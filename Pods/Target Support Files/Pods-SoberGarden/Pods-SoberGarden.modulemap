@@ -1,0 +1,6 @@
+framework module Pods_SoberGarden {
+  umbrella header "Pods-SoberGarden-umbrella.h"
+
+  export *
+  module * { export * }
+}
