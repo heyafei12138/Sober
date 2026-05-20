@@ -13,6 +13,10 @@ final class SGHomeViewController: BaseViewController {
     private let contentStackView = UIStackView()
     private let headerView = SGHomeHeaderView()
     private let coachCardView = SGCardView()
+    private let coachContentStackView = UIStackView()
+    private let coachTextStackView = UIStackView()
+    private let coachImageContainerView = UIView()
+    private let coachImageView = UIImageView()
     private let coachSectionHeader = SGSectionHeaderView(title: "Calm Coach")
     private let coachPromptLabel = UILabel()
     private let streakCardView = SGStreakCardView()
@@ -80,11 +84,11 @@ final class SGHomeViewController: BaseViewController {
         }
 
         contentStackView.axis = .vertical
-        contentStackView.spacing = 16
+        contentStackView.spacing = 18
         contentStackView.alignment = .fill
         contentStackView.distribution = .fill
         contentStackView.isLayoutMarginsRelativeArrangement = true
-        contentStackView.layoutMargins = UIEdgeInsets(top: 0, left: 20, bottom: 20, right: 20)
+        contentStackView.layoutMargins = UIEdgeInsets(top: 2, left: 22, bottom: 28, right: 22)
 
         contentStackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -96,12 +100,23 @@ final class SGHomeViewController: BaseViewController {
     }
 
     private func setupCoachCard() {
-        coachCardView.contentView.addSubview(coachSectionHeader)
-        coachCardView.contentView.addSubview(coachPromptLabel)
+        coachCardView.setContentInsets(UIEdgeInsets(top: 22, left: 22, bottom: 22, right: 22))
+        coachCardView.contentView.backgroundColor = UIColor.hexString("#FFF9E8")
 
-        coachSectionHeader.snp.makeConstraints { make in
-            make.top.left.right.equalToSuperview()
-        }
+        coachContentStackView.axis = .horizontal
+        coachContentStackView.alignment = .center
+        coachContentStackView.spacing = 16
+
+        coachTextStackView.axis = .vertical
+        coachTextStackView.alignment = .fill
+        coachTextStackView.spacing = 10
+
+        coachImageContainerView.backgroundColor = UIColor.hexString("#FDE7B5")
+        coachImageContainerView.layer.cornerRadius = 22
+        coachImageContainerView.layer.masksToBounds = true
+
+        coachImageView.image = UIImage(named: "home_calm_coach_icon") ?? UIImage(named: "guider_icon_singleFlower")
+        coachImageView.contentMode = .scaleAspectFit
 
         coachPromptLabel.font = .systemFont(ofSize: 17, weight: .semibold)
         coachPromptLabel.textColor = SGColor.textDark
@@ -110,9 +125,23 @@ final class SGHomeViewController: BaseViewController {
         coachPromptLabel.adjustsFontSizeToFitWidth = true
         coachPromptLabel.minimumScaleFactor = 0.88
 
-        coachPromptLabel.snp.makeConstraints { make in
-            make.top.equalTo(coachSectionHeader.snp.bottom).offset(10)
-            make.left.right.bottom.equalToSuperview()
+        coachCardView.contentView.addSubview(coachContentStackView)
+        coachTextStackView.addArrangedSubview(coachSectionHeader)
+        coachTextStackView.addArrangedSubview(coachPromptLabel)
+        coachContentStackView.addArrangedSubview(coachTextStackView)
+        coachContentStackView.addArrangedSubview(coachImageContainerView)
+        coachImageContainerView.addSubview(coachImageView)
+
+        coachContentStackView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+
+        coachImageContainerView.snp.makeConstraints { make in
+            make.size.equalTo(74)
+        }
+
+        coachImageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(13)
         }
 
         contentStackView.addArrangedSubview(coachCardView)
@@ -292,8 +321,10 @@ private final class SGHomeActionRowControl: UIControl {
 
         addSubview(cardView)
         cardView.isUserInteractionEnabled = false
+        cardView.setContentInsets(UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
+        cardView.contentView.backgroundColor = UIColor.hexString("#FDF9EA")
         snp.makeConstraints { make in
-            make.height.greaterThanOrEqualTo(84)
+            make.height.greaterThanOrEqualTo(88)
         }
         cardView.contentView.addSubview(iconView)
         cardView.contentView.addSubview(titleLabel)

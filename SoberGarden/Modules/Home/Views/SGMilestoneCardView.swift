@@ -13,6 +13,7 @@ final class SGMilestoneCardView: UIView {
     private let countdownLabel = UILabel()
     private let progressBar = SGProgressBarView()
     private let badgeLabel = UILabel()
+    private let badgeContainerView = UIView()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -42,6 +43,9 @@ final class SGMilestoneCardView: UIView {
     }
 
     private func setupView() {
+        cardView.setContentInsets(UIEdgeInsets(top: 22, left: 22, bottom: 22, right: 22))
+        cardView.contentView.backgroundColor = UIColor.hexString("#F8FBF1")
+
         headerLabel.font = .systemFont(ofSize: 18, weight: .semibold)
         headerLabel.textColor = SGColor.textDark
 
@@ -56,12 +60,17 @@ final class SGMilestoneCardView: UIView {
         badgeLabel.textColor = SGColor.primaryDark
         badgeLabel.numberOfLines = 1
 
+        badgeContainerView.backgroundColor = SGColor.flower.withAlphaComponent(0.28)
+        badgeContainerView.layer.cornerRadius = 14
+        badgeContainerView.layer.masksToBounds = true
+
         addSubview(cardView)
         cardView.contentView.addSubview(headerLabel)
         cardView.contentView.addSubview(milestoneLabel)
         cardView.contentView.addSubview(countdownLabel)
         cardView.contentView.addSubview(progressBar)
-        cardView.contentView.addSubview(badgeLabel)
+        cardView.contentView.addSubview(badgeContainerView)
+        badgeContainerView.addSubview(badgeLabel)
 
         cardView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -72,7 +81,7 @@ final class SGMilestoneCardView: UIView {
         }
 
         milestoneLabel.snp.makeConstraints { make in
-            make.top.equalTo(headerLabel.snp.bottom).offset(10)
+            make.top.equalTo(headerLabel.snp.bottom).offset(12)
             make.left.right.equalToSuperview()
         }
 
@@ -82,14 +91,19 @@ final class SGMilestoneCardView: UIView {
         }
 
         progressBar.snp.makeConstraints { make in
-            make.top.equalTo(countdownLabel.snp.bottom).offset(12)
+            make.top.equalTo(countdownLabel.snp.bottom).offset(14)
             make.left.right.equalToSuperview()
             make.height.equalTo(10)
         }
 
-        badgeLabel.snp.makeConstraints { make in
+        badgeContainerView.snp.makeConstraints { make in
             make.top.equalTo(progressBar.snp.bottom).offset(10)
-            make.left.right.bottom.equalToSuperview()
+            make.left.bottom.equalToSuperview()
+            make.right.lessThanOrEqualToSuperview()
+        }
+
+        badgeLabel.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 7, left: 12, bottom: 7, right: 12))
         }
     }
 }

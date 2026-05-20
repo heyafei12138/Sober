@@ -9,8 +9,18 @@ final class SGSavedStatsView: UIView {
 
     private let titleLabel = UILabel()
     private let cardStackView = UIStackView()
-    private let moneyCard = SGHomeSavingsCardView(title: "Money Saved")
-    private let timeCard = SGHomeSavingsCardView(title: "Time Saved")
+    private let moneyCard = SGHomeSavingsCardView(
+        title: "Money Saved",
+        iconName: "leaf.fill",
+        accentColor: SGColor.flower,
+        surfaceColor: UIColor.hexString("#FFFBED")
+    )
+    private let timeCard = SGHomeSavingsCardView(
+        title: "Time Saved",
+        iconName: "clock.fill",
+        accentColor: UIColor.hexString("#86B8B0"),
+        surfaceColor: UIColor.hexString("#F2FAF8")
+    )
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -25,7 +35,7 @@ final class SGSavedStatsView: UIView {
     func configure(dailyCost: Double?, dailyMinutes: Int?, cleanDays: Int) {
         if let dailyCost, dailyCost > 0 {
             let saved = SGProgressCalculator.moneySaved(dailyCost: dailyCost, cleanDays: cleanDays)
-            moneyCard.configure(value: Self.currencyString(from: saved), subtitle: "Keep the momentum visible.")
+            moneyCard.configure(value: Self.currencyString(from: saved), subtitle: "Visible progress.")
         } else {
             moneyCard.configure(value: "Add cost", subtitle: "Add cost to see your savings.")
         }
@@ -58,7 +68,7 @@ final class SGSavedStatsView: UIView {
         }
 
         cardStackView.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.top.equalTo(titleLabel.snp.bottom).offset(12)
             make.left.right.bottom.equalToSuperview()
         }
     }
@@ -84,17 +94,26 @@ final class SGSavedStatsView: UIView {
 private final class SGHomeSavingsCardView: UIView {
 
     private let cardView = SGCardView()
+    private let iconContainerView = UIView()
+    private let iconView = UIImageView()
+    private let titleLabel = UILabel()
     private let valueLabel = UILabel()
     private let subtitleLabel = UILabel()
+    private let accentColor: UIColor
+    private let surfaceColor: UIColor
 
-    init(title: String) {
+    init(title: String, iconName: String, accentColor: UIColor, surfaceColor: UIColor) {
+        self.accentColor = accentColor
+        self.surfaceColor = surfaceColor
         super.init(frame: .zero)
-        setupView(title: title)
+        setupView(title: title, iconName: iconName)
     }
 
     required init?(coder: NSCoder) {
+        self.accentColor = SGColor.primary
+        self.surfaceColor = SGColor.surface
         super.init(coder: coder)
-        setupView(title: "")
+        setupView(title: "", iconName: "leaf.fill")
     }
 
     func configure(value: String, subtitle: String) {
@@ -102,11 +121,24 @@ private final class SGHomeSavingsCardView: UIView {
         subtitleLabel.text = subtitle
     }
 
-    private func setupView(title: String) {
-        let titleLabel = UILabel()
+    private func setupView(title: String, iconName: String) {
+        cardView.setContentInsets(UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
+        cardView.contentView.backgroundColor = surfaceColor
+
+        iconContainerView.backgroundColor = accentColor.withAlphaComponent(0.24)
+        iconContainerView.layer.cornerRadius = 14
+        iconContainerView.layer.masksToBounds = true
+
+        iconView.image = UIImage(systemName: iconName)
+        iconView.tintColor = accentColor
+        iconView.contentMode = .scaleAspectFit
+
         titleLabel.text = title
-        titleLabel.font = .systemFont(ofSize: 14, weight: .semibold)
+        titleLabel.font = .systemFont(ofSize: 13, weight: .semibold)
         titleLabel.textColor = SGColor.textSecondary
+        titleLabel.numberOfLines = 1
+        titleLabel.adjustsFontSizeToFitWidth = true
+        titleLabel.minimumScaleFactor = 0.82
 
         valueLabel.font = .systemFont(ofSize: 22, weight: .bold)
         valueLabel.textColor = SGColor.textDark
@@ -117,22 +149,42 @@ private final class SGHomeSavingsCardView: UIView {
         subtitleLabel.font = .systemFont(ofSize: 13, weight: .medium)
         subtitleLabel.textColor = SGColor.textSecondary
         subtitleLabel.numberOfLines = 2
+        subtitleLabel.adjustsFontSizeToFitWidth = true
+        subtitleLabel.minimumScaleFactor = 0.86
 
         addSubview(cardView)
+        cardView.contentView.addSubview(iconContainerView)
+        iconContainerView.addSubview(iconView)
         cardView.contentView.addSubview(titleLabel)
         cardView.contentView.addSubview(valueLabel)
         cardView.contentView.addSubview(subtitleLabel)
+
+        snp.makeConstraints { make in
+            make.height.greaterThanOrEqualTo(128)
+        }
 
         cardView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
 
+        iconContainerView.snp.makeConstraints { make in
+            make.top.left.equalToSuperview()
+            make.size.equalTo(34)
+        }
+
+        iconView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.size.equalTo(17)
+        }
+
         titleLabel.snp.makeConstraints { make in
-            make.top.left.right.equalToSuperview()
+            make.centerY.equalTo(iconContainerView)
+            make.left.equalTo(iconContainerView.snp.right).offset(10)
+            make.right.equalToSuperview()
         }
 
         valueLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.top.equalTo(iconContainerView.snp.bottom).offset(14)
             make.left.right.equalToSuperview()
         }
 

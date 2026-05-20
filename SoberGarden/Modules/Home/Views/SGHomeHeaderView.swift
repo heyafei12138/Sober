@@ -7,9 +7,12 @@ import UIKit
 
 final class SGHomeHeaderView: UIView {
 
+    private let textStackView = UIStackView()
     private let dayLabel = UILabel()
     private let habitLabel = UILabel()
     private let captionLabel = UILabel()
+    private let visualContainerView = UIView()
+    private let visualImageView = UIImageView()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,6 +31,10 @@ final class SGHomeHeaderView: UIView {
     }
 
     private func setupView() {
+        textStackView.axis = .vertical
+        textStackView.alignment = .fill
+        textStackView.spacing = 4
+
         dayLabel.font = .systemFont(ofSize: 34, weight: .bold)
         dayLabel.textColor = SGColor.textDark
         dayLabel.numberOfLines = 1
@@ -43,22 +50,33 @@ final class SGHomeHeaderView: UIView {
         captionLabel.font = .systemFont(ofSize: 13, weight: .medium)
         captionLabel.textColor = SGColor.textSecondary
 
-        addSubview(dayLabel)
-        addSubview(habitLabel)
-        addSubview(captionLabel)
+        visualContainerView.backgroundColor = UIColor.hexString("#FFF3D2")
+        visualContainerView.layer.cornerRadius = 26
+        visualContainerView.layer.masksToBounds = true
 
-        dayLabel.snp.makeConstraints { make in
-            make.top.left.right.equalToSuperview()
+        visualImageView.image = UIImage(named: "garden_stage_sprout") ?? UIImage(named: "guider_icon_flowerpot")
+        visualImageView.contentMode = .scaleAspectFit
+
+        addSubview(textStackView)
+        addSubview(visualContainerView)
+        textStackView.addArrangedSubview(dayLabel)
+        textStackView.addArrangedSubview(habitLabel)
+        textStackView.addArrangedSubview(captionLabel)
+        visualContainerView.addSubview(visualImageView)
+
+        textStackView.snp.makeConstraints { make in
+            make.top.left.bottom.equalToSuperview().inset(2)
+            make.right.lessThanOrEqualTo(visualContainerView.snp.left).offset(-18)
         }
 
-        habitLabel.snp.makeConstraints { make in
-            make.top.equalTo(dayLabel.snp.bottom).offset(2)
-            make.left.right.equalToSuperview()
+        visualContainerView.snp.makeConstraints { make in
+            make.right.equalToSuperview()
+            make.centerY.equalToSuperview()
+            make.size.equalTo(94)
         }
 
-        captionLabel.snp.makeConstraints { make in
-            make.top.equalTo(habitLabel.snp.bottom).offset(4)
-            make.left.right.bottom.equalToSuperview()
+        visualImageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(15)
         }
     }
 }

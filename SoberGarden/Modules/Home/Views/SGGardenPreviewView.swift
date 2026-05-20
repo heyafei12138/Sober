@@ -15,6 +15,7 @@ final class SGGardenPreviewView: UIControl {
     private let titleLabel = UILabel()
     private let subtitleLabel = UILabel()
     private let badgeLabel = UILabel()
+    private let badgeContainerView = UIView()
     private let chevronView = UIImageView()
 
     override init(frame: CGRect) {
@@ -45,8 +46,11 @@ final class SGGardenPreviewView: UIControl {
     private func setupView() {
         addTarget(self, action: #selector(handleTap), for: .touchUpInside)
 
-        illustrationBackgroundView.backgroundColor = SGColor.primaryLight.withAlphaComponent(0.55)
-        illustrationBackgroundView.layer.cornerRadius = 22
+        cardView.setContentInsets(UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
+        cardView.contentView.backgroundColor = UIColor.hexString("#F6FAF7")
+
+        illustrationBackgroundView.backgroundColor = UIColor.hexString("#E5F0EC")
+        illustrationBackgroundView.layer.cornerRadius = 20
         illustrationBackgroundView.layer.masksToBounds = true
 
         illustrationView.contentMode = .scaleAspectFit
@@ -64,6 +68,10 @@ final class SGGardenPreviewView: UIControl {
         badgeLabel.font = .systemFont(ofSize: 13, weight: .semibold)
         badgeLabel.textColor = SGColor.primaryDark
 
+        badgeContainerView.backgroundColor = SGColor.primaryLight.withAlphaComponent(0.62)
+        badgeContainerView.layer.cornerRadius = 13
+        badgeContainerView.layer.masksToBounds = true
+
         chevronView.image = UIImage(systemName: "chevron.right")
         chevronView.tintColor = SGColor.textTertiary
         chevronView.contentMode = .scaleAspectFit
@@ -74,7 +82,8 @@ final class SGGardenPreviewView: UIControl {
         illustrationBackgroundView.addSubview(illustrationView)
         cardView.contentView.addSubview(titleLabel)
         cardView.contentView.addSubview(subtitleLabel)
-        cardView.contentView.addSubview(badgeLabel)
+        cardView.contentView.addSubview(badgeContainerView)
+        badgeContainerView.addSubview(badgeLabel)
         cardView.contentView.addSubview(chevronView)
 
         cardView.snp.makeConstraints { make in
@@ -83,11 +92,11 @@ final class SGGardenPreviewView: UIControl {
 
         illustrationBackgroundView.snp.makeConstraints { make in
             make.left.top.bottom.equalToSuperview()
-            make.width.equalTo(108)
+            make.width.equalTo(116)
         }
 
         illustrationView.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(18)
+            make.edges.equalToSuperview().inset(16)
         }
 
         chevronView.snp.makeConstraints { make in
@@ -97,7 +106,7 @@ final class SGGardenPreviewView: UIControl {
 
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(4)
-            make.left.equalTo(illustrationBackgroundView.snp.right).offset(14)
+            make.left.equalTo(illustrationBackgroundView.snp.right).offset(16)
             make.right.lessThanOrEqualTo(chevronView.snp.left).offset(-12)
         }
 
@@ -107,10 +116,15 @@ final class SGGardenPreviewView: UIControl {
             make.right.lessThanOrEqualTo(chevronView.snp.left).offset(-12)
         }
 
-        badgeLabel.snp.makeConstraints { make in
+        badgeContainerView.snp.makeConstraints { make in
             make.top.equalTo(subtitleLabel.snp.bottom).offset(12)
             make.left.equalTo(titleLabel)
             make.bottom.lessThanOrEqualToSuperview()
+            make.right.lessThanOrEqualTo(chevronView.snp.left).offset(-12)
+        }
+
+        badgeLabel.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 6, left: 10, bottom: 6, right: 10))
         }
     }
 

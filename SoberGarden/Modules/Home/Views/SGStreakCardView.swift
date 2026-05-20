@@ -40,6 +40,9 @@ final class SGStreakCardView: UIView {
     }
 
     private func setupView() {
+        cardView.setContentInsets(UIEdgeInsets(top: 22, left: 22, bottom: 22, right: 22))
+        cardView.contentView.backgroundColor = UIColor.hexString("#FBFDF8")
+
         titleLabel.font = .systemFont(ofSize: 24, weight: .bold)
         titleLabel.textColor = SGColor.textDark
         titleLabel.numberOfLines = 1
@@ -49,7 +52,7 @@ final class SGStreakCardView: UIView {
         metricStackView.axis = .horizontal
         metricStackView.alignment = .fill
         metricStackView.distribution = .fillEqually
-        metricStackView.spacing = 10
+        metricStackView.spacing = 11
 
         metricStackView.addArrangedSubview(dayMetricView)
         metricStackView.addArrangedSubview(hourMetricView)
@@ -104,8 +107,8 @@ private final class SGStreakMetricView: UIView {
     }
 
     private func setupView() {
-        backgroundColor = SGColor.background.withAlphaComponent(0.55)
-        layer.cornerRadius = 14
+        backgroundColor = UIColor.hexString("#EEF5E9")
+        layer.cornerRadius = 12
         layer.masksToBounds = true
 
         valueLabel.font = .systemFont(ofSize: 22, weight: .bold)
@@ -124,7 +127,7 @@ private final class SGStreakMetricView: UIView {
         addSubview(titleLabel)
 
         valueLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(14)
+            make.top.equalToSuperview().offset(15)
             make.left.right.equalToSuperview().inset(10)
         }
 
