@@ -17,9 +17,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let window = UIWindow(windowScene: windowScene)
         let state = SoberGardenStore.shared.load()
-        window.rootViewController = state.habit == nil ? SGOnboardingViewController() : MainTabBarController()
+        window.rootViewController = state.habit == nil
+            ? SGOnboardingViewController()
+            : MainTabBarController()
         window.makeKeyAndVisible()
         self.window = window
+    }
+
+    func showMainInterface(animated: Bool = true) {
+        guard let window else { return }
+        let mainController = MainTabBarController()
+        guard animated else {
+            window.rootViewController = mainController
+            return
+        }
+        UIView.transition(with: window, duration: 0.28, options: .transitionCrossDissolve) {
+            window.rootViewController = mainController
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

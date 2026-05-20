@@ -165,12 +165,12 @@ Keep files focused. Do not turn one module controller into a large all-in-one fi
 - Create: `SoberGarden/Core/Services/SGNotificationService.swift`
 - Modify: `SoberGarden/SceneDelegate.swift`
 
-- [ ] Step 5 time input: minutes per day, hours per week, Skip; normalize to `dailyMinutes`.
-- [ ] Step 6 reasons: multi-select PRD templates, custom reason text, Skip allowed.
-- [ ] Step 7 notification explainer: buttons `Enable Notifications` and `Maybe Later`; request system permission only after tapping enable.
-- [ ] Step 8 completion: save `Habit`, set `createdAt/updatedAt`, transition to `MainTabBarController`.
-- [ ] Build and verify a full onboarding completion persists after app restart.
-- [ ] Commit: `feat: complete onboarding flow`
+- [x] Step 5 time input: minutes per day, hours per week, Skip; normalize to `dailyMinutes`.
+- [x] Step 6 reasons: multi-select PRD templates, custom reason text, Skip allowed.
+- [x] Step 7 notification explainer: buttons `Enable Notifications` and `Maybe Later`; request system permission only after tapping enable.
+- [x] Step 8 completion: save `Habit`, set `createdAt/updatedAt`, transition to `MainTabBarController`.
+- [x] Build and verify a full onboarding completion persists after app restart.
+- [x] Commit: `feat: complete onboarding flow`
 
 ---
 

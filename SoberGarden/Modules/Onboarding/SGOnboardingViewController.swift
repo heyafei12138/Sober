@@ -61,7 +61,7 @@ final class SGOnboardingViewController: BaseViewController {
             case .notifications:
                 return "We'll send gentle reminders, milestone celebrations, and urge support prompts."
             case .complete:
-                return "Start Growing"
+                return "Your habit, garden, and gentle reminders are ready whenever you need them."
             }
         }
 
@@ -83,6 +83,7 @@ final class SGOnboardingViewController: BaseViewController {
     private var draft = SGOnboardingDraft()
     private var selectedStartDateOption: Int = 0
     private var selectedCostMode: SGOnboardingCostMode = .skip
+    private var selectedTimeMode: SGOnboardingTimeMode = .skip
 
     private let progressBarView = SGProgressBarView()
     private let stepView = SGOnboardingStepView()
@@ -92,6 +93,11 @@ final class SGOnboardingViewController: BaseViewController {
     private let primaryButton = SGPrimaryButton(title: "Get Started", style: .primary)
     private let customHabitTextField = UITextField()
     private let costTextField = UITextField()
+    private let timeTextField = UITextField()
+    private let customReasonTextField = UITextField()
+    private let notificationActionsStack = UIStackView()
+    private let enableNotificationsButton = SGPrimaryButton(title: "Enable Notifications", style: .primary)
+    private let maybeLaterButton = SGPrimaryButton(title: "Maybe Later", style: .secondary)
 
     override func viewDidLoad() {
         isCustomNavigationHidden = true
@@ -109,7 +115,14 @@ final class SGOnboardingViewController: BaseViewController {
         view.addSubview(scrollView)
         view.addSubview(backButton)
         view.addSubview(primaryButton)
+        view.addSubview(notificationActionsStack)
         scrollView.addSubview(contentStackView)
+
+        notificationActionsStack.axis = .vertical
+        notificationActionsStack.spacing = 12
+        notificationActionsStack.addArrangedSubview(enableNotificationsButton)
+        notificationActionsStack.addArrangedSubview(maybeLaterButton)
+        notificationActionsStack.isHidden = true
 
         progressBarView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)
@@ -137,6 +150,11 @@ final class SGOnboardingViewController: BaseViewController {
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-24)
         }
 
+        notificationActionsStack.snp.makeConstraints { make in
+            make.left.right.equalToSuperview().inset(Layout.pageInset)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-24)
+        }
+
         backButton.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(Layout.pageInset)
             make.bottom.equalTo(primaryButton.snp.top).offset(-16)
@@ -148,6 +166,8 @@ final class SGOnboardingViewController: BaseViewController {
         backButton.setTitle("Back", for: .normal)
         backButton.addTarget(self, action: #selector(handleBackTapped), for: .touchUpInside)
         primaryButton.addTarget(self, action: #selector(handlePrimaryTapped), for: .touchUpInside)
+        enableNotificationsButton.addTarget(self, action: #selector(handleEnableNotificationsTapped), for: .touchUpInside)
+        maybeLaterButton.addTarget(self, action: #selector(handleMaybeLaterTapped), for: .touchUpInside)
 
         contentStackView.axis = .vertical
         contentStackView.spacing = Layout.contentSpacing
@@ -158,6 +178,7 @@ final class SGOnboardingViewController: BaseViewController {
         stepView.configure(title: currentStep.title, subtitle: currentStep.subtitle)
         primaryButton.setTitle(currentStep.primaryButtonTitle, for: .normal)
         backButton.isHidden = currentStep == .welcome
+        updateFooterButtons()
 
         let stepCount = CGFloat(Step.allCases.count)
         let currentIndex = CGFloat(currentStep.rawValue + 1)
@@ -178,8 +199,29 @@ final class SGOnboardingViewController: BaseViewController {
             addStartDateContent()
         case .cost:
             addCostContent()
-        default:
-            addPlaceholderContent()
+        case .time:
+            addTimeContent()
+        case .reasons:
+            addReasonsContent()
+        case .notifications:
+            addNotificationsContent()
+        case .complete:
+            addCompleteContent()
+        }
+    }
+
+    private func updateFooterButtons() {
+        let showsNotificationActions = currentStep == .notifications
+        notificationActionsStack.isHidden = !showsNotificationActions
+        primaryButton.isHidden = showsNotificationActions
+        backButton.snp.remakeConstraints { make in
+            make.left.equalToSuperview().offset(Layout.pageInset)
+            if showsNotificationActions {
+                make.bottom.equalTo(notificationActionsStack.snp.top).offset(-16)
+            } else {
+                make.bottom.equalTo(primaryButton.snp.top).offset(-16)
+            }
+            make.height.equalTo(44)
         }
     }
 
@@ -293,13 +335,100 @@ final class SGOnboardingViewController: BaseViewController {
         contentStackView.addArrangedSubview(costTextField)
     }
 
-    private func addPlaceholderContent() {
+    private func addTimeContent() {
+        let modeStack = makeVerticalStack(spacing: 10)
+        SGOnboardingTimeMode.allCases.forEach { mode in
+            let chip = SGOptionChip(title: mode.title)
+            chip.tag = mode.rawValue
+            chip.isSelected = selectedTimeMode == mode
+            chip.addTarget(self, action: #selector(handleTimeModeTapped(_:)), for: .touchUpInside)
+            modeStack.addArrangedSubview(chip)
+        }
+        contentStackView.addArrangedSubview(modeStack)
+
+        timeTextField.placeholder = selectedTimeMode.placeholder
+        timeTextField.keyboardType = .decimalPad
+        timeTextField.borderStyle = .none
+        timeTextField.backgroundColor = SGColor.surface
+        timeTextField.textColor = SGColor.textDark
+        timeTextField.font = .systemFont(ofSize: 16)
+        timeTextField.layer.cornerRadius = Layout.compactRadius
+        timeTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 1))
+        timeTextField.leftViewMode = .always
+        timeTextField.isHidden = selectedTimeMode == .skip
+        timeTextField.removeTarget(nil, action: nil, for: .editingChanged)
+        timeTextField.addTarget(self, action: #selector(handleTimeAmountChanged(_:)), for: .editingChanged)
+        timeTextField.snp.makeConstraints { make in
+            make.height.equalTo(52)
+        }
+        contentStackView.addArrangedSubview(timeTextField)
+    }
+
+    private func addReasonsContent() {
+        let hintLabel = UILabel()
+        hintLabel.text = "Select any that resonate. You can skip and add reasons later."
+        hintLabel.font = .systemFont(ofSize: 14, weight: .regular)
+        hintLabel.textColor = SGColor.textSecondary
+        hintLabel.numberOfLines = 0
+        contentStackView.addArrangedSubview(hintLabel)
+
+        let reasonStack = makeVerticalStack(spacing: 10)
+        SGOnboardingDraft.reasonTemplates.enumerated().forEach { index, template in
+            let chip = SGOptionChip(title: template)
+            chip.tag = index
+            chip.isSelected = draft.selectedReasonTemplates.contains(template)
+            chip.addTarget(self, action: #selector(handleReasonChipTapped(_:)), for: .touchUpInside)
+            reasonStack.addArrangedSubview(chip)
+        }
+        contentStackView.addArrangedSubview(reasonStack)
+
+        customReasonTextField.placeholder = "Add your own reason"
+        customReasonTextField.text = draft.customReasonText
+        customReasonTextField.borderStyle = .none
+        customReasonTextField.backgroundColor = SGColor.surface
+        customReasonTextField.textColor = SGColor.textDark
+        customReasonTextField.font = .systemFont(ofSize: 16)
+        customReasonTextField.layer.cornerRadius = Layout.compactRadius
+        customReasonTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 1))
+        customReasonTextField.leftViewMode = .always
+        customReasonTextField.removeTarget(nil, action: nil, for: .editingChanged)
+        customReasonTextField.addTarget(self, action: #selector(handleCustomReasonChanged(_:)), for: .editingChanged)
+        customReasonTextField.snp.makeConstraints { make in
+            make.height.equalTo(52)
+        }
+        contentStackView.addArrangedSubview(customReasonTextField)
+    }
+
+    private func addNotificationsContent() {
+        let card = SGCardView()
+        card.cornerRadius = 16
+        card.setContentInsets(UIEdgeInsets(top: 18, left: 20, bottom: 18, right: 20))
         let label = UILabel()
-        label.text = "This step will be completed in the next task."
-        label.font = .systemFont(ofSize: 15)
-        label.textColor = SGColor.textTertiary
+        label.text = "We'll send gentle reminders, milestone celebrations, and urge support prompts. You can change this anytime in Settings."
+        label.font = .systemFont(ofSize: 15, weight: .regular)
+        label.textColor = SGColor.textSecondary
         label.numberOfLines = 0
-        contentStackView.addArrangedSubview(label)
+        card.contentView.addSubview(label)
+        label.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        contentStackView.addArrangedSubview(card)
+    }
+
+    private func addCompleteContent() {
+        let card = SGCardView()
+        card.cornerRadius = 16
+        card.setContentInsets(UIEdgeInsets(top: 20, left: 24, bottom: 20, right: 24))
+        let label = UILabel()
+        label.text = "Tap Start Growing to open your Home tab, track clean days, and reach for Rescue whenever you need support."
+        label.font = .systemFont(ofSize: 16, weight: .regular)
+        label.textColor = SGColor.textSecondary
+        label.numberOfLines = 0
+        card.contentView.addSubview(label)
+        label.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        contentStackView.addArrangedSubview(card)
     }
 
     private func updatePrimaryButtonState() {
@@ -322,6 +451,8 @@ final class SGOnboardingViewController: BaseViewController {
 
     @objc private func handlePrimaryTapped() {
         view.endEditing(true)
+        syncDraftFromInputs()
+
         if currentStep == .complete {
             finishOnboardingIfPossible()
             return
@@ -329,6 +460,26 @@ final class SGOnboardingViewController: BaseViewController {
 
         guard let nextStep = Step(rawValue: currentStep.rawValue + 1) else { return }
         currentStep = nextStep
+    }
+
+    @objc private func handleEnableNotificationsTapped() {
+        SGNotificationService.shared.requestAuthorization { [weak self] granted in
+            guard let self else { return }
+            SoberGardenStore.shared.updateSettings { settings in
+                settings.dailyReminderEnabled = granted
+                settings.milestoneNotificationsEnabled = granted || settings.milestoneNotificationsEnabled
+            }
+            self.advanceFromNotificationsStep()
+        }
+    }
+
+    @objc private func handleMaybeLaterTapped() {
+        advanceFromNotificationsStep()
+    }
+
+    private func advanceFromNotificationsStep() {
+        guard currentStep == .notifications else { return }
+        currentStep = .complete
     }
 
     @objc private func handleHabitChipTapped(_ sender: SGOptionChip) {
@@ -381,6 +532,49 @@ final class SGOnboardingViewController: BaseViewController {
         draft.setCost(amount: amount, mode: selectedCostMode)
     }
 
+    @objc private func handleTimeModeTapped(_ sender: SGOptionChip) {
+        selectedTimeMode = SGOnboardingTimeMode(rawValue: sender.tag) ?? .skip
+        updateDraftTime()
+        renderCurrentStep()
+    }
+
+    @objc private func handleTimeAmountChanged(_ sender: UITextField) {
+        updateDraftTime()
+    }
+
+    private func updateDraftTime() {
+        let amountText = timeTextField.text ?? ""
+        let amount = Double(amountText.replacingOccurrences(of: ",", with: "."))
+        draft.setTime(amount: amount, mode: selectedTimeMode)
+    }
+
+    @objc private func handleReasonChipTapped(_ sender: SGOptionChip) {
+        let template = SGOnboardingDraft.reasonTemplates[sender.tag]
+        if draft.selectedReasonTemplates.contains(template) {
+            draft.selectedReasonTemplates.remove(template)
+            sender.isSelected = false
+        } else {
+            draft.selectedReasonTemplates.insert(template)
+            sender.isSelected = true
+        }
+    }
+
+    @objc private func handleCustomReasonChanged(_ sender: UITextField) {
+        draft.customReasonText = sender.text
+    }
+
+    private func syncDraftFromInputs() {
+        if currentStep == .cost || selectedCostMode != .skip {
+            updateDraftCost()
+        }
+        if currentStep == .time || selectedTimeMode != .skip {
+            updateDraftTime()
+        }
+        if currentStep == .reasons {
+            draft.customReasonText = customReasonTextField.text
+        }
+    }
+
     private func makeStartDateChip(title: String, tag: Int) -> SGOptionChip {
         let chip = SGOptionChip(title: title)
         chip.tag = tag
@@ -414,18 +608,22 @@ final class SGOnboardingViewController: BaseViewController {
     }
 
     private func finishOnboardingIfPossible() {
-        if let habit = draft.makeHabit() {
-            SoberGardenStore.shared.setHabit(habit)
+        syncDraftFromInputs()
+        guard let habit = draft.makeHabit() else { return }
+        SoberGardenStore.shared.setHabit(habit)
+
+        if let sceneDelegate = view.window?.windowScene?.delegate as? SceneDelegate {
+            sceneDelegate.showMainInterface(animated: true)
+        } else {
+            showMainAppFallback()
         }
-        showMainApp()
     }
 
-    private func showMainApp() {
+    private func showMainAppFallback() {
         guard let windowScene = view.window?.windowScene else { return }
         let window = UIWindow(windowScene: windowScene)
         window.rootViewController = MainTabBarController()
         window.makeKeyAndVisible()
-
         if let sceneDelegate = windowScene.delegate as? SceneDelegate {
             sceneDelegate.window = window
         }
