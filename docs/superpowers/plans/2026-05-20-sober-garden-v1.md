@@ -200,7 +200,7 @@ Keep files focused. Do not turn one module controller into a large all-in-one fi
 - Create: `SoberGarden/Modules/Home/Views/SGMilestoneCardView.swift`
 - Create: `SoberGarden/Modules/Home/Views/SGGardenPreviewView.swift`
 
-- [ ] Use a vertical `UIScrollView` and content stack with SnapKit.
+- [x] Use a vertical `UIScrollView` and content stack with SnapKit.
 - [x] Show top habit status: `Day N` and `Clean from Habit`.
 - [x] Show Calm Coach card with local prompt text.
 - [x] Show streak main card: days clean, hours, longest streak, started date.
@@ -219,13 +219,13 @@ Keep files focused. Do not turn one module controller into a large all-in-one fi
 - Create: `SoberGarden/Modules/Garden/Views/SGGardenIllustrationView.swift`
 - Create: `SoberGarden/Modules/Garden/Views/SGBadgeGridView.swift`
 
-- [ ] Show current garden illustration using simple UIKit shapes first: seed, sprout, plant, flower, garden bed, blooming garden, peaceful garden, small forest, sanctuary.
-- [ ] Show current stage name and clean days.
-- [ ] Show next stage progress.
-- [ ] Show unlocked badges from milestones already reached; keep badges visually retained.
-- [ ] Show PRD growth copy; for reset state use `Your garden remembers your effort. A new seed has been planted.`
-- [ ] Build and manually verify different stages by temporarily changing start date in storage or debug seed data.
-- [ ] Commit: `feat: build garden growth page`
+- [x] Show current garden illustration using simple UIKit shapes first: seed, sprout, plant, flower, garden bed, blooming garden, peaceful garden, small forest, sanctuary.
+- [x] Show current stage name and clean days.
+- [x] Show next stage progress.
+- [x] Show unlocked badges from milestones already reached; keep badges visually retained.
+- [x] Show PRD growth copy; for reset state use `Your garden remembers your effort. A new seed has been planted.`
+- [x] Build and manually verify different stages by temporarily changing start date in storage or debug seed data.
+- [x] Commit: `feat: build garden growth page`
 
 ---
 
