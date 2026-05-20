@@ -91,6 +91,26 @@ final class SoberGardenStore {
         }
     }
 
+    func saveRescueSession(
+        emotion: EmotionType,
+        startedAt: Date,
+        urgeBefore: Int?,
+        urgeAfter: Int?,
+        completedBreathing: Bool,
+        completedDelay: Bool
+    ) {
+        let session = RescueSession(
+            id: UUID(),
+            date: startedAt,
+            emotion: emotion,
+            urgeBefore: urgeBefore,
+            urgeAfter: urgeAfter,
+            completedBreathing: completedBreathing,
+            completedDelay: completedDelay
+        )
+        appendRescueSession(session)
+    }
+
     func upsertJournalEntry(_ entry: JournalEntry, calendar: Calendar = .current) {
         update { state in
             if let index = state.journalEntries.firstIndex(where: { calendar.isDate($0.date, inSameDayAs: entry.date) }) {

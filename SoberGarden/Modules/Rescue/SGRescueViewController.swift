@@ -73,8 +73,10 @@ final class SGRescueViewController: BaseViewController {
                 return "Start Breathing"
             case .breathing:
                 return "Finish Early"
+            case .delay:
+                return "I'll wait 10 minutes"
             case .feedback:
-                return "Finish"
+                return "I'm okay now"
             default:
                 return "Continue"
             }
@@ -96,6 +98,7 @@ final class SGRescueViewController: BaseViewController {
     private let footerStackView = UIStackView()
     private let backButton = UIButton(type: .system)
     private let primaryButton = SGPrimaryButton(title: "Continue")
+    private let feedbackValueLabel = UILabel()
 
     private var currentStep: Step = .emotion
     private var draft = SGRescueDraft()
@@ -324,18 +327,150 @@ final class SGRescueViewController: BaseViewController {
             }
             breathingView.start()
 
-        default:
+        case .reasons:
             cancelCoachLoading()
-            let label = UILabel()
-            label.font = .systemFont(ofSize: 15, weight: .medium)
-            label.textColor = SGColor.textSecondary
-            label.numberOfLines = 0
-            label.text = currentStep.placeholderText
-            stepContentContainerView.addSubview(label)
-            label.snp.makeConstraints { make in
+            let reasonsView = makeReasonsView()
+            stepContentContainerView.addSubview(reasonsView)
+            reasonsView.snp.makeConstraints { make in
+                make.edges.equalToSuperview()
+            }
+
+        case .delay:
+            cancelCoachLoading()
+            let delayView = makeDelayView()
+            stepContentContainerView.addSubview(delayView)
+            delayView.snp.makeConstraints { make in
+                make.edges.equalToSuperview()
+            }
+
+        case .feedback:
+            cancelCoachLoading()
+            let feedbackView = makeFeedbackView()
+            stepContentContainerView.addSubview(feedbackView)
+            feedbackView.snp.makeConstraints { make in
                 make.edges.equalToSuperview()
             }
         }
+    }
+
+    private func makeReasonsView() -> UIView {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.spacing = 10
+
+        let reasons = SoberGardenStore.shared.state.habit?.reasons
+            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .filter { !$0.isEmpty } ?? []
+
+        if reasons.isEmpty {
+            stackView.addArrangedSubview(makeReasonLabel("You chose this because your future matters more than this urge."))
+        } else {
+            reasons.forEach { reason in
+                stackView.addArrangedSubview(makeReasonLabel(reason))
+            }
+        }
+
+        return stackView
+    }
+
+    private func makeReasonLabel(_ text: String) -> UILabel {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 16, weight: .medium)
+        label.textColor = SGColor.textDark
+        label.numberOfLines = 0
+        label.text = "- \(text)"
+        return label
+    }
+
+    private func makeDelayView() -> UIView {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.spacing = 14
+
+        let titleLabel = UILabel()
+        titleLabel.font = .systemFont(ofSize: 22, weight: .semibold)
+        titleLabel.textColor = SGColor.textDark
+        titleLabel.numberOfLines = 0
+        titleLabel.text = "Can you wait 10 minutes?"
+
+        let bodyLabel = UILabel()
+        bodyLabel.font = .systemFont(ofSize: 15, weight: .medium)
+        bodyLabel.textColor = SGColor.textSecondary
+        bodyLabel.numberOfLines = 0
+        bodyLabel.text = "You are not promising forever. Just give this wave a little time to pass."
+
+        let strugglingButton = UIButton(type: .system)
+        strugglingButton.setTitle("I'm still struggling", for: .normal)
+        strugglingButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
+        strugglingButton.setTitleColor(SGColor.rescue, for: .normal)
+        strugglingButton.backgroundColor = SGColor.rescue.withAlphaComponent(0.12)
+        strugglingButton.layer.cornerRadius = 14
+        strugglingButton.layer.masksToBounds = true
+        strugglingButton.addTarget(self, action: #selector(handleStillStrugglingTapped), for: .touchUpInside)
+
+        stackView.addArrangedSubview(titleLabel)
+        stackView.addArrangedSubview(bodyLabel)
+        stackView.addArrangedSubview(strugglingButton)
+
+        strugglingButton.snp.makeConstraints { make in
+            make.height.equalTo(46)
+        }
+
+        return stackView
+    }
+
+    private func makeFeedbackView() -> UIView {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.spacing = 14
+
+        let titleLabel = UILabel()
+        titleLabel.font = .systemFont(ofSize: 20, weight: .semibold)
+        titleLabel.textColor = SGColor.textDark
+        titleLabel.numberOfLines = 0
+        titleLabel.text = "How strong is the urge now?"
+
+        feedbackValueLabel.font = .monospacedDigitSystemFont(ofSize: 28, weight: .semibold)
+        feedbackValueLabel.textColor = SGColor.primaryDark
+        feedbackValueLabel.textAlignment = .center
+
+        let slider = UISlider()
+        if draft.urgeAfter == nil {
+            draft.urgeAfter = 0
+        }
+        slider.minimumValue = 0
+        slider.maximumValue = 10
+        slider.value = Float(draft.urgeAfter ?? 0)
+        slider.minimumTrackTintColor = SGColor.primary
+        slider.maximumTrackTintColor = SGColor.primaryLight
+        slider.addTarget(self, action: #selector(handleUrgeAfterChanged(_:)), for: .valueChanged)
+
+        let startAnotherButton = UIButton(type: .system)
+        startAnotherButton.setTitle("Start another rescue", for: .normal)
+        startAnotherButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
+        startAnotherButton.setTitleColor(SGColor.primaryDark, for: .normal)
+        startAnotherButton.backgroundColor = SGColor.primaryLight.withAlphaComponent(0.68)
+        startAnotherButton.layer.cornerRadius = 14
+        startAnotherButton.layer.masksToBounds = true
+        startAnotherButton.addTarget(self, action: #selector(handleStartAnotherRescueTapped), for: .touchUpInside)
+
+        stackView.addArrangedSubview(titleLabel)
+        stackView.addArrangedSubview(feedbackValueLabel)
+        stackView.addArrangedSubview(slider)
+        stackView.addArrangedSubview(startAnotherButton)
+
+        startAnotherButton.snp.makeConstraints { make in
+            make.height.equalTo(46)
+        }
+
+        updateFeedbackValueLabel()
+        return stackView
     }
 
     private func handleEmotionSelected(_ emotion: EmotionType?) {
@@ -390,17 +525,23 @@ final class SGRescueViewController: BaseViewController {
     }
 
     @objc private func handlePrimaryTapped() {
-        if currentStep == .feedback {
-            startNewSession()
-            return
-        }
-
         if currentStep == .coach, isCoachLoading {
             return
         }
 
         if currentStep == .breathing {
             finishBreathingEarly()
+            return
+        }
+
+        if currentStep == .delay {
+            completeDelayCommitment()
+            return
+        }
+
+        if currentStep == .feedback {
+            saveCompletedRescueSession()
+            startNewSession()
             return
         }
 
@@ -422,5 +563,44 @@ final class SGRescueViewController: BaseViewController {
         draft.completedBreathing = false
         currentStep = .reasons
         renderCurrentStep()
+    }
+
+    private func completeDelayCommitment() {
+        draft.completedDelay = true
+        SGNotificationService.shared.scheduleRescueDelayReminder()
+        currentStep = .feedback
+        renderCurrentStep()
+    }
+
+    private func saveCompletedRescueSession() {
+        SoberGardenStore.shared.saveRescueSession(
+            emotion: draft.emotion ?? .urge,
+            startedAt: draft.startedAt,
+            urgeBefore: draft.urgeBefore,
+            urgeAfter: draft.urgeAfter,
+            completedBreathing: draft.completedBreathing,
+            completedDelay: draft.completedDelay
+        )
+    }
+
+    private func updateFeedbackValueLabel() {
+        let value = draft.urgeAfter ?? 0
+        feedbackValueLabel.text = "\(value) / 10"
+    }
+
+    @objc private func handleStillStrugglingTapped() {
+        draft.completedBreathing = false
+        currentStep = .breathing
+        renderCurrentStep()
+    }
+
+    @objc private func handleUrgeAfterChanged(_ sender: UISlider) {
+        draft.urgeAfter = Int(sender.value.rounded())
+        updateFeedbackValueLabel()
+    }
+
+    @objc private func handleStartAnotherRescueTapped() {
+        saveCompletedRescueSession()
+        startNewSession()
     }
 }

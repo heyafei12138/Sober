@@ -30,4 +30,27 @@ final class SGNotificationService {
             }
         }
     }
+
+    func scheduleRescueDelayReminder(after timeInterval: TimeInterval = 10 * 60) {
+        let content = UNMutableNotificationContent()
+        content.title = "Check in with yourself"
+        content.body = "Ten minutes passed. Notice whether the urge softened before you choose."
+        content.sound = .default
+
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)
+        let request = UNNotificationRequest(
+            identifier: "rescue_delay_\(UUID().uuidString)",
+            content: content,
+            trigger: trigger
+        )
+
+        requestAuthorization { granted in
+            guard granted else { return }
+            UNUserNotificationCenter.current().add(request) { error in
+                if let error {
+                    debugPrint("Failed to schedule rescue delay reminder: \(error)")
+                }
+            }
+        }
+    }
 }

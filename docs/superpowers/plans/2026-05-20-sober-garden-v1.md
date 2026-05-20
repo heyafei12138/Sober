@@ -281,13 +281,13 @@ Keep files focused. Do not turn one module controller into a large all-in-one fi
 - Modify: `SoberGarden/Core/Services/SGNotificationService.swift`
 - Modify: `SoberGarden/Core/Services/SoberGardenStore.swift`
 
-- [ ] Step 4 show user reasons, or default: `You chose this because your future matters more than this urge.`
-- [ ] Step 5 show `Can you wait 10 minutes?` and schedule local notification after tapping `I'll wait 10 minutes`.
-- [ ] `I'm still struggling` should show another coach prompt or restart breathing.
-- [ ] Step 6 show urge strength slider 0-10 and buttons `I'm okay now`, `Start another rescue`.
-- [ ] Save `RescueSession` with all PRD fields.
-- [ ] Build and verify a completed rescue session is persisted.
-- [ ] Commit: `feat: complete rescue session flow`
+- [x] Step 4 show user reasons, or default: `You chose this because your future matters more than this urge.`
+- [x] Step 5 show `Can you wait 10 minutes?` and schedule local notification after tapping `I'll wait 10 minutes`.
+- [x] `I'm still struggling` should show another coach prompt or restart breathing.
+- [x] Step 6 show urge strength slider 0-10 and buttons `I'm okay now`, `Start another rescue`.
+- [x] Save `RescueSession` with all PRD fields.
+- [x] Build and verify a completed rescue session is persisted.
+- [x] Commit: `feat: complete rescue session flow`
 
 ---
 
