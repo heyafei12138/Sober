@@ -201,16 +201,16 @@ Keep files focused. Do not turn one module controller into a large all-in-one fi
 - Create: `SoberGarden/Modules/Home/Views/SGGardenPreviewView.swift`
 
 - [ ] Use a vertical `UIScrollView` and content stack with SnapKit.
-- [ ] Show top habit status: `Day N` and `Clean from Habit`.
-- [ ] Show Calm Coach card with local prompt text.
-- [ ] Show streak main card: days clean, hours, longest streak, started date.
-- [ ] Show money/time saved cards with empty states if no cost/time.
-- [ ] Show next milestone with progress bar.
-- [ ] Show garden preview and make tapping it switch to Garden tab.
-- [ ] Add strong visible `I'm Struggling` CTA that switches to Rescue tab.
-- [ ] Add Share Progress row; implementation can be wired in Task 20.
-- [ ] Build and verify Home is not a placeholder.
-- [ ] Commit: `feat: build home dashboard`
+- [x] Show top habit status: `Day N` and `Clean from Habit`.
+- [x] Show Calm Coach card with local prompt text.
+- [x] Show streak main card: days clean, hours, longest streak, started date.
+- [x] Show money/time saved cards with empty states if no cost/time.
+- [x] Show next milestone with progress bar.
+- [x] Show garden preview and make tapping it switch to Garden tab.
+- [x] Add strong visible `I'm Struggling` CTA that switches to Rescue tab.
+- [x] Add Share Progress row; implementation can be wired in Task 20.
+- [x] Build and verify Home is not a placeholder.
+- [x] Commit: `feat: build home dashboard`
 
 ### Task 10: Replace Garden Placeholder With Growth Page
 
