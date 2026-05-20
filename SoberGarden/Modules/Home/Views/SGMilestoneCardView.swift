@@ -11,8 +11,9 @@ final class SGMilestoneCardView: UIView {
     private let headerLabel = UILabel()
     private let milestoneLabel = UILabel()
     private let countdownLabel = UILabel()
-    private let progressBar = SGProgressBarView()
+    private let badgePill = UIView()
     private let badgeLabel = UILabel()
+    private let progressBar = SGProgressBarView()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -42,26 +43,33 @@ final class SGMilestoneCardView: UIView {
     }
 
     private func setupView() {
-        headerLabel.font = .systemFont(ofSize: 18, weight: .semibold)
-        headerLabel.textColor = SGColor.textDark
+        cardView.cornerRadius = 20
+        cardView.setContentInsets(SGHomeLayout.cardPadding)
+        cardView.contentView.backgroundColor = SGColor.milestoneTint
 
-        milestoneLabel.font = .systemFont(ofSize: 23, weight: .bold)
+        headerLabel.font = .systemFont(ofSize: 15, weight: .semibold)
+        headerLabel.textColor = SGColor.textSecondary
+
+        milestoneLabel.font = .systemFont(ofSize: 22, weight: .bold)
         milestoneLabel.textColor = SGColor.textDark
         milestoneLabel.numberOfLines = 2
 
         countdownLabel.font = .systemFont(ofSize: 14, weight: .medium)
         countdownLabel.textColor = SGColor.textSecondary
 
-        badgeLabel.font = .systemFont(ofSize: 13, weight: .semibold)
+        badgePill.backgroundColor = SGColor.flowerSoft
+        badgePill.layer.cornerRadius = 12
+
+        badgeLabel.font = .systemFont(ofSize: 12, weight: .semibold)
         badgeLabel.textColor = SGColor.primaryDark
-        badgeLabel.numberOfLines = 1
 
         addSubview(cardView)
         cardView.contentView.addSubview(headerLabel)
         cardView.contentView.addSubview(milestoneLabel)
         cardView.contentView.addSubview(countdownLabel)
+        cardView.contentView.addSubview(badgePill)
+        badgePill.addSubview(badgeLabel)
         cardView.contentView.addSubview(progressBar)
-        cardView.contentView.addSubview(badgeLabel)
 
         cardView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -77,19 +85,24 @@ final class SGMilestoneCardView: UIView {
         }
 
         countdownLabel.snp.makeConstraints { make in
-            make.top.equalTo(milestoneLabel.snp.bottom).offset(4)
+            make.top.equalTo(milestoneLabel.snp.bottom).offset(6)
             make.left.right.equalToSuperview()
         }
 
-        progressBar.snp.makeConstraints { make in
+        badgePill.snp.makeConstraints { make in
             make.top.equalTo(countdownLabel.snp.bottom).offset(12)
-            make.left.right.equalToSuperview()
-            make.height.equalTo(10)
+            make.left.equalToSuperview()
         }
 
         badgeLabel.snp.makeConstraints { make in
-            make.top.equalTo(progressBar.snp.bottom).offset(10)
-            make.left.right.bottom.equalToSuperview()
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 6, left: 10, bottom: 6, right: 10))
+        }
+
+        progressBar.snp.makeConstraints { make in
+            make.top.equalTo(badgePill.snp.bottom).offset(14)
+            make.left.right.equalToSuperview()
+            make.height.equalTo(10)
+            make.bottom.equalToSuperview()
         }
     }
 }

@@ -45,8 +45,6 @@ final class SGCardView: UIView {
         contentView.layer.masksToBounds = true
 
         addSubview(contentView)
-        contentView.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 18, left: 18, bottom: 18, right: 18))
-        }
+        setContentInsets(SGHomeLayout.cardPadding)
     }
 }
