@@ -86,14 +86,14 @@ Keep files focused. Do not turn one module controller into a large all-in-one fi
 **Files:**
 - Create: `SoberGarden/Core/Services/SGProgressCalculator.swift`
 
-- [ ] Implement `currentStreakDays(startDate:now:calendar:) -> Int` using calendar day boundaries and PRD display behavior: same-day start should display as day `1`.
-- [ ] Implement `elapsedCleanDaysForSavings(startDate:now:) -> Int` using `floor((now - startDate) / 86400)` for money/time calculations.
-- [ ] Implement `nextMilestone(for:) -> Milestone?`.
-- [ ] Implement `currentGardenStage(for:) -> GardenStage`.
-- [ ] Implement `moneySaved(dailyCost:cleanDays:)` and `timeSavedMinutes(dailyMinutes:cleanDays:)`.
-- [ ] Add small in-file debug assertions in a `#if DEBUG` static method, covering same-day, yesterday, milestone day 7, and next milestone day 14.
-- [ ] Build the app.
-- [ ] Commit: `feat: add progress calculations`
+- [x] Implement `currentStreakDays(startDate:now:calendar:) -> Int` using calendar day boundaries and PRD display behavior: same-day start should display as day `1`.
+- [x] Implement `elapsedCleanDaysForSavings(startDate:now:) -> Int` using `floor((now - startDate) / 86400)` for money/time calculations.
+- [x] Implement `nextMilestone(for:) -> Milestone?`.
+- [x] Implement `currentGardenStage(for:) -> GardenStage`.
+- [x] Implement `moneySaved(dailyCost:cleanDays:)` and `timeSavedMinutes(dailyMinutes:cleanDays:)`.
+- [x] Add small in-file debug assertions in a `#if DEBUG` static method, covering same-day, yesterday, milestone day 7, and next milestone day 14.
+- [x] Build the app.
+- [x] Commit: `feat: add progress calculations`
 
 ### Task 3: Add Local Codable Storage
 
