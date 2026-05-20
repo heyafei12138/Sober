@@ -118,12 +118,12 @@ Keep files focused. Do not turn one module controller into a large all-in-one fi
 - Create: `SoberGarden/Core/UI/SGSectionHeaderView.swift`
 - Modify: `SoberGarden/Helper/Theme/SGColor.swift`
 
-- [ ] Add reusable UIKit components styled with `SGColor`, rounded cards, restrained shadows, and SnapKit constraints.
-- [ ] Add semantic colors only if needed: flower accent, warning-free orange, soft shadow.
-- [ ] Buttons must support normal and disabled states.
-- [ ] Option chips must support selected/unselected state.
-- [ ] Build the app.
-- [ ] Commit: `feat: add shared UIKit components`
+- [x] Add reusable UIKit components styled with `SGColor`, rounded cards, restrained shadows, and SnapKit constraints.
+- [x] Add semantic colors only if needed: flower accent, warning-free orange, soft shadow.
+- [x] Buttons must support normal and disabled states.
+- [x] Option chips must support selected/unselected state.
+- [x] Build the app.
+- [x] Commit: `feat: add shared UIKit components`
 
 ---
 

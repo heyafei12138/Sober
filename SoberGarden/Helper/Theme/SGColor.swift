@@ -33,4 +33,10 @@ enum SGColor {
 
     /// 急救 CTA（PRD：温暖橙，非警告红）
     static let rescue = UIColor.hexString("#E89B5C")
+
+    /// 花朵/徽章点缀色
+    static let flower = UIColor.hexString("#F2C879")
+
+    /// 柔和卡片阴影
+    static let softShadow = UIColor.hexString("#31412B").withAlphaComponent(0.12)
 }
