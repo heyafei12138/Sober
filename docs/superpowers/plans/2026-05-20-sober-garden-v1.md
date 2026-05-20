@@ -252,13 +252,13 @@ Keep files focused. Do not turn one module controller into a large all-in-one fi
 - Create: `SoberGarden/Modules/Rescue/Views/SGEmotionPickerView.swift`
 - Create: `SoberGarden/Modules/Rescue/Views/SGCoachMessageView.swift`
 
-- [ ] Step 1 title `What are you feeling right now?`.
-- [ ] Show all PRD emotions plus Skip.
-- [ ] Record `emotionType` when selected.
-- [ ] Step 2 first shows `Calm Coach is here...` for 0.8-1.2 seconds.
-- [ ] Then show selected local prompt and `Start Breathing`.
-- [ ] Build and verify transition timing.
-- [ ] Commit: `feat: implement rescue emotion and coach steps`
+- [x] Step 1 title `What are you feeling right now?`.
+- [x] Show all PRD emotions plus Skip.
+- [x] Record `emotionType` when selected.
+- [x] Step 2 first shows `Calm Coach is here...` for 0.8-1.2 seconds.
+- [x] Then show selected local prompt and `Start Breathing`.
+- [x] Build and verify transition timing.
+- [x] Commit: `feat: implement rescue emotion and coach steps`
 
 ### Task 13: Implement Breathing Exercise
 

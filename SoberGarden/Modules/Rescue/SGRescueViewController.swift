@@ -69,6 +69,8 @@ final class SGRescueViewController: BaseViewController {
 
         var primaryButtonTitle: String {
             switch self {
+            case .coach:
+                return "Start Breathing"
             case .feedback:
                 return "Finish"
             default:
@@ -87,7 +89,7 @@ final class SGRescueViewController: BaseViewController {
     private let headerView = SGRescueStepHeaderView()
     private let stepCardView = SGCardView()
     private let stepTitleLabel = UILabel()
-    private let stepBodyLabel = UILabel()
+    private let stepContentContainerView = UIView()
     private let draftSummaryLabel = UILabel()
     private let footerStackView = UIStackView()
     private let backButton = UIButton(type: .system)
@@ -95,6 +97,10 @@ final class SGRescueViewController: BaseViewController {
 
     private var currentStep: Step = .emotion
     private var draft = SGRescueDraft()
+    private var coachLoadWorkItem: DispatchWorkItem?
+    private var coachPromptText: String?
+    private var isCoachLoading = false
+    private var didSkipEmotion = false
 
     override func viewDidLoad() {
         isCustomNavigationHidden = true
@@ -117,6 +123,9 @@ final class SGRescueViewController: BaseViewController {
     }
 
     func startNewSession() {
+        cancelCoachLoading()
+        coachPromptText = nil
+        didSkipEmotion = false
         draft = SGRescueDraft()
         currentStep = .emotion
         renderCurrentStep()
@@ -131,11 +140,12 @@ final class SGRescueViewController: BaseViewController {
         )
 
         stepTitleLabel.text = stepTitle(for: currentStep)
-        stepBodyLabel.text = currentStep.placeholderText
+        renderStepContent()
         draftSummaryLabel.text = draftSummaryText()
         backButton.isEnabled = currentStep != .emotion
         backButton.alpha = backButton.isEnabled ? 1 : 0.38
         primaryButton.setTitle(currentStep.primaryButtonTitle, for: .normal)
+        primaryButton.isEnabled = currentStep != .coach || !isCoachLoading
     }
 
     private func setupScrollView() {
@@ -178,29 +188,25 @@ final class SGRescueViewController: BaseViewController {
         stepTitleLabel.textColor = SGColor.textDark
         stepTitleLabel.numberOfLines = 0
 
-        stepBodyLabel.font = .systemFont(ofSize: 15, weight: .medium)
-        stepBodyLabel.textColor = SGColor.textSecondary
-        stepBodyLabel.numberOfLines = 0
-
         draftSummaryLabel.font = .systemFont(ofSize: 13, weight: .medium)
         draftSummaryLabel.textColor = SGColor.primaryDark
         draftSummaryLabel.numberOfLines = 0
 
         stepCardView.contentView.addSubview(stepTitleLabel)
-        stepCardView.contentView.addSubview(stepBodyLabel)
+        stepCardView.contentView.addSubview(stepContentContainerView)
         stepCardView.contentView.addSubview(draftSummaryLabel)
 
         stepTitleLabel.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview().inset(18)
         }
 
-        stepBodyLabel.snp.makeConstraints { make in
+        stepContentContainerView.snp.makeConstraints { make in
             make.top.equalTo(stepTitleLabel.snp.bottom).offset(10)
             make.left.right.equalToSuperview().inset(18)
         }
 
         draftSummaryLabel.snp.makeConstraints { make in
-            make.top.equalTo(stepBodyLabel.snp.bottom).offset(16)
+            make.top.equalTo(stepContentContainerView.snp.bottom).offset(16)
             make.left.right.bottom.equalToSuperview().inset(18)
         }
 
@@ -273,8 +279,98 @@ final class SGRescueViewController: BaseViewController {
         ].joined(separator: "  ·  ")
     }
 
+    private func renderStepContent() {
+        stepContentContainerView.subviews.forEach { $0.removeFromSuperview() }
+
+        switch currentStep {
+        case .emotion:
+            cancelCoachLoading()
+            let pickerView = SGEmotionPickerView()
+            pickerView.configure(selectedEmotion: draft.emotion, didSelectSkip: didSkipEmotion)
+            pickerView.onSelectEmotion = { [weak self] emotion in
+                self?.handleEmotionSelected(emotion)
+            }
+            stepContentContainerView.addSubview(pickerView)
+            pickerView.snp.makeConstraints { make in
+                make.edges.equalToSuperview()
+            }
+
+        case .coach:
+            let coachView = SGCoachMessageView()
+            stepContentContainerView.addSubview(coachView)
+            coachView.snp.makeConstraints { make in
+                make.edges.equalToSuperview()
+            }
+
+            if let coachPromptText {
+                isCoachLoading = false
+                coachView.showPrompt(coachPromptText)
+            } else {
+                coachView.showLoading()
+                scheduleCoachPromptLoad()
+            }
+
+        default:
+            cancelCoachLoading()
+            let label = UILabel()
+            label.font = .systemFont(ofSize: 15, weight: .medium)
+            label.textColor = SGColor.textSecondary
+            label.numberOfLines = 0
+            label.text = currentStep.placeholderText
+            stepContentContainerView.addSubview(label)
+            label.snp.makeConstraints { make in
+                make.edges.equalToSuperview()
+            }
+        }
+    }
+
+    private func handleEmotionSelected(_ emotion: EmotionType?) {
+        draft.emotion = emotion
+        didSkipEmotion = emotion == nil
+        coachPromptText = nil
+        currentStep = .coach
+        renderCurrentStep()
+    }
+
+    private func scheduleCoachPromptLoad() {
+        guard coachLoadWorkItem == nil else { return }
+        isCoachLoading = true
+        primaryButton.isEnabled = false
+        coachLoadWorkItem?.cancel()
+
+        let workItem = DispatchWorkItem { [weak self] in
+            guard let self else { return }
+            self.coachPromptText = SGCalmCoachService.shared.promptText(
+                for: self.coachContext(for: self.draft.emotion)
+            )
+            self.isCoachLoading = false
+            self.coachLoadWorkItem = nil
+            self.renderCurrentStep()
+        }
+
+        coachLoadWorkItem = workItem
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.2, execute: workItem)
+    }
+
+    private func cancelCoachLoading() {
+        coachLoadWorkItem?.cancel()
+        coachLoadWorkItem = nil
+        isCoachLoading = false
+    }
+
+    private func coachContext(for emotion: EmotionType?) -> SGCalmCoachContext {
+        guard let emotion, let context = SGCalmCoachContext(rawValue: emotion.rawValue) else {
+            return .urge
+        }
+        return context
+    }
+
     @objc private func handleBackTapped() {
         guard currentStep.rawValue > 0, let previousStep = Step(rawValue: currentStep.rawValue - 1) else { return }
+        if currentStep == .coach {
+            cancelCoachLoading()
+            coachPromptText = nil
+        }
         currentStep = previousStep
         renderCurrentStep()
     }
@@ -285,7 +381,14 @@ final class SGRescueViewController: BaseViewController {
             return
         }
 
+        if currentStep == .coach, isCoachLoading {
+            return
+        }
+
         guard let nextStep = Step(rawValue: currentStep.rawValue + 1) else { return }
+        if nextStep == .coach {
+            coachPromptText = nil
+        }
         currentStep = nextStep
         renderCurrentStep()
     }
