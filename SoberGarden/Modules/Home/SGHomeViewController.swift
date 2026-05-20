@@ -73,7 +73,7 @@ final class SGHomeViewController: BaseViewController {
         scrollView.contentInsetAdjustmentBehavior = .never
 
         scrollView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(64)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(44)
             make.left.right.equalToSuperview()
             make.bottom.equalTo(rescueSubtitleLabel.snp.top).offset(-20)
         }
