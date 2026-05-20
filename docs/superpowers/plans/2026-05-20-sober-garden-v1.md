@@ -300,15 +300,15 @@ Keep files focused. Do not turn one module controller into a large all-in-one fi
 - Create: `SoberGarden/Modules/Journal/Views/SGJournalCheckInView.swift`
 - Create: `SoberGarden/Modules/Journal/Views/SGJournalHistoryCell.swift`
 
-- [ ] Replace placeholder with Today Check-in UI.
-- [ ] Mood single choice: Great, Calm, Okay, Low, Stressed.
-- [ ] Urge single choice: No urge, Mild urge, Strong urge.
-- [ ] Trigger multi-choice: Stress, Boredom, Loneliness, Social media, Late night, Conflict, Tiredness, Custom.
-- [ ] Reflection text view placeholder: `What helped you today?`
-- [ ] Save or update today's `JournalEntry`.
-- [ ] Show recent entries list with date, mood, urge level, triggers, note.
-- [ ] Build and verify journal survives app restart.
-- [ ] Commit: `feat: build daily journal`
+- [x] Replace placeholder with Today Check-in UI.
+- [x] Mood single choice: Great, Calm, Okay, Low, Stressed.
+- [x] Urge single choice: No urge, Mild urge, Strong urge.
+- [x] Trigger multi-choice: Stress, Boredom, Loneliness, Social media, Late night, Conflict, Tiredness, Custom.
+- [x] Reflection text view placeholder: `What helped you today?`
+- [x] Save or update today's `JournalEntry`.
+- [x] Show recent entries list with date, mood, urge level, triggers, note.
+- [x] Build and verify journal survives app restart.
+- [x] Commit: `feat: build daily journal`
 
 ### Task 16: Add Settings Entry And Main Settings Page
 
