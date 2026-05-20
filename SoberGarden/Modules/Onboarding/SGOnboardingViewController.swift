@@ -7,6 +7,12 @@ import UIKit
 
 final class SGOnboardingViewController: BaseViewController {
 
+    private enum Layout {
+        static let pageInset: CGFloat = 24
+        static let compactRadius: CGFloat = 12
+        static let contentSpacing: CGFloat = 14
+    }
+
     enum Step: Int, CaseIterable {
         case welcome
         case habit
@@ -106,33 +112,33 @@ final class SGOnboardingViewController: BaseViewController {
         scrollView.addSubview(contentStackView)
 
         progressBarView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(24)
-            make.left.right.equalToSuperview().inset(24)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)
+            make.left.right.equalToSuperview().inset(Layout.pageInset)
         }
 
         stepView.snp.makeConstraints { make in
-            make.top.equalTo(progressBarView.snp.bottom).offset(72)
-            make.left.right.equalToSuperview().inset(28)
+            make.top.equalTo(progressBarView.snp.bottom).offset(46)
+            make.left.right.equalToSuperview().inset(Layout.pageInset)
         }
 
         scrollView.snp.makeConstraints { make in
-            make.top.equalTo(stepView.snp.bottom).offset(28)
+            make.top.equalTo(stepView.snp.bottom).offset(24)
             make.left.right.equalToSuperview()
             make.bottom.equalTo(backButton.snp.top).offset(-12)
         }
 
         contentStackView.snp.makeConstraints { make in
-            make.edges.equalTo(scrollView.contentLayoutGuide).inset(UIEdgeInsets(top: 0, left: 28, bottom: 20, right: 28))
-            make.width.equalTo(scrollView.frameLayoutGuide).offset(-56)
+            make.edges.equalTo(scrollView.contentLayoutGuide).inset(UIEdgeInsets(top: 0, left: Layout.pageInset, bottom: 20, right: Layout.pageInset))
+            make.width.equalTo(scrollView.frameLayoutGuide).offset(-Layout.pageInset * 2)
         }
 
         primaryButton.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(24)
+            make.left.right.equalToSuperview().inset(Layout.pageInset)
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-24)
         }
 
         backButton.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(24)
+            make.left.equalToSuperview().offset(Layout.pageInset)
             make.bottom.equalTo(primaryButton.snp.top).offset(-16)
             make.height.equalTo(44)
         }
@@ -144,7 +150,7 @@ final class SGOnboardingViewController: BaseViewController {
         primaryButton.addTarget(self, action: #selector(handlePrimaryTapped), for: .touchUpInside)
 
         contentStackView.axis = .vertical
-        contentStackView.spacing = 12
+        contentStackView.spacing = Layout.contentSpacing
         contentStackView.alignment = .fill
     }
 
@@ -179,15 +185,22 @@ final class SGOnboardingViewController: BaseViewController {
 
     private func addWelcomeContent() {
         let card = SGCardView()
+        card.cornerRadius = 16
+        card.setContentInsets(UIEdgeInsets(top: 18, left: 20, bottom: 18, right: 20))
         let label = UILabel()
         label.text = "A calm place to track your clean days, prepare for difficult moments, and see your garden grow."
         label.font = .systemFont(ofSize: 16, weight: .regular)
         label.textColor = SGColor.textSecondary
         label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.setContentCompressionResistancePriority(.required, for: .vertical)
 
         card.contentView.addSubview(label)
         label.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+        card.snp.makeConstraints { make in
+            make.height.greaterThanOrEqualTo(104)
         }
         contentStackView.addArrangedSubview(card)
     }
@@ -219,8 +232,8 @@ final class SGOnboardingViewController: BaseViewController {
         customHabitTextField.backgroundColor = SGColor.surface
         customHabitTextField.textColor = SGColor.textDark
         customHabitTextField.font = .systemFont(ofSize: 16)
-        customHabitTextField.layer.cornerRadius = 16
-        customHabitTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 14, height: 1))
+        customHabitTextField.layer.cornerRadius = Layout.compactRadius
+        customHabitTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 1))
         customHabitTextField.leftViewMode = .always
         customHabitTextField.isHidden = draft.habitType != .custom
         customHabitTextField.removeTarget(nil, action: nil, for: .editingChanged)
@@ -268,8 +281,8 @@ final class SGOnboardingViewController: BaseViewController {
         costTextField.backgroundColor = SGColor.surface
         costTextField.textColor = SGColor.textDark
         costTextField.font = .systemFont(ofSize: 16)
-        costTextField.layer.cornerRadius = 16
-        costTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 14, height: 1))
+        costTextField.layer.cornerRadius = Layout.compactRadius
+        costTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 1))
         costTextField.leftViewMode = .always
         costTextField.isHidden = selectedCostMode == .skip
         costTextField.removeTarget(nil, action: nil, for: .editingChanged)

@@ -9,7 +9,7 @@ final class SGCardView: UIView {
 
     let contentView = UIView()
 
-    var cornerRadius: CGFloat = 20 {
+    var cornerRadius: CGFloat = 16 {
         didSet {
             layer.cornerRadius = cornerRadius
             contentView.layer.cornerRadius = cornerRadius
@@ -36,9 +36,9 @@ final class SGCardView: UIView {
         backgroundColor = .clear
         layer.cornerRadius = cornerRadius
         layer.shadowColor = SGColor.softShadow.cgColor
-        layer.shadowOpacity = 1
-        layer.shadowRadius = 18
-        layer.shadowOffset = CGSize(width: 0, height: 8)
+        layer.shadowOpacity = 0.7
+        layer.shadowRadius = 10
+        layer.shadowOffset = CGSize(width: 0, height: 4)
 
         contentView.backgroundColor = SGColor.surface
         contentView.layer.cornerRadius = cornerRadius
@@ -46,7 +46,7 @@ final class SGCardView: UIView {
 
         addSubview(contentView)
         contentView.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 18, left: 18, bottom: 18, right: 18))
         }
     }
 }

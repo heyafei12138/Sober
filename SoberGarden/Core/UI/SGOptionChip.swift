@@ -42,7 +42,7 @@ final class SGOptionChip: UIControl {
     private func setupView() {
         isAccessibilityElement = true
         accessibilityTraits = [.button]
-        layer.cornerRadius = 17
+        layer.cornerRadius = 12
         layer.borderWidth = 1
 
         titleLabel.font = .systemFont(ofSize: 15, weight: .medium)
@@ -53,7 +53,7 @@ final class SGOptionChip: UIControl {
 
         addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview().inset(9)
+            make.top.bottom.equalToSuperview().inset(10)
             make.left.right.equalToSuperview().inset(16)
         }
     }

@@ -27,15 +27,17 @@ final class SGOnboardingStepView: UIView {
     }
 
     private func setupView() {
-        titleLabel.font = .systemFont(ofSize: 32, weight: .bold)
+        titleLabel.font = .systemFont(ofSize: 30, weight: .bold)
         titleLabel.textColor = SGColor.textDark
         titleLabel.numberOfLines = 0
         titleLabel.textAlignment = .left
+        titleLabel.lineBreakMode = .byWordWrapping
 
-        subtitleLabel.font = .systemFont(ofSize: 17, weight: .regular)
+        subtitleLabel.font = .systemFont(ofSize: 16, weight: .regular)
         subtitleLabel.textColor = SGColor.textSecondary
         subtitleLabel.numberOfLines = 0
         subtitleLabel.textAlignment = .left
+        subtitleLabel.lineBreakMode = .byWordWrapping
 
         addSubview(titleLabel)
         addSubview(subtitleLabel)
@@ -45,7 +47,7 @@ final class SGOnboardingStepView: UIView {
         }
 
         subtitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(12)
+            make.top.equalTo(titleLabel.snp.bottom).offset(10)
             make.left.right.bottom.equalToSuperview()
         }
     }
