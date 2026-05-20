@@ -183,12 +183,12 @@ Keep files focused. Do not turn one module controller into a large all-in-one fi
 - Create: `SoberGarden/Core/Services/SGCalmCoachService.swift`
 - Modify: `SoberGarden/Core/Services/SoberGardenStore.swift`
 
-- [ ] Add local prompts for `home`, `urge`, `stress`, `lonely`, `bored`, `angry`, `tired`, `anxious`, `triggered`, `lateNight`, `milestone7`, and `relapse`.
-- [ ] Implement weighted random prompt selection.
-- [ ] Avoid repeating prompt IDs from the last 24 hours when candidates are available.
-- [ ] Never use AI wording such as `AI`, `AI says`, or `Powered by AI`.
-- [ ] Build the app.
-- [ ] Commit: `feat: add local calm coach prompts`
+- [x] Add local prompts for `home`, `urge`, `stress`, `lonely`, `bored`, `angry`, `tired`, `anxious`, `triggered`, `lateNight`, `milestone7`, and `relapse`.
+- [x] Implement weighted random prompt selection.
+- [x] Avoid repeating prompt IDs from the last 24 hours when candidates are available.
+- [x] Never use AI wording such as `AI`, `AI says`, or `Powered by AI`.
+- [x] Build the app.
+- [x] Commit: `feat: add local calm coach prompts`
 
 ### Task 9: Replace Home Placeholder With PRD Home
 

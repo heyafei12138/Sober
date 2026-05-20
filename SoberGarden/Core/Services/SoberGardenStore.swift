@@ -111,10 +111,17 @@ final class SoberGardenStore {
 
     func recordPromptShown(id: String, shownAt: Date = Date()) {
         update { state in
+            state.recentPromptIDs.removeAll { shownAt.timeIntervalSince($0.shownAt) > Self.promptRepeatWindow }
             state.recentPromptIDs.removeAll { $0.id == id }
             state.recentPromptIDs.append(PromptDisplayRecord(id: id, shownAt: shownAt))
             state.recentPromptIDs.sort { $0.shownAt > $1.shownAt }
         }
+    }
+
+    func recentPromptIDs(within interval: TimeInterval, now: Date = Date()) -> [String] {
+        state.recentPromptIDs
+            .filter { now.timeIntervalSince($0.shownAt) <= interval }
+            .map { $0.id }
     }
 
     func updateSettings(_ transform: (inout SoberGardenSettings) -> Void) {
@@ -144,4 +151,6 @@ final class SoberGardenStore {
             try fileManager.createDirectory(at: directoryURL, withIntermediateDirectories: true)
         }
     }
+
+    private static let promptRepeatWindow: TimeInterval = 24 * 60 * 60
 }

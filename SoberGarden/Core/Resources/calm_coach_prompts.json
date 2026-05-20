@@ -1,0 +1,37 @@
+[
+  {"id":"home_1","context":"home","weight":3,"text":"Take one steady breath and choose the next right thing."},
+  {"id":"home_2","context":"home","weight":2,"text":"You are building proof that change is possible, one day at a time."},
+
+  {"id":"urge_1","context":"urge","weight":3,"text":"Ride this urge for one minute before you decide anything."},
+  {"id":"urge_2","context":"urge","weight":2,"text":"Urges peak, then pass. Stay with the wave until it softens."},
+
+  {"id":"stress_1","context":"stress","weight":3,"text":"Lower the pressure. One calm action is enough for now."},
+  {"id":"stress_2","context":"stress","weight":2,"text":"You do not need to carry every problem at full weight tonight."},
+
+  {"id":"lonely_1","context":"lonely","weight":3,"text":"Reach for connection, even if it is just one message."},
+  {"id":"lonely_2","context":"lonely","weight":2,"text":"Loneliness is a feeling, not a verdict. Stay close to people who help."},
+
+  {"id":"bored_1","context":"bored","weight":3,"text":"Boredom is a good time to change the scene, not your goals."},
+  {"id":"bored_2","context":"bored","weight":2,"text":"Pick a small task with a clear finish and let momentum do the rest."},
+
+  {"id":"angry_1","context":"angry","weight":3,"text":"Do not act from the edge of the feeling. Let it drop first."},
+  {"id":"angry_2","context":"angry","weight":2,"text":"Anger wants motion. Give it a walk, water, or a slower breath."},
+
+  {"id":"tired_1","context":"tired","weight":3,"text":"Fatigue makes old habits louder. Keep the next step small."},
+  {"id":"tired_2","context":"tired","weight":2,"text":"Rest is part of staying on track. Reduce decisions for tonight."},
+
+  {"id":"anxious_1","context":"anxious","weight":3,"text":"Name three things you can see, then return to the breath."},
+  {"id":"anxious_2","context":"anxious","weight":2,"text":"You only need enough calm for the next few minutes."},
+
+  {"id":"triggered_1","context":"triggered","weight":3,"text":"Leave the trigger if you can and give your body some space."},
+  {"id":"triggered_2","context":"triggered","weight":2,"text":"This is a cue, not a command. Pause before you respond."},
+
+  {"id":"lateNight_1","context":"lateNight","weight":3,"text":"Night hours distort judgment. Put distance between you and the urge."},
+  {"id":"lateNight_2","context":"lateNight","weight":2,"text":"Late-night decisions are often the hardest to trust tomorrow."},
+
+  {"id":"milestone7_1","context":"milestone7","weight":3,"text":"Seven days is a real shift. Let the progress land."},
+  {"id":"milestone7_2","context":"milestone7","weight":2,"text":"You have already changed your pattern. Keep tending it."},
+
+  {"id":"relapse_1","context":"relapse","weight":3,"text":"A slip is information, not a full stop. Return to the next step."},
+  {"id":"relapse_2","context":"relapse","weight":2,"text":"Start again from now. The garden still grows after the rain."}
+]
