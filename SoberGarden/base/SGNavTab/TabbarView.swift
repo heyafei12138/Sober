@@ -34,7 +34,7 @@ class CustomTabBar: UIView {
     /// 【代码说明】主背景容器视图（深色胶囊形状）
     private let backgroundContainerView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.black.withAlphaComponent(0.10)
+        view.backgroundColor = SGColor.tabBarTint
         view.layer.cornerRadius = barHeight*0.5
         view.clipsToBounds = false
         
@@ -94,16 +94,16 @@ class CustomTabBar: UIView {
     
     /// 【代码说明】配置TabBar项
     /// - Parameter items: TabBar项配置数组，包含标题、普通图片和选中图片
-    func configureItems(_ items: [(title: String, normalImage: String, selectedImage: String)]) {
-        // 清除旧的视图
+    func configureItems(_ items: [(title: String, systemImage: String, selectedSystemImage: String)]) {
         tabBarItems.forEach { $0.removeFromSuperview() }
         tabBarItems.removeAll()
-        
-        // 创建新的TabBar项
+
+        let symbolConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .medium)
+
         for (index, item) in items.enumerated() {
-            let normalImage = UIImage(named: item.normalImage)
-            let selectedImage = UIImage(named: item.selectedImage)
-            
+            let normalImage = UIImage(systemName: item.systemImage, withConfiguration: symbolConfig)
+            let selectedImage = UIImage(systemName: item.selectedSystemImage, withConfiguration: symbolConfig)
+
             let tabBarItem = CustomTabBarItem(
                 title: item.title,
                 normalImage: normalImage,
@@ -174,7 +174,7 @@ class CustomTabBarItem: UIView {
     private let iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = .white
+        imageView.tintColor = SGColor.textSecondary
         return imageView
     }()
     
@@ -183,7 +183,7 @@ class CustomTabBarItem: UIView {
         let label = UILabel()
         label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
-        label.textColor = .white
+        label.textColor = SGColor.textSecondary
         return label
     }()
     
@@ -215,8 +215,8 @@ class CustomTabBarItem: UIView {
     ///   - selectedImage: 选中状态图片
     init(title: String, normalImage: UIImage?, selectedImage: UIImage?) {
         self.title = title
-        self.normalImage = normalImage?.withRenderingMode(.alwaysOriginal)
-        self.selectedImage = selectedImage?.withRenderingMode(.alwaysOriginal)
+        self.normalImage = normalImage?.withRenderingMode(.alwaysTemplate)
+        self.selectedImage = selectedImage?.withRenderingMode(.alwaysTemplate)
         super.init(frame: .zero)
         setupUI()
     }
@@ -301,14 +301,16 @@ class CustomTabBarItem: UIView {
             if animated {
                 // 执行动画
                 UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: [.curveEaseInOut, .beginFromCurrentState, .allowUserInteraction]) {
-                    self.backgroundView.backgroundColor = .red
+                    self.backgroundView.backgroundColor = SGColor.primary
+                    self.iconImageView.tintColor = .white
+                    self.titleLabel.textColor = .white
                     self.titleLabel.alpha = 1.0
-                    // 触发布局更新以实现宽度动画
                     self.superview?.layoutIfNeeded()
                 }
             } else {
-                // 不执行动画，立即更新
-                self.backgroundView.backgroundColor = .red
+                self.backgroundView.backgroundColor = SGColor.primary
+                self.iconImageView.tintColor = .white
+                self.titleLabel.textColor = .white
                 self.titleLabel.alpha = 1.0
             }
         } else {
@@ -322,8 +324,9 @@ class CustomTabBarItem: UIView {
                 // 执行动画
                 UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: [.curveEaseInOut, .beginFromCurrentState, .allowUserInteraction]) {
                     self.backgroundView.backgroundColor = .clear
+                    self.iconImageView.tintColor = SGColor.textSecondary
+                    self.titleLabel.textColor = SGColor.textSecondary
                     self.titleLabel.alpha = 0.0
-                    // 触发布局更新以实现宽度动画
                     self.superview?.layoutIfNeeded()
                 } completion: { finished in
                     // 动画完成后隐藏标题，节省渲染资源
@@ -334,6 +337,8 @@ class CustomTabBarItem: UIView {
             } else {
                 // 不执行动画，立即更新
                 self.backgroundView.backgroundColor = .clear
+                self.iconImageView.tintColor = SGColor.textSecondary
+                self.titleLabel.textColor = SGColor.textSecondary
                 self.titleLabel.alpha = 0.0
                 self.titleLabel.isHidden = true
             }

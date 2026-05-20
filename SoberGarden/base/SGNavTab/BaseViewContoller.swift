@@ -107,7 +107,7 @@ open class BaseViewController: UIViewController {
 extension BaseViewController {
     
     private func setupPageAppearance() {
-        view.backgroundColor = .white.withAlphaComponent(0.2)
+        view.backgroundColor = SGColor.background
     }
     
     private func setupCustomNavigationIfNeeded() {

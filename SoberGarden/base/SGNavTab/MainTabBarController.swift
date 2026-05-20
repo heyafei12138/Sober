@@ -82,27 +82,19 @@ class MainTabBarController: UITabBarController {
     
     /// 【代码说明】设置四个主要视图控制器
     private func setupViewControllers() {
-        let homeVC = UIViewController()
-        let recordVC = UIViewController()
-        let shotsVC = UIViewController()
-        let settingsVC = UIViewController()
-        
-        let homeNav = createNavigationController(for: homeVC, title: "Home", normalImage: "home", selectedImage: "home_s")
-        let recordNav = createNavigationController(for: recordVC, title: "Record", normalImage: "tab3", selectedImage: "tab3_s")
-        let shotsNav = createNavigationController(for: shotsVC, title: "Shots", normalImage: "tab2", selectedImage: "tab2_s")
-        let settingsNav = createNavigationController(for: settingsVC, title: "Set", normalImage: "setting_icon", selectedImage: "setting_icon")
-        
-        viewControllers = [homeNav, recordNav, shotsNav, settingsNav]
+        let homeNav = createNavigationController(for: SGHomeViewController())
+        let rescueNav = createNavigationController(for: SGRescueViewController())
+        let gardenNav = createNavigationController(for: SGGardenViewController())
+        let journalNav = createNavigationController(for: SGJournalViewController())
+
+        viewControllers = [homeNav, rescueNav, gardenNav, journalNav]
     }
     
     /// 【代码说明】创建导航控制器并配置TabBar项
-    private func createNavigationController(for rootViewController: UIViewController, title: String, normalImage: String, selectedImage: String) -> UINavigationController {
-        // 创建导航控制器
+    private func createNavigationController(for rootViewController: UIViewController) -> UINavigationController {
         let navController = UINavigationController(rootViewController: rootViewController)
         navController.delegate = self
-        // 设置标题
         rootViewController.title = ""
-        
         return navController
     }
     
@@ -117,12 +109,11 @@ class MainTabBarController: UITabBarController {
         }
         
         // 配置TabBar项
-        let items: [(title: String, normalImage: String, selectedImage: String)] = [
-            ("Home", "home", "home_s"),
-            ("Record", "tab3", "tab3_s"),
-            ("Shots", "tab2", "tab2_s"),
-            ("Set", "tab4", "tab4_s")
-
+        let items: [(title: String, systemImage: String, selectedSystemImage: String)] = [
+            ("Home", "house", "house.fill"),
+            ("Rescue", "lifepreserver", "lifepreserver.fill"),
+            ("Garden", "leaf", "leaf.fill"),
+            ("Journal", "book", "book.fill"),
         ]
         
         customTabBar.configureItems(items)
