@@ -17,11 +17,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let window = UIWindow(windowScene: windowScene)
         let state = SoberGardenStore.shared.load()
-//        window.rootViewController = state.habit == nil
-//            ? SGOnboardingViewController()
-//            : MainTabBarController()
-        
-        window.rootViewController = SGOnboardingViewController()
+
+        window.rootViewController = state.habit == nil
+            ? SGOnboardingViewController()
+            : MainTabBarController()
         window.makeKeyAndVisible()
         self.window = window
     }

@@ -8,6 +8,25 @@ import UIKit
 /// 首页：Streak、Calm Coach、Garden 预览、I'm Struggling 入口
 final class SGHomeViewController: BaseViewController {
 
+    private let scrollView = UIScrollView()
+    private let contentView = UIView()
+    private let contentStackView = UIStackView()
+    private let headerView = SGHomeHeaderView()
+    private let coachCardView = SGCardView()
+    private let coachSectionHeader = SGSectionHeaderView(title: "Calm Coach")
+    private let coachPromptLabel = UILabel()
+    private let streakCardView = SGStreakCardView()
+    private let savingsView = SGSavedStatsView()
+    private let milestoneCardView = SGMilestoneCardView()
+    private let gardenPreviewView = SGGardenPreviewView()
+    private let shareProgressControl = SGHomeActionRowControl(
+        title: "Share Progress",
+        subtitle: "Make your progress easy to share.",
+        iconName: "square.and.arrow.up"
+    )
+    private let rescueButton = SGPrimaryButton(title: "I'm Struggling", style: .rescue)
+    private let rescueSubtitleLabel = UILabel()
+
     override func viewDidLoad() {
         isCustomNavigationHidden = true
         showsRightNavigationActions = true
@@ -17,13 +36,316 @@ final class SGHomeViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         rightActionContainerView.isHidden = false
+        renderContent()
+    }
+
+    override func bindViewModel() {
+        renderContent()
+    }
+
+    override func onSettingsButtonPressed() {
+        super.onSettingsButtonPressed()
     }
 
     override func setupSubviews() {
-        let label = makePlaceholderLabel(text: "Home")
-        view.addSubview(label)
-        label.snp.makeConstraints { make in
-            make.center.equalToSuperview()
+        setupFooter()
+        setupScrollView()
+        setupHeader()
+        setupCoachCard()
+        setupStreakCard()
+        setupSavingsSection()
+        setupMilestoneSection()
+        setupGardenPreview()
+        setupShareSection()
+        renderContent()
+    }
+
+    private func setupScrollView() {
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(contentStackView)
+
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.contentInsetAdjustmentBehavior = .never
+
+        scrollView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(12)
+            make.left.right.equalToSuperview()
+            make.bottom.equalTo(rescueSubtitleLabel.snp.top).offset(-20)
         }
+
+        contentView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+            make.width.equalTo(scrollView.snp.width)
+        }
+
+        contentStackView.axis = .vertical
+        contentStackView.spacing = 16
+        contentStackView.alignment = .fill
+        contentStackView.distribution = .fill
+        contentStackView.isLayoutMarginsRelativeArrangement = true
+        contentStackView.layoutMargins = UIEdgeInsets(top: 0, left: 20, bottom: 20, right: 20)
+
+        contentStackView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+    }
+
+    private func setupHeader() {
+        contentStackView.addArrangedSubview(headerView)
+    }
+
+    private func setupCoachCard() {
+        coachCardView.contentView.addSubview(coachSectionHeader)
+        coachCardView.contentView.addSubview(coachPromptLabel)
+
+        coachSectionHeader.snp.makeConstraints { make in
+            make.top.left.right.equalToSuperview()
+        }
+
+        coachPromptLabel.font = .systemFont(ofSize: 17, weight: .semibold)
+        coachPromptLabel.textColor = SGColor.textDark
+        coachPromptLabel.numberOfLines = 0
+        coachPromptLabel.lineBreakMode = .byWordWrapping
+        coachPromptLabel.adjustsFontSizeToFitWidth = true
+        coachPromptLabel.minimumScaleFactor = 0.88
+
+        coachPromptLabel.snp.makeConstraints { make in
+            make.top.equalTo(coachSectionHeader.snp.bottom).offset(10)
+            make.left.right.bottom.equalToSuperview()
+        }
+
+        contentStackView.addArrangedSubview(coachCardView)
+    }
+
+    private func setupStreakCard() {
+        contentStackView.addArrangedSubview(streakCardView)
+    }
+
+    private func setupSavingsSection() {
+        contentStackView.addArrangedSubview(savingsView)
+    }
+
+    private func setupMilestoneSection() {
+        contentStackView.addArrangedSubview(milestoneCardView)
+    }
+
+    private func setupGardenPreview() {
+        contentStackView.addArrangedSubview(gardenPreviewView)
+    }
+
+    private func setupShareSection() {
+        shareProgressControl.onTap = { [weak self] in
+            self?.shareProgress()
+        }
+        contentStackView.addArrangedSubview(shareProgressControl)
+    }
+
+    private func setupFooter() {
+        view.addSubview(rescueSubtitleLabel)
+        view.addSubview(rescueButton)
+
+        rescueSubtitleLabel.text = "Get through the next few minutes."
+        rescueSubtitleLabel.font = .systemFont(ofSize: 14, weight: .medium)
+        rescueSubtitleLabel.textColor = SGColor.textSecondary
+        rescueSubtitleLabel.textAlignment = .center
+        rescueSubtitleLabel.numberOfLines = 1
+        rescueSubtitleLabel.adjustsFontSizeToFitWidth = true
+        rescueSubtitleLabel.minimumScaleFactor = 0.8
+
+        rescueButton.addTarget(self, action: #selector(handleRescueButtonTapped), for: .touchUpInside)
+
+        rescueSubtitleLabel.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(24)
+            make.right.equalToSuperview().offset(-24)
+            make.bottom.equalTo(rescueButton.snp.top).offset(-10)
+        }
+
+        rescueButton.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-(CustomTabBar.barHeight + 16))
+        }
+    }
+
+    private func renderContent() {
+        let state = SoberGardenStore.shared.state
+        let habit = state.habit
+        let now = Date()
+
+        let cleanDays = habit.map { SGProgressCalculator.currentStreakDays(startDate: $0.startDate, now: now) } ?? 1
+        let elapsedDays = habit.map { SGProgressCalculator.elapsedCleanDaysForSavings(startDate: $0.startDate, now: now) } ?? 0
+        let currentHours = habit.map { max(Int(floor(now.timeIntervalSince($0.startDate) / 3600)), 0) } ?? 0
+        let longestStreak = max(cleanDays, state.relapseRecords.map(\.previousStreakDays).max() ?? cleanDays)
+        let nextMilestone = SGProgressCalculator.nextMilestone(for: cleanDays)
+        let habitName = habit?.displayName ?? "Habit"
+
+        headerView.configure(
+            dayCount: cleanDays,
+            habitName: habitName
+        )
+
+        coachPromptLabel.text = currentCoachText(for: state, habit: habit, cleanDays: cleanDays, now: now)
+
+        streakCardView.configure(
+            cleanDays: cleanDays,
+            currentHours: currentHours,
+            longestStreakDays: longestStreak,
+            startedDate: habit?.startDate,
+            habitName: habitName
+        )
+
+        savingsView.configure(
+            dailyCost: habit?.dailyCost,
+            dailyMinutes: habit?.dailyMinutes,
+            cleanDays: elapsedDays
+        )
+
+        milestoneCardView.configure(
+            cleanDays: cleanDays,
+            nextMilestone: nextMilestone
+        )
+
+        gardenPreviewView.configure(
+            gardenStage: SGProgressCalculator.currentGardenStage(for: cleanDays),
+            nextMilestone: nextMilestone,
+            cleanDays: cleanDays,
+            habitName: habitName
+        )
+    }
+
+    private func currentCoachText(for state: SoberGardenState, habit: Habit?, cleanDays: Int, now: Date) -> String {
+        let promptContext: SGCalmCoachContext
+        if cleanDays == 7 {
+            promptContext = .milestone7
+        } else {
+            let hour = Calendar.current.component(.hour, from: now)
+            if hour >= 22 || hour < 6 {
+                promptContext = .lateNight
+            } else if state.relapseRecords.isEmpty == false {
+                promptContext = .stress
+            } else {
+                promptContext = .home
+            }
+        }
+
+        return SGCalmCoachService.shared.promptText(for: promptContext, now: now)
+    }
+
+    private func shareProgress() {
+        guard let habit = SoberGardenStore.shared.state.habit else { return }
+        let cleanDays = SGProgressCalculator.currentStreakDays(startDate: habit.startDate)
+        let savedMoney = SGProgressCalculator.moneySaved(dailyCost: habit.dailyCost ?? 0, cleanDays: cleanDays)
+        let nextMilestone = SGProgressCalculator.nextMilestone(for: cleanDays)?.day
+        let stage = SGProgressCalculator.currentGardenStage(for: cleanDays)
+        let summary = [
+            "I’m growing one clean day at a time.",
+            "\(cleanDays) days clean from \(habit.displayName).",
+            stage.title,
+            nextMilestone.map { "Next milestone: \($0) days." } ?? nil,
+            savedMoney > 0 ? "Saved \(NumberFormatter.localizedString(from: NSNumber(value: savedMoney), number: .currency))." : nil
+        ]
+        .compactMap { $0 }
+        .joined(separator: "\n")
+
+        let snapshot = WidgetSnapshot(
+            cleanDays: cleanDays,
+            nextMilestone: nextMilestone,
+            gardenStage: stage,
+            habitDisplayName: habit.displayName,
+            updatedAt: Date()
+        )
+        let activity = UIActivityViewController(activityItems: [summary], applicationActivities: nil)
+        activity.popoverPresentationController?.sourceView = view
+        activity.popoverPresentationController?.sourceRect = CGRect(x: view.bounds.midX, y: view.bounds.maxY - 120, width: 1, height: 1)
+        present(activity, animated: true)
+        debugPrint("Share Progress snapshot: \(snapshot)")
+    }
+
+    @objc private func handleRescueButtonTapped() {
+        (tabBarController as? MainTabBarController)?.setSelectedIndex(1)
+    }
+}
+
+private final class SGHomeActionRowControl: UIControl {
+
+    var onTap: (() -> Void)?
+
+    private let cardView = SGCardView()
+    private let iconView = UIImageView()
+    private let titleLabel = UILabel()
+    private let subtitleLabel = UILabel()
+    private let chevronView = UIImageView()
+
+    init(title: String, subtitle: String, iconName: String) {
+        super.init(frame: .zero)
+        setupView(title: title, subtitle: subtitle, iconName: iconName)
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupView(title: "Share Progress", subtitle: "", iconName: "square.and.arrow.up")
+    }
+
+    private func setupView(title: String, subtitle: String, iconName: String) {
+        addTarget(self, action: #selector(handleTap), for: .touchUpInside)
+
+        addSubview(cardView)
+        cardView.isUserInteractionEnabled = false
+        snp.makeConstraints { make in
+            make.height.greaterThanOrEqualTo(84)
+        }
+        cardView.contentView.addSubview(iconView)
+        cardView.contentView.addSubview(titleLabel)
+        cardView.contentView.addSubview(subtitleLabel)
+        cardView.contentView.addSubview(chevronView)
+
+        cardView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+
+        iconView.image = UIImage(systemName: iconName)
+        iconView.tintColor = SGColor.primaryDark
+        iconView.contentMode = .scaleAspectFit
+
+        titleLabel.text = title
+        titleLabel.font = .systemFont(ofSize: 16, weight: .semibold)
+        titleLabel.textColor = SGColor.textDark
+
+        subtitleLabel.text = subtitle
+        subtitleLabel.font = .systemFont(ofSize: 13, weight: .medium)
+        subtitleLabel.textColor = SGColor.textSecondary
+        subtitleLabel.numberOfLines = 2
+
+        chevronView.image = UIImage(systemName: "chevron.right")
+        chevronView.tintColor = SGColor.textTertiary
+        chevronView.contentMode = .scaleAspectFit
+
+        iconView.snp.makeConstraints { make in
+            make.left.top.equalToSuperview()
+            make.size.equalTo(24)
+        }
+
+        chevronView.snp.makeConstraints { make in
+            make.right.centerY.equalToSuperview()
+            make.size.equalTo(12)
+        }
+
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(1)
+            make.left.equalTo(iconView.snp.right).offset(12)
+            make.right.lessThanOrEqualTo(chevronView.snp.left).offset(-12)
+        }
+
+        subtitleLabel.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(4)
+            make.left.equalTo(titleLabel)
+            make.right.lessThanOrEqualTo(chevronView.snp.left).offset(-12)
+            make.bottom.equalToSuperview()
+        }
+    }
+
+    @objc private func handleTap() {
+        onTap?()
     }
 }
