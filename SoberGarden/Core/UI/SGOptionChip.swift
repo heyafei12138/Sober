@@ -40,6 +40,8 @@ final class SGOptionChip: UIControl {
     }
 
     private func setupView() {
+        isAccessibilityElement = true
+        accessibilityTraits = [.button]
         layer.cornerRadius = 17
         layer.borderWidth = 1
 
@@ -63,5 +65,7 @@ final class SGOptionChip: UIControl {
         layer.borderColor = (isSelected ? SGColor.primary : SGColor.separator).cgColor
         titleLabel.textColor = isEnabled ? SGColor.textDark : SGColor.textTertiary
         alpha = isHighlighted ? 0.72 : (isEnabled ? 1 : 0.55)
+        accessibilityLabel = title
+        accessibilityTraits = isSelected ? [.button, .selected] : [.button]
     }
 }

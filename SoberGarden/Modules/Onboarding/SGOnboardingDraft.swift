@@ -17,6 +17,24 @@ struct SGOnboardingDraft {
         habitType != nil
     }
 
+    mutating func setCost(amount: Double?, mode: SGOnboardingCostMode) {
+        guard let amount, amount > 0, mode != .skip else {
+            dailyCost = nil
+            return
+        }
+
+        switch mode {
+        case .day:
+            dailyCost = amount
+        case .week:
+            dailyCost = amount / 7
+        case .month:
+            dailyCost = amount / 30
+        case .skip:
+            dailyCost = nil
+        }
+    }
+
     func makeHabit(now: Date = Date()) -> Habit? {
         guard let habitType else { return nil }
 
@@ -31,5 +49,25 @@ struct SGOnboardingDraft {
             createdAt: now,
             updatedAt: now
         )
+    }
+}
+
+enum SGOnboardingCostMode: Int, CaseIterable {
+    case day
+    case week
+    case month
+    case skip
+
+    var title: String {
+        switch self {
+        case .day:
+            return "Cost per day"
+        case .week:
+            return "Cost per week"
+        case .month:
+            return "Cost per month"
+        case .skip:
+            return "Skip"
+        }
     }
 }

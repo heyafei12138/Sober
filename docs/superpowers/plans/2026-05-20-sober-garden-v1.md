@@ -150,13 +150,13 @@ Keep files focused. Do not turn one module controller into a large all-in-one fi
 - Modify: `SoberGarden/Modules/Onboarding/SGOnboardingViewController.swift`
 - Modify: `SoberGarden/Modules/Onboarding/SGOnboardingDraft.swift`
 
-- [ ] Step 1 welcome: title `Break the habit. Grow a calmer life.`, subtitle, button `Get Started`.
-- [ ] Step 2 habit picker with PRD options and custom text field when `Custom` is selected.
-- [ ] Step 3 start date: Today, Yesterday, Pick a date; reject future dates.
-- [ ] Step 4 cost input: per day, per week, per month, Skip; normalize to `dailyCost`.
-- [ ] Use SnapKit for all layout; avoid storyboard edits.
-- [ ] Build and manually step through pages 1-4.
-- [ ] Commit: `feat: implement onboarding habit setup`
+- [x] Step 1 welcome: title `Break the habit. Grow a calmer life.`, subtitle, button `Get Started`.
+- [x] Step 2 habit picker with PRD options and custom text field when `Custom` is selected.
+- [x] Step 3 start date: Today, Yesterday, Pick a date; reject future dates.
+- [x] Step 4 cost input: per day, per week, per month, Skip; normalize to `dailyCost`.
+- [x] Use SnapKit for all layout; avoid storyboard edits.
+- [x] Build and manually step through pages 1-4.
+- [x] Commit: `feat: implement onboarding habit setup`
 
 ### Task 7: Implement Onboarding Steps 5-8
 

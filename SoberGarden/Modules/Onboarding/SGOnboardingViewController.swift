@@ -75,11 +75,17 @@ final class SGOnboardingViewController: BaseViewController {
         didSet { renderCurrentStep() }
     }
     private var draft = SGOnboardingDraft()
+    private var selectedStartDateOption: Int = 0
+    private var selectedCostMode: SGOnboardingCostMode = .skip
 
     private let progressBarView = SGProgressBarView()
     private let stepView = SGOnboardingStepView()
+    private let scrollView = UIScrollView()
+    private let contentStackView = UIStackView()
     private let backButton = UIButton(type: .system)
     private let primaryButton = SGPrimaryButton(title: "Get Started", style: .primary)
+    private let customHabitTextField = UITextField()
+    private let costTextField = UITextField()
 
     override func viewDidLoad() {
         isCustomNavigationHidden = true
@@ -94,8 +100,10 @@ final class SGOnboardingViewController: BaseViewController {
     private func setupLayout() {
         view.addSubview(progressBarView)
         view.addSubview(stepView)
+        view.addSubview(scrollView)
         view.addSubview(backButton)
         view.addSubview(primaryButton)
+        scrollView.addSubview(contentStackView)
 
         progressBarView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(24)
@@ -105,6 +113,17 @@ final class SGOnboardingViewController: BaseViewController {
         stepView.snp.makeConstraints { make in
             make.top.equalTo(progressBarView.snp.bottom).offset(72)
             make.left.right.equalToSuperview().inset(28)
+        }
+
+        scrollView.snp.makeConstraints { make in
+            make.top.equalTo(stepView.snp.bottom).offset(28)
+            make.left.right.equalToSuperview()
+            make.bottom.equalTo(backButton.snp.top).offset(-12)
+        }
+
+        contentStackView.snp.makeConstraints { make in
+            make.edges.equalTo(scrollView.contentLayoutGuide).inset(UIEdgeInsets(top: 0, left: 28, bottom: 20, right: 28))
+            make.width.equalTo(scrollView.frameLayoutGuide).offset(-56)
         }
 
         primaryButton.snp.makeConstraints { make in
@@ -123,6 +142,10 @@ final class SGOnboardingViewController: BaseViewController {
         backButton.setTitle("Back", for: .normal)
         backButton.addTarget(self, action: #selector(handleBackTapped), for: .touchUpInside)
         primaryButton.addTarget(self, action: #selector(handlePrimaryTapped), for: .touchUpInside)
+
+        contentStackView.axis = .vertical
+        contentStackView.spacing = 12
+        contentStackView.alignment = .fill
     }
 
     private func renderCurrentStep() {
@@ -133,6 +156,150 @@ final class SGOnboardingViewController: BaseViewController {
         let stepCount = CGFloat(Step.allCases.count)
         let currentIndex = CGFloat(currentStep.rawValue + 1)
         progressBarView.setProgress(currentIndex / stepCount, animated: true)
+        renderStepContent()
+        updatePrimaryButtonState()
+    }
+
+    private func renderStepContent() {
+        contentStackView.removeAllArrangedSubviews()
+
+        switch currentStep {
+        case .welcome:
+            addWelcomeContent()
+        case .habit:
+            addHabitPickerContent()
+        case .startDate:
+            addStartDateContent()
+        case .cost:
+            addCostContent()
+        default:
+            addPlaceholderContent()
+        }
+    }
+
+    private func addWelcomeContent() {
+        let card = SGCardView()
+        let label = UILabel()
+        label.text = "A calm place to track your clean days, prepare for difficult moments, and see your garden grow."
+        label.font = .systemFont(ofSize: 16, weight: .regular)
+        label.textColor = SGColor.textSecondary
+        label.numberOfLines = 0
+
+        card.contentView.addSubview(label)
+        label.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        contentStackView.addArrangedSubview(card)
+    }
+
+    private func addHabitPickerContent() {
+        let gridStack = makeVerticalStack(spacing: 10)
+        let rows = HabitType.allCases.chunked(into: 2)
+
+        rows.forEach { rowTypes in
+            let rowStack = makeHorizontalStack()
+            rowTypes.forEach { type in
+                let chip = SGOptionChip(title: type.displayName)
+                chip.tag = HabitType.allCases.firstIndex(of: type) ?? 0
+                chip.isSelected = draft.habitType == type
+                chip.addTarget(self, action: #selector(handleHabitChipTapped(_:)), for: .touchUpInside)
+                rowStack.addArrangedSubview(chip)
+            }
+            if rowTypes.count == 1 {
+                rowStack.addArrangedSubview(UIView())
+            }
+            gridStack.addArrangedSubview(rowStack)
+        }
+
+        contentStackView.addArrangedSubview(gridStack)
+
+        customHabitTextField.placeholder = "Enter your habit"
+        customHabitTextField.text = draft.customHabitName
+        customHabitTextField.borderStyle = .none
+        customHabitTextField.backgroundColor = SGColor.surface
+        customHabitTextField.textColor = SGColor.textDark
+        customHabitTextField.font = .systemFont(ofSize: 16)
+        customHabitTextField.layer.cornerRadius = 16
+        customHabitTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 14, height: 1))
+        customHabitTextField.leftViewMode = .always
+        customHabitTextField.isHidden = draft.habitType != .custom
+        customHabitTextField.removeTarget(nil, action: nil, for: .editingChanged)
+        customHabitTextField.addTarget(self, action: #selector(handleCustomHabitChanged(_:)), for: .editingChanged)
+        customHabitTextField.snp.makeConstraints { make in
+            make.height.equalTo(52)
+        }
+        contentStackView.addArrangedSubview(customHabitTextField)
+    }
+
+    private func addStartDateContent() {
+        let optionStack = makeVerticalStack(spacing: 10)
+        let todayChip = makeStartDateChip(title: "Today", tag: 0)
+        let yesterdayChip = makeStartDateChip(title: "Yesterday", tag: 1)
+        let pickDateChip = makeStartDateChip(title: "Pick a date", tag: 2)
+        optionStack.addArrangedSubview(todayChip)
+        optionStack.addArrangedSubview(yesterdayChip)
+        optionStack.addArrangedSubview(pickDateChip)
+        contentStackView.addArrangedSubview(optionStack)
+
+        let datePicker = UIDatePicker()
+        datePicker.datePickerMode = .date
+        datePicker.preferredDatePickerStyle = .inline
+        datePicker.maximumDate = Date()
+        datePicker.date = min(draft.startDate, Date())
+        datePicker.addTarget(self, action: #selector(handleStartDatePicked(_:)), for: .valueChanged)
+        datePicker.isHidden = !isCustomStartDateSelected()
+        contentStackView.addArrangedSubview(datePicker)
+    }
+
+    private func addCostContent() {
+        let modeStack = makeVerticalStack(spacing: 10)
+        SGOnboardingCostMode.allCases.forEach { mode in
+            let chip = SGOptionChip(title: mode.title)
+            chip.tag = mode.rawValue
+            chip.isSelected = selectedCostMode == mode
+            chip.addTarget(self, action: #selector(handleCostModeTapped(_:)), for: .touchUpInside)
+            modeStack.addArrangedSubview(chip)
+        }
+        contentStackView.addArrangedSubview(modeStack)
+
+        costTextField.placeholder = "Amount"
+        costTextField.keyboardType = .decimalPad
+        costTextField.borderStyle = .none
+        costTextField.backgroundColor = SGColor.surface
+        costTextField.textColor = SGColor.textDark
+        costTextField.font = .systemFont(ofSize: 16)
+        costTextField.layer.cornerRadius = 16
+        costTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 14, height: 1))
+        costTextField.leftViewMode = .always
+        costTextField.isHidden = selectedCostMode == .skip
+        costTextField.removeTarget(nil, action: nil, for: .editingChanged)
+        costTextField.addTarget(self, action: #selector(handleCostAmountChanged(_:)), for: .editingChanged)
+        costTextField.snp.makeConstraints { make in
+            make.height.equalTo(52)
+        }
+        contentStackView.addArrangedSubview(costTextField)
+    }
+
+    private func addPlaceholderContent() {
+        let label = UILabel()
+        label.text = "This step will be completed in the next task."
+        label.font = .systemFont(ofSize: 15)
+        label.textColor = SGColor.textTertiary
+        label.numberOfLines = 0
+        contentStackView.addArrangedSubview(label)
+    }
+
+    private func updatePrimaryButtonState() {
+        switch currentStep {
+        case .habit:
+            if draft.habitType == .custom {
+                primaryButton.isEnabled = !(draft.customHabitName?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true)
+            } else {
+                primaryButton.isEnabled = draft.habitType != nil
+            }
+        default:
+            primaryButton.isEnabled = true
+        }
     }
 
     @objc private func handleBackTapped() {
@@ -141,6 +308,7 @@ final class SGOnboardingViewController: BaseViewController {
     }
 
     @objc private func handlePrimaryTapped() {
+        view.endEditing(true)
         if currentStep == .complete {
             finishOnboardingIfPossible()
             return
@@ -148,6 +316,88 @@ final class SGOnboardingViewController: BaseViewController {
 
         guard let nextStep = Step(rawValue: currentStep.rawValue + 1) else { return }
         currentStep = nextStep
+    }
+
+    @objc private func handleHabitChipTapped(_ sender: SGOptionChip) {
+        let selectedType = HabitType.allCases[sender.tag]
+        draft.habitType = selectedType
+        if selectedType != .custom {
+            draft.customHabitName = nil
+        }
+        renderCurrentStep()
+    }
+
+    @objc private func handleCustomHabitChanged(_ sender: UITextField) {
+        draft.customHabitName = sender.text
+        updatePrimaryButtonState()
+    }
+
+    @objc private func handleStartDateChipTapped(_ sender: SGOptionChip) {
+        selectedStartDateOption = sender.tag
+        let calendar = Calendar.current
+        switch sender.tag {
+        case 0:
+            draft.startDate = Date()
+        case 1:
+            draft.startDate = calendar.date(byAdding: .day, value: -1, to: Date()) ?? Date()
+        default:
+            draft.startDate = min(draft.startDate, Date())
+        }
+        renderCurrentStep()
+    }
+
+    @objc private func handleStartDatePicked(_ sender: UIDatePicker) {
+        selectedStartDateOption = 2
+        draft.startDate = min(sender.date, Date())
+        renderCurrentStep()
+    }
+
+    @objc private func handleCostModeTapped(_ sender: SGOptionChip) {
+        selectedCostMode = SGOnboardingCostMode(rawValue: sender.tag) ?? .skip
+        updateDraftCost()
+        renderCurrentStep()
+    }
+
+    @objc private func handleCostAmountChanged(_ sender: UITextField) {
+        updateDraftCost()
+    }
+
+    private func updateDraftCost() {
+        let amountText = costTextField.text ?? ""
+        let amount = Double(amountText.replacingOccurrences(of: ",", with: "."))
+        draft.setCost(amount: amount, mode: selectedCostMode)
+    }
+
+    private func makeStartDateChip(title: String, tag: Int) -> SGOptionChip {
+        let chip = SGOptionChip(title: title)
+        chip.tag = tag
+        chip.isSelected = isStartDateChipSelected(tag: tag)
+        chip.addTarget(self, action: #selector(handleStartDateChipTapped(_:)), for: .touchUpInside)
+        return chip
+    }
+
+    private func isStartDateChipSelected(tag: Int) -> Bool {
+        selectedStartDateOption == tag
+    }
+
+    private func isCustomStartDateSelected() -> Bool {
+        selectedStartDateOption == 2
+    }
+
+    private func makeVerticalStack(spacing: CGFloat) -> UIStackView {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = spacing
+        stack.alignment = .fill
+        return stack
+    }
+
+    private func makeHorizontalStack() -> UIStackView {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.spacing = 10
+        stack.distribution = .fillEqually
+        return stack
     }
 
     private func finishOnboardingIfPossible() {
@@ -165,6 +415,23 @@ final class SGOnboardingViewController: BaseViewController {
 
         if let sceneDelegate = windowScene.delegate as? SceneDelegate {
             sceneDelegate.window = window
+        }
+    }
+}
+
+private extension UIStackView {
+    func removeAllArrangedSubviews() {
+        arrangedSubviews.forEach { view in
+            removeArrangedSubview(view)
+            view.removeFromSuperview()
+        }
+    }
+}
+
+private extension Array {
+    func chunked(into size: Int) -> [[Element]] {
+        stride(from: 0, to: count, by: size).map {
+            Array(self[$0..<Swift.min($0 + size, count)])
         }
     }
 }
