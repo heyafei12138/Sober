@@ -226,9 +226,11 @@ final class SGOnboardingViewController: BaseViewController {
     }
 
     private func addWelcomeContent() {
+        addIllustration(named: "guider_icon_flowerpot", height: 146)
+
         let card = SGCardView()
         card.cornerRadius = 16
-        card.setContentInsets(UIEdgeInsets(top: 20, left: 28, bottom: 20, right: 28))
+        card.setContentInsets(UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10))
         let label = UILabel()
         label.text = "A calm place to track your clean days, prepare for difficult moments, and see your garden grow."
         label.font = .systemFont(ofSize: 16, weight: .regular)
@@ -239,7 +241,7 @@ final class SGOnboardingViewController: BaseViewController {
 
         card.contentView.addSubview(label)
         label.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.edges.equalToSuperview().inset(6)
         }
         card.snp.makeConstraints { make in
             make.height.greaterThanOrEqualTo(124)
@@ -248,6 +250,8 @@ final class SGOnboardingViewController: BaseViewController {
     }
 
     private func addHabitPickerContent() {
+        addIllustration(named: "guider_icon_tree1", height: 110)
+
         let gridStack = makeVerticalStack(spacing: 10)
         let rows = HabitType.allCases.chunked(into: 2)
 
@@ -400,9 +404,11 @@ final class SGOnboardingViewController: BaseViewController {
     }
 
     private func addNotificationsContent() {
+        addIllustration(named: "guider_icon_singleFlower", height: 118)
+
         let card = SGCardView()
         card.cornerRadius = 16
-        card.setContentInsets(UIEdgeInsets(top: 18, left: 20, bottom: 18, right: 20))
+        card.setContentInsets(UIEdgeInsets(top: 18, left: 10, bottom: 18, right: 10))
         let label = UILabel()
         label.text = "We'll send gentle reminders, milestone celebrations, and urge support prompts. You can change this anytime in Settings."
         label.font = .systemFont(ofSize: 15, weight: .regular)
@@ -410,15 +416,17 @@ final class SGOnboardingViewController: BaseViewController {
         label.numberOfLines = 0
         card.contentView.addSubview(label)
         label.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.edges.equalToSuperview().inset(6)
         }
         contentStackView.addArrangedSubview(card)
     }
 
     private func addCompleteContent() {
+        addIllustration(named: "guider_icon_tree", height: 150)
+
         let card = SGCardView()
         card.cornerRadius = 16
-        card.setContentInsets(UIEdgeInsets(top: 20, left: 24, bottom: 20, right: 24))
+        card.setContentInsets(UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10))
         let label = UILabel()
         label.text = "Tap Start Growing to open your Home tab, track clean days, and reach for Rescue whenever you need support."
         label.font = .systemFont(ofSize: 16, weight: .regular)
@@ -426,7 +434,7 @@ final class SGOnboardingViewController: BaseViewController {
         label.numberOfLines = 0
         card.contentView.addSubview(label)
         label.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.edges.equalToSuperview().inset(6)
         }
         contentStackView.addArrangedSubview(card)
     }
@@ -605,6 +613,23 @@ final class SGOnboardingViewController: BaseViewController {
         stack.spacing = 10
         stack.distribution = .fillEqually
         return stack
+    }
+
+    private func addIllustration(named imageName: String, height: CGFloat) {
+        guard let image = UIImage(named: imageName) else { return }
+
+        let container = UIView()
+        let imageView = UIImageView(image: image)
+        imageView.contentMode = .scaleAspectFit
+        imageView.isAccessibilityElement = false
+        container.addSubview(imageView)
+        container.snp.makeConstraints { make in
+            make.height.equalTo(height)
+        }
+        imageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        contentStackView.addArrangedSubview(container)
     }
 
     private func finishOnboardingIfPossible() {
