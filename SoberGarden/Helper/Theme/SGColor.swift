@@ -36,14 +36,7 @@ enum SGColor {
 
     /// 花朵/徽章点缀色
     static let flower = UIColor.hexString("#F2C879")
-    static let flowerSoft = UIColor.hexString("#FBF0D6")
-
-    /// 分区浅底（打破全白单调）
-    static let coachTint = UIColor.hexString("#EFF5E6")
-    static let savingsMoneyTint = UIColor.hexString("#FAF6EE")
-    static let savingsTimeTint = UIColor.hexString("#F0F6EC")
-    static let milestoneTint = UIColor.hexString("#F8FAF4")
 
     /// 柔和卡片阴影
-    static let softShadow = UIColor.hexString("#31412B").withAlphaComponent(0.10)
+    static let softShadow = UIColor.hexString("#31412B").withAlphaComponent(0.12)
 }

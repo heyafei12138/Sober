@@ -9,8 +9,8 @@ final class SGSavedStatsView: UIView {
 
     private let titleLabel = UILabel()
     private let cardStackView = UIStackView()
-    private let moneyCard = SGHomeSavingsCardView(title: "Money Saved", tint: SGColor.savingsMoneyTint, accent: SGColor.flower)
-    private let timeCard = SGHomeSavingsCardView(title: "Time Saved", tint: SGColor.savingsTimeTint, accent: SGColor.primary)
+    private let moneyCard = SGHomeSavingsCardView(title: "Money Saved")
+    private let timeCard = SGHomeSavingsCardView(title: "Time Saved")
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -58,7 +58,7 @@ final class SGSavedStatsView: UIView {
         }
 
         cardStackView.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(12)
+            make.top.equalTo(titleLabel.snp.bottom).offset(10)
             make.left.right.bottom.equalToSuperview()
         }
     }
@@ -74,7 +74,9 @@ final class SGSavedStatsView: UIView {
         guard minutes >= 60 else { return "\(minutes) min" }
         let hours = minutes / 60
         let leftover = minutes % 60
-        if leftover == 0 { return "\(hours)h" }
+        if leftover == 0 {
+            return "\(hours)h"
+        }
         return "\(hours)h \(leftover)m"
     }
 }
@@ -82,22 +84,15 @@ final class SGSavedStatsView: UIView {
 private final class SGHomeSavingsCardView: UIView {
 
     private let cardView = SGCardView()
-    private let cardTint: UIColor
-    private let accentColor: UIColor
-    private let titleLabel = UILabel()
     private let valueLabel = UILabel()
     private let subtitleLabel = UILabel()
 
-    init(title: String, tint: UIColor, accent: UIColor) {
-        self.cardTint = tint
-        self.accentColor = accent
+    init(title: String) {
         super.init(frame: .zero)
         setupView(title: title)
     }
 
     required init?(coder: NSCoder) {
-        self.cardTint = SGColor.surface
-        self.accentColor = SGColor.primary
         super.init(coder: coder)
         setupView(title: "")
     }
@@ -108,16 +103,13 @@ private final class SGHomeSavingsCardView: UIView {
     }
 
     private func setupView(title: String) {
-        cardView.cornerRadius = 18
-        cardView.setContentInsets(SGHomeLayout.cardPaddingCompact)
-        cardView.contentView.backgroundColor = cardTint
-
+        let titleLabel = UILabel()
         titleLabel.text = title
         titleLabel.font = .systemFont(ofSize: 14, weight: .semibold)
         titleLabel.textColor = SGColor.textSecondary
 
-        valueLabel.font = .systemFont(ofSize: 24, weight: .bold)
-        valueLabel.textColor = accentColor
+        valueLabel.font = .systemFont(ofSize: 22, weight: .bold)
+        valueLabel.textColor = SGColor.textDark
         valueLabel.numberOfLines = 1
         valueLabel.adjustsFontSizeToFitWidth = true
         valueLabel.minimumScaleFactor = 0.7
@@ -133,7 +125,6 @@ private final class SGHomeSavingsCardView: UIView {
 
         cardView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
-            make.height.greaterThanOrEqualTo(120)
         }
 
         titleLabel.snp.makeConstraints { make in
@@ -141,12 +132,12 @@ private final class SGHomeSavingsCardView: UIView {
         }
 
         valueLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(12)
+            make.top.equalTo(titleLabel.snp.bottom).offset(10)
             make.left.right.equalToSuperview()
         }
 
         subtitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(valueLabel.snp.bottom).offset(8)
+            make.top.equalTo(valueLabel.snp.bottom).offset(6)
             make.left.right.bottom.equalToSuperview()
         }
     }
