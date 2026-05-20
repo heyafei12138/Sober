@@ -16,7 +16,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = scene as? UIWindowScene else { return }
 
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = MainTabBarController()
+        let state = SoberGardenStore.shared.load()
+        window.rootViewController = state.habit == nil ? SGOnboardingViewController() : MainTabBarController()
         window.makeKeyAndVisible()
         self.window = window
     }
@@ -51,4 +52,3 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
 }
-

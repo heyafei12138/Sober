@@ -137,12 +137,12 @@ Keep files focused. Do not turn one module controller into a large all-in-one fi
 - Create: `SoberGarden/Modules/Onboarding/SGOnboardingDraft.swift`
 - Modify: `SoberGarden/SceneDelegate.swift`
 
-- [ ] On launch, load `SoberGardenStore.shared.state`.
-- [ ] If `state.habit == nil`, show `SGOnboardingViewController`; otherwise show `MainTabBarController`.
-- [ ] Keep onboarding in one controller with a step enum to avoid over-building navigation.
-- [ ] Add progress indicator and Back/Next behavior.
-- [ ] Build and verify first launch shows onboarding.
-- [ ] Commit: `feat: route first launch to onboarding`
+- [x] On launch, load `SoberGardenStore.shared.state`.
+- [x] If `state.habit == nil`, show `SGOnboardingViewController`; otherwise show `MainTabBarController`.
+- [x] Keep onboarding in one controller with a step enum to avoid over-building navigation.
+- [x] Add progress indicator and Back/Next behavior.
+- [x] Build and verify first launch shows onboarding.
+- [x] Commit: `feat: route first launch to onboarding`
 
 ### Task 6: Implement Onboarding Steps 1-4
 
