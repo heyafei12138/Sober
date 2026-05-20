@@ -101,12 +101,12 @@ Keep files focused. Do not turn one module controller into a large all-in-one fi
 - Create: `SoberGarden/Core/Services/SoberGardenStore.swift`
 - Create: `SoberGarden/Core/Services/SoberGardenState.swift`
 
-- [ ] Implement `SoberGardenState: Codable` containing optional `habit`, arrays for `rescueSessions`, `journalEntries`, `relapseRecords`, `recentPromptIDs`, and settings flags.
-- [ ] Implement `SoberGardenStore` as a singleton with `load()`, `save(_:)`, and convenience mutation methods.
-- [ ] Store JSON in app documents directory as `sober_garden_state.json`.
-- [ ] Keep all storage local; do not add networking or accounts.
-- [ ] Build the app.
-- [ ] Commit: `feat: add local sober garden store`
+- [x] Implement `SoberGardenState: Codable` containing optional `habit`, arrays for `rescueSessions`, `journalEntries`, `relapseRecords`, `recentPromptIDs`, and settings flags.
+- [x] Implement `SoberGardenStore` as a singleton with `load()`, `save(_:)`, and convenience mutation methods.
+- [x] Store JSON in app documents directory as `sober_garden_state.json`.
+- [x] Keep all storage local; do not add networking or accounts.
+- [x] Build the app.
+- [x] Commit: `feat: add local sober garden store`
 
 ### Task 4: Add Shared Design Components
 
