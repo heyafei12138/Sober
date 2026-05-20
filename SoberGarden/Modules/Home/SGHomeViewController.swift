@@ -48,7 +48,7 @@ final class SGHomeViewController: BaseViewController {
     }
 
     override func onSettingsButtonPressed() {
-        super.onSettingsButtonPressed()
+        pushController(SGSettingsViewController())
     }
 
     override func setupSubviews() {

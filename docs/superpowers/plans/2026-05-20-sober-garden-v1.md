@@ -317,12 +317,12 @@ Keep files focused. Do not turn one module controller into a large all-in-one fi
 - Create: `SoberGarden/Modules/Settings/SGSettingsViewController.swift`
 - Create: `SoberGarden/Modules/Settings/SGSettingsRowView.swift`
 
-- [ ] Wire Home settings button to push `SGSettingsViewController`.
-- [ ] Sections: Habit, Notifications, Privacy & Safety, Data Management, About.
-- [ ] Include rows from PRD: edit habit, start date, cost, time, reasons, notification toggles, Privacy Policy, Terms, Non-medical disclaimer, Reset current streak, Delete all data, App version.
-- [ ] Use `SFSafariViewController` for external policy/terms URLs; use placeholder URLs only if final URLs are not available.
-- [ ] Build and verify push/pop works with existing custom navigation.
-- [ ] Commit: `feat: add settings page`
+- [x] Wire Home settings button to push `SGSettingsViewController`.
+- [x] Sections: Habit, Notifications, Privacy & Safety, Data Management, About.
+- [x] Include rows from PRD: edit habit, start date, cost, time, reasons, notification toggles, Privacy Policy, Terms, Non-medical disclaimer, Reset current streak, Delete all data, App version.
+- [x] Use `SFSafariViewController` for external policy/terms URLs; use placeholder URLs only if final URLs are not available.
+- [x] Build and verify push/pop works with existing custom navigation.
+- [x] Commit: `feat: add settings page`
 
 ### Task 17: Implement Habit Editing And Reset Streak
 
