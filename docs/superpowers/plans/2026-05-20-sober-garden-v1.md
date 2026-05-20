@@ -238,12 +238,12 @@ Keep files focused. Do not turn one module controller into a large all-in-one fi
 - Create: `SoberGarden/Modules/Rescue/SGRescueDraft.swift`
 - Create: `SoberGarden/Modules/Rescue/Views/SGRescueStepHeaderView.swift`
 
-- [ ] Replace placeholder with a single controller driven by `enum Step`.
-- [ ] Support steps: emotion, coach, breathing, reasons, delay, feedback.
-- [ ] Keep draft fields: emotion, urgeBefore, urgeAfter, completedBreathing, completedDelay.
-- [ ] Add `startNewSession()` and `renderCurrentStep()`.
-- [ ] Build and verify Rescue tab shows Step 1.
-- [ ] Commit: `feat: add rescue flow state`
+- [x] Replace placeholder with a single controller driven by `enum Step`.
+- [x] Support steps: emotion, coach, breathing, reasons, delay, feedback.
+- [x] Keep draft fields: emotion, urgeBefore, urgeAfter, completedBreathing, completedDelay.
+- [x] Add `startNewSession()` and `renderCurrentStep()`.
+- [x] Build and verify Rescue tab shows Step 1.
+- [x] Commit: `feat: add rescue flow state`
 
 ### Task 12: Implement Rescue Emotion And Coach Steps
 
