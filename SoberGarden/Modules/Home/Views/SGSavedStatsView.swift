@@ -122,7 +122,7 @@ private final class SGHomeSavingsCardView: UIView {
     }
 
     private func setupView(title: String, iconName: String) {
-        cardView.setContentInsets(UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
+        cardView.setContentInsets(.zero)
         cardView.contentView.backgroundColor = surfaceColor
 
         iconContainerView.backgroundColor = accentColor.withAlphaComponent(0.24)
@@ -168,7 +168,7 @@ private final class SGHomeSavingsCardView: UIView {
         }
 
         iconContainerView.snp.makeConstraints { make in
-            make.top.left.equalToSuperview()
+            make.top.left.equalToSuperview().inset(16)
             make.size.equalTo(34)
         }
 
@@ -180,17 +180,17 @@ private final class SGHomeSavingsCardView: UIView {
         titleLabel.snp.makeConstraints { make in
             make.centerY.equalTo(iconContainerView)
             make.left.equalTo(iconContainerView.snp.right).offset(10)
-            make.right.equalToSuperview()
+            make.right.equalToSuperview().inset(16)
         }
 
         valueLabel.snp.makeConstraints { make in
             make.top.equalTo(iconContainerView.snp.bottom).offset(14)
-            make.left.right.equalToSuperview()
+            make.left.right.equalToSuperview().inset(16)
         }
 
         subtitleLabel.snp.makeConstraints { make in
             make.top.equalTo(valueLabel.snp.bottom).offset(6)
-            make.left.right.bottom.equalToSuperview()
+            make.left.right.bottom.equalToSuperview().inset(16)
         }
     }
 }

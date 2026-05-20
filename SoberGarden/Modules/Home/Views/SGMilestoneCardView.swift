@@ -43,7 +43,7 @@ final class SGMilestoneCardView: UIView {
     }
 
     private func setupView() {
-        cardView.setContentInsets(UIEdgeInsets(top: 22, left: 22, bottom: 22, right: 22))
+        cardView.setContentInsets(.zero)
         cardView.contentView.backgroundColor = UIColor.hexString("#F8FBF1")
 
         headerLabel.font = .systemFont(ofSize: 18, weight: .semibold)
@@ -77,29 +77,29 @@ final class SGMilestoneCardView: UIView {
         }
 
         headerLabel.snp.makeConstraints { make in
-            make.top.left.right.equalToSuperview()
+            make.top.left.right.equalToSuperview().inset(18)
         }
 
         milestoneLabel.snp.makeConstraints { make in
             make.top.equalTo(headerLabel.snp.bottom).offset(12)
-            make.left.right.equalToSuperview()
+            make.left.right.equalToSuperview().inset(18)
         }
 
         countdownLabel.snp.makeConstraints { make in
             make.top.equalTo(milestoneLabel.snp.bottom).offset(4)
-            make.left.right.equalToSuperview()
+            make.left.right.equalToSuperview().inset(18)
         }
 
         progressBar.snp.makeConstraints { make in
             make.top.equalTo(countdownLabel.snp.bottom).offset(14)
-            make.left.right.equalToSuperview()
+            make.left.right.equalToSuperview().inset(18)
             make.height.equalTo(10)
         }
 
         badgeContainerView.snp.makeConstraints { make in
             make.top.equalTo(progressBar.snp.bottom).offset(10)
-            make.left.bottom.equalToSuperview()
-            make.right.lessThanOrEqualToSuperview()
+            make.left.bottom.equalToSuperview().inset(18)
+            make.right.lessThanOrEqualToSuperview().inset(18)
         }
 
         badgeLabel.snp.makeConstraints { make in

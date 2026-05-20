@@ -73,7 +73,7 @@ final class SGHomeViewController: BaseViewController {
         scrollView.contentInsetAdjustmentBehavior = .never
 
         scrollView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(12)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(64)
             make.left.right.equalToSuperview()
             make.bottom.equalTo(rescueSubtitleLabel.snp.top).offset(-20)
         }
@@ -88,7 +88,7 @@ final class SGHomeViewController: BaseViewController {
         contentStackView.alignment = .fill
         contentStackView.distribution = .fill
         contentStackView.isLayoutMarginsRelativeArrangement = true
-        contentStackView.layoutMargins = UIEdgeInsets(top: 2, left: 22, bottom: 28, right: 22)
+        contentStackView.layoutMargins = UIEdgeInsets(top: 2, left: 16, bottom: 28, right: 16)
 
         contentStackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -100,7 +100,7 @@ final class SGHomeViewController: BaseViewController {
     }
 
     private func setupCoachCard() {
-        coachCardView.setContentInsets(UIEdgeInsets(top: 22, left: 22, bottom: 22, right: 22))
+        coachCardView.setContentInsets(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
         coachCardView.contentView.backgroundColor = UIColor.hexString("#FFF9E8")
 
         coachContentStackView.axis = .horizontal
@@ -133,7 +133,8 @@ final class SGHomeViewController: BaseViewController {
         coachImageContainerView.addSubview(coachImageView)
 
         coachContentStackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.bottom.equalToSuperview().inset(16)
+            make.left.right.equalToSuperview().inset(16)
         }
 
         coachImageContainerView.snp.makeConstraints { make in
@@ -321,7 +322,7 @@ private final class SGHomeActionRowControl: UIControl {
 
         addSubview(cardView)
         cardView.isUserInteractionEnabled = false
-        cardView.setContentInsets(UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
+        cardView.setContentInsets(.zero)
         cardView.contentView.backgroundColor = UIColor.hexString("#FDF9EA")
         snp.makeConstraints { make in
             make.height.greaterThanOrEqualTo(88)
@@ -353,17 +354,18 @@ private final class SGHomeActionRowControl: UIControl {
         chevronView.contentMode = .scaleAspectFit
 
         iconView.snp.makeConstraints { make in
-            make.left.top.equalToSuperview()
+            make.left.top.equalToSuperview().inset(18)
             make.size.equalTo(24)
         }
 
         chevronView.snp.makeConstraints { make in
-            make.right.centerY.equalToSuperview()
+            make.right.equalToSuperview().inset(18)
+            make.centerY.equalToSuperview()
             make.size.equalTo(12)
         }
 
         titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(1)
+            make.top.equalToSuperview().offset(19)
             make.left.equalTo(iconView.snp.right).offset(12)
             make.right.lessThanOrEqualTo(chevronView.snp.left).offset(-12)
         }
@@ -372,7 +374,7 @@ private final class SGHomeActionRowControl: UIControl {
             make.top.equalTo(titleLabel.snp.bottom).offset(4)
             make.left.equalTo(titleLabel)
             make.right.lessThanOrEqualTo(chevronView.snp.left).offset(-12)
-            make.bottom.equalToSuperview()
+            make.bottom.equalToSuperview().inset(18)
         }
     }
 

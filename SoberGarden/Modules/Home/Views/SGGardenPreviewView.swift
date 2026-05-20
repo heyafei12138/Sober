@@ -46,7 +46,7 @@ final class SGGardenPreviewView: UIControl {
     private func setupView() {
         addTarget(self, action: #selector(handleTap), for: .touchUpInside)
 
-        cardView.setContentInsets(UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
+        cardView.setContentInsets(.zero)
         cardView.contentView.backgroundColor = UIColor.hexString("#F6FAF7")
 
         illustrationBackgroundView.backgroundColor = UIColor.hexString("#E5F0EC")
@@ -91,7 +91,7 @@ final class SGGardenPreviewView: UIControl {
         }
 
         illustrationBackgroundView.snp.makeConstraints { make in
-            make.left.top.bottom.equalToSuperview()
+            make.left.top.bottom.equalToSuperview().inset(16)
             make.width.equalTo(116)
         }
 
@@ -100,12 +100,13 @@ final class SGGardenPreviewView: UIControl {
         }
 
         chevronView.snp.makeConstraints { make in
-            make.right.centerY.equalToSuperview()
+            make.right.equalToSuperview().inset(16)
+            make.centerY.equalToSuperview()
             make.size.equalTo(12)
         }
 
         titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(4)
+            make.top.equalToSuperview().offset(20)
             make.left.equalTo(illustrationBackgroundView.snp.right).offset(16)
             make.right.lessThanOrEqualTo(chevronView.snp.left).offset(-12)
         }
@@ -119,7 +120,7 @@ final class SGGardenPreviewView: UIControl {
         badgeContainerView.snp.makeConstraints { make in
             make.top.equalTo(subtitleLabel.snp.bottom).offset(12)
             make.left.equalTo(titleLabel)
-            make.bottom.lessThanOrEqualToSuperview()
+            make.bottom.lessThanOrEqualToSuperview().inset(16)
             make.right.lessThanOrEqualTo(chevronView.snp.left).offset(-12)
         }
 

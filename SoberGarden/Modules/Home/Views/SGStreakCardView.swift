@@ -40,7 +40,7 @@ final class SGStreakCardView: UIView {
     }
 
     private func setupView() {
-        cardView.setContentInsets(UIEdgeInsets(top: 22, left: 22, bottom: 22, right: 22))
+        cardView.setContentInsets(.zero)
         cardView.contentView.backgroundColor = UIColor.hexString("#FBFDF8")
 
         titleLabel.font = .systemFont(ofSize: 24, weight: .bold)
@@ -68,12 +68,12 @@ final class SGStreakCardView: UIView {
         }
 
         titleLabel.snp.makeConstraints { make in
-            make.top.left.right.equalToSuperview()
+            make.top.left.right.equalToSuperview().inset(18)
         }
 
         metricStackView.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(14)
-            make.left.right.bottom.equalToSuperview()
+            make.left.right.bottom.equalToSuperview().inset(18)
         }
     }
 
