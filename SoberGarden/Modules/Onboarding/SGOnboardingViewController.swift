@@ -186,7 +186,7 @@ final class SGOnboardingViewController: BaseViewController {
     private func addWelcomeContent() {
         let card = SGCardView()
         card.cornerRadius = 16
-        card.setContentInsets(UIEdgeInsets(top: 18, left: 20, bottom: 18, right: 20))
+        card.setContentInsets(UIEdgeInsets(top: 20, left: 28, bottom: 20, right: 28))
         let label = UILabel()
         label.text = "A calm place to track your clean days, prepare for difficult moments, and see your garden grow."
         label.font = .systemFont(ofSize: 16, weight: .regular)
@@ -200,7 +200,7 @@ final class SGOnboardingViewController: BaseViewController {
             make.edges.equalToSuperview()
         }
         card.snp.makeConstraints { make in
-            make.height.greaterThanOrEqualTo(104)
+            make.height.greaterThanOrEqualTo(124)
         }
         contentStackView.addArrangedSubview(card)
     }
