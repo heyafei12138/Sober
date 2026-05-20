@@ -71,6 +71,8 @@ final class SGRescueViewController: BaseViewController {
             switch self {
             case .coach:
                 return "Start Breathing"
+            case .breathing:
+                return "Finish Early"
             case .feedback:
                 return "Finish"
             default:
@@ -310,6 +312,18 @@ final class SGRescueViewController: BaseViewController {
                 scheduleCoachPromptLoad()
             }
 
+        case .breathing:
+            cancelCoachLoading()
+            let breathingView = SGBreathingExerciseView()
+            breathingView.onComplete = { [weak self] in
+                self?.completeBreathingNaturally()
+            }
+            stepContentContainerView.addSubview(breathingView)
+            breathingView.snp.makeConstraints { make in
+                make.edges.equalToSuperview()
+            }
+            breathingView.start()
+
         default:
             cancelCoachLoading()
             let label = UILabel()
@@ -385,11 +399,28 @@ final class SGRescueViewController: BaseViewController {
             return
         }
 
+        if currentStep == .breathing {
+            finishBreathingEarly()
+            return
+        }
+
         guard let nextStep = Step(rawValue: currentStep.rawValue + 1) else { return }
         if nextStep == .coach {
             coachPromptText = nil
         }
         currentStep = nextStep
+        renderCurrentStep()
+    }
+
+    private func completeBreathingNaturally() {
+        draft.completedBreathing = true
+        currentStep = .reasons
+        renderCurrentStep()
+    }
+
+    private func finishBreathingEarly() {
+        draft.completedBreathing = false
+        currentStep = .reasons
         renderCurrentStep()
     }
 }

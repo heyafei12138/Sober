@@ -266,13 +266,13 @@ Keep files focused. Do not turn one module controller into a large all-in-one fi
 - Modify: `SoberGarden/Modules/Rescue/SGRescueViewController.swift`
 - Create: `SoberGarden/Modules/Rescue/Views/SGBreathingExerciseView.swift`
 
-- [ ] Implement 4s inhale, 2s hold, 6s exhale cycle for default 90 seconds.
-- [ ] Animate a circle scaling up/down.
-- [ ] Show current phase and remaining seconds.
-- [ ] `Finish Early` continues to next step with `completedBreathing = false`.
-- [ ] Natural completion sets `completedBreathing = true`.
-- [ ] Build and manually verify the timer can finish early without blocking.
-- [ ] Commit: `feat: add rescue breathing exercise`
+- [x] Implement 4s inhale, 2s hold, 6s exhale cycle for default 90 seconds.
+- [x] Animate a circle scaling up/down.
+- [x] Show current phase and remaining seconds.
+- [x] `Finish Early` continues to next step with `completedBreathing = false`.
+- [x] Natural completion sets `completedBreathing = true`.
+- [x] Build and manually verify the timer can finish early without blocking.
+- [x] Commit: `feat: add rescue breathing exercise`
 
 ### Task 14: Implement Reasons, Delay Commitment, And Feedback
 
