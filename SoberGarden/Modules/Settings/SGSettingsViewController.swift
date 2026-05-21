@@ -274,13 +274,13 @@ final class SGSettingsViewController: BaseViewController {
         let disclaimer = SGSettingsRowView()
         disclaimer.configure(
             title: "Non-medical disclaimer",
-            subtitle: "This app supports reflection, not diagnosis or treatment.",
+            subtitle: "A recovery companion for self-reflection, urge support, and progress tracking.",
             accessory: .disclosure
         )
         disclaimer.onTap = { [weak self] in
             self?.showComingSoonAlert(
                 title: "Non-medical disclaimer",
-                message: "SoberGarden is a support tool and does not replace professional medical advice."
+                message: "SoberGarden is a non-medical recovery companion for self-reflection, gentle reminders, calming exercises, and progress tracking. It does not replace professional medical advice."
             )
         }
 

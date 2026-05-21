@@ -232,7 +232,7 @@ final class SGOnboardingViewController: BaseViewController {
         card.cornerRadius = 16
         card.setContentInsets(UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10))
         let label = UILabel()
-        label.text = "A calm place to track your clean days, prepare for difficult moments, and see your garden grow."
+        label.text = "A non-medical recovery companion for self-reflection, gentle reminders, calming exercises, urge support, and progress tracking."
         label.font = .systemFont(ofSize: 16, weight: .regular)
         label.textColor = SGColor.textSecondary
         label.numberOfLines = 0

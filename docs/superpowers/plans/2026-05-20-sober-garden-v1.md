@@ -457,11 +457,11 @@ Keep files focused. Do not turn one module controller into a large all-in-one fi
 - Modify: `SoberGarden/Modules/Settings/SGSettingsViewController.swift`
 - Search all Swift/resource files.
 
-- [ ] Add concise non-medical disclaimer in onboarding or settings.
-- [ ] Search and remove prohibited terms from PRD: cure addiction, treat addiction, medical treatment, therapy, diagnosis, clinical recovery, scientifically proven to cure, quit forever, stop relapse permanently, AI therapist, AI doctor, powered by AI.
-- [ ] Verify allowed copy uses recovery companion, urge support, calming exercise, self-reflection, gentle reminders, progress tracking.
-- [ ] Build the app.
-- [ ] Commit: `chore: align copy with review guidance`
+- [x] Add concise non-medical disclaimer in onboarding or settings.
+- [x] Search and remove prohibited terms from PRD: cure addiction, treat addiction, medical treatment, therapy, diagnosis, clinical recovery, scientifically proven to cure, quit forever, stop relapse permanently, AI therapist, AI doctor, powered by AI.
+- [x] Verify allowed copy uses recovery companion, urge support, calming exercise, self-reflection, gentle reminders, progress tracking.
+- [x] Build the app.
+- [x] Commit: `chore: align copy with review guidance`
 
 ### Task 26: Final MVP Acceptance Pass
 
