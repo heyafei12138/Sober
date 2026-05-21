@@ -438,13 +438,13 @@ Keep files focused. Do not turn one module controller into a large all-in-one fi
 - Modify: `SoberGarden/Modules/Settings/SGSettingsViewController.swift`
 - Modify: `SoberGarden/SceneDelegate.swift`
 
-- [ ] Add settings toggle for Face ID / App Lock.
-- [ ] Use `LocalAuthentication`.
-- [ ] Lock on app foreground only when setting is enabled.
-- [ ] Provide passcode fallback through system authentication policy.
-- [ ] Do not block notification or deep-link routing permanently; authenticate first, then route.
-- [ ] Build and verify enabling/disabling app lock.
-- [ ] Commit: `feat: add local app lock`
+- [x] Add settings toggle for Face ID / App Lock.
+- [x] Use `LocalAuthentication`.
+- [x] Lock on app foreground only when setting is enabled.
+- [x] Provide passcode fallback through system authentication policy.
+- [x] Do not block notification or deep-link routing permanently; authenticate first, then route.
+- [x] Build and verify enabling/disabling app lock.
+- [x] Commit: `feat: add local app lock`
 
 ---
 

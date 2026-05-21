@@ -10,6 +10,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    private var pendingDeepLinkURL: URL?
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -25,7 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = window
 
         if let urlContext = connectionOptions.urlContexts.first {
-            SGDeepLinkRouter.shared.route(urlContext.url, from: window)
+            routeAfterUnlock(urlContext.url)
         }
     }
 
@@ -43,7 +44,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         guard let urlContext = URLContexts.first else { return }
-        SGDeepLinkRouter.shared.route(urlContext.url, from: window)
+        routeAfterUnlock(urlContext.url)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -64,8 +65,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneWillEnterForeground(_ scene: UIScene) {
-        // Called as the scene transitions from the background to the foreground.
-        // Use this method to undo the changes made on entering the background.
+        SGAppLockService.shared.authenticateIfNeeded { [weak self] success in
+            guard success else { return }
+            self?.routePendingDeepLinkIfNeeded()
+        }
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
@@ -74,5 +77,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 
+    private func routeAfterUnlock(_ url: URL) {
+        pendingDeepLinkURL = url
+        SGAppLockService.shared.authenticateIfNeeded(reason: "Unlock SoberGarden to continue.") { [weak self] success in
+            guard success else {
+                self?.pendingDeepLinkURL = nil
+                return
+            }
+            self?.routePendingDeepLinkIfNeeded()
+        }
+    }
 
+    private func routePendingDeepLinkIfNeeded() {
+        guard let pendingDeepLinkURL else { return }
+        self.pendingDeepLinkURL = nil
+        SGDeepLinkRouter.shared.route(pendingDeepLinkURL, from: window)
+    }
 }

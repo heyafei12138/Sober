@@ -87,7 +87,7 @@ final class SGSettingsViewController: BaseViewController {
         contentStackView.addArrangedSubview(makeSectionCard(
             title: "Privacy & Safety",
             subtitle: "Read the policy, terms, and care boundaries.",
-            rows: buildPrivacyRows()
+            rows: buildPrivacyRows(settings: settings)
         ))
 
         contentStackView.addArrangedSubview(makeSectionCard(
@@ -240,7 +240,17 @@ final class SGSettingsViewController: BaseViewController {
         }
     }
 
-    private func buildPrivacyRows() -> [SGSettingsRowView] {
+    private func buildPrivacyRows(settings: SoberGardenSettings) -> [SGSettingsRowView] {
+        let appLock = SGSettingsRowView()
+        appLock.configure(
+            title: "Face ID / App Lock",
+            subtitle: "Require device authentication when returning to SoberGarden.",
+            accessory: .toggle(settings.appLockEnabled)
+        )
+        appLock.onToggleChanged = { [weak self] isOn in
+            self?.updateAppLockSetting(isOn: isOn)
+        }
+
         let privacyPolicy = SGSettingsRowView()
         privacyPolicy.configure(
             title: "Privacy Policy",
@@ -274,7 +284,33 @@ final class SGSettingsViewController: BaseViewController {
             )
         }
 
-        return [privacyPolicy, terms, disclaimer]
+        return [appLock, privacyPolicy, terms, disclaimer]
+    }
+
+    private func updateAppLockSetting(isOn: Bool) {
+        view.endEditing(true)
+
+        guard isOn else {
+            SoberGardenStore.shared.updateSettings { settings in
+                settings.appLockEnabled = false
+            }
+            return
+        }
+
+        SGAppLockService.shared.authenticateForEnable { [weak self] success in
+            guard let self else { return }
+
+            guard success else {
+                self.showAppLockAuthenticationAlert()
+                self.reloadContent()
+                return
+            }
+
+            SoberGardenStore.shared.updateSettings { settings in
+                settings.appLockEnabled = true
+            }
+            self.reloadContent()
+        }
     }
 
     private func buildDataRows() -> [SGSettingsRowView] {
@@ -336,6 +372,16 @@ final class SGSettingsViewController: BaseViewController {
             guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
             UIApplication.shared.open(url)
         })
+        present(alert, animated: true)
+    }
+
+    private func showAppLockAuthenticationAlert() {
+        let alert = UIAlertController(
+            title: "App Lock was not enabled",
+            message: "Device authentication is required before App Lock can be turned on.",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
     }
 
