@@ -53,6 +53,19 @@ final class SoberGardenStore {
         do {
             let data = try Data(contentsOf: stateURL)
             let decodedState = try decoder.decode(SoberGardenState.self, from: data)
+            var migratedState = decodedState
+            if migratedState.settings.dailyReminderEnabled == false,
+               migratedState.settings.nightReminderEnabled == false {
+                migratedState.settings.dailyReminderEnabled = true
+                migratedState.settings.nightReminderEnabled = true
+            }
+
+            if migratedState.settings.dailyReminderEnabled != decodedState.settings.dailyReminderEnabled ||
+                migratedState.settings.nightReminderEnabled != decodedState.settings.nightReminderEnabled {
+                save(migratedState)
+                return migratedState
+            }
+
             state = decodedState
             SGWidgetSnapshotWriter.shared.writeSnapshot(for: decodedState)
             return decodedState

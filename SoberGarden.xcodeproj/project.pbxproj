@@ -70,7 +70,6 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
-				SoberGarden.entitlements,
 			);
 			target = 04F5E7AD2FBC900E0049A938 /* SoberGarden */;
 		};
@@ -78,16 +77,8 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
-				SoberGardenWidgets.entitlements,
 			);
 			target = 700000000000000000000008 /* SoberGardenWidgets */;
-		};
-		710000000000000000000004 /* Exceptions for "SoberGardenWatch" folder in "SoberGardenWatch" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				SoberGardenWatch.entitlements,
-			);
-			target = 710000000000000000000008 /* SoberGardenWatch */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -110,9 +101,6 @@
 		};
 		710000000000000000000003 /* SoberGardenWatch */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				710000000000000000000004 /* Exceptions for "SoberGardenWatch" folder in "SoberGardenWatch" target */,
-			);
 			path = SoberGardenWatch;
 			sourceTree = "<group>";
 		};
@@ -666,7 +654,10 @@
 				INFOPLIST_KEY_CFBundleDisplayName = SoberGarden;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.Sober.SoberGarden;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Sober.SoberGarden.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -697,7 +688,10 @@
 				INFOPLIST_KEY_CFBundleDisplayName = SoberGarden;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.Sober.SoberGarden;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Sober.SoberGarden.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";

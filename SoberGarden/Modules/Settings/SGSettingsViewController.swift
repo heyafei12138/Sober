@@ -21,7 +21,7 @@ final class SGSettingsViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Settings"
+//        title = "Settings"
     }
 
     override func setupSubviews() {
@@ -36,9 +36,11 @@ final class SGSettingsViewController: BaseViewController {
 
         scrollView.showsVerticalScrollIndicator = false
         scrollView.contentInsetAdjustmentBehavior = .never
+        scrollView.bounces = false
+        scrollView.alwaysBounceVertical = false
 
         scrollView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(16)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(44)
             make.left.right.bottom.equalToSuperview()
         }
 
@@ -274,14 +276,11 @@ final class SGSettingsViewController: BaseViewController {
         let disclaimer = SGSettingsRowView()
         disclaimer.configure(
             title: "Non-medical disclaimer",
-            subtitle: "A recovery companion for self-reflection, urge support, and progress tracking.",
+            subtitle: "Review what this app does, and what it does not do.",
             accessory: .disclosure
         )
         disclaimer.onTap = { [weak self] in
-            self?.showComingSoonAlert(
-                title: "Non-medical disclaimer",
-                message: "SoberGarden is a non-medical recovery companion for self-reflection, gentle reminders, calming exercises, and progress tracking. It does not replace professional medical advice."
-            )
+            self?.pushController(SGNonMedicalDisclaimerViewController(mode: .settings))
         }
 
         return [appLock, privacyPolicy, terms, disclaimer]

@@ -59,7 +59,7 @@ final class SGGardenViewController: BaseViewController {
         scrollView.contentInsetAdjustmentBehavior = .never
 
         scrollView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(16)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(44)
             make.left.right.equalToSuperview()
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-CustomTabBar.barHeight - 12)
         }

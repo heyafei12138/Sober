@@ -30,6 +30,7 @@ final class SGHomeViewController: BaseViewController {
     )
     private let rescueButton = SGPrimaryButton(title: "I'm Struggling", style: .rescue)
     private let rescueSubtitleLabel = UILabel()
+    private var didPresentNonMedicalDisclaimer = false
 
     override func viewDidLoad() {
         isCustomNavigationHidden = true
@@ -41,6 +42,11 @@ final class SGHomeViewController: BaseViewController {
         super.viewWillAppear(animated)
         rightActionContainerView.isHidden = false
         renderContent()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        presentNonMedicalDisclaimerIfNeeded()
     }
 
     override func bindViewModel() {
@@ -242,6 +248,18 @@ final class SGHomeViewController: BaseViewController {
             cleanDays: cleanDays,
             habitName: habitName
         )
+    }
+
+    private func presentNonMedicalDisclaimerIfNeeded() {
+        guard didPresentNonMedicalDisclaimer == false else { return }
+        guard SoberGardenStore.shared.state.settings.hasAcknowledgedNonMedicalDisclaimer == false else { return }
+        guard presentedViewController == nil else { return }
+
+        didPresentNonMedicalDisclaimer = true
+
+        let disclaimerViewController = SGNonMedicalDisclaimerViewController(mode: .firstLaunch)
+        disclaimerViewController.modalPresentationStyle = .fullScreen
+        present(disclaimerViewController, animated: true)
     }
 
     private func currentCoachText(for state: SoberGardenState, habit: Habit?, cleanDays: Int, now: Date) -> String {

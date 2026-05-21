@@ -75,7 +75,7 @@ final class SGEditHabitViewController: BaseViewController {
         }
 
         scrollView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(16)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(44)
             make.left.right.equalToSuperview()
             make.bottom.equalTo(saveButton.snp.top).offset(-12)
         }
@@ -219,6 +219,8 @@ final class SGEditHabitViewController: BaseViewController {
         cardView.contentView.backgroundColor = UIColor.hexString("#FBFDF8")
 
         let fieldStackView = makeVerticalStack(spacing: 12)
+        fieldStackView.isLayoutMarginsRelativeArrangement = true
+        fieldStackView.layoutMargins = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
         cardView.contentView.addSubview(fieldStackView)
         fieldStackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()

@@ -45,7 +45,7 @@ extension UIViewController {
             return
         }
         
-        target.hidesBottomBarWhenPushed = true
+        target.hidesBottomBarWhenPushed = false
         navigationController?.pushSafely(target, animated: true)
     }
     
@@ -56,7 +56,7 @@ extension UIViewController {
             return
         }
         
-        target.hidesBottomBarWhenPushed = true
+        target.hidesBottomBarWhenPushed = false
         navigationController?.pushViewController(target, animated: animated)
     }
     
