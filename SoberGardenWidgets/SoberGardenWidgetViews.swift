@@ -12,18 +12,31 @@ struct SGStreakWidgetView: View {
 
     var body: some View {
         SGWidgetContainer(url: URL(string: "sobergarden://home")) {
-            VStack(alignment: .leading, spacing: family == .systemSmall ? 8 : 12) {
-                SGWidgetHeader(title: "SoberGarden", icon: "leaf.fill")
-                Spacer(minLength: 4)
-                Text("\(entry.snapshot.cleanDays) Days Clean")
-                    .font(family == .systemSmall ? .title2.bold() : .largeTitle.bold())
-                    .foregroundStyle(SGWidgetPalette.text)
-                    .minimumScaleFactor(0.72)
-                Text(nextMilestoneText)
-                    .font(.subheadline.weight(.semibold))
-                    .foregroundStyle(SGWidgetPalette.secondary)
-                if family == .systemMedium {
-                    SGWidgetProgressLine(cleanDays: entry.snapshot.cleanDays, nextMilestone: entry.snapshot.nextMilestone)
+            ZStack(alignment: .bottomTrailing) {
+                SGWidgetDecorativeImage(
+                    name: entry.snapshot.gardenStage.treeAssetName,
+                    size: family == .systemSmall ? 76 : 102,
+                    opacity: 0.28
+                )
+                .offset(x: family == .systemSmall ? 20 : 28, y: family == .systemSmall ? 18 : 20)
+
+                VStack(alignment: .leading, spacing: family == .systemSmall ? 8 : 12) {
+                    SGWidgetHeader(title: "SoberGarden", icon: "leaf.fill")
+                    Spacer(minLength: 4)
+                    Text("\(entry.snapshot.cleanDays) Days Clean")
+                        .font(family == .systemSmall ? .title2.bold() : .largeTitle.bold())
+                        .foregroundStyle(SGWidgetPalette.text)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.66)
+                        .layoutPriority(2)
+                    Text(nextMilestoneText)
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(SGWidgetPalette.secondary)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.76)
+                    if family == .systemMedium {
+                        SGWidgetProgressLine(cleanDays: entry.snapshot.cleanDays, nextMilestone: entry.snapshot.nextMilestone)
+                    }
                 }
             }
         }
@@ -43,26 +56,44 @@ struct SGGardenWidgetView: View {
 
     var body: some View {
         SGWidgetContainer(url: URL(string: "sobergarden://garden")) {
-            HStack(spacing: family == .systemSmall ? 0 : 16) {
-                VStack(alignment: .leading, spacing: 8) {
+            if family == .systemSmall {
+                VStack(alignment: .leading, spacing: 6) {
                     SGWidgetHeader(title: "Garden", icon: "camera.macro")
-                    Spacer(minLength: 4)
-                    Text("Your garden is growing.")
-                        .font(.headline.weight(.bold))
+                    Text("Garden growing")
+                        .font(.system(size: 16, weight: .bold, design: .rounded))
                         .foregroundStyle(SGWidgetPalette.text)
-                        .lineLimit(2)
-                    Text("Day \(entry.snapshot.cleanDays)")
-                        .font(.subheadline.weight(.semibold))
-                        .foregroundStyle(SGWidgetPalette.secondary)
-                    if family == .systemMedium {
-                        Text(entry.snapshot.gardenStage.title)
-                            .font(.caption.weight(.semibold))
-                            .foregroundStyle(SGWidgetPalette.primary)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.76)
+                        .layoutPriority(2)
+                    Spacer(minLength: 0)
+                    HStack(alignment: .bottom, spacing: 8) {
+                        Text("Day \(entry.snapshot.cleanDays)")
+                            .font(.subheadline.weight(.semibold))
+                            .foregroundStyle(SGWidgetPalette.secondary)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.78)
+                        Spacer(minLength: 0)
+                        SGGardenStageArtwork(stage: entry.snapshot.gardenStage, size: 64)
                     }
                 }
-                Spacer(minLength: 8)
-                if family == .systemMedium {
-                    SGGardenStageMark(stage: entry.snapshot.gardenStage, size: 82)
+            } else {
+                HStack(alignment: .center, spacing: 14) {
+                    VStack(alignment: .leading, spacing: 7) {
+                        SGWidgetHeader(title: "Garden", icon: "camera.macro")
+                        Text("Your garden is growing.")
+                            .font(.system(size: 18, weight: .bold, design: .rounded))
+                            .foregroundStyle(SGWidgetPalette.text)
+                            .lineLimit(2)
+                            .minimumScaleFactor(0.78)
+                            .layoutPriority(2)
+                        Text("Day \(entry.snapshot.cleanDays) · \(entry.snapshot.gardenStage.title)")
+                            .font(.subheadline.weight(.semibold))
+                            .foregroundStyle(SGWidgetPalette.secondary)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.76)
+                    }
+                    Spacer(minLength: 0)
+                    SGGardenStageArtwork(stage: entry.snapshot.gardenStage, size: 108)
                 }
             }
         }
@@ -75,23 +106,35 @@ struct SGRescueWidgetView: View {
 
     var body: some View {
         SGWidgetContainer(url: URL(string: "sobergarden://rescue")) {
-            VStack(alignment: .leading, spacing: 10) {
-                SGWidgetHeader(title: "Rescue", icon: "lifepreserver.fill", tint: SGWidgetPalette.rescue)
-                Spacer(minLength: 4)
-                Text("Struggling?")
-                    .font(family == .systemSmall ? .title2.bold() : .largeTitle.bold())
-                    .foregroundStyle(SGWidgetPalette.text)
-                    .minimumScaleFactor(0.75)
-                Text("Open Rescue")
-                    .font(.headline.weight(.semibold))
-                    .foregroundStyle(.white)
-                    .padding(.horizontal, 14)
-                    .padding(.vertical, 8)
-                    .background(Capsule().fill(SGWidgetPalette.rescue))
-                if family == .systemMedium {
-                    Text("Take a few steady minutes before choosing.")
-                        .font(.caption)
-                        .foregroundStyle(SGWidgetPalette.secondary)
+            ZStack(alignment: .bottomTrailing) {
+                SGWidgetDecorativeImage(
+                    name: "guider_icon_kittle",
+                    size: family == .systemSmall ? 68 : 90,
+                    opacity: 0.34
+                )
+                .offset(x: family == .systemSmall ? 20 : 18, y: family == .systemSmall ? 12 : 14)
+
+                VStack(alignment: .leading, spacing: 10) {
+                    SGWidgetHeader(title: "Rescue", icon: "lifepreserver.fill", tint: SGWidgetPalette.rescue)
+                    Spacer(minLength: 4)
+                    Text("Struggling?")
+                        .font(family == .systemSmall ? .title2.bold() : .largeTitle.bold())
+                        .foregroundStyle(SGWidgetPalette.text)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.72)
+                    Text("Open")
+                        .font(.headline.weight(.semibold))
+                        .foregroundStyle(.white)
+                        .padding(.horizontal, 14)
+                        .padding(.vertical, 8)
+                        .background(Capsule().fill(SGWidgetPalette.rescue))
+                    if family == .systemMedium {
+                        Text("Take a few steady minutes before choosing.")
+                            .font(.caption)
+                            .foregroundStyle(SGWidgetPalette.secondary)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.76)
+                    }
                 }
             }
         }
@@ -136,19 +179,62 @@ struct SGWidgetHeader: View {
     }
 }
 
-struct SGGardenStageMark: View {
+struct SGGardenStageArtwork: View {
     let stage: SGWidgetGardenStage
     let size: CGFloat
 
     var body: some View {
         ZStack {
             Circle()
-                .fill(.white.opacity(0.65))
-            Image(systemName: stage.symbolName)
-                .font(.system(size: size * 0.42, weight: .semibold))
-                .foregroundStyle(SGWidgetPalette.primary)
+                .fill(
+                    LinearGradient(
+                        colors: [
+                            .white.opacity(0.78),
+                            SGWidgetPalette.greenWash.opacity(0.55)
+                        ],
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                )
+                .shadow(color: SGWidgetPalette.primary.opacity(0.12), radius: 8, x: 0, y: 4)
+
+            Image("guider_icon_grass")
+                .resizable()
+                .scaledToFit()
+                .frame(width: size * 0.76, height: size * 0.28)
+                .offset(y: size * 0.25)
+
+            Image(stage.baseAssetName)
+                .resizable()
+                .scaledToFit()
+                .frame(width: size * stage.assetScale, height: size * stage.assetScale)
+                .offset(y: stage.assetYOffset(for: size))
+
+            if let accentAssetName = stage.accentAssetName {
+                Image(accentAssetName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: size * 0.36, height: size * 0.36)
+                    .offset(x: -size * 0.24, y: size * 0.16)
+            }
         }
         .frame(width: size, height: size)
+        .accessibilityHidden(true)
+    }
+}
+
+struct SGWidgetDecorativeImage: View {
+    let name: String
+    let size: CGFloat
+    let opacity: Double
+
+    var body: some View {
+        Image(name)
+            .resizable()
+            .scaledToFit()
+            .frame(width: size, height: size)
+            .opacity(opacity)
+            .accessibilityHidden(true)
     }
 }
 
@@ -182,6 +268,74 @@ enum SGWidgetPalette {
     static let rescue = Color(red: 0.91, green: 0.61, blue: 0.36)
     static let text = Color(red: 0.19, green: 0.25, blue: 0.17)
     static let secondary = text.opacity(0.66)
+}
+
+private extension SGWidgetGardenStage {
+
+    var baseAssetName: String {
+        switch self {
+        case .seed:
+            return "guider_icon_flowerpot"
+        case .sprout:
+            return "guider_icon_singleFlower"
+        case .youngPlant:
+            return "guider_icon_flower"
+        case .flower, .gardenBed:
+            return "guider_icon_flower1"
+        case .bloomingGarden:
+            return "guider_icon_tree"
+        case .peacefulGarden, .smallForest, .sanctuary:
+            return "guider_icon_tree1"
+        }
+    }
+
+    var accentAssetName: String? {
+        switch self {
+        case .seed, .sprout, .youngPlant:
+            return nil
+        case .flower, .gardenBed:
+            return "guider_icon_singleFlower"
+        case .bloomingGarden, .peacefulGarden:
+            return "guider_icon_flower"
+        case .smallForest, .sanctuary:
+            return "guider_icon_flower1"
+        }
+    }
+
+    var treeAssetName: String {
+        switch self {
+        case .seed, .sprout, .youngPlant, .flower, .gardenBed:
+            return "guider_icon_flower"
+        case .bloomingGarden:
+            return "guider_icon_tree"
+        case .peacefulGarden, .smallForest, .sanctuary:
+            return "guider_icon_tree1"
+        }
+    }
+
+    var assetScale: CGFloat {
+        switch self {
+        case .seed:
+            return 0.52
+        case .sprout, .youngPlant:
+            return 0.62
+        case .flower, .gardenBed:
+            return 0.7
+        case .bloomingGarden, .peacefulGarden, .smallForest, .sanctuary:
+            return 0.78
+        }
+    }
+
+    func assetYOffset(for size: CGFloat) -> CGFloat {
+        switch self {
+        case .seed:
+            return size * 0.08
+        case .sprout, .youngPlant, .flower, .gardenBed:
+            return size * 0.02
+        case .bloomingGarden, .peacefulGarden, .smallForest, .sanctuary:
+            return -size * 0.02
+        }
+    }
 }
 
 #Preview(as: .systemSmall) {

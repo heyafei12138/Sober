@@ -45,7 +45,9 @@ final class SoberGardenStore {
     @discardableResult
     func load() -> SoberGardenState {
         guard fileManager.fileExists(atPath: stateURL.path) else {
-            state = SoberGardenState()
+            var defaultState = SoberGardenState()
+            Self.reconcileCheckInState(&defaultState)
+            state = defaultState
             SGWidgetSnapshotWriter.shared.clearSnapshot()
             return state
         }
@@ -54,24 +56,28 @@ final class SoberGardenStore {
             let data = try Data(contentsOf: stateURL)
             let decodedState = try decoder.decode(SoberGardenState.self, from: data)
             var migratedState = decodedState
+            let checkInChanged = Self.reconcileCheckInState(&migratedState)
             if migratedState.settings.dailyReminderEnabled == false,
                migratedState.settings.nightReminderEnabled == false {
                 migratedState.settings.dailyReminderEnabled = true
                 migratedState.settings.nightReminderEnabled = true
             }
 
-            if migratedState.settings.dailyReminderEnabled != decodedState.settings.dailyReminderEnabled ||
+            if checkInChanged ||
+                migratedState.settings.dailyReminderEnabled != decodedState.settings.dailyReminderEnabled ||
                 migratedState.settings.nightReminderEnabled != decodedState.settings.nightReminderEnabled {
                 save(migratedState)
                 return migratedState
             }
 
-            state = decodedState
-            SGWidgetSnapshotWriter.shared.writeSnapshot(for: decodedState)
-            return decodedState
+            state = migratedState
+            SGWidgetSnapshotWriter.shared.writeSnapshot(for: migratedState)
+            return migratedState
         } catch {
             debugPrint("Failed to load sober garden state: \(error)")
-            state = SoberGardenState()
+            var fallbackState = SoberGardenState()
+            Self.reconcileCheckInState(&fallbackState)
+            state = fallbackState
             SGWidgetSnapshotWriter.shared.clearSnapshot()
             return state
         }
@@ -80,11 +86,13 @@ final class SoberGardenStore {
     func save(_ state: SoberGardenState) {
         do {
             try ensureStorageDirectoryExists()
-            let data = try encoder.encode(state)
+            var normalizedState = state
+            Self.reconcileCheckInState(&normalizedState)
+            let data = try encoder.encode(normalizedState)
             try data.write(to: stateURL, options: [.atomic])
-            self.state = state
-            SGNotificationService.shared.rescheduleNotifications(for: state)
-            SGWidgetSnapshotWriter.shared.writeSnapshot(for: state)
+            self.state = normalizedState
+            SGNotificationService.shared.rescheduleNotifications(for: normalizedState)
+            SGWidgetSnapshotWriter.shared.writeSnapshot(for: normalizedState)
         } catch {
             debugPrint("Failed to save sober garden state: \(error)")
         }
@@ -203,6 +211,63 @@ final class SoberGardenStore {
         }
     }
 
+    func markTodayCheckInConfirmed(
+        outcome: SoberGardenCheckInOutcome,
+        at now: Date = Date(),
+        calendar: Calendar = .current
+    ) {
+        update { state in
+            Self.applyCheckInConfirmation(
+                to: &state.checkIn,
+                outcome: outcome,
+                confirmedDate: now,
+                calendar: calendar
+            )
+        }
+    }
+
+    func recordYesterdayCheckInConfirmed(
+        outcome: SoberGardenCheckInOutcome,
+        yesterdayDate: Date,
+        at now: Date = Date(),
+        calendar: Calendar = .current
+    ) {
+        update { state in
+            Self.applyYesterdayCheckInConfirmation(
+                to: &state.checkIn,
+                outcome: outcome,
+                yesterdayDate: yesterdayDate,
+                recordedAt: now,
+                calendar: calendar
+            )
+        }
+    }
+
+    func updateCheckInStreak(
+        confirmedAt date: Date = Date(),
+        calendar: Calendar = .current
+    ) {
+        update { state in
+            state.checkIn.checkInStreakDays = Self.nextCheckInStreakDays(
+                from: state.checkIn,
+                confirmedAt: date,
+                calendar: calendar
+            )
+        }
+    }
+
+    @discardableResult
+    func resetCleanStreakAfterCheckInReset(
+        now: Date = Date(),
+        calendar: Calendar = .current
+    ) -> RelapseRecord? {
+        let record = resetCurrentStreak(now: now, calendar: calendar)
+        update { state in
+            state.checkIn = SoberGardenCheckInState()
+        }
+        return record
+    }
+
     func deleteAllData() {
         do {
             if fileManager.fileExists(atPath: stateURL.path) {
@@ -228,4 +293,81 @@ final class SoberGardenStore {
     }
 
     private static let promptRepeatWindow: TimeInterval = 24 * 60 * 60
+
+    private static func reconcileCheckInState(
+        _ state: inout SoberGardenState,
+        now: Date = Date(),
+        calendar: Calendar = .current
+    ) -> Bool {
+        let normalized = normalizedCheckInState(from: state.checkIn, now: now, calendar: calendar)
+        guard normalized != state.checkIn else { return false }
+        state.checkIn = normalized
+        return true
+    }
+
+    private static func normalizedCheckInState(
+        from checkInState: SoberGardenCheckInState,
+        now: Date,
+        calendar: Calendar
+    ) -> SoberGardenCheckInState {
+        var state = checkInState
+        if let lastDate = state.lastCheckInDate {
+            state.confirmedToday = calendar.isDate(lastDate, inSameDayAs: now)
+            state.needsYesterdayConfirmation = state.confirmedToday == false && calendar.isDateInYesterday(lastDate)
+        } else {
+            state.confirmedToday = false
+            state.needsYesterdayConfirmation = false
+        }
+        return state
+    }
+
+    private static func applyCheckInConfirmation(
+        to state: inout SoberGardenCheckInState,
+        outcome: SoberGardenCheckInOutcome,
+        confirmedDate: Date,
+        calendar: Calendar
+    ) {
+        state.checkInStreakDays = nextCheckInStreakDays(from: state, confirmedAt: confirmedDate, calendar: calendar)
+        state.lastCheckInDate = confirmedDate
+        state.confirmedToday = true
+        state.needsYesterdayConfirmation = false
+        state.lastOutcome = outcome
+        state.lastOutcomeDate = confirmedDate
+    }
+
+    private static func applyYesterdayCheckInConfirmation(
+        to state: inout SoberGardenCheckInState,
+        outcome: SoberGardenCheckInOutcome,
+        yesterdayDate: Date,
+        recordedAt: Date,
+        calendar: Calendar
+    ) {
+        state.checkInStreakDays = nextCheckInStreakDays(from: state, confirmedAt: recordedAt, calendar: calendar)
+        state.lastCheckInDate = recordedAt
+        state.confirmedToday = true
+        state.needsYesterdayConfirmation = false
+        state.lastOutcome = outcome
+        state.lastOutcomeDate = yesterdayDate
+    }
+
+    private static func nextCheckInStreakDays(
+        from state: SoberGardenCheckInState,
+        confirmedAt date: Date,
+        calendar: Calendar
+    ) -> Int {
+        guard let lastDate = state.lastCheckInDate else {
+            return 1
+        }
+
+        if calendar.isDate(lastDate, inSameDayAs: date) {
+            return max(state.checkInStreakDays, 1)
+        }
+
+        if let expectedPrevious = calendar.date(byAdding: .day, value: 1, to: lastDate),
+           calendar.isDate(expectedPrevious, inSameDayAs: date) {
+            return max(state.checkInStreakDays, 0) + 1
+        }
+
+        return 1
+    }
 }

@@ -15,6 +15,7 @@ final class SGJournalViewController: BaseViewController {
         title: "Journal",
         subtitle: "A small check-in helps you notice patterns without judging the day."
     )
+    private let checkInStatsView = SGCheckInStatsView()
     private let checkInView = SGJournalCheckInView()
     private let historyHeaderView = SGSectionHeaderView(title: "Recent entries")
     private let historyStackView = UIStackView()
@@ -77,13 +78,22 @@ final class SGJournalViewController: BaseViewController {
         }
 
         contentStackView.addArrangedSubview(headerView)
+        contentStackView.addArrangedSubview(checkInStatsView)
         contentStackView.addArrangedSubview(checkInView)
         contentStackView.addArrangedSubview(historyHeaderView)
         contentStackView.addArrangedSubview(historyStackView)
     }
 
     private func reloadJournal() {
-        let entries = SoberGardenStore.shared.state.journalEntries
+        let state = SoberGardenStore.shared.state
+        let entries = state.journalEntries
+        let cleanStreakDays = state.habit.map {
+            SGProgressCalculator.currentStreakDays(startDate: $0.startDate, now: Date())
+        }
+        checkInStatsView.configure(
+            cleanStreakDays: cleanStreakDays,
+            checkInStreakDays: state.checkIn.checkInStreakDays
+        )
         checkInView.configure(entry: todayEntry(in: entries))
         renderHistory(entries)
     }

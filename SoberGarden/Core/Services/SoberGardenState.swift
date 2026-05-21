@@ -11,6 +11,7 @@ struct SoberGardenState: Codable {
     var journalEntries: [JournalEntry]
     var relapseRecords: [RelapseRecord]
     var recentPromptIDs: [PromptDisplayRecord]
+    var checkIn: SoberGardenCheckInState
     var settings: SoberGardenSettings
 
     init(
@@ -19,6 +20,7 @@ struct SoberGardenState: Codable {
         journalEntries: [JournalEntry] = [],
         relapseRecords: [RelapseRecord] = [],
         recentPromptIDs: [PromptDisplayRecord] = [],
+        checkIn: SoberGardenCheckInState = SoberGardenCheckInState(),
         settings: SoberGardenSettings = SoberGardenSettings()
     ) {
         self.habit = habit
@@ -26,8 +28,102 @@ struct SoberGardenState: Codable {
         self.journalEntries = journalEntries
         self.relapseRecords = relapseRecords
         self.recentPromptIDs = recentPromptIDs
+        self.checkIn = checkIn
         self.settings = settings
     }
+
+    enum CodingKeys: String, CodingKey {
+        case habit
+        case rescueSessions
+        case journalEntries
+        case relapseRecords
+        case recentPromptIDs
+        case checkIn
+        case settings
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        habit = try container.decodeIfPresent(Habit.self, forKey: .habit)
+        rescueSessions = try container.decodeIfPresent([RescueSession].self, forKey: .rescueSessions) ?? []
+        journalEntries = try container.decodeIfPresent([JournalEntry].self, forKey: .journalEntries) ?? []
+        relapseRecords = try container.decodeIfPresent([RelapseRecord].self, forKey: .relapseRecords) ?? []
+        recentPromptIDs = try container.decodeIfPresent([PromptDisplayRecord].self, forKey: .recentPromptIDs) ?? []
+        checkIn = try container.decodeIfPresent(SoberGardenCheckInState.self, forKey: .checkIn) ?? SoberGardenCheckInState()
+        settings = try container.decodeIfPresent(SoberGardenSettings.self, forKey: .settings) ?? SoberGardenSettings()
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(habit, forKey: .habit)
+        try container.encode(rescueSessions, forKey: .rescueSessions)
+        try container.encode(journalEntries, forKey: .journalEntries)
+        try container.encode(relapseRecords, forKey: .relapseRecords)
+        try container.encode(recentPromptIDs, forKey: .recentPromptIDs)
+        try container.encode(checkIn, forKey: .checkIn)
+        try container.encode(settings, forKey: .settings)
+    }
+}
+
+struct SoberGardenCheckInState: Codable, Equatable {
+    var lastCheckInDate: Date?
+    var confirmedToday: Bool
+    var needsYesterdayConfirmation: Bool
+    var checkInStreakDays: Int
+    var lastOutcome: SoberGardenCheckInOutcome?
+    var lastOutcomeDate: Date?
+
+    init(
+        lastCheckInDate: Date? = nil,
+        confirmedToday: Bool = false,
+        needsYesterdayConfirmation: Bool = false,
+        checkInStreakDays: Int = 0,
+        lastOutcome: SoberGardenCheckInOutcome? = nil,
+        lastOutcomeDate: Date? = nil
+    ) {
+        self.lastCheckInDate = lastCheckInDate
+        self.confirmedToday = confirmedToday
+        self.needsYesterdayConfirmation = needsYesterdayConfirmation
+        self.checkInStreakDays = checkInStreakDays
+        self.lastOutcome = lastOutcome
+        self.lastOutcomeDate = lastOutcomeDate
+    }
+
+    enum CodingKeys: String, CodingKey {
+        case lastCheckInDate
+        case confirmedToday
+        case needsYesterdayConfirmation
+        case checkInStreakDays
+        case lastOutcome
+        case lastOutcomeDate
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        lastCheckInDate = try container.decodeIfPresent(Date.self, forKey: .lastCheckInDate)
+        confirmedToday = try container.decodeIfPresent(Bool.self, forKey: .confirmedToday) ?? false
+        needsYesterdayConfirmation = try container.decodeIfPresent(Bool.self, forKey: .needsYesterdayConfirmation) ?? false
+        checkInStreakDays = try container.decodeIfPresent(Int.self, forKey: .checkInStreakDays) ?? 0
+        lastOutcome = try container.decodeIfPresent(SoberGardenCheckInOutcome.self, forKey: .lastOutcome)
+        lastOutcomeDate = try container.decodeIfPresent(Date.self, forKey: .lastOutcomeDate)
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(lastCheckInDate, forKey: .lastCheckInDate)
+        try container.encode(confirmedToday, forKey: .confirmedToday)
+        try container.encode(needsYesterdayConfirmation, forKey: .needsYesterdayConfirmation)
+        try container.encode(checkInStreakDays, forKey: .checkInStreakDays)
+        try container.encodeIfPresent(lastOutcome, forKey: .lastOutcome)
+        try container.encodeIfPresent(lastOutcomeDate, forKey: .lastOutcomeDate)
+    }
+}
+
+enum SoberGardenCheckInOutcome: String, Codable, CaseIterable, Equatable {
+    case easy
+    case okay
+    case hard
+    case urges
 }
 
 struct SoberGardenSettings: Codable {

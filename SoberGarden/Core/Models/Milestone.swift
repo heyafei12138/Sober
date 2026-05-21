@@ -12,6 +12,10 @@ struct Milestone: Codable, Identifiable {
     let gardenStage: GardenStage
     let badgeName: String
 
+    var rewardDescription: String {
+        gardenStage.rewardDescription
+    }
+
     static let defaultMilestones: [Milestone] = [
         Milestone(id: UUID(uuidString: "00000000-0000-0000-0000-000000000001")!, day: 1, title: "Seed", gardenStage: .seed, badgeName: "First Seed"),
         Milestone(id: UUID(uuidString: "00000000-0000-0000-0000-000000000003")!, day: 3, title: "Sprout", gardenStage: .sprout, badgeName: "Tiny Leaf"),
@@ -79,6 +83,29 @@ enum GardenStage: String, Codable, CaseIterable {
             return "Strong Roots"
         case .sanctuary:
             return "One Year Clean"
+        }
+    }
+
+    var rewardDescription: String {
+        switch self {
+        case .seed:
+            return "Your first seed is planted."
+        case .sprout:
+            return "A tiny sprout breaks through the soil."
+        case .youngPlant:
+            return "Fresh leaves make your progress visible."
+        case .flower:
+            return "Your first flower appears in the garden."
+        case .gardenBed:
+            return "A small bed of blooms starts to fill the space."
+        case .bloomingGarden:
+            return "More flowers arrive, with the first tree taking root."
+        case .peacefulGarden:
+            return "Trees and a quiet path make the garden feel settled."
+        case .smallForest:
+            return "A cluster of trees grows into a small forest."
+        case .sanctuary:
+            return "The full sanctuary opens with sunlight, trees, and a path."
         }
     }
 }

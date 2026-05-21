@@ -66,17 +66,17 @@ final class SGHomeHeaderView: UIView {
 
         textStackView.snp.makeConstraints { make in
             make.top.left.bottom.equalToSuperview().inset(2)
-            make.right.lessThanOrEqualTo(visualContainerView.snp.left).offset(-18)
+            make.right.lessThanOrEqualTo(visualContainerView.snp.left).offset(-20)
         }
 
         visualContainerView.snp.makeConstraints { make in
             make.right.equalToSuperview()
             make.centerY.equalToSuperview()
-            make.size.equalTo(94)
+            make.size.equalTo(90)
         }
 
         visualImageView.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(15)
+            make.edges.equalToSuperview().inset(14)
         }
     }
 }

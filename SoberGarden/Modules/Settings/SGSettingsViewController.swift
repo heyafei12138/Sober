@@ -15,6 +15,7 @@ final class SGSettingsViewController: BaseViewController {
         title: "Settings",
         subtitle: "Manage reminders, privacy, and local data."
     )
+    private let checkInStatsView = SGCheckInStatsView()
 
     private let privacyPolicyURL = URL(string: "https://example.com/privacy-policy")!
     private let termsURL = URL(string: "https://example.com/terms")!
@@ -74,6 +75,15 @@ final class SGSettingsViewController: BaseViewController {
         contentStackView.addArrangedSubview(introHeaderView)
         contentStackView.setCustomSpacing(20, after: introHeaderView)
 
+        let cleanStreakDays = habit.map {
+            SGProgressCalculator.currentStreakDays(startDate: $0.startDate, now: Date())
+        }
+        checkInStatsView.configure(
+            cleanStreakDays: cleanStreakDays,
+            checkInStreakDays: state.checkIn.checkInStreakDays
+        )
+        contentStackView.addArrangedSubview(checkInStatsView)
+
         contentStackView.addArrangedSubview(makeSectionCard(
             title: "Habit",
             subtitle: "Review your current recovery goal and the baseline you set during onboarding.",
@@ -96,6 +106,12 @@ final class SGSettingsViewController: BaseViewController {
             title: "Data Management",
             subtitle: "Local data stays on this device unless you remove it.",
             rows: buildDataRows()
+        ))
+
+        contentStackView.addArrangedSubview(makeSectionCard(
+            title: "Widget",
+            subtitle: "Put your garden progress on the Home Screen.",
+            rows: buildWidgetRows()
         ))
 
         contentStackView.addArrangedSubview(makeSectionCard(
@@ -336,6 +352,27 @@ final class SGSettingsViewController: BaseViewController {
         }
 
         return [resetRow, deleteRow]
+    }
+
+    private func buildWidgetRows() -> [SGSettingsRowView] {
+        let widgetGuideRow = SGSettingsRowView()
+        widgetGuideRow.configure(
+            title: "Add Home Screen widget",
+            subtitle: "Step-by-step guide for adding SoberGarden to your Home Screen.",
+            accessory: .disclosure
+        )
+        widgetGuideRow.onTap = { [weak self] in
+            let guideViewController = SGWidgetGuideViewController()
+            guideViewController.modalPresentationStyle = .pageSheet
+            if let sheet = guideViewController.sheetPresentationController {
+                sheet.detents = [.large()]
+                sheet.prefersGrabberVisible = true
+                sheet.preferredCornerRadius = 24
+            }
+            self?.present(guideViewController, animated: true)
+        }
+
+        return [widgetGuideRow]
     }
 
     private func buildAboutRows() -> [SGSettingsRowView] {

@@ -19,6 +19,7 @@ final class SGHomeViewController: BaseViewController {
     private let coachImageView = UIImageView()
     private let coachSectionHeader = SGSectionHeaderView(title: "Calm Coach")
     private let coachPromptLabel = UILabel()
+    private let todayCheckInCardView = SGTodayCheckInCardView()
     private let streakCardView = SGStreakCardView()
     private let savingsView = SGSavedStatsView()
     private let milestoneCardView = SGMilestoneCardView()
@@ -62,6 +63,7 @@ final class SGHomeViewController: BaseViewController {
         setupScrollView()
         setupHeader()
         setupCoachCard()
+        setupTodayCheckInCard()
         setupStreakCard()
         setupSavingsSection()
         setupMilestoneSection()
@@ -90,11 +92,11 @@ final class SGHomeViewController: BaseViewController {
         }
 
         contentStackView.axis = .vertical
-        contentStackView.spacing = 18
+        contentStackView.spacing = 20
         contentStackView.alignment = .fill
         contentStackView.distribution = .fill
         contentStackView.isLayoutMarginsRelativeArrangement = true
-        contentStackView.layoutMargins = UIEdgeInsets(top: 2, left: 16, bottom: 28, right: 16)
+        contentStackView.layoutMargins = UIEdgeInsets(top: 2, left: 20, bottom: 32, right: 20)
 
         contentStackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -103,6 +105,7 @@ final class SGHomeViewController: BaseViewController {
 
     private func setupHeader() {
         contentStackView.addArrangedSubview(headerView)
+        contentStackView.setCustomSpacing(22, after: headerView)
     }
 
     private func setupCoachCard() {
@@ -154,11 +157,25 @@ final class SGHomeViewController: BaseViewController {
         contentStackView.addArrangedSubview(coachCardView)
     }
 
+    private func setupTodayCheckInCard() {
+        todayCheckInCardView.onPrimaryAction = { [weak self] in
+            self?.presentTodayCheckInFlow()
+        }
+        todayCheckInCardView.onSecondaryAction = { [weak self] in
+            self?.handleTodayCheckInSecondaryAction()
+        }
+        contentStackView.addArrangedSubview(todayCheckInCardView)
+        contentStackView.setCustomSpacing(22, after: todayCheckInCardView)
+    }
+
     private func setupStreakCard() {
         contentStackView.addArrangedSubview(streakCardView)
     }
 
     private func setupSavingsSection() {
+        savingsView.onSavingsItemTap = { [weak self] in
+            self?.openHabitEditor()
+        }
         contentStackView.addArrangedSubview(savingsView)
     }
 
@@ -222,6 +239,7 @@ final class SGHomeViewController: BaseViewController {
         )
 
         coachPromptLabel.text = currentCoachText(for: state, habit: habit, cleanDays: cleanDays, now: now)
+        todayCheckInCardView.configure(state: currentTodayCheckInState(from: state.checkIn))
 
         streakCardView.configure(
             cleanDays: cleanDays,
@@ -250,6 +268,103 @@ final class SGHomeViewController: BaseViewController {
         )
     }
 
+    private func currentTodayCheckInState(from checkInState: SoberGardenCheckInState) -> SGTodayCheckInCardView.State {
+        if checkInState.confirmedToday {
+            return .todayConfirmed
+        }
+
+        if checkInState.needsYesterdayConfirmation {
+            return .yesterdayPending
+        }
+
+        return .todayNotConfirmed
+    }
+
+    private func presentTodayCheckInFlow() {
+        let checkInState = SoberGardenStore.shared.state.checkIn
+        let flowState: SGTodayCheckInFlowViewController.State
+
+        if checkInState.needsYesterdayConfirmation {
+            flowState = .yesterdayPending
+        } else if checkInState.confirmedToday {
+            flowState = .todayConfirmed
+        } else {
+            flowState = .dailyFlow
+        }
+
+        let flowViewController = SGTodayCheckInFlowViewController(state: flowState)
+        flowViewController.onComplete = { [weak self] result in
+            self?.handleTodayCheckInResult(result)
+        }
+        flowViewController.onReset = { [weak self] in
+            self?.handleTodayCheckInReset()
+        }
+        present(flowViewController, animated: true)
+    }
+
+    private func handleTodayCheckInSecondaryAction() {
+        let checkInState = SoberGardenStore.shared.state.checkIn
+        if checkInState.needsYesterdayConfirmation {
+            presentTodayCheckInFlow()
+            return
+        }
+
+        if let tabBarController = tabBarController as? MainTabBarController {
+            tabBarController.setSelectedIndex(1)
+        } else {
+            navigationController?.pushViewController(SGRescueViewController(), animated: true)
+        }
+    }
+
+    private func handleTodayCheckInResult(_ result: SGTodayCheckInFlowViewController.Result) {
+        let store = SoberGardenStore.shared
+
+        switch result.state {
+        case .todayNotConfirmed, .dailyFlow:
+            store.markTodayCheckInConfirmed(outcome: result.outcome)
+        case .yesterdayPending:
+            let yesterdayDate = store.state.checkIn.lastCheckInDate ?? Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? Date()
+            store.recordYesterdayCheckInConfirmed(
+                outcome: result.outcome,
+                yesterdayDate: yesterdayDate
+            )
+        case .todayConfirmed:
+            break
+        }
+
+        dismiss(animated: true) { [weak self] in
+            self?.renderContent()
+            self?.animateTodayCheckInFeedback()
+        }
+    }
+
+    private func handleTodayCheckInReset() {
+        SoberGardenStore.shared.resetCleanStreakAfterCheckInReset()
+        dismiss(animated: true) { [weak self] in
+            self?.renderContent()
+        }
+    }
+
+    private func animateTodayCheckInFeedback() {
+        let animations = {
+            self.todayCheckInCardView.transform = CGAffineTransform(scaleX: 1.01, y: 1.01)
+            self.gardenPreviewView.transform = CGAffineTransform(scaleX: 1.01, y: 1.01)
+            self.todayCheckInCardView.alpha = 0.98
+            self.gardenPreviewView.alpha = 0.98
+        }
+
+        let completion: (Bool) -> Void = { _ in
+            UIView.animate(withDuration: 0.18, delay: 0, options: [.curveEaseOut]) {
+                self.todayCheckInCardView.transform = .identity
+                self.gardenPreviewView.transform = .identity
+                self.todayCheckInCardView.alpha = 1
+                self.gardenPreviewView.alpha = 1
+            }
+        }
+
+        UIView.animate(withDuration: 0.14, delay: 0, options: [.curveEaseOut], animations: animations, completion: completion)
+    }
+
     private func presentNonMedicalDisclaimerIfNeeded() {
         guard didPresentNonMedicalDisclaimer == false else { return }
         guard SoberGardenStore.shared.state.settings.hasAcknowledgedNonMedicalDisclaimer == false else { return }
@@ -264,17 +379,14 @@ final class SGHomeViewController: BaseViewController {
 
     private func currentCoachText(for state: SoberGardenState, habit: Habit?, cleanDays: Int, now: Date) -> String {
         let promptContext: SGCalmCoachContext
-        if cleanDays == 7 {
+        if state.checkIn.needsYesterdayConfirmation {
+            promptContext = .yesterdayFollowUp
+        } else if state.checkIn.confirmedToday {
+            promptContext = .postCheckInEncouragement
+        } else if cleanDays == 7 {
             promptContext = .milestone7
         } else {
-            let hour = Calendar.current.component(.hour, from: now)
-            if hour >= 22 || hour < 6 {
-                promptContext = .lateNight
-            } else if state.relapseRecords.isEmpty == false {
-                promptContext = .stress
-            } else {
-                promptContext = .home
-            }
+            promptContext = .notConfirmedToday
         }
 
         return SGCalmCoachService.shared.promptText(for: promptContext, now: now)
@@ -287,6 +399,15 @@ final class SGHomeViewController: BaseViewController {
         activity.popoverPresentationController?.sourceView = view
         activity.popoverPresentationController?.sourceRect = CGRect(x: view.bounds.midX, y: view.bounds.maxY - 120, width: 1, height: 1)
         present(activity, animated: true)
+    }
+
+    private func openHabitEditor() {
+        guard let habit = SoberGardenStore.shared.state.habit else { return }
+        let editViewController = SGEditHabitViewController(habit: habit)
+        editViewController.onSave = { [weak self] in
+            self?.renderContent()
+        }
+        pushController(editViewController)
     }
 
     @objc private func handleRescueButtonTapped() {

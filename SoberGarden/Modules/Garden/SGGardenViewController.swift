@@ -20,8 +20,10 @@ final class SGGardenViewController: BaseViewController {
     private let progressCardView = SGCardView()
     private let progressHeaderLabel = UILabel()
     private let progressDetailLabel = UILabel()
+    private let progressRewardLabel = SGGardenInsetLabel()
     private let progressBarView = SGProgressBarView()
 
+    private let growthPathView = SGGrowthPathView()
     private let badgeGridView = SGBadgeGridView()
 
     private let copyCardView = SGCardView()
@@ -45,6 +47,7 @@ final class SGGardenViewController: BaseViewController {
         setupScrollView()
         setupIllustrationCard()
         setupProgressCard()
+        setupGrowthPath()
         setupBadgeGrid()
         setupCopyCard()
         renderContent()
@@ -130,8 +133,18 @@ final class SGGardenViewController: BaseViewController {
         progressDetailLabel.textColor = SGColor.textSecondary
         progressDetailLabel.numberOfLines = 2
 
+        progressRewardLabel.font = .systemFont(ofSize: 14, weight: .semibold)
+        progressRewardLabel.textColor = SGColor.primaryDark
+        progressRewardLabel.numberOfLines = 0
+        progressRewardLabel.lineBreakMode = .byWordWrapping
+        progressRewardLabel.backgroundColor = SGColor.primaryLight.withAlphaComponent(0.3)
+        progressRewardLabel.layer.cornerRadius = 12
+        progressRewardLabel.layer.masksToBounds = true
+        progressRewardLabel.textInsets = UIEdgeInsets(top: 10, left: 12, bottom: 10, right: 12)
+
         progressCardView.contentView.addSubview(progressHeaderLabel)
         progressCardView.contentView.addSubview(progressDetailLabel)
+        progressCardView.contentView.addSubview(progressRewardLabel)
         progressCardView.contentView.addSubview(progressBarView)
 
         progressHeaderLabel.snp.makeConstraints { make in
@@ -143,13 +156,22 @@ final class SGGardenViewController: BaseViewController {
             make.left.right.equalToSuperview().inset(18)
         }
 
+        progressRewardLabel.snp.makeConstraints { make in
+            make.top.equalTo(progressDetailLabel.snp.bottom).offset(12)
+            make.left.right.equalToSuperview().inset(18)
+        }
+
         progressBarView.snp.makeConstraints { make in
-            make.top.equalTo(progressDetailLabel.snp.bottom).offset(14)
+            make.top.equalTo(progressRewardLabel.snp.bottom).offset(14)
             make.left.right.bottom.equalToSuperview().inset(18)
             make.height.equalTo(10)
         }
 
         contentStackView.addArrangedSubview(progressCardView)
+    }
+
+    private func setupGrowthPath() {
+        contentStackView.addArrangedSubview(growthPathView)
     }
 
     private func setupBadgeGrid() {
@@ -192,15 +214,22 @@ final class SGGardenViewController: BaseViewController {
             let currentStageProgress = max(cleanDays - previousMilestoneDay, 0)
             let remainingDays = max(nextMilestone.day - cleanDays, 0)
 
-            progressHeaderLabel.text = "Next stage: \(nextMilestone.title)"
-            progressDetailLabel.text = "\(remainingDays) days to go until \(nextMilestone.badgeName)."
+            progressHeaderLabel.text = "Next reward: \(nextMilestone.title)"
+            progressDetailLabel.text = "\(remainingDays) days to go until your garden reaches \(nextMilestone.title)."
+            progressRewardLabel.text = "Unlocks: \(nextMilestone.rewardDescription)"
             progressBarView.setProgress(CGFloat(currentStageProgress) / CGFloat(stageSpan), animated: false)
         } else {
             progressHeaderLabel.text = "Sanctuary reached"
             progressDetailLabel.text = "Your garden is fully grown. Keep tending it one day at a time."
+            progressRewardLabel.text = "Unlocked: The full sanctuary with sunlight, trees, and a quiet path."
             progressBarView.setProgress(1, animated: false)
         }
 
+        growthPathView.configure(
+            milestones: Milestone.defaultMilestones,
+            cleanDays: cleanDays,
+            unlockedCleanDays: retainedBadgeDays
+        )
         badgeGridView.configure(milestones: Milestone.defaultMilestones, unlockedCleanDays: retainedBadgeDays)
         copyLabel.text = growthCopy(cleanDays: cleanDays, state: state)
     }
@@ -230,5 +259,26 @@ final class SGGardenViewController: BaseViewController {
         default:
             return "Your garden holds the work you have already done. Keep tending it at your own pace."
         }
+    }
+}
+
+private final class SGGardenInsetLabel: UILabel {
+
+    var textInsets: UIEdgeInsets = .zero {
+        didSet {
+            invalidateIntrinsicContentSize()
+        }
+    }
+
+    override func drawText(in rect: CGRect) {
+        super.drawText(in: rect.inset(by: textInsets))
+    }
+
+    override var intrinsicContentSize: CGSize {
+        let size = super.intrinsicContentSize
+        return CGSize(
+            width: size.width + textInsets.left + textInsets.right,
+            height: size.height + textInsets.top + textInsets.bottom
+        )
     }
 }

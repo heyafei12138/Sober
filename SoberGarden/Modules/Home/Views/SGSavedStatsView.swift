@@ -7,6 +7,8 @@ import UIKit
 
 final class SGSavedStatsView: UIView {
 
+    var onSavingsItemTap: (() -> Void)?
+
     private let titleLabel = UILabel()
     private let cardStackView = UIStackView()
     private let moneyCard = SGHomeSavingsCardView(
@@ -57,6 +59,12 @@ final class SGSavedStatsView: UIView {
         cardStackView.spacing = 12
         cardStackView.alignment = .fill
         cardStackView.distribution = .fillEqually
+        moneyCard.onTap = { [weak self] in
+            self?.onSavingsItemTap?()
+        }
+        timeCard.onTap = { [weak self] in
+            self?.onSavingsItemTap?()
+        }
         cardStackView.addArrangedSubview(moneyCard)
         cardStackView.addArrangedSubview(timeCard)
 
@@ -93,6 +101,8 @@ final class SGSavedStatsView: UIView {
 
 private final class SGHomeSavingsCardView: UIView {
 
+    var onTap: (() -> Void)?
+
     private let cardView = SGCardView()
     private let iconContainerView = UIView()
     private let iconView = UIImageView()
@@ -101,10 +111,12 @@ private final class SGHomeSavingsCardView: UIView {
     private let subtitleLabel = UILabel()
     private let accentColor: UIColor
     private let surfaceColor: UIColor
+    private let cardTitle: String
 
     init(title: String, iconName: String, accentColor: UIColor, surfaceColor: UIColor) {
         self.accentColor = accentColor
         self.surfaceColor = surfaceColor
+        self.cardTitle = title
         super.init(frame: .zero)
         setupView(title: title, iconName: iconName)
     }
@@ -112,6 +124,7 @@ private final class SGHomeSavingsCardView: UIView {
     required init?(coder: NSCoder) {
         self.accentColor = SGColor.primary
         self.surfaceColor = SGColor.surface
+        self.cardTitle = ""
         super.init(coder: coder)
         setupView(title: "", iconName: "leaf.fill")
     }
@@ -119,11 +132,21 @@ private final class SGHomeSavingsCardView: UIView {
     func configure(value: String, subtitle: String) {
         valueLabel.text = value
         subtitleLabel.text = subtitle
+        accessibilityLabel = [cardTitle, value, subtitle]
+            .filter { !$0.isEmpty }
+            .joined(separator: ", ")
     }
 
     private func setupView(title: String, iconName: String) {
+        isAccessibilityElement = true
+        accessibilityTraits = .button
+
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        addGestureRecognizer(tapGesture)
+
         cardView.setContentInsets(.zero)
         cardView.contentView.backgroundColor = surfaceColor
+        cardView.isUserInteractionEnabled = false
 
         iconContainerView.backgroundColor = accentColor.withAlphaComponent(0.24)
         iconContainerView.layer.cornerRadius = 14
@@ -192,5 +215,9 @@ private final class SGHomeSavingsCardView: UIView {
             make.top.equalTo(valueLabel.snp.bottom).offset(6)
             make.left.right.bottom.equalToSuperview().inset(16)
         }
+    }
+
+    @objc private func handleTap() {
+        onTap?()
     }
 }

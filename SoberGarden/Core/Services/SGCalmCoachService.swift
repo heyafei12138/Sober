@@ -7,6 +7,10 @@ import Foundation
 
 enum SGCalmCoachContext: String, CaseIterable {
     case home
+    case notConfirmedToday
+    case confirmedToday
+    case yesterdayFollowUp
+    case postCheckInEncouragement
     case urge
     case stress
     case lonely
@@ -98,6 +102,22 @@ final class SGCalmCoachService {
         "home": [
             SGCalmCoachPrompt(id: "home_1", context: "home", weight: 3, text: "Take one steady breath and choose the next right thing."),
             SGCalmCoachPrompt(id: "home_2", context: "home", weight: 2, text: "You are building proof that change is possible, one day at a time.")
+        ],
+        "notConfirmedToday": [
+            SGCalmCoachPrompt(id: "notConfirmedToday_1", context: "notConfirmedToday", weight: 3, text: "A quiet check-in can turn the day around."),
+            SGCalmCoachPrompt(id: "notConfirmedToday_2", context: "notConfirmedToday", weight: 2, text: "You can start with one small, honest moment now.")
+        ],
+        "confirmedToday": [
+            SGCalmCoachPrompt(id: "confirmedToday_1", context: "confirmedToday", weight: 3, text: "You have already protected today. Keep the rhythm gentle."),
+            SGCalmCoachPrompt(id: "confirmedToday_2", context: "confirmedToday", weight: 2, text: "Small daily proof adds up. Let that sink in.")
+        ],
+        "yesterdayFollowUp": [
+            SGCalmCoachPrompt(id: "yesterdayFollowUp_1", context: "yesterdayFollowUp", weight: 3, text: "If yesterday stayed clean, you can protect that progress now."),
+            SGCalmCoachPrompt(id: "yesterdayFollowUp_2", context: "yesterdayFollowUp", weight: 2, text: "Yesterday still matters. A calm confirmation is enough.")
+        ],
+        "postCheckInEncouragement": [
+            SGCalmCoachPrompt(id: "postCheckInEncouragement_1", context: "postCheckInEncouragement", weight: 3, text: "Nice work. You kept the garden moving today."),
+            SGCalmCoachPrompt(id: "postCheckInEncouragement_2", context: "postCheckInEncouragement", weight: 2, text: "That was a steady choice. Let the win land.")
         ],
         "urge": [
             SGCalmCoachPrompt(id: "urge_1", context: "urge", weight: 3, text: "Ride this urge for one minute before you decide anything."),

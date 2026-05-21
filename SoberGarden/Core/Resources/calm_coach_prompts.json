@@ -2,6 +2,18 @@
   {"id":"home_1","context":"home","weight":3,"text":"Take one steady breath and choose the next right thing."},
   {"id":"home_2","context":"home","weight":2,"text":"You are building proof that change is possible, one day at a time."},
 
+  {"id":"notConfirmedToday_1","context":"notConfirmedToday","weight":3,"text":"A quiet check-in can turn the day around."},
+  {"id":"notConfirmedToday_2","context":"notConfirmedToday","weight":2,"text":"You can start with one small, honest moment now."},
+
+  {"id":"confirmedToday_1","context":"confirmedToday","weight":3,"text":"You have already protected today. Keep the rhythm gentle."},
+  {"id":"confirmedToday_2","context":"confirmedToday","weight":2,"text":"Small daily proof adds up. Let that sink in."},
+
+  {"id":"yesterdayFollowUp_1","context":"yesterdayFollowUp","weight":3,"text":"If yesterday stayed clean, you can protect that progress now."},
+  {"id":"yesterdayFollowUp_2","context":"yesterdayFollowUp","weight":2,"text":"Yesterday still matters. A calm confirmation is enough."},
+
+  {"id":"postCheckInEncouragement_1","context":"postCheckInEncouragement","weight":3,"text":"Nice work. You kept the garden moving today."},
+  {"id":"postCheckInEncouragement_2","context":"postCheckInEncouragement","weight":2,"text":"That was a steady choice. Let the win land."},
+
   {"id":"urge_1","context":"urge","weight":3,"text":"Ride this urge for one minute before you decide anything."},
   {"id":"urge_2","context":"urge","weight":2,"text":"Urges peak, then pass. Stay with the wave until it softens."},
 
