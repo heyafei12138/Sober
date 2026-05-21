@@ -23,6 +23,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             : MainTabBarController()
         window.makeKeyAndVisible()
         self.window = window
+
+        if let urlContext = connectionOptions.urlContexts.first {
+            SGDeepLinkRouter.shared.route(urlContext.url, from: window)
+        }
     }
 
     func showMainInterface(animated: Bool = true) {
@@ -35,6 +39,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         UIView.transition(with: window, duration: 0.28, options: .transitionCrossDissolve) {
             window.rootViewController = mainController
         }
+    }
+
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        guard let urlContext = URLContexts.first else { return }
+        SGDeepLinkRouter.shared.route(urlContext.url, from: window)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

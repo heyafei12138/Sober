@@ -364,12 +364,12 @@ Keep files focused. Do not turn one module controller into a large all-in-one fi
 - Modify: `SoberGarden/SceneDelegate.swift`
 - Create: `SoberGarden/Core/Services/SGDeepLinkRouter.swift`
 
-- [ ] Add URL scheme `sobergarden`.
-- [ ] Route `sobergarden://home`, `rescue`, `garden`, `journal`, `settings`.
-- [ ] For settings, push settings on the selected Home navigation controller or top visible navigation controller.
-- [ ] For rescue, switch to Rescue tab and reset to Step 1.
-- [ ] Build and verify deep links with `xcrun simctl openurl booted sobergarden://rescue`.
-- [ ] Commit: `feat: add sober garden deep links`
+- [x] Add URL scheme `sobergarden`.
+- [x] Route `sobergarden://home`, `rescue`, `garden`, `journal`, `settings`.
+- [x] For settings, push settings on the selected Home navigation controller or top visible navigation controller.
+- [x] For rescue, switch to Rescue tab and reset to Step 1.
+- [x] Build and verify deep links with `xcrun simctl openurl booted sobergarden://rescue`.
+- [x] Commit: `feat: add sober garden deep links`
 
 ### Task 20: Add Share Progress Card
 
