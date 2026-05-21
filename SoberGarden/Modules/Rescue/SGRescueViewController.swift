@@ -162,7 +162,7 @@ final class SGRescueViewController: BaseViewController {
         scrollView.contentInsetAdjustmentBehavior = .never
 
         scrollView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(44)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(18)
             make.left.right.equalToSuperview()
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-CustomTabBar.barHeight - 92)
         }
