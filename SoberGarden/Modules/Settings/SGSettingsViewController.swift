@@ -150,10 +150,7 @@ final class SGSettingsViewController: BaseViewController {
             accessory: .disclosure
         )
         editRow.onTap = { [weak self] in
-            self?.showComingSoonAlert(
-                title: "Edit habit",
-                message: "Habit editing will be added in the next task."
-            )
+            self?.openHabitEditor()
         }
 
         let startDateRow = SGSettingsRowView()
@@ -273,10 +270,7 @@ final class SGSettingsViewController: BaseViewController {
             isDestructive: true
         )
         resetRow.onTap = { [weak self] in
-            self?.showComingSoonAlert(
-                title: "Reset current streak",
-                message: "The reset flow will land in the next task."
-            )
+            self?.confirmResetCurrentStreak()
         }
 
         let deleteRow = SGSettingsRowView()
@@ -311,6 +305,42 @@ final class SGSettingsViewController: BaseViewController {
 
     private func showComingSoonAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+
+    private func openHabitEditor() {
+        guard let habit = SoberGardenStore.shared.state.habit else { return }
+        let editViewController = SGEditHabitViewController(habit: habit)
+        editViewController.onSave = { [weak self] in
+            self?.reloadContent()
+        }
+        pushController(editViewController)
+    }
+
+    private func confirmResetCurrentStreak() {
+        let alert = UIAlertController(
+            title: "Start again?",
+            message: "Your progress is not erased. Your garden remembers your effort, and a new seed will be planted.",
+            preferredStyle: .alert
+        )
+
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alert.addAction(UIAlertAction(title: "Start Again", style: .destructive) { [weak self] _ in
+            SoberGardenStore.shared.resetCurrentStreak()
+            self?.reloadContent()
+            self?.showResetCompleteAlert()
+        })
+
+        present(alert, animated: true)
+    }
+
+    private func showResetCompleteAlert() {
+        let alert = UIAlertController(
+            title: "Calm Coach",
+            message: "A new seed has been planted. Begin again without shame.",
+            preferredStyle: .alert
+        )
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
     }

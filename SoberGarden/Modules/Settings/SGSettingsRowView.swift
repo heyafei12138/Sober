@@ -28,6 +28,7 @@ final class SGSettingsRowView: UIControl {
     private let separatorView = UIView()
 
     private var accessory: Accessory = .none
+    private var isDestructiveRow = false
 
     var showsSeparator: Bool = true {
         didSet {
@@ -53,6 +54,7 @@ final class SGSettingsRowView: UIControl {
         isDestructive: Bool = false
     ) {
         self.accessory = accessory
+        self.isDestructiveRow = isDestructive
 
         titleLabel.text = title
         subtitleLabel.text = subtitle
@@ -73,6 +75,7 @@ final class SGSettingsRowView: UIControl {
         toggleSwitch.onTintColor = isDestructive ? UIColor.systemRed : SGColor.primaryDark
 
         updateAccessory()
+        updateAccessibility()
     }
 
     func setToggleState(_ isOn: Bool, animated: Bool = false) {
@@ -80,10 +83,17 @@ final class SGSettingsRowView: UIControl {
         toggleSwitch.setOn(isOn, animated: animated)
     }
 
+    override func accessibilityActivate() -> Bool {
+        handleTap()
+        return true
+    }
+
     private func setupView() {
         backgroundColor = .clear
+        isAccessibilityElement = true
 
         containerView.backgroundColor = .clear
+        containerView.isUserInteractionEnabled = false
 
         contentStackView.axis = .horizontal
         contentStackView.alignment = .center
@@ -155,6 +165,7 @@ final class SGSettingsRowView: UIControl {
         addTarget(self, action: #selector(handleTap), for: .touchUpInside)
         showsSeparator = true
         updateAccessory()
+        updateAccessibility()
     }
 
     private func updateAccessory() {
@@ -176,6 +187,28 @@ final class SGSettingsRowView: UIControl {
             toggleSwitch.setOn(isOn, animated: false)
             chevronImageView.isHidden = true
         }
+        updateAccessibility()
+    }
+
+    private func updateAccessibility() {
+        let parts = [
+            titleLabel.text,
+            subtitleLabel.isHidden ? nil : subtitleLabel.text,
+            valueLabel.isHidden ? nil : valueLabel.text
+        ].compactMap { $0 }.filter { !$0.isEmpty }
+
+        accessibilityLabel = parts.joined(separator: ", ")
+        switch accessory {
+        case .toggle:
+            accessibilityTraits = [.button]
+            accessibilityValue = toggleSwitch.isOn ? "On" : "Off"
+        case .disclosure:
+            accessibilityTraits = [.button]
+            accessibilityValue = nil
+        case .none:
+            accessibilityTraits = []
+            accessibilityValue = nil
+        }
     }
 
     @objc private func handleTap() {
@@ -186,6 +219,7 @@ final class SGSettingsRowView: UIControl {
             let next = !toggleSwitch.isOn
             toggleSwitch.setOn(next, animated: true)
             onToggleChanged?(next)
+            updateAccessibility()
         case .disclosure, .none:
             onTap?()
         }

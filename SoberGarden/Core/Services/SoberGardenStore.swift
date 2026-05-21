@@ -84,6 +84,15 @@ final class SoberGardenStore {
         }
     }
 
+    func updateHabit(_ transform: (inout Habit) -> Void) {
+        update { state in
+            guard var habit = state.habit else { return }
+            transform(&habit)
+            habit.updatedAt = Date()
+            state.habit = habit
+        }
+    }
+
     func appendRescueSession(_ session: RescueSession) {
         update { state in
             state.rescueSessions.append(session)
@@ -127,6 +136,32 @@ final class SoberGardenStore {
             state.relapseRecords.append(record)
             state.relapseRecords.sort { $0.date > $1.date }
         }
+    }
+
+    @discardableResult
+    func resetCurrentStreak(now: Date = Date(), calendar: Calendar = .current) -> RelapseRecord? {
+        guard let currentHabit = state.habit else { return nil }
+        let previousStreakDays = SGProgressCalculator.currentStreakDays(
+            startDate: currentHabit.startDate,
+            now: now,
+            calendar: calendar
+        )
+        let record = RelapseRecord(
+            id: UUID(),
+            date: now,
+            previousStartDate: currentHabit.startDate,
+            previousStreakDays: previousStreakDays,
+            note: nil
+        )
+
+        update { state in
+            state.relapseRecords.append(record)
+            state.relapseRecords.sort { $0.date > $1.date }
+            state.habit?.startDate = now
+            state.habit?.updatedAt = now
+        }
+
+        return record
     }
 
     func recordPromptShown(id: String, shownAt: Date = Date()) {

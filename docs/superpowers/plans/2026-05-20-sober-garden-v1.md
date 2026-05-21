@@ -331,13 +331,13 @@ Keep files focused. Do not turn one module controller into a large all-in-one fi
 - Create: `SoberGarden/Modules/Settings/SGEditHabitViewController.swift`
 - Modify: `SoberGarden/Core/Services/SoberGardenStore.swift`
 
-- [ ] Let user edit habit type/custom name, start date, daily cost, daily minutes, and reasons.
-- [ ] Reject future start dates.
-- [ ] Reset flow: confirmation title `Start again?`, body from PRD, buttons Cancel and Start Again.
-- [ ] On reset, save `RelapseRecord`, update `longestStreak`, reset `startDate`, keep unlocked badges behavior via milestone history.
-- [ ] Show relapse Calm Coach copy after reset.
-- [ ] Build and verify Home/Garden update after reset.
-- [ ] Commit: `feat: support habit edits and streak reset`
+- [x] Let user edit habit type/custom name, start date, daily cost, daily minutes, and reasons.
+- [x] Reject future start dates.
+- [x] Reset flow: confirmation title `Start again?`, body from PRD, buttons Cancel and Start Again.
+- [x] On reset, save `RelapseRecord`, update `longestStreak`, reset `startDate`, keep unlocked badges behavior via milestone history.
+- [x] Show relapse Calm Coach copy after reset.
+- [x] Build and verify Home/Garden update after reset.
+- [x] Commit: `feat: support habit edits and streak reset`
 
 ---
 
