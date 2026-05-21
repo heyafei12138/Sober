@@ -67,6 +67,7 @@ final class SoberGardenStore {
             let data = try encoder.encode(state)
             try data.write(to: stateURL, options: [.atomic])
             self.state = state
+            SGNotificationService.shared.rescheduleNotifications(for: state)
         } catch {
             debugPrint("Failed to save sober garden state: \(error)")
         }
@@ -194,6 +195,7 @@ final class SoberGardenStore {
             debugPrint("Failed to delete sober garden state: \(error)")
         }
         state = SoberGardenState()
+        SGNotificationService.shared.cancelScheduledNotifications()
     }
 
     private func ensureStorageDirectoryExists() throws {

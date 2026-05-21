@@ -176,10 +176,9 @@ final class SGSettingsViewController: BaseViewController {
             accessory: .toggle(settings.dailyReminderEnabled)
         )
         dailyReminder.onToggleChanged = { [weak self] isOn in
-            SoberGardenStore.shared.updateSettings { state in
-                state.dailyReminderEnabled = isOn
+            self?.updateNotificationSetting(isOn: isOn) { settings in
+                settings.dailyReminderEnabled = isOn
             }
-            self?.view.endEditing(true)
         }
 
         let milestoneRow = SGSettingsRowView()
@@ -189,10 +188,9 @@ final class SGSettingsViewController: BaseViewController {
             accessory: .toggle(settings.milestoneNotificationsEnabled)
         )
         milestoneRow.onToggleChanged = { [weak self] isOn in
-            SoberGardenStore.shared.updateSettings { state in
-                state.milestoneNotificationsEnabled = isOn
+            self?.updateNotificationSetting(isOn: isOn) { settings in
+                settings.milestoneNotificationsEnabled = isOn
             }
-            self?.view.endEditing(true)
         }
 
         let nightReminder = SGSettingsRowView()
@@ -202,10 +200,9 @@ final class SGSettingsViewController: BaseViewController {
             accessory: .toggle(settings.nightReminderEnabled)
         )
         nightReminder.onToggleChanged = { [weak self] isOn in
-            SoberGardenStore.shared.updateSettings { state in
-                state.nightReminderEnabled = isOn
+            self?.updateNotificationSetting(isOn: isOn) { settings in
+                settings.nightReminderEnabled = isOn
             }
-            self?.view.endEditing(true)
         }
 
         let rescueReminder = SGSettingsRowView()
@@ -215,13 +212,32 @@ final class SGSettingsViewController: BaseViewController {
             accessory: .toggle(settings.rescueDelayReminderEnabled)
         )
         rescueReminder.onToggleChanged = { [weak self] isOn in
-            SoberGardenStore.shared.updateSettings { state in
-                state.rescueDelayReminderEnabled = isOn
+            self?.updateNotificationSetting(isOn: isOn) { settings in
+                settings.rescueDelayReminderEnabled = isOn
             }
-            self?.view.endEditing(true)
         }
 
         return [dailyReminder, milestoneRow, nightReminder, rescueReminder]
+    }
+
+    private func updateNotificationSetting(isOn: Bool, update: @escaping (inout SoberGardenSettings) -> Void) {
+        view.endEditing(true)
+
+        guard isOn else {
+            SoberGardenStore.shared.updateSettings(update)
+            return
+        }
+
+        SGNotificationService.shared.requestAuthorization { [weak self] granted in
+            guard let self else { return }
+            guard granted else {
+                self.showNotificationPermissionAlert()
+                self.reloadContent()
+                return
+            }
+
+            SoberGardenStore.shared.updateSettings(update)
+        }
     }
 
     private func buildPrivacyRows() -> [SGSettingsRowView] {
@@ -306,6 +322,20 @@ final class SGSettingsViewController: BaseViewController {
     private func showComingSoonAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+
+    private func showNotificationPermissionAlert() {
+        let alert = UIAlertController(
+            title: "Notifications are off",
+            message: "Allow notifications in iOS Settings to use reminders.",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        alert.addAction(UIAlertAction(title: "Open Settings", style: .default) { _ in
+            guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+            UIApplication.shared.open(url)
+        })
         present(alert, animated: true)
     }
 

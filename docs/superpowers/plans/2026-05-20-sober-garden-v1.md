@@ -350,12 +350,12 @@ Keep files focused. Do not turn one module controller into a large all-in-one fi
 - Modify: `SoberGarden/Modules/Settings/SGSettingsViewController.swift`
 - Modify: `SoberGarden/AppDelegate.swift`
 
-- [ ] Implement daily reminder, milestone notification, night reminder, and rescue delay notification identifiers.
-- [ ] Store notification settings locally.
-- [ ] Reschedule notifications when settings or habit state changes.
-- [ ] Add notification delegate handling for foreground display.
-- [ ] Build and verify permission request and one test notification.
-- [ ] Commit: `feat: add local notification scheduling`
+- [x] Implement daily reminder, milestone notification, night reminder, and rescue delay notification identifiers.
+- [x] Store notification settings locally.
+- [x] Reschedule notifications when settings or habit state changes.
+- [x] Add notification delegate handling for foreground display.
+- [x] Build and verify permission request and one test notification.
+- [x] Commit: `feat: add local notification scheduling`
 
 ### Task 19: Add URL Scheme And Deep Link Router
 
