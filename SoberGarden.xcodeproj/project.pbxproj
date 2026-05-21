@@ -11,6 +11,7 @@
 		04F5E7FB2FBC97690049A938 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 04F5E7FA2FBC97690049A938 /* SnapKit */; };
 		2B3039A9D7BA8D47ABEF5826 /* Pods_SoberGarden.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4CC144DE7B44112E610A660 /* Pods_SoberGarden.framework */; };
 		700000000000000000000002 /* SoberGardenWidgets.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 700000000000000000000001 /* SoberGardenWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		710000000000000000000002 /* SoberGardenWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 710000000000000000000001 /* SoberGardenWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -20,6 +21,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 700000000000000000000008;
 			remoteInfo = SoberGardenWidgets;
+		};
+		71000000000000000000000D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04F5E7A62FBC900E0049A938 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 710000000000000000000008;
+			remoteInfo = SoberGardenWatch;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -35,6 +43,17 @@
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		71000000000000000000000C /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				710000000000000000000002 /* SoberGardenWatch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +61,7 @@
 		329B5C1808AF900B8025CB26 /* Pods-SoberGarden.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoberGarden.debug.xcconfig"; path = "Target Support Files/Pods-SoberGarden/Pods-SoberGarden.debug.xcconfig"; sourceTree = "<group>"; };
 		3D09EF61D7EDB5C1083DBF73 /* Pods-SoberGarden.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoberGarden.release.xcconfig"; path = "Target Support Files/Pods-SoberGarden/Pods-SoberGarden.release.xcconfig"; sourceTree = "<group>"; };
 		700000000000000000000001 /* SoberGardenWidgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SoberGardenWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		710000000000000000000001 /* SoberGardenWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoberGardenWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4CC144DE7B44112E610A660 /* Pods_SoberGarden.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoberGarden.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -62,6 +82,13 @@
 			);
 			target = 700000000000000000000008 /* SoberGardenWidgets */;
 		};
+		710000000000000000000004 /* Exceptions for "SoberGardenWatch" folder in "SoberGardenWatch" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				SoberGardenWatch.entitlements,
+			);
+			target = 710000000000000000000008 /* SoberGardenWatch */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -79,6 +106,14 @@
 				700000000000000000000004 /* Exceptions for "SoberGardenWidgets" folder in "SoberGardenWidgets" target */,
 			);
 			path = SoberGardenWidgets;
+			sourceTree = "<group>";
+		};
+		710000000000000000000003 /* SoberGardenWatch */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				710000000000000000000004 /* Exceptions for "SoberGardenWatch" folder in "SoberGardenWatch" target */,
+			);
+			path = SoberGardenWatch;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -101,6 +136,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		710000000000000000000005 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -109,6 +151,7 @@
 			children = (
 				04F5E7B02FBC900E0049A938 /* SoberGarden */,
 				700000000000000000000003 /* SoberGardenWidgets */,
+				710000000000000000000003 /* SoberGardenWatch */,
 				04F5E7AF2FBC900E0049A938 /* Products */,
 				D8D6EB5FAFB443900407D9BC /* Pods */,
 				6125C260A87855DBFF2E3224 /* Frameworks */,
@@ -120,6 +163,7 @@
 			children = (
 				04F5E7AE2FBC900E0049A938 /* SoberGarden.app */,
 				700000000000000000000001 /* SoberGardenWidgets.appex */,
+				710000000000000000000001 /* SoberGardenWatch.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -153,11 +197,13 @@
 				04F5E7AB2FBC900E0049A938 /* Frameworks */,
 				04F5E7AC2FBC900E0049A938 /* Resources */,
 				70000000000000000000000C /* Embed App Extensions */,
+				71000000000000000000000C /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				70000000000000000000000E /* PBXTargetDependency */,
+				71000000000000000000000E /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				04F5E7B02FBC900E0049A938 /* SoberGarden */,
@@ -187,6 +233,26 @@
 			productReference = 700000000000000000000001 /* SoberGardenWidgets.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		710000000000000000000008 /* SoberGardenWatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 71000000000000000000000B /* Build configuration list for PBXNativeTarget "SoberGardenWatch" */;
+			buildPhases = (
+				710000000000000000000006 /* Sources */,
+				710000000000000000000005 /* Frameworks */,
+				710000000000000000000007 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				710000000000000000000003 /* SoberGardenWatch */,
+			);
+			name = SoberGardenWatch;
+			productName = SoberGardenWatch;
+			productReference = 710000000000000000000001 /* SoberGardenWatch.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -201,6 +267,9 @@
 						CreatedOnToolsVersion = 26.1;
 					};
 					700000000000000000000008 = {
+						CreatedOnToolsVersion = 26.1;
+					};
+					710000000000000000000008 = {
 						CreatedOnToolsVersion = 26.1;
 					};
 				};
@@ -225,6 +294,7 @@
 			targets = (
 				04F5E7AD2FBC900E0049A938 /* SoberGarden */,
 				700000000000000000000008 /* SoberGardenWidgets */,
+				710000000000000000000008 /* SoberGardenWatch */,
 			);
 		};
 /* End PBXProject section */
@@ -238,6 +308,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		700000000000000000000007 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		710000000000000000000007 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -286,6 +363,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		710000000000000000000006 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -293,6 +377,11 @@
 			isa = PBXTargetDependency;
 			target = 700000000000000000000008 /* SoberGardenWidgets */;
 			targetProxy = 70000000000000000000000D /* PBXContainerItemProxy */;
+		};
+		71000000000000000000000E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 710000000000000000000008 /* SoberGardenWatch */;
+			targetProxy = 71000000000000000000000D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -564,6 +653,69 @@
 			};
 			name = Release;
 		};
+		710000000000000000000009 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SoberGardenWatch/SoberGardenWatch.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FQ89HCKDX4;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = SoberGarden;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.Sober.SoberGarden;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Sober.SoberGarden.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "watchos watchsimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 26.1;
+			};
+			name = Debug;
+		};
+		71000000000000000000000A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SoberGardenWatch/SoberGardenWatch.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FQ89HCKDX4;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = SoberGarden;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.Sober.SoberGarden;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Sober.SoberGarden.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "watchos watchsimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 26.1;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -590,6 +742,15 @@
 			buildConfigurations = (
 				700000000000000000000009 /* Debug */,
 				70000000000000000000000A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		71000000000000000000000B /* Build configuration list for PBXNativeTarget "SoberGardenWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				710000000000000000000009 /* Debug */,
+				71000000000000000000000A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

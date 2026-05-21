@@ -424,12 +424,12 @@ Keep files focused. Do not turn one module controller into a large all-in-one fi
 - Create via Xcode: Watch App target, suggested name `SoberGardenWatch`
 - Add watch shared snapshot reader.
 
-- [ ] Show streak glance: `N days clean`, `Next: X days`.
-- [ ] Add `I'm Struggling` button.
-- [ ] Implement 60 or 90 second breathing page with circle animation and optional haptic feedback.
-- [ ] Keep watch app read-only except local breathing interaction.
-- [ ] Build iOS app and watch target.
-- [ ] Commit: `feat: add watch lite rescue`
+- [x] Show streak glance: `N days clean`, `Next: X days`.
+- [x] Add `I'm Struggling` button.
+- [x] Implement 60 or 90 second breathing page with circle animation and optional haptic feedback.
+- [x] Keep watch app read-only except local breathing interaction.
+- [x] Build iOS app and watch target.
+- [x] Commit: `feat: add watch lite rescue`
 
 ### Task 24: Add Face ID / App Lock
 
