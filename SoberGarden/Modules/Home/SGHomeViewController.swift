@@ -263,33 +263,12 @@ final class SGHomeViewController: BaseViewController {
     }
 
     private func shareProgress() {
-        guard let habit = SoberGardenStore.shared.state.habit else { return }
-        let cleanDays = SGProgressCalculator.currentStreakDays(startDate: habit.startDate)
-        let savedMoney = SGProgressCalculator.moneySaved(dailyCost: habit.dailyCost ?? 0, cleanDays: cleanDays)
-        let nextMilestone = SGProgressCalculator.nextMilestone(for: cleanDays)?.day
-        let stage = SGProgressCalculator.currentGardenStage(for: cleanDays)
-        let summary = [
-            "I’m growing one clean day at a time.",
-            "\(cleanDays) days clean from \(habit.displayName).",
-            stage.title,
-            nextMilestone.map { "Next milestone: \($0) days." } ?? nil,
-            savedMoney > 0 ? "Saved \(NumberFormatter.localizedString(from: NSNumber(value: savedMoney), number: .currency))." : nil
-        ]
-        .compactMap { $0 }
-        .joined(separator: "\n")
+        guard let activityItems = SGShareProgressService.shared.makeActivityItems() else { return }
 
-        let snapshot = WidgetSnapshot(
-            cleanDays: cleanDays,
-            nextMilestone: nextMilestone,
-            gardenStage: stage,
-            habitDisplayName: habit.displayName,
-            updatedAt: Date()
-        )
-        let activity = UIActivityViewController(activityItems: [summary], applicationActivities: nil)
+        let activity = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
         activity.popoverPresentationController?.sourceView = view
         activity.popoverPresentationController?.sourceRect = CGRect(x: view.bounds.midX, y: view.bounds.maxY - 120, width: 1, height: 1)
         present(activity, animated: true)
-        debugPrint("Share Progress snapshot: \(snapshot)")
     }
 
     @objc private func handleRescueButtonTapped() {

@@ -378,11 +378,11 @@ Keep files focused. Do not turn one module controller into a large all-in-one fi
 - Create: `SoberGarden/Modules/Share/SGShareProgressService.swift`
 - Modify: `SoberGarden/Modules/Home/SGHomeViewController.swift`
 
-- [ ] Render a shareable card containing clean days, saved money, garden stage, app name, and text `I'm growing one clean day at a time.`
-- [ ] Present `UIActivityViewController` from Home.
-- [ ] Ensure share card image uses the same warm visual style as Home/Garden.
-- [ ] Build and verify share sheet opens.
-- [ ] Commit: `feat: add progress sharing`
+- [x] Render a shareable card containing clean days, saved money, garden stage, app name, and text `I'm growing one clean day at a time.`
+- [x] Present `UIActivityViewController` from Home.
+- [x] Ensure share card image uses the same warm visual style as Home/Garden.
+- [x] Build and verify share sheet opens.
+- [x] Commit: `feat: add progress sharing`
 
 ---
 
