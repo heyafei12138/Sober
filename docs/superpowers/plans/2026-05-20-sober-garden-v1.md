@@ -407,12 +407,12 @@ Keep files focused. Do not turn one module controller into a large all-in-one fi
 - Create via Xcode: Widget Extension target, suggested name `SoberGardenWidgets`
 - Add widget files under generated extension folder.
 
-- [ ] Create Streak Widget small/medium: `7 Days Clean`, `Next: 14 Days`, deep link `sobergarden://home`.
-- [ ] Create Garden Widget small/medium: `Your garden is growing.`, `Day N`, current stage graphic, deep link `sobergarden://garden`.
-- [ ] Create Rescue Widget small/medium: `Struggling?`, `Open Rescue`, deep link `sobergarden://rescue`.
-- [ ] Read only `WidgetSnapshot`; do not duplicate app storage logic.
-- [ ] Build app and widget extension.
-- [ ] Commit: `feat: add home screen widgets`
+- [x] Create Streak Widget small/medium: `7 Days Clean`, `Next: 14 Days`, deep link `sobergarden://home`.
+- [x] Create Garden Widget small/medium: `Your garden is growing.`, `Day N`, current stage graphic, deep link `sobergarden://garden`.
+- [x] Create Rescue Widget small/medium: `Struggling?`, `Open Rescue`, deep link `sobergarden://rescue`.
+- [x] Read only `WidgetSnapshot`; do not duplicate app storage logic.
+- [x] Build app and widget extension.
+- [x] Commit: `feat: add home screen widgets`
 
 ---
 

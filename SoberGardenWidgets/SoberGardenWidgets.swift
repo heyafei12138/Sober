@@ -1,0 +1,76 @@
+//
+//  SoberGardenWidgets.swift
+//  SoberGardenWidgets
+//
+
+import SwiftUI
+import WidgetKit
+
+struct SGWidgetEntry: TimelineEntry {
+    let date: Date
+    let snapshot: SGWidgetSnapshot
+}
+
+struct SGWidgetProvider: TimelineProvider {
+    func placeholder(in context: Context) -> SGWidgetEntry {
+        SGWidgetEntry(date: Date(), snapshot: .placeholder)
+    }
+
+    func getSnapshot(in context: Context, completion: @escaping (SGWidgetEntry) -> Void) {
+        completion(SGWidgetEntry(date: Date(), snapshot: SGWidgetSnapshotReader.shared.readSnapshot()))
+    }
+
+    func getTimeline(in context: Context, completion: @escaping (Timeline<SGWidgetEntry>) -> Void) {
+        let entry = SGWidgetEntry(date: Date(), snapshot: SGWidgetSnapshotReader.shared.readSnapshot())
+        let nextRefresh = Calendar.current.date(byAdding: .hour, value: 1, to: entry.date) ?? entry.date.addingTimeInterval(3600)
+        completion(Timeline(entries: [entry], policy: .after(nextRefresh)))
+    }
+}
+
+struct SGStreakWidget: Widget {
+    let kind = "SGStreakWidget"
+
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: kind, provider: SGWidgetProvider()) { entry in
+            SGStreakWidgetView(entry: entry)
+        }
+        .configurationDisplayName("SoberGarden Streak")
+        .description("Track clean days and the next milestone.")
+        .supportedFamilies([.systemSmall, .systemMedium])
+    }
+}
+
+struct SGGardenWidget: Widget {
+    let kind = "SGGardenWidget"
+
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: kind, provider: SGWidgetProvider()) { entry in
+            SGGardenWidgetView(entry: entry)
+        }
+        .configurationDisplayName("SoberGarden Garden")
+        .description("See your garden stage at a glance.")
+        .supportedFamilies([.systemSmall, .systemMedium])
+    }
+}
+
+struct SGRescueWidget: Widget {
+    let kind = "SGRescueWidget"
+
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: kind, provider: SGWidgetProvider()) { entry in
+            SGRescueWidgetView(entry: entry)
+        }
+        .configurationDisplayName("SoberGarden Rescue")
+        .description("Open Rescue when the moment gets hard.")
+        .supportedFamilies([.systemSmall, .systemMedium])
+    }
+}
+
+@main
+struct SoberGardenWidgetsBundle: WidgetBundle {
+    var body: some Widget {
+        SGStreakWidget()
+        SGGardenWidget()
+        SGRescueWidget()
+    }
+}
