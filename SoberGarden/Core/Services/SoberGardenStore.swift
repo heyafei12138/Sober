@@ -46,6 +46,7 @@ final class SoberGardenStore {
     func load() -> SoberGardenState {
         guard fileManager.fileExists(atPath: stateURL.path) else {
             state = SoberGardenState()
+            SGWidgetSnapshotWriter.shared.clearSnapshot()
             return state
         }
 
@@ -53,10 +54,12 @@ final class SoberGardenStore {
             let data = try Data(contentsOf: stateURL)
             let decodedState = try decoder.decode(SoberGardenState.self, from: data)
             state = decodedState
+            SGWidgetSnapshotWriter.shared.writeSnapshot(for: decodedState)
             return decodedState
         } catch {
             debugPrint("Failed to load sober garden state: \(error)")
             state = SoberGardenState()
+            SGWidgetSnapshotWriter.shared.clearSnapshot()
             return state
         }
     }
@@ -68,6 +71,7 @@ final class SoberGardenStore {
             try data.write(to: stateURL, options: [.atomic])
             self.state = state
             SGNotificationService.shared.rescheduleNotifications(for: state)
+            SGWidgetSnapshotWriter.shared.writeSnapshot(for: state)
         } catch {
             debugPrint("Failed to save sober garden state: \(error)")
         }
@@ -196,6 +200,7 @@ final class SoberGardenStore {
         }
         state = SoberGardenState()
         SGNotificationService.shared.cancelScheduledNotifications()
+        SGWidgetSnapshotWriter.shared.clearSnapshot()
     }
 
     private func ensureStorageDirectoryExists() throws {

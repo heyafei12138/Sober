@@ -395,11 +395,11 @@ Keep files focused. Do not turn one module controller into a large all-in-one fi
 - Modify: `SoberGarden/Core/Services/SoberGardenStore.swift`
 - Modify: project capabilities manually in Xcode if App Group is required.
 
-- [ ] Define App Group identifier, for example `group.com.Sober.SoberGarden`, after confirming Apple Developer configuration.
-- [ ] Write `WidgetSnapshot` to App Group UserDefaults after onboarding completion, app open, start date edit, reset, and milestone changes.
-- [ ] Keep a fallback standard UserDefaults writer for simulator development before App Group is configured.
-- [ ] Build the app.
-- [ ] Commit: `feat: write widget snapshot data`
+- [x] Define App Group identifier, for example `group.com.Sober.SoberGarden`, after confirming Apple Developer configuration.
+- [x] Write `WidgetSnapshot` to App Group UserDefaults after onboarding completion, app open, start date edit, reset, and milestone changes.
+- [x] Keep a fallback standard UserDefaults writer for simulator development before App Group is configured.
+- [x] Build the app.
+- [x] Commit: `feat: write widget snapshot data`
 
 ### Task 22: Add Widget Extension
 
