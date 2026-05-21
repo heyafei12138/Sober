@@ -468,19 +468,19 @@ Keep files focused. Do not turn one module controller into a large all-in-one fi
 **Files:**
 - Modify only files required by discovered issues.
 
-- [ ] Fresh install shows onboarding.
-- [ ] User can create a single habit.
-- [ ] Home shows clean days, Calm Coach, Garden preview, money/time saved, next milestone, and `I'm Struggling`.
-- [ ] Rescue flow completes and saves `RescueSession`.
-- [ ] Garden stage changes based on clean days.
-- [ ] Journal saves and lists entries.
-- [ ] Settings can edit habit and reset streak without deleting history.
-- [ ] Notifications request permission only after custom explainer.
-- [ ] Deep links open correct tabs.
-- [ ] Widget displays streak and rescue entry after App Group is configured.
-- [ ] App contains no subscription, account, AI API, community, or medical-claim UI.
-- [ ] Run full build command.
-- [ ] Commit: `chore: verify sober garden mvp`
+- [x] Fresh install shows onboarding.
+- [x] User can create a single habit.
+- [x] Home shows clean days, Calm Coach, Garden preview, money/time saved, next milestone, and `I'm Struggling`.
+- [x] Rescue flow completes and saves `RescueSession`.
+- [x] Garden stage changes based on clean days.
+- [x] Journal saves and lists entries.
+- [x] Settings can edit habit and reset streak without deleting history.
+- [x] Notifications request permission only after custom explainer.
+- [x] Deep links open correct tabs.
+- [x] Widget displays streak and rescue entry after App Group is configured.
+- [x] App contains no subscription, account, AI API, community, or medical-claim UI.
+- [x] Run full build command.
+- [x] Commit: `chore: verify sober garden mvp`
 
 ---
 
