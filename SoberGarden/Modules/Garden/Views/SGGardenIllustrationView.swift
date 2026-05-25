@@ -37,7 +37,7 @@ final class SGGardenIllustrationView: UIView {
     }
 }
 
-private extension GardenStage {
+extension GardenStage {
 
     var gardenImageName: String {
         switch self {

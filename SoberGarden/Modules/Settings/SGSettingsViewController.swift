@@ -17,9 +17,9 @@ final class SGSettingsViewController: BaseViewController {
     )
     private let checkInStatsView = SGCheckInStatsView()
 
-    private let privacyPolicyURL = URL(string: "https://example.com/privacy-policy")!
-    private let termsURL = URL(string: "https://example.com/terms")!
-
+    private let privacyPolicyURL = URL(string: "https://sites.google.com/view/sober-privacy")!
+    private let termsURL = URL(string: "https://sites.google.com/view/sober-termsofus")!
+    private let disclaimerURL = URL(string: "https://sites.google.com/view/sober-disclaimer")!
     override func viewDidLoad() {
         super.viewDidLoad()
 //        title = "Settings"

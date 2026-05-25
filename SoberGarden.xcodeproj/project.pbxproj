@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04B73F322FBF3A14000FA01E /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 04B73F312FBF3A14000FA01E /* PrivacyInfo.xcprivacy */; };
 		04F5E7F82FBC96D10049A938 /* JKSwiftExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 04F5E7F72FBC96D10049A938 /* JKSwiftExtension */; };
 		04F5E7FB2FBC97690049A938 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 04F5E7FA2FBC97690049A938 /* SnapKit */; };
 		2B3039A9D7BA8D47ABEF5826 /* Pods_SoberGarden.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4CC144DE7B44112E610A660 /* Pods_SoberGarden.framework */; };
@@ -57,6 +58,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		04B73F312FBF3A14000FA01E /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		04F5E7AE2FBC900E0049A938 /* SoberGarden.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoberGarden.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		329B5C1808AF900B8025CB26 /* Pods-SoberGarden.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoberGarden.debug.xcconfig"; path = "Target Support Files/Pods-SoberGarden/Pods-SoberGarden.debug.xcconfig"; sourceTree = "<group>"; };
 		3D09EF61D7EDB5C1083DBF73 /* Pods-SoberGarden.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoberGarden.release.xcconfig"; path = "Target Support Files/Pods-SoberGarden/Pods-SoberGarden.release.xcconfig"; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 		04F5E7A52FBC900E0049A938 = {
 			isa = PBXGroup;
 			children = (
+				04B73F312FBF3A14000FA01E /* PrivacyInfo.xcprivacy */,
 				04F5E7B02FBC900E0049A938 /* SoberGarden */,
 				700000000000000000000003 /* SoberGardenWidgets */,
 				710000000000000000000003 /* SoberGardenWatch */,
@@ -292,6 +295,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04B73F322FBF3A14000FA01E /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,11 +395,12 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Sober.SoberGarden;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -429,11 +434,12 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Sober.SoberGarden;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;

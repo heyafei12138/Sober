@@ -16,6 +16,7 @@ final class SGGardenViewController: BaseViewController {
     private let illustrationView = SGGardenIllustrationView()
     private let stageTitleLabel = UILabel()
     private let cleanDaysLabel = UILabel()
+    private let shareButton = UIButton(type: .system)
 
     private let progressCardView = SGCardView()
     private let progressHeaderLabel = UILabel()
@@ -99,13 +100,31 @@ final class SGGardenViewController: BaseViewController {
         cleanDaysLabel.textColor = SGColor.primaryDark
         cleanDaysLabel.textAlignment = .center
 
+        shareButton.setImage(UIImage(systemName: "paperplane.fill"), for: .normal)
+        shareButton.setTitle("Share", for: .normal)
+        shareButton.tintColor = SGColor.primaryDark
+        shareButton.titleLabel?.font = .systemFont(ofSize: 13, weight: .semibold)
+        shareButton.backgroundColor = UIColor.white.withAlphaComponent(0.72)
+        shareButton.layer.cornerRadius = 16
+        shareButton.layer.masksToBounds = true
+        shareButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -2, bottom: 0, right: 2)
+        shareButton.accessibilityLabel = "Share garden progress"
+        shareButton.addTarget(self, action: #selector(handleShareTapped), for: .touchUpInside)
+
         illustrationCardView.contentView.addSubview(illustrationView)
+        illustrationCardView.contentView.addSubview(shareButton)
         illustrationCardView.contentView.addSubview(stageTitleLabel)
         illustrationCardView.contentView.addSubview(cleanDaysLabel)
 
         illustrationView.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview().inset(16)
             make.height.equalTo(230)
+        }
+
+        shareButton.snp.makeConstraints { make in
+            make.top.right.equalToSuperview().inset(16)
+            make.width.equalTo(86)
+            make.height.equalTo(32)
         }
 
         stageTitleLabel.snp.makeConstraints { make in
@@ -259,6 +278,14 @@ final class SGGardenViewController: BaseViewController {
         default:
             return "Your garden holds the work you have already done. Keep tending it at your own pace."
         }
+    }
+
+    @objc private func handleShareTapped() {
+        guard let package = SGShareProgressService.shared.makeProgressSharePackage() else { return }
+        let previewViewController = SGSharePreviewViewController(package: package)
+        previewViewController.popoverPresentationController?.sourceView = shareButton
+        previewViewController.popoverPresentationController?.sourceRect = shareButton.bounds
+        present(previewViewController, animated: true)
     }
 }
 

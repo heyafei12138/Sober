@@ -15,6 +15,8 @@
 	</array>
 	<key>NSFaceIDUsageDescription</key>
 	<string>SoberGarden uses Face ID to keep your recovery progress private.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>SoberGarden saves your progress poster to your photo library when you choose Save.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

@@ -24,14 +24,15 @@ final class SGHomeViewController: BaseViewController {
     private let savingsView = SGSavedStatsView()
     private let milestoneCardView = SGMilestoneCardView()
     private let gardenPreviewView = SGGardenPreviewView()
+    private let navigationShareButton = UIButton(type: .system)
     private let shareProgressControl = SGHomeActionRowControl(
         title: "Share Progress",
         subtitle: "Make your progress easy to share.",
-        iconName: "square.and.arrow.up"
+        iconName: "paperplane.fill"
     )
-    private let rescueButton = SGPrimaryButton(title: "I'm Struggling", style: .rescue)
-    private let rescueSubtitleLabel = UILabel()
+    private let rescuePillControl = SGHomeRescuePillControl()
     private var didPresentNonMedicalDisclaimer = false
+    private var isRescuePillHiddenForScroll = false
 
     override func viewDidLoad() {
         isCustomNavigationHidden = true
@@ -43,6 +44,12 @@ final class SGHomeViewController: BaseViewController {
         super.viewWillAppear(animated)
         rightActionContainerView.isHidden = false
         renderContent()
+        rescuePillControl.startBreathingAnimation()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        rescuePillControl.stopBreathingAnimation()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -59,7 +66,6 @@ final class SGHomeViewController: BaseViewController {
     }
 
     override func setupSubviews() {
-        setupFooter()
         setupScrollView()
         setupHeader()
         setupCoachCard()
@@ -69,6 +75,8 @@ final class SGHomeViewController: BaseViewController {
         setupMilestoneSection()
         setupGardenPreview()
         setupShareSection()
+        setupFooter()
+        setupNavigationShareAction()
         renderContent()
     }
 
@@ -77,13 +85,14 @@ final class SGHomeViewController: BaseViewController {
         scrollView.addSubview(contentView)
         contentView.addSubview(contentStackView)
 
+        scrollView.delegate = self
         scrollView.showsVerticalScrollIndicator = false
         scrollView.contentInsetAdjustmentBehavior = .never
 
         scrollView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(44)
             make.left.right.equalToSuperview()
-            make.bottom.equalTo(rescueSubtitleLabel.snp.top).offset(-20)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-CustomTabBar.barHeight - 12)
         }
 
         contentView.snp.makeConstraints { make in
@@ -169,6 +178,10 @@ final class SGHomeViewController: BaseViewController {
     }
 
     private func setupStreakCard() {
+        streakCardView.onShareTap = { [weak self] in
+            guard let self else { return }
+            self.shareProgress(sourceView: self.streakCardView)
+        }
         contentStackView.addArrangedSubview(streakCardView)
     }
 
@@ -189,34 +202,44 @@ final class SGHomeViewController: BaseViewController {
 
     private func setupShareSection() {
         shareProgressControl.onTap = { [weak self] in
-            self?.shareProgress()
+            guard let self else { return }
+            self.shareProgress(sourceView: self.shareProgressControl)
         }
         contentStackView.addArrangedSubview(shareProgressControl)
     }
 
-    private func setupFooter() {
-        view.addSubview(rescueSubtitleLabel)
-        view.addSubview(rescueButton)
+    private func setupNavigationShareAction() {
+        rightActionContainerView.addSubview(navigationShareButton)
 
-        rescueSubtitleLabel.text = "Get through the next few minutes."
-        rescueSubtitleLabel.font = .systemFont(ofSize: 14, weight: .medium)
-        rescueSubtitleLabel.textColor = SGColor.textSecondary
-        rescueSubtitleLabel.textAlignment = .center
-        rescueSubtitleLabel.numberOfLines = 1
-        rescueSubtitleLabel.adjustsFontSizeToFitWidth = true
-        rescueSubtitleLabel.minimumScaleFactor = 0.8
+        navigationShareButton.setImage(UIImage(systemName: "paperplane.fill"), for: .normal)
+        navigationShareButton.tintColor = SGColor.primaryDark
+        navigationShareButton.backgroundColor = UIColor.white.withAlphaComponent(0.72)
+        navigationShareButton.layer.cornerRadius = 16
+        navigationShareButton.layer.masksToBounds = true
+        navigationShareButton.accessibilityLabel = "Share progress"
+        navigationShareButton.addTarget(self, action: #selector(handleNavigationShareTapped), for: .touchUpInside)
 
-        rescueButton.addTarget(self, action: #selector(handleRescueButtonTapped), for: .touchUpInside)
-
-        rescueSubtitleLabel.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(24)
-            make.right.equalToSuperview().offset(-24)
-            make.bottom.equalTo(rescueButton.snp.top).offset(-10)
+        navigationShareButton.snp.makeConstraints { make in
+            make.left.top.bottom.equalToSuperview()
+            make.width.height.equalTo(32)
+            make.right.equalTo(settingsButton.snp.left).offset(-10)
         }
 
-        rescueButton.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(20)
-            make.right.equalToSuperview().offset(-20)
+        settingsButton.snp.remakeConstraints { make in
+            make.top.bottom.right.equalToSuperview()
+            make.width.height.equalTo(32)
+        }
+    }
+
+    private func setupFooter() {
+        view.addSubview(rescuePillControl)
+        view.bringSubviewToFront(rescuePillControl)
+        rescuePillControl.addTarget(self, action: #selector(handleRescueButtonTapped), for: .touchUpInside)
+
+        rescuePillControl.snp.makeConstraints { make in
+            make.width.equalTo(84)
+            make.right.equalToSuperview().offset(-18)
+            make.height.equalTo(64)
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-(CustomTabBar.barHeight + 16))
         }
     }
@@ -392,13 +415,13 @@ final class SGHomeViewController: BaseViewController {
         return SGCalmCoachService.shared.promptText(for: promptContext, now: now)
     }
 
-    private func shareProgress() {
-        guard let activityItems = SGShareProgressService.shared.makeActivityItems() else { return }
+    private func shareProgress(sourceView: UIView?) {
+        guard let package = SGShareProgressService.shared.makeProgressSharePackage() else { return }
 
-        let activity = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
-        activity.popoverPresentationController?.sourceView = view
-        activity.popoverPresentationController?.sourceRect = CGRect(x: view.bounds.midX, y: view.bounds.maxY - 120, width: 1, height: 1)
-        present(activity, animated: true)
+        let previewViewController = SGSharePreviewViewController(package: package)
+        previewViewController.popoverPresentationController?.sourceView = sourceView ?? view
+        previewViewController.popoverPresentationController?.sourceRect = sourceView?.bounds ?? CGRect(x: view.bounds.midX, y: view.bounds.maxY - 120, width: 1, height: 1)
+        present(previewViewController, animated: true)
     }
 
     private func openHabitEditor() {
@@ -412,6 +435,57 @@ final class SGHomeViewController: BaseViewController {
 
     @objc private func handleRescueButtonTapped() {
         (tabBarController as? MainTabBarController)?.setSelectedIndex(1)
+    }
+
+    @objc private func handleNavigationShareTapped() {
+        shareProgress(sourceView: navigationShareButton)
+    }
+
+    private func setRescuePillHiddenForScroll(_ hidden: Bool) {
+        guard isRescuePillHiddenForScroll != hidden else { return }
+        isRescuePillHiddenForScroll = hidden
+
+        let horizontalOffset = rescuePillControl.bounds.width + 32
+        let targetTransform = hidden ? CGAffineTransform(translationX: horizontalOffset, y: 0) : .identity
+        let targetAlpha: CGFloat = hidden ? 0.82 : 1
+
+        UIView.animate(
+            withDuration: hidden ? 0.34 : 0.46,
+            delay: hidden ? 0.04 : 0.18,
+            usingSpringWithDamping: hidden ? 0.92 : 0.78,
+            initialSpringVelocity: hidden ? 0.2 : 0.38,
+            options: [.allowUserInteraction, .beginFromCurrentState, .curveEaseOut]
+        ) {
+            self.rescuePillControl.transform = targetTransform
+            self.rescuePillControl.alpha = hidden ? 0.72 : targetAlpha
+        }
+    }
+}
+
+extension SGHomeViewController: UIScrollViewDelegate {
+
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        setRescuePillHiddenForScroll(true)
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.isDragging || scrollView.isDecelerating {
+            setRescuePillHiddenForScroll(true)
+        }
+    }
+
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if decelerate == false {
+            setRescuePillHiddenForScroll(false)
+        }
+    }
+
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        setRescuePillHiddenForScroll(false)
+    }
+
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        setRescuePillHiddenForScroll(false)
     }
 }
 
@@ -472,7 +546,8 @@ private final class SGHomeActionRowControl: UIControl {
         chevronView.contentMode = .scaleAspectFit
 
         iconView.snp.makeConstraints { make in
-            make.left.top.equalToSuperview().inset(18)
+            make.left.equalToSuperview().inset(18)
+            make.centerY.equalToSuperview()
             make.size.equalTo(24)
         }
 
@@ -498,5 +573,158 @@ private final class SGHomeActionRowControl: UIControl {
 
     @objc private func handleTap() {
         onTap?()
+    }
+}
+
+private final class SGHomeRescuePillControl: UIControl {
+
+    private let pulseOuterView = UIView()
+    private let pulseMiddleView = UIView()
+    private let backgroundView = UIView()
+    private let iconContainerView = UIView()
+    private let iconView = UIImageView()
+    private let titleLabel = UILabel()
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupView()
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupView()
+    }
+
+    override var isHighlighted: Bool {
+        didSet {
+            UIView.animate(withDuration: 0.14, delay: 0, options: [.curveEaseOut]) {
+                self.backgroundView.transform = self.isHighlighted ? CGAffineTransform(scaleX: 0.985, y: 0.985) : .identity
+                self.backgroundView.backgroundColor = self.isHighlighted ? UIColor.hexString("#D95733") : UIColor.hexString("#F06A42")
+            }
+        }
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        pulseOuterView.layer.cornerRadius = pulseOuterView.bounds.height / 2
+        pulseMiddleView.layer.cornerRadius = pulseMiddleView.bounds.height / 2
+        backgroundView.layer.cornerRadius = backgroundView.bounds.height / 2
+        iconContainerView.layer.cornerRadius = iconContainerView.bounds.height / 2
+    }
+
+    func startBreathingAnimation() {
+        guard pulseOuterView.layer.animation(forKey: "rescuePulseOuter") == nil else { return }
+
+        addRippleAnimation(to: pulseOuterView, key: "rescuePulseOuter", delay: 0)
+        addRippleAnimation(to: pulseMiddleView, key: "rescuePulseMiddle", delay: 0.55)
+
+        let iconScale = CABasicAnimation(keyPath: "transform.scale")
+        iconScale.fromValue = 1
+        iconScale.toValue = 1.08
+        iconScale.duration = 1.2
+        iconScale.autoreverses = true
+        iconScale.repeatCount = .infinity
+        iconScale.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        iconContainerView.layer.add(iconScale, forKey: "rescueIconPulse")
+    }
+
+    func stopBreathingAnimation() {
+        pulseOuterView.layer.removeAnimation(forKey: "rescuePulseOuter")
+        pulseMiddleView.layer.removeAnimation(forKey: "rescuePulseMiddle")
+        iconContainerView.layer.removeAnimation(forKey: "rescueIconPulse")
+    }
+
+    private func addRippleAnimation(to view: UIView, key: String, delay: CFTimeInterval) {
+        let scale = CABasicAnimation(keyPath: "transform.scale")
+        scale.fromValue = 0.86
+        scale.toValue = 1.78
+
+        let opacity = CABasicAnimation(keyPath: "opacity")
+        opacity.fromValue = 0.62
+        opacity.toValue = 0
+
+        let group = CAAnimationGroup()
+        group.animations = [scale, opacity]
+        group.duration = 1.85
+        group.beginTime = CACurrentMediaTime() + delay
+        group.repeatCount = .infinity
+        group.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        view.layer.add(group, forKey: key)
+    }
+
+    private func setupView() {
+        accessibilityLabel = "Help. Start support."
+        accessibilityHint = "Opens the help flow."
+        accessibilityTraits = .button
+
+        addSubview(pulseOuterView)
+        addSubview(pulseMiddleView)
+        addSubview(backgroundView)
+
+        pulseOuterView.isUserInteractionEnabled = false
+        pulseMiddleView.isUserInteractionEnabled = false
+        pulseOuterView.backgroundColor = UIColor.hexString("#F06A42").withAlphaComponent(0.34)
+        pulseMiddleView.backgroundColor = UIColor.hexString("#FF8A5B").withAlphaComponent(0.32)
+
+        backgroundView.isUserInteractionEnabled = false
+        backgroundView.backgroundColor = UIColor.hexString("#F06A42")
+        backgroundView.layer.borderWidth = 1.5
+        backgroundView.layer.borderColor = UIColor.white.withAlphaComponent(0.72).cgColor
+        backgroundView.layer.shadowColor = UIColor.hexString("#B74E32").cgColor
+        backgroundView.layer.shadowOpacity = 0.34
+        backgroundView.layer.shadowRadius = 18
+        backgroundView.layer.shadowOffset = CGSize(width: 0, height: 10)
+
+        backgroundView.addSubview(iconContainerView)
+        backgroundView.addSubview(titleLabel)
+
+        iconContainerView.backgroundColor = .clear
+        iconContainerView.layer.cornerRadius = 16
+        iconContainerView.layer.masksToBounds = true
+        iconContainerView.addSubview(iconView)
+
+        iconView.image = UIImage(systemName: "hand.raised.fill")
+        iconView.tintColor = .white
+        iconView.contentMode = .scaleAspectFit
+
+        titleLabel.text = "Help"
+        titleLabel.font = .systemFont(ofSize: 13, weight: .bold)
+        titleLabel.textColor = .white
+        titleLabel.textAlignment = .center
+        titleLabel.adjustsFontSizeToFitWidth = true
+        titleLabel.minimumScaleFactor = 0.86
+
+        pulseOuterView.snp.makeConstraints { make in
+            make.center.equalTo(backgroundView)
+            make.width.equalTo(backgroundView.snp.width).offset(10)
+            make.height.equalTo(backgroundView.snp.height).offset(8)
+        }
+
+        pulseMiddleView.snp.makeConstraints { make in
+            make.center.equalTo(backgroundView)
+            make.width.equalTo(backgroundView.snp.width).offset(6)
+            make.height.equalTo(backgroundView.snp.height).offset(4)
+        }
+
+        backgroundView.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(6)
+        }
+
+        iconContainerView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(8)
+            make.centerX.equalToSuperview()
+            make.size.equalTo(25)
+        }
+
+        iconView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.size.equalTo(20)
+        }
+
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalTo(iconContainerView.snp.bottom).offset(1)
+            make.left.right.equalToSuperview().inset(10)
+            make.bottom.lessThanOrEqualToSuperview().inset(7)
+        }
     }
 }
