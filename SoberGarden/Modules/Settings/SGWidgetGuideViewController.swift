@@ -13,9 +13,8 @@ final class SGWidgetGuideViewController: BaseViewController {
     private let closeButton = UIButton(type: .system)
 
     override func viewDidLoad() {
+        isCustomNavigationHidden = true
         super.viewDidLoad()
-        title = "Home Screen Widget"
-        
     }
 
     override func setupSubviews() {
@@ -31,6 +30,7 @@ final class SGWidgetGuideViewController: BaseViewController {
         closeButton.backgroundColor = UIColor.white.withAlphaComponent(0.9)
         closeButton.layer.cornerRadius = 18
         closeButton.layer.masksToBounds = true
+        closeButton.accessibilityLabel = "Close"
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
         
         closeButton.snp.makeConstraints { make in
@@ -38,11 +38,23 @@ final class SGWidgetGuideViewController: BaseViewController {
             make.left.equalToSuperview().offset(20)
             make.size.equalTo(36)
         }
+        view.bringSubviewToFront(closeButton)
     }
     
     @objc private func closeButtonTapped() {
-        dismiss(animated: true)
+        closeGuide()
     }
+
+    private func closeGuide() {
+        if presentingViewController != nil {
+            dismiss(animated: true)
+        } else if navigationController?.presentingViewController != nil {
+            navigationController?.dismiss(animated: true)
+        } else {
+            popCurrentController()
+        }
+    }
+
     private func setupLayout() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
@@ -50,10 +62,13 @@ final class SGWidgetGuideViewController: BaseViewController {
 
         scrollView.showsVerticalScrollIndicator = false
         scrollView.contentInsetAdjustmentBehavior = .never
+        scrollView.bounces = false
+        scrollView.alwaysBounceVertical = false
 
         scrollView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(54)
-            make.left.right.bottom.equalToSuperview()
+            make.left.right.equalToSuperview()
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
         }
 
         contentView.snp.makeConstraints { make in
@@ -252,6 +267,6 @@ final class SGWidgetGuideViewController: BaseViewController {
     }
 
     override func onNavigationBackPressed() {
-        dismiss(animated: true)
+        closeGuide()
     }
 }

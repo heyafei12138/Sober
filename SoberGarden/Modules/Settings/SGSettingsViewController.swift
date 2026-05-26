@@ -15,6 +15,7 @@ final class SGSettingsViewController: BaseViewController {
         title: "Settings",
         subtitle: "Manage reminders, privacy, and local data."
     )
+    private let subscriptionCardView = SGSettingsSubscriptionCardView()
     private let checkInStatsView = SGCheckInStatsView()
 
     private let privacyPolicyURL = URL(string: "https://sites.google.com/view/sober-privacy")!
@@ -27,6 +28,7 @@ final class SGSettingsViewController: BaseViewController {
 
     override func setupSubviews() {
         setupScrollView()
+        bindSubscriptionCard()
         reloadContent()
     }
 
@@ -73,7 +75,11 @@ final class SGSettingsViewController: BaseViewController {
         let settings = state.settings
 
         contentStackView.addArrangedSubview(introHeaderView)
-        contentStackView.setCustomSpacing(20, after: introHeaderView)
+        contentStackView.setCustomSpacing(16, after: introHeaderView)
+
+        subscriptionCardView.configure(isPlus: SGSubscriptionManager.shared.isPlus)
+        contentStackView.addArrangedSubview(subscriptionCardView)
+        contentStackView.setCustomSpacing(22, after: subscriptionCardView)
 
         let cleanStreakDays = habit.map {
             SGProgressCalculator.currentStreakDays(startDate: $0.startDate, now: Date())
@@ -184,6 +190,17 @@ final class SGSettingsViewController: BaseViewController {
         reasonsRow.configure(title: "Reasons", value: reasons, accessory: .none)
 
         return [editRow, startDateRow, costRow, timeRow, reasonsRow]
+    }
+
+    private func bindSubscriptionCard() {
+        subscriptionCardView.onPrimaryAction = { [weak self] in
+            self?.presentSubscriptionPaywall()
+        }
+    }
+
+    private func presentSubscriptionPaywall() {
+        let paywallViewController = SGSubscriptionPaywallViewController()
+        presentController(paywallViewController)
     }
 
     private func buildNotificationRows(settings: SoberGardenSettings) -> [SGSettingsRowView] {
@@ -519,5 +536,180 @@ final class SGSettingsViewController: BaseViewController {
         formatter.minimumFractionDigits = 0
         formatter.maximumFractionDigits = 2
         return formatter.string(from: NSNumber(value: value)) ?? "\(value)"
+    }
+}
+
+private final class SGSettingsSubscriptionCardView: UIControl {
+
+    private let gradientLayer = CAGradientLayer()
+    private let badgeBackgroundView = UIView()
+    private let badgeLabel = UILabel()
+    private let titleLabel = UILabel()
+    private let subtitleLabel = UILabel()
+    private let featureStackView = UIStackView()
+    private let actionButton = UIButton(type: .system)
+    private let bloomImageView = UIImageView(image: UIImage(named: GardenStage.flower.gardenImageName))
+
+    var onPrimaryAction: (() -> Void)?
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupView()
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupView()
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        gradientLayer.frame = bounds
+    }
+
+    func configure(isPlus: Bool) {
+        badgeLabel.text = isPlus ? "PLUS ACTIVE" : "SOBERGARDEN PLUS"
+        titleLabel.text = isPlus ? "Your Plus garden is active" : "Grow deeper with Plus"
+        subtitleLabel.text = isPlus
+            ? "Premium tracking and reflection tools are unlocked for this Apple ID."
+            : "Unlock richer trends, garden motivation, and more reflection space."
+        actionButton.setTitle(isPlus ? "Manage" : "View Plans", for: .normal)
+    }
+
+    private func setupView() {
+        clipsToBounds = false
+        layer.cornerRadius = 24
+        layer.cornerCurve = .continuous
+        layer.shadowColor = SGColor.textDark.cgColor
+        layer.shadowOpacity = 0.14
+        layer.shadowRadius = 18
+        layer.shadowOffset = CGSize(width: 0, height: 10)
+
+        backgroundColor = .clear
+        layer.masksToBounds = false
+
+        gradientLayer.colors = [
+            SGColor.primaryDark.cgColor,
+            UIColor.hexString("#789A55").cgColor,
+            UIColor.hexString("#E89B5C").cgColor
+        ]
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 1)
+        gradientLayer.cornerRadius = 24
+        layer.insertSublayer(gradientLayer, at: 0)
+
+        badgeBackgroundView.backgroundColor = UIColor.white.withAlphaComponent(0.16)
+        badgeBackgroundView.layer.cornerRadius = 13
+        badgeBackgroundView.layer.cornerCurve = .continuous
+
+        badgeLabel.font = .systemFont(ofSize: 11, weight: .heavy)
+        badgeLabel.textColor = UIColor.white.withAlphaComponent(0.92)
+        badgeLabel.textAlignment = .center
+
+        titleLabel.font = .systemFont(ofSize: 25, weight: .heavy)
+        titleLabel.textColor = .white
+        titleLabel.numberOfLines = 2
+        titleLabel.adjustsFontSizeToFitWidth = true
+        titleLabel.minimumScaleFactor = 0.82
+
+        subtitleLabel.font = .systemFont(ofSize: 14, weight: .semibold)
+        subtitleLabel.textColor = UIColor.white.withAlphaComponent(0.78)
+        subtitleLabel.numberOfLines = 0
+
+        featureStackView.axis = .horizontal
+        featureStackView.alignment = .fill
+        featureStackView.distribution = .fillProportionally
+        featureStackView.spacing = 8
+        ["Trends", "Garden", "Reflection"].forEach { feature in
+            featureStackView.addArrangedSubview(makeFeaturePill(text: feature))
+        }
+
+        actionButton.backgroundColor = .white
+        actionButton.setTitleColor(SGColor.primaryDark, for: .normal)
+        actionButton.titleLabel?.font = .systemFont(ofSize: 15, weight: .heavy)
+        actionButton.layer.cornerRadius = 18
+        actionButton.layer.cornerCurve = .continuous
+        actionButton.addTarget(self, action: #selector(handlePrimaryAction), for: .touchUpInside)
+
+        bloomImageView.contentMode = .scaleAspectFit
+        bloomImageView.alpha = 0.22
+
+        addTarget(self, action: #selector(handlePrimaryAction), for: .touchUpInside)
+
+        addSubview(bloomImageView)
+        addSubview(badgeBackgroundView)
+        badgeBackgroundView.addSubview(badgeLabel)
+        addSubview(titleLabel)
+        addSubview(subtitleLabel)
+        addSubview(featureStackView)
+        addSubview(actionButton)
+
+        bloomImageView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(10)
+            make.right.equalToSuperview().offset(-6)
+            make.width.height.equalTo(132)
+        }
+
+        badgeBackgroundView.snp.makeConstraints { make in
+            make.top.left.equalToSuperview().inset(18)
+        }
+
+        badgeLabel.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 7, left: 10, bottom: 7, right: 10))
+        }
+
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalTo(badgeBackgroundView.snp.bottom).offset(15)
+            make.left.right.equalToSuperview().inset(18)
+        }
+
+        subtitleLabel.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(8)
+            make.left.right.equalToSuperview().inset(18)
+        }
+
+        featureStackView.snp.makeConstraints { make in
+            make.top.equalTo(subtitleLabel.snp.bottom).offset(16)
+            make.left.equalToSuperview().offset(18)
+            make.right.lessThanOrEqualToSuperview().offset(-18)
+        }
+
+        actionButton.snp.makeConstraints { make in
+            make.top.equalTo(featureStackView.snp.bottom).offset(18)
+            make.left.equalToSuperview().offset(18)
+            make.bottom.equalToSuperview().offset(-18)
+            make.height.equalTo(38)
+            make.width.greaterThanOrEqualTo(104)
+        }
+    }
+
+    private func makeFeaturePill(text: String) -> UILabel {
+        let label = SGSettingsPaddingLabel()
+        label.text = text
+        label.font = .systemFont(ofSize: 11, weight: .heavy)
+        label.textColor = UIColor.white.withAlphaComponent(0.9)
+        label.backgroundColor = UIColor.white.withAlphaComponent(0.14)
+        label.layer.cornerRadius = 14
+        label.layer.cornerCurve = .continuous
+        label.clipsToBounds = true
+        return label
+    }
+
+    @objc private func handlePrimaryAction() {
+        onPrimaryAction?()
+    }
+}
+
+private final class SGSettingsPaddingLabel: UILabel {
+
+    var insets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+
+    override var intrinsicContentSize: CGSize {
+        let size = super.intrinsicContentSize
+        return CGSize(width: size.width + insets.left + insets.right, height: size.height + insets.top + insets.bottom)
+    }
+
+    override func drawText(in rect: CGRect) {
+        super.drawText(in: rect.inset(by: insets))
     }
 }

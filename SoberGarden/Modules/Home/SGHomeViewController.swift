@@ -212,11 +212,9 @@ final class SGHomeViewController: BaseViewController {
         rightActionContainerView.addSubview(navigationShareButton)
 
         navigationShareButton.setImage(UIImage(systemName: "paperplane.fill"), for: .normal)
-        navigationShareButton.tintColor = SGColor.primaryDark
-        navigationShareButton.backgroundColor = UIColor.white.withAlphaComponent(0.72)
-        navigationShareButton.layer.cornerRadius = 16
-        navigationShareButton.layer.masksToBounds = true
-        navigationShareButton.accessibilityLabel = "Share progress"
+        
+        navigationShareButton.tintColor = SGColor.primaryDark.withAlphaComponent(0.7)
+
         navigationShareButton.addTarget(self, action: #selector(handleNavigationShareTapped), for: .touchUpInside)
 
         navigationShareButton.snp.makeConstraints { make in

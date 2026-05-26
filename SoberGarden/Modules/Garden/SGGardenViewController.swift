@@ -4,6 +4,8 @@
 //
 
 import UIKit
+import FLAnimatedImage
+import ImageIO
 
 /// 成长花园：阶段插画、进度、已解锁徽章
 final class SGGardenViewController: BaseViewController {
@@ -29,15 +31,32 @@ final class SGGardenViewController: BaseViewController {
 
     private let copyCardView = SGCardView()
     private let copyLabel = UILabel()
+    private let subscriptionOverlayView = SGGardenSubscriptionOverlayView()
 
     override func viewDidLoad() {
         isCustomNavigationHidden = true
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleSubscriptionEntitlementChanged),
+            name: SGSubscriptionManager.entitlementDidChangeNotification,
+            object: nil
+        )
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         renderContent()
+        updateSubscriptionOverlayVisibility()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        updateSubscriptionOverlayVisibility()
     }
 
     override func bindViewModel() {
@@ -51,6 +70,7 @@ final class SGGardenViewController: BaseViewController {
         setupGrowthPath()
         setupBadgeGrid()
         setupCopyCard()
+        setupSubscriptionOverlay()
         renderContent()
     }
 
@@ -215,6 +235,20 @@ final class SGGardenViewController: BaseViewController {
         contentStackView.addArrangedSubview(copyCardView)
     }
 
+    private func setupSubscriptionOverlay() {
+        subscriptionOverlayView.onSubscribeTapped = { [weak self] in
+            let paywallViewController = SGSubscriptionPaywallViewController()
+            self?.presentController(paywallViewController)
+        }
+        view.addSubview(subscriptionOverlayView)
+        subscriptionOverlayView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(18)
+            make.left.right.equalToSuperview()
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-CustomTabBar.barHeight - 12)
+        }
+        updateSubscriptionOverlayVisibility()
+    }
+
     private func renderContent() {
         let state = SoberGardenStore.shared.state
         let habit = state.habit
@@ -253,6 +287,15 @@ final class SGGardenViewController: BaseViewController {
         copyLabel.text = growthCopy(cleanDays: cleanDays, state: state)
     }
 
+    private func updateSubscriptionOverlayVisibility() {
+        let shouldHideOverlay = SGSubscriptionManager.shared.isPlus
+        subscriptionOverlayView.isHidden = shouldHideOverlay
+        subscriptionOverlayView.setAnimationActive(!shouldHideOverlay)
+        if shouldHideOverlay == false {
+            view.bringSubviewToFront(subscriptionOverlayView)
+        }
+    }
+
     private func previousMilestoneDay(before day: Int) -> Int {
         Milestone.defaultMilestones
             .last { $0.day < day }?
@@ -286,6 +329,194 @@ final class SGGardenViewController: BaseViewController {
         previewViewController.popoverPresentationController?.sourceView = shareButton
         previewViewController.popoverPresentationController?.sourceRect = shareButton.bounds
         present(previewViewController, animated: true)
+    }
+
+    @objc private func handleSubscriptionEntitlementChanged() {
+        updateSubscriptionOverlayVisibility()
+    }
+}
+
+private final class SGGardenSubscriptionOverlayView: UIView {
+
+    var onSubscribeTapped: (() -> Void)?
+
+    private let posterImageView = UIImageView()
+    private let animatedImageView = FLAnimatedImageView()
+    private let tintOverlayView = UIView()
+    private let buttonWrapView = UIView()
+    private let subscribeButton = UIButton(type: .system)
+    private var shouldPlayAnimation = false
+
+    override var isHidden: Bool {
+        didSet {
+            syncAnimationPlayback()
+        }
+    }
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupView()
+        loadAnimatedBackground()
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupView()
+        loadAnimatedBackground()
+    }
+
+    func setAnimationActive(_ isActive: Bool) {
+        shouldPlayAnimation = isActive
+        syncAnimationPlayback()
+    }
+
+    override func didMoveToWindow() {
+        super.didMoveToWindow()
+        syncAnimationPlayback()
+    }
+
+    private func syncAnimationPlayback() {
+        guard shouldPlayAnimation, isHidden == false, window != nil else {
+            animatedImageView.stopAnimating()
+            posterImageView.stopAnimating()
+            return
+        }
+
+        if animatedImageView.animatedImage != nil, animatedImageView.isAnimating == false {
+            animatedImageView.startAnimating()
+        }
+
+        if let animationImages = posterImageView.animationImages,
+           animationImages.isEmpty == false,
+           posterImageView.isAnimating == false {
+            posterImageView.startAnimating()
+        }
+    }
+
+    private func setupView() {
+        clipsToBounds = true
+        accessibilityViewIsModal = false
+
+        posterImageView.contentMode = .scaleAspectFill
+        posterImageView.clipsToBounds = true
+
+        animatedImageView.contentMode = .scaleAspectFill
+        animatedImageView.clipsToBounds = true
+        animatedImageView.runLoopMode = .common
+
+        tintOverlayView.backgroundColor = UIColor.white.withAlphaComponent(0.32)
+        tintOverlayView.isUserInteractionEnabled = false
+
+        buttonWrapView.backgroundColor = UIColor.white.withAlphaComponent(0.34)
+        buttonWrapView.layer.cornerRadius = 26
+        buttonWrapView.layer.cornerCurve = .continuous
+        buttonWrapView.layer.shadowColor = SGColor.textDark.cgColor
+        buttonWrapView.layer.shadowOpacity = 0.18
+        buttonWrapView.layer.shadowRadius = 22
+        buttonWrapView.layer.shadowOffset = CGSize(width: 0, height: 12)
+
+        subscribeButton.setTitle("Unlock Garden Plus", for: .normal)
+        subscribeButton.setImage(UIImage(systemName: "leaf.fill"), for: .normal)
+        subscribeButton.tintColor = .white
+        subscribeButton.titleLabel?.font = .systemFont(ofSize: 17, weight: .heavy)
+        subscribeButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        subscribeButton.titleLabel?.minimumScaleFactor = 0.82
+        subscribeButton.backgroundColor = SGColor.primaryDark
+        subscribeButton.layer.cornerRadius = 22
+        subscribeButton.layer.cornerCurve = .continuous
+        subscribeButton.layer.masksToBounds = true
+        subscribeButton.semanticContentAttribute = .forceLeftToRight
+        subscribeButton.accessibilityLabel = "Unlock Garden Plus"
+        subscribeButton.addTarget(self, action: #selector(handleSubscribeTapped), for: .touchUpInside)
+
+        addSubview(posterImageView)
+        addSubview(animatedImageView)
+        addSubview(tintOverlayView)
+        addSubview(buttonWrapView)
+        buttonWrapView.addSubview(subscribeButton)
+
+        posterImageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+
+        animatedImageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+
+        tintOverlayView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+
+        buttonWrapView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-74)
+            make.left.greaterThanOrEqualToSuperview().offset(34)
+            make.right.lessThanOrEqualToSuperview().offset(-34)
+            make.height.equalTo(64)
+        }
+
+        subscribeButton.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(6)
+            make.width.greaterThanOrEqualTo(218)
+        }
+    }
+
+    private func loadAnimatedBackground() {
+        guard let url = Bundle.main.url(forResource: "graden", withExtension: "gif"),
+              let data = try? Data(contentsOf: url) else {
+            posterImageView.image = UIImage(named: GardenStage.flower.gardenImageName)
+            return
+        }
+
+        if let fallback = Self.makeAnimatedFallbackImage(from: data) {
+            posterImageView.image = fallback.poster
+            posterImageView.animationImages = fallback.frames
+            posterImageView.animationDuration = fallback.duration
+            posterImageView.animationRepeatCount = 0
+        } else {
+            posterImageView.image = UIImage(contentsOfFile: url.path)
+        }
+
+        if let animatedImage = FLAnimatedImage(animatedGIFData: data) {
+            animatedImageView.animatedImage = animatedImage
+        }
+        syncAnimationPlayback()
+    }
+
+    @objc private func handleSubscribeTapped() {
+        onSubscribeTapped?()
+    }
+
+    private static func makeAnimatedFallbackImage(from data: Data) -> (poster: UIImage, frames: [UIImage], duration: TimeInterval)? {
+        guard let source = CGImageSourceCreateWithData(data as CFData, nil) else { return nil }
+
+        let frameCount = CGImageSourceGetCount(source)
+        guard frameCount > 1 else { return nil }
+
+        var frames: [UIImage] = []
+        frames.reserveCapacity(frameCount)
+        var duration: TimeInterval = 0
+
+        for index in 0..<frameCount {
+            guard let cgImage = CGImageSourceCreateImageAtIndex(source, index, nil) else { continue }
+            frames.append(UIImage(cgImage: cgImage, scale: UIScreen.main.scale, orientation: .up))
+            duration += frameDelay(at: index, source: source)
+        }
+
+        guard let poster = frames.first else { return nil }
+        return (poster, frames, max(duration, 0.1))
+    }
+
+    private static func frameDelay(at index: Int, source: CGImageSource) -> TimeInterval {
+        guard let properties = CGImageSourceCopyPropertiesAtIndex(source, index, nil) as? [CFString: Any],
+              let gifProperties = properties[kCGImagePropertyGIFDictionary] as? [CFString: Any] else {
+            return 0.1
+        }
+
+        let unclampedDelay = gifProperties[kCGImagePropertyGIFUnclampedDelayTime] as? TimeInterval
+        let clampedDelay = gifProperties[kCGImagePropertyGIFDelayTime] as? TimeInterval
+        let delay = unclampedDelay ?? clampedDelay ?? 0.1
+        return delay < 0.02 ? 0.1 : delay
     }
 }
 

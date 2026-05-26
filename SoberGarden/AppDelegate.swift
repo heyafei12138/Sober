@@ -14,6 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         SGNotificationService.shared.configure()
+        SGSubscriptionManager.shared.start()
         SGNotificationService.shared.rescheduleNotifications()
         #if DEBUG
         if ProcessInfo.processInfo.arguments.contains("-SGScheduleTestNotification") {
