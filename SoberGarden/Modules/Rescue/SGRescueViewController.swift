@@ -109,6 +109,7 @@ final class SGRescueViewController: BaseViewController {
 
     override func viewDidLoad() {
         isCustomNavigationHidden = true
+        showsRightNavigationActions = true
         super.viewDidLoad()
     }
 

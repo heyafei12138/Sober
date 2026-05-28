@@ -28,6 +28,14 @@ extension UIViewController {
         }
         present(target, animated: true)
     }
+
+    /// 订阅功能访问拦截。返回 true 时继续执行功能；非 Plus 用户会进入订阅页。
+    @discardableResult
+    func requirePlusAccess() -> Bool {
+        guard SGSubscriptionManager.shared.isPlus == false else { return true }
+        presentController(SGSubscriptionPaywallViewController())
+        return false
+    }
     
     // MARK: - Push
     

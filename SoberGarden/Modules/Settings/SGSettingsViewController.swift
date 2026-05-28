@@ -26,9 +26,17 @@ final class SGSettingsViewController: BaseViewController {
 //        title = "Settings"
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        reloadContent()
+    }
+
     override func setupSubviews() {
         setupScrollView()
         bindSubscriptionCard()
+        checkInStatsView.onPremiumTap = { [weak self] in
+            self?.requirePlusAccess()
+        }
         reloadContent()
     }
 
@@ -88,6 +96,7 @@ final class SGSettingsViewController: BaseViewController {
             cleanStreakDays: cleanStreakDays,
             checkInStreakDays: state.checkIn.checkInStreakDays
         )
+        checkInStatsView.setLocked(!SGSubscriptionManager.shared.isPlus)
         contentStackView.addArrangedSubview(checkInStatsView)
 
         contentStackView.addArrangedSubview(makeSectionCard(
@@ -189,7 +198,21 @@ final class SGSettingsViewController: BaseViewController {
         let reasonsRow = SGSettingsRowView()
         reasonsRow.configure(title: "Reasons", value: reasons, accessory: .none)
 
-        return [editRow, startDateRow, costRow, timeRow, reasonsRow]
+        let additionalHabitRow = SGSettingsRowView()
+        additionalHabitRow.configure(
+            title: "Additional habits",
+            subtitle: "Track more than one recovery goal with Plus.",
+            value: "Plus",
+            accessory: .disclosure
+        )
+        additionalHabitRow.onTap = { [weak self] in
+            guard let self else { return }
+            if self.requirePlusAccess() {
+                self.showComingSoonAlert(title: "Coming soon", message: "Multiple habit tracking will be available in a later build.")
+            }
+        }
+
+        return [editRow, startDateRow, costRow, timeRow, reasonsRow, additionalHabitRow]
     }
 
     private func bindSubscriptionCard() {
@@ -220,10 +243,10 @@ final class SGSettingsViewController: BaseViewController {
         milestoneRow.configure(
             title: "Milestone notifications",
             subtitle: "Celebrate important streak points.",
-            accessory: .toggle(settings.milestoneNotificationsEnabled)
+            accessory: .toggle(SGSubscriptionManager.shared.isPlus && settings.milestoneNotificationsEnabled)
         )
         milestoneRow.onToggleChanged = { [weak self] isOn in
-            self?.updateNotificationSetting(isOn: isOn) { settings in
+            self?.updatePremiumNotificationSetting(isOn: isOn) { settings in
                 settings.milestoneNotificationsEnabled = isOn
             }
         }
@@ -232,10 +255,10 @@ final class SGSettingsViewController: BaseViewController {
         nightReminder.configure(
             title: "Night reminder",
             subtitle: "A softer nudge if the evening gets hard.",
-            accessory: .toggle(settings.nightReminderEnabled)
+            accessory: .toggle(SGSubscriptionManager.shared.isPlus && settings.nightReminderEnabled)
         )
         nightReminder.onToggleChanged = { [weak self] isOn in
-            self?.updateNotificationSetting(isOn: isOn) { settings in
+            self?.updatePremiumNotificationSetting(isOn: isOn) { settings in
                 settings.nightReminderEnabled = isOn
             }
         }
@@ -244,10 +267,10 @@ final class SGSettingsViewController: BaseViewController {
         rescueReminder.configure(
             title: "Rescue delay reminder",
             subtitle: "Remind me when I choose to wait.",
-            accessory: .toggle(settings.rescueDelayReminderEnabled)
+            accessory: .toggle(SGSubscriptionManager.shared.isPlus && settings.rescueDelayReminderEnabled)
         )
         rescueReminder.onToggleChanged = { [weak self] isOn in
-            self?.updateNotificationSetting(isOn: isOn) { settings in
+            self?.updatePremiumNotificationSetting(isOn: isOn) { settings in
                 settings.rescueDelayReminderEnabled = isOn
             }
         }
@@ -273,6 +296,20 @@ final class SGSettingsViewController: BaseViewController {
 
             SoberGardenStore.shared.updateSettings(update)
         }
+    }
+
+    private func updatePremiumNotificationSetting(isOn: Bool, update: @escaping (inout SoberGardenSettings) -> Void) {
+        guard isOn else {
+            updateNotificationSetting(isOn: false, update: update)
+            return
+        }
+
+        guard requirePlusAccess() else {
+            reloadContent()
+            return
+        }
+
+        updateNotificationSetting(isOn: true, update: update)
     }
 
     private func buildPrivacyRows(settings: SoberGardenSettings) -> [SGSettingsRowView] {

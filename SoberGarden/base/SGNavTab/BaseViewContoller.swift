@@ -9,6 +9,7 @@ import UIKit
 import SafariServices
 
 open class BaseViewController: UIViewController {
+    private let proBadgeAnimationKey = "sg.vipIcon.breathe"
     
     // MARK: - Navigation
     
@@ -42,7 +43,31 @@ open class BaseViewController: UIViewController {
         view.isHidden = true
         return view
     }()
-    
+
+    /// 右上角操作栈
+    open lazy var rightActionStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        stackView.distribution = .fill
+        stackView.spacing = 10
+        return stackView
+    }()
+
+    /// Plus 订阅入口
+    open lazy var proBadgeButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(named: "vip_icon"), for: .normal)
+        button.contentHorizontalAlignment = .fill
+        button.contentVerticalAlignment = .fill
+        button.imageView?.contentMode = .scaleAspectFit
+        button.layer.shadowColor = UIColor.hexString("#F2A72E").cgColor
+        button.layer.shadowOpacity = 0.22
+        button.layer.shadowRadius = 7
+        button.layer.shadowOffset = CGSize(width: 0, height: 4)
+        button.accessibilityLabel = "SoberGarden Plus"
+        return button
+    }()
 
     
     /// 设置按钮
@@ -75,6 +100,12 @@ open class BaseViewController: UIViewController {
     open override func viewDidLoad() {
         super.viewDidLoad()
         setupPageAppearance()
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleBaseSubscriptionEntitlementChanged),
+            name: SGSubscriptionManager.entitlementDidChangeNotification,
+            object: nil
+        )
         if enablesTapToDismissKeyboard {
             enableTapToDismissKeyboard()
         }
@@ -90,6 +121,11 @@ open class BaseViewController: UIViewController {
         refreshRightNavigationActionsIfNeeded()
         bringNavigationChromeToFrontIfNeeded()
     }
+
+    open override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        stopProBadgeAnimation()
+    }
     
     open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -98,6 +134,7 @@ open class BaseViewController: UIViewController {
     }
     
     deinit {
+        NotificationCenter.default.removeObserver(self)
         debugPrint("deinit controller >>> \(self)")
     }
    
@@ -136,26 +173,32 @@ extension BaseViewController {
         
         
         view.addSubview(rightActionContainerView)
-       
-        rightActionContainerView.addSubview(settingsButton)
+        rightActionContainerView.addSubview(rightActionStackView)
+        rightActionStackView.addArrangedSubview(proBadgeButton)
+        rightActionStackView.addArrangedSubview(settingsButton)
         
         rightActionContainerView.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-16)
-            make.top.equalToSuperview().offset(kStatusBarHeight + 5)
-            make.height.equalTo(36)
+            make.top.equalToSuperview().offset(kStatusBarHeight + 2)
+            make.height.equalTo(50)
         }
         
-       
-        
+        rightActionStackView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+
+        proBadgeButton.snp.makeConstraints { make in
+            make.height.equalTo(25)
+            make.width.equalTo(63)
+        }
+
         settingsButton.snp.makeConstraints { make in
-            make.left.equalToSuperview()
-            make.top.bottom.right.equalToSuperview()
             make.width.height.equalTo(32)
         }
         
+        proBadgeButton.addTarget(self, action: #selector(onProBadgePressed), for: .touchUpInside)
         settingsButton.addTarget(self, action: #selector(onSettingsButtonPressed), for: .touchUpInside)
-        
-       
+        refreshRightNavigationActionsIfNeeded()
     }
     open func refreshRightNavigationActionsIfNeeded() {
         
@@ -164,7 +207,10 @@ extension BaseViewController {
             return
         }
         
-       
+        proBadgeButton.isHidden = !allowsShowProBadge || SGSubscriptionManager.shared.isPlus
+        settingsButton.isHidden = !showsSettingsButton
+        rightActionContainerView.isHidden = rightActionStackView.arrangedSubviews.allSatisfy { $0.isHidden }
+        updateProBadgeAnimation()
     }
     @objc open func onSettingsButtonPressed() {
         
@@ -172,7 +218,38 @@ extension BaseViewController {
     }
 
     @objc open func onProBadgePressed() {
-        print("点击了 Pro Badge")
+        guard SGSubscriptionManager.shared.isPlus == false else { return }
+        presentController(SGSubscriptionPaywallViewController())
+    }
+
+    @objc private func handleBaseSubscriptionEntitlementChanged() {
+        refreshRightNavigationActionsIfNeeded()
+    }
+
+    private func updateProBadgeAnimation() {
+        if proBadgeButton.isHidden || rightActionContainerView.isHidden {
+            stopProBadgeAnimation()
+        } else {
+            startProBadgeAnimationIfNeeded()
+        }
+    }
+
+    private func startProBadgeAnimationIfNeeded() {
+        guard proBadgeButton.layer.animation(forKey: proBadgeAnimationKey) == nil else { return }
+
+        let scaleAnimation = CABasicAnimation(keyPath: "transform.scale")
+        scaleAnimation.fromValue = 1
+        scaleAnimation.toValue = 1.06
+        scaleAnimation.duration = 1.35
+        scaleAnimation.autoreverses = true
+        scaleAnimation.repeatCount = .infinity
+        scaleAnimation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+
+        proBadgeButton.layer.add(scaleAnimation, forKey: proBadgeAnimationKey)
+    }
+
+    private func stopProBadgeAnimation() {
+        proBadgeButton.layer.removeAnimation(forKey: proBadgeAnimationKey)
     }
     private func updateInteractivePopGestureState() {
         guard let gesture = navigationController?.interactivePopGestureRecognizer else { return }
@@ -205,8 +282,9 @@ extension BaseViewController {
 
     /// 子类在 `setupSubviews` 里铺满 `scrollView` 时会把自定义导航栏盖住，需将导航与右上角操作区提到最前，否则返回按钮无法响应。
     private func bringNavigationChromeToFrontIfNeeded() {
-        guard isCustomNavigationHidden == false else { return }
-        view.bringSubviewToFront(navigationHeaderView)
+        if isCustomNavigationHidden == false {
+            view.bringSubviewToFront(navigationHeaderView)
+        }
         if showsRightNavigationActions, !rightActionContainerView.isHidden {
             view.bringSubviewToFront(rightActionContainerView)
         }

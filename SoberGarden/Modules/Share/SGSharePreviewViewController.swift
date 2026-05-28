@@ -177,6 +177,7 @@ final class SGSharePreviewViewController: UIViewController {
     }
 
     @objc private func handleSaveTapped() {
+        guard requirePlusAccess() else { return }
         saveButton.isEnabled = false
         saveImageToPhotoLibrary()
     }
@@ -186,6 +187,7 @@ final class SGSharePreviewViewController: UIViewController {
     }
 
     @objc private func handleShareTapped() {
+        guard requirePlusAccess() else { return }
         let activity = UIActivityViewController(activityItems: package.activityItems, applicationActivities: nil)
         activity.popoverPresentationController?.sourceView = shareButton
         activity.popoverPresentationController?.sourceRect = shareButton.bounds

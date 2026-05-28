@@ -24,7 +24,7 @@ final class SGHomeViewController: BaseViewController {
     private let savingsView = SGSavedStatsView()
     private let milestoneCardView = SGMilestoneCardView()
     private let gardenPreviewView = SGGardenPreviewView()
-    private let navigationShareButton = UIButton(type: .system)
+    private let logoImageView = UIImageView(image: UIImage(named: "logo_icon"))
     private let shareProgressControl = SGHomeActionRowControl(
         title: "Share Progress",
         subtitle: "Make your progress easy to share.",
@@ -37,12 +37,13 @@ final class SGHomeViewController: BaseViewController {
     override func viewDidLoad() {
         isCustomNavigationHidden = true
         showsRightNavigationActions = true
+        showsSettingsButton = true
         super.viewDidLoad()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        rightActionContainerView.isHidden = false
+        refreshRightNavigationActionsIfNeeded()
         renderContent()
         rescuePillControl.startBreathingAnimation()
     }
@@ -67,6 +68,7 @@ final class SGHomeViewController: BaseViewController {
 
     override func setupSubviews() {
         setupScrollView()
+        setupLogoView()
         setupHeader()
         setupCoachCard()
         setupTodayCheckInCard()
@@ -76,7 +78,6 @@ final class SGHomeViewController: BaseViewController {
         setupGardenPreview()
         setupShareSection()
         setupFooter()
-        setupNavigationShareAction()
         renderContent()
     }
 
@@ -110,6 +111,18 @@ final class SGHomeViewController: BaseViewController {
         contentStackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+    }
+
+    private func setupLogoView() {
+        view.addSubview(logoImageView)
+        logoImageView.contentMode = .scaleAspectFit
+        logoImageView.accessibilityLabel = "SoberGarden"
+        logoImageView.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(20)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(1)
+            make.size.equalTo(CGSizeMake(150, 25))
+        }
+        view.bringSubviewToFront(logoImageView)
     }
 
     private func setupHeader() {
@@ -206,27 +219,6 @@ final class SGHomeViewController: BaseViewController {
             self.shareProgress(sourceView: self.shareProgressControl)
         }
         contentStackView.addArrangedSubview(shareProgressControl)
-    }
-
-    private func setupNavigationShareAction() {
-        rightActionContainerView.addSubview(navigationShareButton)
-
-        navigationShareButton.setImage(UIImage(systemName: "paperplane.fill"), for: .normal)
-        
-        navigationShareButton.tintColor = SGColor.primaryDark.withAlphaComponent(0.7)
-
-        navigationShareButton.addTarget(self, action: #selector(handleNavigationShareTapped), for: .touchUpInside)
-
-        navigationShareButton.snp.makeConstraints { make in
-            make.left.top.bottom.equalToSuperview()
-            make.width.height.equalTo(32)
-            make.right.equalTo(settingsButton.snp.left).offset(-10)
-        }
-
-        settingsButton.snp.remakeConstraints { make in
-            make.top.bottom.right.equalToSuperview()
-            make.width.height.equalTo(32)
-        }
     }
 
     private func setupFooter() {
@@ -433,10 +425,6 @@ final class SGHomeViewController: BaseViewController {
 
     @objc private func handleRescueButtonTapped() {
         (tabBarController as? MainTabBarController)?.setSelectedIndex(1)
-    }
-
-    @objc private func handleNavigationShareTapped() {
-        shareProgress(sourceView: navigationShareButton)
     }
 
     private func setRescuePillHiddenForScroll(_ hidden: Bool) {

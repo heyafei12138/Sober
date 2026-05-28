@@ -22,6 +22,7 @@ final class SGJournalViewController: BaseViewController {
 
     override func viewDidLoad() {
         isCustomNavigationHidden = true
+        showsRightNavigationActions = true
         super.viewDidLoad()
     }
 
@@ -76,6 +77,9 @@ final class SGJournalViewController: BaseViewController {
         checkInView.onSave = { [weak self] mood, urgeLevel, triggers, note in
             self?.saveTodayEntry(mood: mood, urgeLevel: urgeLevel, triggers: triggers, note: note)
         }
+        checkInStatsView.onPremiumTap = { [weak self] in
+            self?.requirePlusAccess()
+        }
 
         contentStackView.addArrangedSubview(headerView)
         contentStackView.addArrangedSubview(checkInStatsView)
@@ -94,6 +98,7 @@ final class SGJournalViewController: BaseViewController {
             cleanStreakDays: cleanStreakDays,
             checkInStreakDays: state.checkIn.checkInStreakDays
         )
+        checkInStatsView.setLocked(!SGSubscriptionManager.shared.isPlus)
         checkInView.configure(entry: todayEntry(in: entries))
         renderHistory(entries)
     }
@@ -130,6 +135,11 @@ final class SGJournalViewController: BaseViewController {
             return
         }
 
+        guard SGSubscriptionManager.shared.isPlus else {
+            historyStackView.addArrangedSubview(makePremiumHistoryGateView(entryCount: entries.count))
+            return
+        }
+
         entries.prefix(7).forEach { entry in
             let cell = SGJournalHistoryCell()
             cell.configure(entry: entry)
@@ -148,5 +158,54 @@ final class SGJournalViewController: BaseViewController {
         label.numberOfLines = 0
         label.text = "No entries yet. Save today's check-in to start your journal."
         return label
+    }
+
+    private func makePremiumHistoryGateView(entryCount: Int) -> UIControl {
+        let control = UIControl()
+        control.backgroundColor = UIColor.hexString("#FBFDF8")
+        control.layer.cornerRadius = 16
+        control.layer.masksToBounds = true
+        control.addTarget(self, action: #selector(handlePremiumHistoryTapped), for: .touchUpInside)
+
+        let iconView = UIImageView(image: UIImage(named: "vip_icon"))
+        iconView.contentMode = .scaleAspectFit
+
+        let titleLabel = UILabel()
+        titleLabel.text = "Unlock journal history"
+        titleLabel.font = .systemFont(ofSize: 17, weight: .bold)
+        titleLabel.textColor = SGColor.textDark
+
+        let subtitleLabel = UILabel()
+        subtitleLabel.text = "\(entryCount) saved \(entryCount == 1 ? "entry" : "entries") are ready with Plus."
+        subtitleLabel.font = .systemFont(ofSize: 14, weight: .medium)
+        subtitleLabel.textColor = SGColor.textSecondary
+        subtitleLabel.numberOfLines = 0
+
+        let textStackView = UIStackView(arrangedSubviews: [titleLabel, subtitleLabel])
+        textStackView.axis = .vertical
+        textStackView.alignment = .fill
+        textStackView.spacing = 5
+        textStackView.isUserInteractionEnabled = false
+
+        control.addSubview(iconView)
+        control.addSubview(textStackView)
+
+        iconView.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(16)
+            make.centerY.equalToSuperview()
+            make.width.height.equalTo(44)
+        }
+
+        textStackView.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview().inset(16)
+            make.left.equalTo(iconView.snp.right).offset(12)
+            make.right.equalToSuperview().inset(16)
+        }
+
+        return control
+    }
+
+    @objc private func handlePremiumHistoryTapped() {
+        requirePlusAccess()
     }
 }

@@ -57,6 +57,7 @@ final class SGNotificationService: NSObject {
         center.removePendingNotificationRequests(withIdentifiers: Identifier.scheduledIdentifiers)
 
         guard state.habit != nil else { return }
+        let isPlus = SGSubscriptionManager.shared.isPlus
 
         center.getNotificationSettings { [weak self] settings in
             guard let self else { return }
@@ -65,6 +66,8 @@ final class SGNotificationService: NSObject {
             if state.settings.dailyReminderEnabled {
                 self.scheduleDailyReminder(time: state.settings.dailyReminderTime)
             }
+
+            guard isPlus else { return }
 
             if state.settings.nightReminderEnabled {
                 self.scheduleNightReminder(time: state.settings.nightReminderTime)
@@ -85,6 +88,7 @@ final class SGNotificationService: NSObject {
 
     func scheduleRescueDelayReminder(after timeInterval: TimeInterval = 10 * 60) {
         guard SoberGardenStore.shared.state.settings.rescueDelayReminderEnabled else { return }
+        guard SGSubscriptionManager.shared.isPlus else { return }
 
         let content = UNMutableNotificationContent()
         content.title = "Check in with yourself"

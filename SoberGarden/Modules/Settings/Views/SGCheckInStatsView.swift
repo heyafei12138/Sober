@@ -7,6 +7,8 @@ import UIKit
 
 final class SGCheckInStatsView: UIView {
 
+    var onPremiumTap: (() -> Void)?
+
     private let cardView = SGCardView()
     private let stackView = UIStackView()
     private let headerView = SGSectionHeaderView(
@@ -24,6 +26,11 @@ final class SGCheckInStatsView: UIView {
         accentColor: SGColor.flower,
         surfaceColor: UIColor.hexString("#FFF8EE")
     )
+    private let premiumOverlayControl = UIControl()
+    private let premiumOverlayStackView = UIStackView()
+    private let premiumIconView = UIImageView(image: UIImage(named: "vip_icon"))
+    private let premiumTitleLabel = UILabel()
+    private let premiumSubtitleLabel = UILabel()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -42,6 +49,10 @@ final class SGCheckInStatsView: UIView {
         } else {
             cleanRow.configure(value: "Not set")
         }
+    }
+
+    func setLocked(_ isLocked: Bool) {
+        premiumOverlayControl.isHidden = !isLocked
     }
 
     private func setupView() {
@@ -63,9 +74,39 @@ final class SGCheckInStatsView: UIView {
 
         addSubview(cardView)
         cardView.contentView.addSubview(stackView)
+        cardView.contentView.addSubview(premiumOverlayControl)
 
         stackView.addArrangedSubview(headerView)
         stackView.addArrangedSubview(rowsStackView)
+
+        premiumOverlayControl.isHidden = true
+        premiumOverlayControl.backgroundColor = UIColor.hexString("#FBFDF8").withAlphaComponent(0.92)
+        premiumOverlayControl.addTarget(self, action: #selector(handlePremiumOverlayTapped), for: .touchUpInside)
+
+        premiumOverlayStackView.axis = .horizontal
+        premiumOverlayStackView.alignment = .center
+        premiumOverlayStackView.spacing = 12
+        premiumOverlayStackView.isUserInteractionEnabled = false
+
+        premiumIconView.contentMode = .scaleAspectFit
+
+        premiumTitleLabel.text = "Unlock Plus stats"
+        premiumTitleLabel.font = .systemFont(ofSize: 16, weight: .bold)
+        premiumTitleLabel.textColor = SGColor.textDark
+
+        premiumSubtitleLabel.text = "See streak context and check-in momentum."
+        premiumSubtitleLabel.font = .systemFont(ofSize: 13, weight: .medium)
+        premiumSubtitleLabel.textColor = SGColor.textSecondary
+        premiumSubtitleLabel.numberOfLines = 0
+
+        let textStackView = UIStackView(arrangedSubviews: [premiumTitleLabel, premiumSubtitleLabel])
+        textStackView.axis = .vertical
+        textStackView.alignment = .fill
+        textStackView.spacing = 3
+
+        premiumOverlayControl.addSubview(premiumOverlayStackView)
+        premiumOverlayStackView.addArrangedSubview(premiumIconView)
+        premiumOverlayStackView.addArrangedSubview(textStackView)
 
         cardView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -74,6 +115,23 @@ final class SGCheckInStatsView: UIView {
         stackView.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(16)
         }
+
+        premiumOverlayControl.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+
+        premiumOverlayStackView.snp.makeConstraints { make in
+            make.left.right.equalToSuperview().inset(16)
+            make.centerY.equalToSuperview()
+        }
+
+        premiumIconView.snp.makeConstraints { make in
+            make.width.height.equalTo(42)
+        }
+    }
+
+    @objc private func handlePremiumOverlayTapped() {
+        onPremiumTap?()
     }
 }
 
