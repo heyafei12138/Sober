@@ -50,11 +50,11 @@ final class SGGrowthPathView: UIView {
     }
 
     private func setupView() {
-        titleLabel.text = "Growth Path"
+        titleLabel.text = "garden.path.title".localized()
         titleLabel.font = .systemFont(ofSize: 18, weight: .semibold)
         titleLabel.textColor = SGColor.textDark
 
-        subtitleLabel.text = "Each milestone adds something visible to your garden."
+        subtitleLabel.text = "garden.path.subtitle".localized()
         subtitleLabel.font = .systemFont(ofSize: 14, weight: .medium)
         subtitleLabel.textColor = SGColor.textSecondary
         subtitleLabel.numberOfLines = 0
@@ -147,7 +147,7 @@ private final class SGGrowthPathRowView: UIView {
 
     func configure(milestone: Milestone, state: State, connector: ConnectorState) {
         titleLabel.text = milestone.title
-        dayLabel.text = "Day \(milestone.day)"
+        dayLabel.text = "garden.dayFormat".localizedFormat(milestone.day)
         rewardLabel.text = shortRewardText(for: milestone.gardenStage)
         statusLabel.text = statusText(for: state)
         thumbnailView.configure(imageName: "Day\(milestone.day)", state: state.thumbnailState)
@@ -264,34 +264,34 @@ private final class SGGrowthPathRowView: UIView {
     private func shortRewardText(for stage: GardenStage) -> String {
         switch stage {
         case .seed:
-            return "Seed planted"
+            return "garden.shortReward.seed".localized()
         case .sprout:
-            return "Tiny sprout"
+            return "garden.shortReward.sprout".localized()
         case .youngPlant:
-            return "Fresh leaves"
+            return "garden.shortReward.youngPlant".localized()
         case .flower:
-            return "First flower"
+            return "garden.shortReward.flower".localized()
         case .gardenBed:
-            return "Flower bed"
+            return "garden.shortReward.gardenBed".localized()
         case .bloomingGarden:
-            return "Tree takes root"
+            return "garden.shortReward.bloomingGarden".localized()
         case .peacefulGarden:
-            return "Quiet path"
+            return "garden.shortReward.peacefulGarden".localized()
         case .smallForest:
-            return "Small forest"
+            return "garden.shortReward.smallForest".localized()
         case .sanctuary:
-            return "Full sanctuary"
+            return "garden.shortReward.sanctuary".localized()
         }
     }
 
     private func statusText(for state: State) -> String {
         switch state {
         case .unlocked:
-            return "Unlocked"
+            return "garden.status.unlocked".localized()
         case .next(let remainingDays):
-            return remainingDays == 0 ? "Ready" : "\(remainingDays)d left"
+            return remainingDays == 0 ? "garden.status.ready".localized() : "garden.status.daysLeftFormat".localizedFormat(remainingDays)
         case .locked:
-            return "Locked"
+            return "garden.status.locked".localized()
         }
     }
 

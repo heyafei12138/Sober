@@ -6,5 +6,5 @@ target 'SoberGarden' do
   use_frameworks!
 
   # Pods for SoberGarden
-
+  pod 'Localize-Swift', '~> 3.2'
 end

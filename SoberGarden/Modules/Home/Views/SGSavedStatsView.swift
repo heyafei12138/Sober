@@ -12,13 +12,13 @@ final class SGSavedStatsView: UIView {
     private let titleLabel = UILabel()
     private let cardStackView = UIStackView()
     private let moneyCard = SGHomeSavingsCardView(
-        title: "Money Saved",
+        title: "home.savings.money.title".localized(),
         iconName: "leaf.fill",
         accentColor: SGColor.flower,
         surfaceColor: UIColor.hexString("#FFFBED")
     )
     private let timeCard = SGHomeSavingsCardView(
-        title: "Time Saved",
+        title: "home.savings.time.title".localized(),
         iconName: "clock.fill",
         accentColor: UIColor.hexString("#86B8B0"),
         surfaceColor: UIColor.hexString("#F2FAF8")
@@ -37,21 +37,21 @@ final class SGSavedStatsView: UIView {
     func configure(dailyCost: Double?, dailyMinutes: Int?, cleanDays: Int) {
         if let dailyCost, dailyCost > 0 {
             let saved = SGProgressCalculator.moneySaved(dailyCost: dailyCost, cleanDays: cleanDays)
-            moneyCard.configure(value: Self.currencyString(from: saved), subtitle: "Visible progress.")
+            moneyCard.configure(value: Self.currencyString(from: saved), subtitle: "home.savings.money.visible".localized())
         } else {
-            moneyCard.configure(value: "Add cost", subtitle: "Add cost to see your savings.")
+            moneyCard.configure(value: "home.savings.money.addCost".localized(), subtitle: "home.savings.money.addCostSubtitle".localized())
         }
 
         if let dailyMinutes, dailyMinutes > 0 {
             let minutes = SGProgressCalculator.timeSavedMinutes(dailyMinutes: dailyMinutes, cleanDays: cleanDays)
-            timeCard.configure(value: Self.timeString(from: minutes), subtitle: "Time you got back.")
+            timeCard.configure(value: Self.timeString(from: minutes), subtitle: "home.savings.time.back".localized())
         } else {
-            timeCard.configure(value: "Add time", subtitle: "Add time to see your time saved.")
+            timeCard.configure(value: "home.savings.time.addTime".localized(), subtitle: "home.savings.time.addTimeSubtitle".localized())
         }
     }
 
     private func setupView() {
-        titleLabel.text = "Savings"
+        titleLabel.text = "home.savings.title".localized()
         titleLabel.font = .systemFont(ofSize: 18, weight: .semibold)
         titleLabel.textColor = SGColor.textDark
 
@@ -89,13 +89,13 @@ final class SGSavedStatsView: UIView {
     }
 
     private static func timeString(from minutes: Int) -> String {
-        guard minutes >= 60 else { return "\(minutes) min" }
+        guard minutes >= 60 else { return "time.minutes.shortFormat".localizedFormat(minutes) }
         let hours = minutes / 60
         let leftover = minutes % 60
         if leftover == 0 {
-            return "\(hours)h"
+            return "time.hours.shortFormat".localizedFormat(hours)
         }
-        return "\(hours)h \(leftover)m"
+        return "time.hoursMinutes.shortFormat".localizedFormat(hours, leftover)
     }
 }
 

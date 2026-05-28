@@ -30,17 +30,19 @@ final class SGGardenPreviewView: UIControl {
 
     func configure(gardenStage: GardenStage, nextMilestone: Milestone?, cleanDays: Int, habitName: String) {
         titleLabel.text = gardenStage.title
-        badgeLabel.text = "\(cleanDays) days clean"
+        badgeLabel.text = "home.gardenPreview.cleanDaysFormat".localizedFormat(cleanDays)
 
         if let nextMilestone {
             let remaining = max(nextMilestone.day - cleanDays, 0)
-            subtitleLabel.text = remaining == 0 ? "You are ready for the next bloom." : "Next bloom in \(remaining) days"
+            subtitleLabel.text = remaining == 0
+                ? "home.gardenPreview.ready".localized()
+                : "home.gardenPreview.nextBloomFormat".localizedFormat(remaining)
         } else {
-            subtitleLabel.text = "Your garden is fully grown."
+            subtitleLabel.text = "home.gardenPreview.fullyGrown".localized()
         }
 
         illustrationView.image = UIImage(named: Self.assetName(for: gardenStage))
-        accessibilityLabel = "Garden preview for \(habitName)"
+        accessibilityLabel = "home.gardenPreview.accessibilityFormat".localizedFormat(habitName)
     }
 
     private func setupView() {

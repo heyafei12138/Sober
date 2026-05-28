@@ -26,18 +26,18 @@ final class SGMilestoneCardView: UIView {
     }
 
     func configure(cleanDays: Int, nextMilestone: Milestone?) {
-        headerLabel.text = "Next Milestone"
+        headerLabel.text = "home.milestone.header".localized()
 
         if let nextMilestone {
             let remaining = max(nextMilestone.day - cleanDays, 0)
-            milestoneLabel.text = "Next milestone: \(nextMilestone.day) days"
-            countdownLabel.text = remaining == 0 ? "You made it." : "\(remaining) days to go"
+            milestoneLabel.text = "home.milestone.nextFormat".localizedFormat(nextMilestone.day)
+            countdownLabel.text = remaining == 0 ? "home.milestone.madeIt".localized() : "home.milestone.daysToGoFormat".localizedFormat(remaining)
             badgeLabel.text = nextMilestone.badgeName
             progressBar.setProgress(CGFloat(cleanDays) / CGFloat(nextMilestone.day), animated: false)
         } else {
-            milestoneLabel.text = "All milestones reached"
-            countdownLabel.text = "Keep growing at your own pace."
-            badgeLabel.text = "Sanctuary"
+            milestoneLabel.text = "home.milestone.allReached".localized()
+            countdownLabel.text = "home.milestone.keepGrowing".localized()
+            badgeLabel.text = GardenStage.sanctuary.title
             progressBar.setProgress(1, animated: false)
         }
     }

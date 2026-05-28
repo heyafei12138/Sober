@@ -180,7 +180,7 @@ extension BaseViewController {
         rightActionContainerView.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-16)
             make.top.equalToSuperview().offset(kStatusBarHeight + 2)
-            make.height.equalTo(50)
+            make.height.equalTo(35)
         }
         
         rightActionStackView.snp.makeConstraints { make in

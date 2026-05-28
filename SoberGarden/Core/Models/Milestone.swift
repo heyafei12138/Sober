@@ -43,69 +43,69 @@ enum GardenStage: String, Codable, CaseIterable {
     var title: String {
         switch self {
         case .seed:
-            return "Seed"
+            return "garden.stage.seed".localized()
         case .sprout:
-            return "Sprout"
+            return "garden.stage.sprout".localized()
         case .youngPlant:
-            return "Young Plant"
+            return "garden.stage.youngPlant".localized()
         case .flower:
-            return "Flower"
+            return "garden.stage.flower".localized()
         case .gardenBed:
-            return "Garden Bed"
+            return "garden.stage.gardenBed".localized()
         case .bloomingGarden:
-            return "Blooming Garden"
+            return "garden.stage.bloomingGarden".localized()
         case .peacefulGarden:
-            return "Peaceful Garden"
+            return "garden.stage.peacefulGarden".localized()
         case .smallForest:
-            return "Small Forest"
+            return "garden.stage.smallForest".localized()
         case .sanctuary:
-            return "Sanctuary"
+            return "garden.stage.sanctuary".localized()
         }
     }
 
     var badgeName: String {
         switch self {
         case .seed:
-            return "First Seed"
+            return "garden.badge.firstSeed".localized()
         case .sprout:
-            return "Tiny Leaf"
+            return "garden.badge.tinyLeaf".localized()
         case .youngPlant:
-            return "First Week"
+            return "garden.badge.firstWeek".localized()
         case .flower:
-            return "Steady Bloom"
+            return "garden.badge.steadyBloom".localized()
         case .gardenBed:
-            return "30-Day Bloom"
+            return "garden.badge.thirtyDayBloom".localized()
         case .bloomingGarden:
-            return "Deep Roots"
+            return "garden.badge.deepRoots".localized()
         case .peacefulGarden:
-            return "90-Day Sanctuary"
+            return "garden.badge.ninetyDaySanctuary".localized()
         case .smallForest:
-            return "Strong Roots"
+            return "garden.badge.strongRoots".localized()
         case .sanctuary:
-            return "One Year Clean"
+            return "garden.badge.oneYearClean".localized()
         }
     }
 
     var rewardDescription: String {
         switch self {
         case .seed:
-            return "Your first seed is planted."
+            return "garden.reward.seed".localized()
         case .sprout:
-            return "A tiny sprout breaks through the soil."
+            return "garden.reward.sprout".localized()
         case .youngPlant:
-            return "Fresh leaves make your progress visible."
+            return "garden.reward.youngPlant".localized()
         case .flower:
-            return "Your first flower appears in the garden."
+            return "garden.reward.flower".localized()
         case .gardenBed:
-            return "A small bed of blooms starts to fill the space."
+            return "garden.reward.gardenBed".localized()
         case .bloomingGarden:
-            return "More flowers arrive, with the first tree taking root."
+            return "garden.reward.bloomingGarden".localized()
         case .peacefulGarden:
-            return "Trees and a quiet path make the garden feel settled."
+            return "garden.reward.peacefulGarden".localized()
         case .smallForest:
-            return "A cluster of trees grows into a small forest."
+            return "garden.reward.smallForest".localized()
         case .sanctuary:
-            return "The full sanctuary opens with sunlight, trees, and a path."
+            return "garden.reward.sanctuary".localized()
         }
     }
 }

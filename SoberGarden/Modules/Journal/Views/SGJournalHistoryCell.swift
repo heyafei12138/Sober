@@ -28,12 +28,12 @@ final class SGJournalHistoryCell: UIView {
         summaryLabel.text = "\(entry.mood.displayName) · \(entry.urgeLevel.displayName)"
 
         if entry.triggers.isEmpty {
-            triggersLabel.text = "No triggers selected"
+            triggersLabel.text = "journal.history.noTriggers".localized()
         } else {
             triggersLabel.text = entry.triggers.map(\.displayName).joined(separator: ", ")
         }
 
-        noteLabel.text = entry.note?.isEmpty == false ? entry.note : "No reflection yet."
+        noteLabel.text = entry.note?.isEmpty == false ? entry.note : "journal.history.noReflection".localized()
         noteLabel.textColor = entry.note?.isEmpty == false ? SGColor.textDark : SGColor.textTertiary
     }
 

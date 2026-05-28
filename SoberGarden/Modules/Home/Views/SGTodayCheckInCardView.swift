@@ -13,28 +13,28 @@ final class SGTodayCheckInCardView: UIView {
         case yesterdayPending
 
         var badgeTitle: String {
-            "Today’s Check-in"
+            "checkin.card.badge".localized()
         }
 
         var title: String {
             switch self {
             case .todayNotConfirmed:
-                return "How are you holding up today?"
+                return "checkin.card.today.title".localized()
             case .todayConfirmed:
-                return "Today protected"
+                return "checkin.card.confirmed.title".localized()
             case .yesterdayPending:
-                return "Did you stay clean yesterday?"
+                return "checkin.card.yesterday.title".localized()
             }
         }
 
         var subtitle: String {
             switch self {
             case .todayNotConfirmed:
-                return "A tiny confirmation keeps the garden moving."
+                return "checkin.card.today.subtitle".localized()
             case .todayConfirmed:
-                return "Your garden is growing."
+                return "checkin.card.confirmed.subtitle".localized()
             case .yesterdayPending:
-                return "You can quietly confirm the day before without pressure."
+                return "checkin.card.yesterday.subtitle".localized()
             }
         }
 
@@ -43,7 +43,7 @@ final class SGTodayCheckInCardView: UIView {
             case .todayNotConfirmed:
                 return nil
             case .todayConfirmed:
-                return "Nice. Your garden grew a little today."
+                return "checkin.card.confirmed.detail".localized()
             case .yesterdayPending:
                 return nil
             }
@@ -52,18 +52,18 @@ final class SGTodayCheckInCardView: UIView {
         var primaryButtonTitle: String? {
             switch self {
             case .todayNotConfirmed:
-                return "Still clean today"
+                return "checkin.card.today.primary".localized()
             case .todayConfirmed:
                 return nil
             case .yesterdayPending:
-                return "I stayed clean"
+                return "checkin.card.yesterday.primary".localized()
             }
         }
 
         var secondaryButtonTitle: String? {
             switch self {
             case .todayNotConfirmed, .yesterdayPending:
-                return self == .todayNotConfirmed ? "I’m struggling" : "No, I want to reset"
+                return self == .todayNotConfirmed ? "common.imStruggling".localized() : "checkin.card.yesterday.secondary".localized()
             case .todayConfirmed:
                 return nil
             }
@@ -78,8 +78,8 @@ final class SGTodayCheckInCardView: UIView {
     private let subtitleLabel = UILabel()
     private let detailLabel = UILabel()
     private let buttonStackView = UIStackView()
-    private let primaryButton = SGPrimaryButton(title: "Continue")
-    private let secondaryButton = SGPrimaryButton(title: "I’m struggling", style: .secondary)
+    private let primaryButton = SGPrimaryButton(title: "common.continue".localized())
+    private let secondaryButton = SGPrimaryButton(title: "common.imStruggling".localized(), style: .secondary)
 
     override init(frame: CGRect) {
         super.init(frame: frame)

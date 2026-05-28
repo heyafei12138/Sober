@@ -12,8 +12,8 @@ final class SGSettingsViewController: BaseViewController {
     private let contentView = UIView()
     private let contentStackView = UIStackView()
     private let introHeaderView = SGSectionHeaderView(
-        title: "Settings",
-        subtitle: "Manage reminders, privacy, and local data."
+        title: "settings.title".localized(),
+        subtitle: "settings.subtitle".localized()
     )
     private let subscriptionCardView = SGSettingsSubscriptionCardView()
     private let checkInStatsView = SGCheckInStatsView()
@@ -24,6 +24,12 @@ final class SGSettingsViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        title = "Settings"
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleLanguageChanged),
+            name: Notification.Name(rawValue: LCLLanguageChangeNotification),
+            object: nil
+        )
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -82,6 +88,10 @@ final class SGSettingsViewController: BaseViewController {
         let habit = state.habit
         let settings = state.settings
 
+        introHeaderView.configure(
+            title: "settings.title".localized(),
+            subtitle: "settings.subtitle".localized()
+        )
         contentStackView.addArrangedSubview(introHeaderView)
         contentStackView.setCustomSpacing(16, after: introHeaderView)
 
@@ -100,20 +110,26 @@ final class SGSettingsViewController: BaseViewController {
         contentStackView.addArrangedSubview(checkInStatsView)
 
         contentStackView.addArrangedSubview(makeSectionCard(
-            title: "Habit",
-            subtitle: "Review your current recovery goal and the baseline you set during onboarding.",
+            title: "settings.section.habit.title".localized(),
+            subtitle: "settings.section.habit.subtitle".localized(),
             rows: buildHabitRows(habit: habit)
         ))
 
         contentStackView.addArrangedSubview(makeSectionCard(
-            title: "Notifications",
-            subtitle: "Keep reminders gentle and predictable.",
+            title: "settings.section.preferences.title".localized(),
+            subtitle: "settings.section.preferences.subtitle".localized(),
+            rows: buildPreferenceRows()
+        ))
+
+        contentStackView.addArrangedSubview(makeSectionCard(
+            title: "settings.section.notifications.title".localized(),
+            subtitle: "settings.section.notifications.subtitle".localized(),
             rows: buildNotificationRows(settings: settings)
         ))
 
         contentStackView.addArrangedSubview(makeSectionCard(
-            title: "Privacy & Safety",
-            subtitle: "Read the policy, terms, and care boundaries.",
+            title: "settings.section.privacy.title".localized(),
+            subtitle: "settings.section.privacy.subtitle".localized(),
             rows: buildPrivacyRows(settings: settings)
         ))
 
@@ -276,6 +292,25 @@ final class SGSettingsViewController: BaseViewController {
         }
 
         return [dailyReminder, milestoneRow, nightReminder, rescueReminder]
+    }
+
+    private func buildPreferenceRows() -> [SGSettingsRowView] {
+        let languageRow = SGSettingsRowView()
+        languageRow.configure(
+            title: "settings.language.title".localized(),
+            subtitle: "settings.language.row.subtitle".localized(),
+            value: SGAppLanguage.current.nativeName,
+            accessory: .disclosure
+        )
+        languageRow.onTap = { [weak self] in
+            let languageViewController = SGLanguageSelectionViewController()
+            languageViewController.onLanguageChanged = { [weak self] in
+                self?.reloadContent()
+            }
+            self?.pushController(languageViewController)
+        }
+
+        return [languageRow]
     }
 
     private func updateNotificationSetting(isOn: Bool, update: @escaping (inout SoberGardenSettings) -> Void) {
@@ -535,6 +570,10 @@ final class SGSettingsViewController: BaseViewController {
 
         window.rootViewController = SGOnboardingViewController()
         window.makeKeyAndVisible()
+    }
+
+    @objc private func handleLanguageChanged() {
+        reloadContent()
     }
 
     private var appVersionText: String {

@@ -26,53 +26,53 @@ final class SGOnboardingViewController: BaseViewController {
         var title: String {
             switch self {
             case .welcome:
-                return "Break the habit. Grow a calmer life."
+                return "onboarding.welcome.title".localized()
             case .habit:
-                return "What do you want to quit?"
+                return "onboarding.habit.title".localized()
             case .startDate:
-                return "When did your clean streak begin?"
+                return "onboarding.startDate.title".localized()
             case .cost:
-                return "How much did this habit cost you?"
+                return "onboarding.cost.title".localized()
             case .time:
-                return "How much time did this habit take?"
+                return "onboarding.time.title".localized()
             case .reasons:
-                return "Why do you want to quit?"
+                return "onboarding.reasons.title".localized()
             case .notifications:
-                return "Let us support you at the right moments."
+                return "onboarding.notifications.title".localized()
             case .complete:
-                return "Your recovery garden is ready."
+                return "onboarding.complete.title".localized()
             }
         }
 
         var subtitle: String? {
             switch self {
             case .welcome:
-                return "Track clean days, survive urges, and grow your recovery garden."
+                return "onboarding.welcome.subtitle".localized()
             case .habit:
-                return "First version supports one habit so the experience stays focused."
+                return "onboarding.habit.subtitle".localized()
             case .startDate:
-                return "Choose today, yesterday, or a date you already started."
+                return "onboarding.startDate.subtitle".localized()
             case .cost:
-                return "Optional. You can skip this and add it later from Settings."
+                return "onboarding.cost.subtitle".localized()
             case .time:
-                return "Optional. We will use it to show time saved."
+                return "onboarding.time.subtitle".localized()
             case .reasons:
-                return "Keep a few reasons nearby for difficult moments."
+                return "onboarding.reasons.subtitle".localized()
             case .notifications:
-                return "We'll send gentle reminders, milestone celebrations, and urge support prompts."
+                return "onboarding.notifications.subtitle".localized()
             case .complete:
-                return "Your habit, garden, and gentle reminders are ready whenever you need them."
+                return "onboarding.complete.subtitle".localized()
             }
         }
 
         var primaryButtonTitle: String {
             switch self {
             case .welcome:
-                return "Get Started"
+                return "onboarding.getStarted".localized()
             case .complete:
-                return "Start Growing"
+                return "onboarding.startGrowing".localized()
             default:
-                return "Next"
+                return "common.next".localized()
             }
         }
     }
@@ -90,14 +90,14 @@ final class SGOnboardingViewController: BaseViewController {
     private let scrollView = UIScrollView()
     private let contentStackView = UIStackView()
     private let backButton = UIButton(type: .system)
-    private let primaryButton = SGPrimaryButton(title: "Get Started", style: .primary)
+    private let primaryButton = SGPrimaryButton(title: "onboarding.getStarted".localized(), style: .primary)
     private let customHabitTextField = UITextField()
     private let costTextField = UITextField()
     private let timeTextField = UITextField()
     private let customReasonTextField = UITextField()
     private let notificationActionsStack = UIStackView()
-    private let enableNotificationsButton = SGPrimaryButton(title: "Enable Notifications", style: .primary)
-    private let maybeLaterButton = SGPrimaryButton(title: "Maybe Later", style: .secondary)
+    private let enableNotificationsButton = SGPrimaryButton(title: "onboarding.enableNotifications".localized(), style: .primary)
+    private let maybeLaterButton = SGPrimaryButton(title: "onboarding.maybeLater".localized(), style: .secondary)
 
     override func viewDidLoad() {
         isCustomNavigationHidden = true
@@ -163,7 +163,7 @@ final class SGOnboardingViewController: BaseViewController {
 
         backButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
         backButton.setTitleColor(SGColor.textSecondary, for: .normal)
-        backButton.setTitle("Back", for: .normal)
+        backButton.setTitle("common.back".localized(), for: .normal)
         backButton.addTarget(self, action: #selector(handleBackTapped), for: .touchUpInside)
         primaryButton.addTarget(self, action: #selector(handlePrimaryTapped), for: .touchUpInside)
         enableNotificationsButton.addTarget(self, action: #selector(handleEnableNotificationsTapped), for: .touchUpInside)
@@ -232,7 +232,7 @@ final class SGOnboardingViewController: BaseViewController {
         card.cornerRadius = 16
         card.setContentInsets(UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10))
         let label = UILabel()
-        label.text = "A non-medical recovery companion for self-reflection, gentle reminders, calming exercises, urge support, and progress tracking."
+        label.text = "onboarding.welcome.body".localized()
         label.font = .systemFont(ofSize: 16, weight: .regular)
         label.textColor = SGColor.textSecondary
         label.numberOfLines = 0
@@ -272,7 +272,7 @@ final class SGOnboardingViewController: BaseViewController {
 
         contentStackView.addArrangedSubview(gridStack)
 
-        customHabitTextField.placeholder = "Enter your habit"
+        customHabitTextField.placeholder = "onboarding.habit.customPlaceholder".localized()
         customHabitTextField.text = draft.customHabitName
         customHabitTextField.borderStyle = .none
         customHabitTextField.backgroundColor = SGColor.surface
@@ -292,9 +292,9 @@ final class SGOnboardingViewController: BaseViewController {
 
     private func addStartDateContent() {
         let optionStack = makeVerticalStack(spacing: 10)
-        let todayChip = makeStartDateChip(title: "Today", tag: 0)
-        let yesterdayChip = makeStartDateChip(title: "Yesterday", tag: 1)
-        let pickDateChip = makeStartDateChip(title: "Pick a date", tag: 2)
+        let todayChip = makeStartDateChip(title: "common.today".localized(), tag: 0)
+        let yesterdayChip = makeStartDateChip(title: "common.yesterday".localized(), tag: 1)
+        let pickDateChip = makeStartDateChip(title: "onboarding.startDate.pickDate".localized(), tag: 2)
         optionStack.addArrangedSubview(todayChip)
         optionStack.addArrangedSubview(yesterdayChip)
         optionStack.addArrangedSubview(pickDateChip)
@@ -321,7 +321,7 @@ final class SGOnboardingViewController: BaseViewController {
         }
         contentStackView.addArrangedSubview(modeStack)
 
-        costTextField.placeholder = "Amount"
+        costTextField.placeholder = "common.amount".localized()
         costTextField.keyboardType = .decimalPad
         costTextField.borderStyle = .none
         costTextField.backgroundColor = SGColor.surface
@@ -370,7 +370,7 @@ final class SGOnboardingViewController: BaseViewController {
 
     private func addReasonsContent() {
         let hintLabel = UILabel()
-        hintLabel.text = "Select any that resonate. You can skip and add reasons later."
+        hintLabel.text = "onboarding.reasons.hint".localized()
         hintLabel.font = .systemFont(ofSize: 14, weight: .regular)
         hintLabel.textColor = SGColor.textSecondary
         hintLabel.numberOfLines = 0
@@ -386,7 +386,7 @@ final class SGOnboardingViewController: BaseViewController {
         }
         contentStackView.addArrangedSubview(reasonStack)
 
-        customReasonTextField.placeholder = "Add your own reason"
+        customReasonTextField.placeholder = "onboarding.reasons.customPlaceholder".localized()
         customReasonTextField.text = draft.customReasonText
         customReasonTextField.borderStyle = .none
         customReasonTextField.backgroundColor = SGColor.surface
@@ -410,7 +410,7 @@ final class SGOnboardingViewController: BaseViewController {
         card.cornerRadius = 16
         card.setContentInsets(UIEdgeInsets(top: 18, left: 10, bottom: 18, right: 10))
         let label = UILabel()
-        label.text = "We'll send gentle reminders, milestone celebrations, and urge support prompts. You can change this anytime in Settings."
+        label.text = "onboarding.notifications.body".localized()
         label.font = .systemFont(ofSize: 15, weight: .regular)
         label.textColor = SGColor.textSecondary
         label.numberOfLines = 0
@@ -428,7 +428,7 @@ final class SGOnboardingViewController: BaseViewController {
         card.cornerRadius = 16
         card.setContentInsets(UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10))
         let label = UILabel()
-        label.text = "Tap Start Growing to open your Home tab, track clean days, and reach for Rescue whenever you need support."
+        label.text = "onboarding.complete.body".localized()
         label.font = .systemFont(ofSize: 16, weight: .regular)
         label.textColor = SGColor.textSecondary
         label.numberOfLines = 0

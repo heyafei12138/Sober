@@ -7,59 +7,138 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0EF32753EA43D35C3F2D43F1922D9F58 /* Pods-SoberGarden-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B81A6248D7B697B330D22E7FE7933BBD /* Pods-SoberGarden-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		36277DD518AFD4B0742EE4BC43B8FD14 /* Pods-SoberGarden-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EFA17599D56DD5121CFEA6DE14450140 /* Pods-SoberGarden-dummy.m */; };
-		872EA5712A10D5298C7E4D29AC175FDA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 384DDA2CB25005BD6479B5987C619DD4 /* Foundation.framework */; };
+		4A85A45E57FF0E7FA4EE51592244B6DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 384DDA2CB25005BD6479B5987C619DD4 /* Foundation.framework */; };
+		677438382D3A53DE35C044B96AA29CF0 /* Localize-Swift-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A2DF16BE7AAC6524EBFC525EDA77CC5 /* Localize-Swift-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		769F2A2F3015075DA36A1B3724A007CD /* String+LocalizeBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F075E49D52A0EE0AEEB11B430117A0 /* String+LocalizeBundle.swift */; };
+		8314DA7E666D0D342C4C9A9AEF96BBF8 /* String+LocalizedBundleTableName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D1C8D5976F7A2EE249AC52798D4D48 /* String+LocalizedBundleTableName.swift */; };
+		9B6575B52096A00F0FF946662EF6C68F /* Localize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32DB3FF7B19118A6AE8C73B37A9C0A85 /* Localize.swift */; };
+		C26543B5AAF8EB6BFD115258B345FCCB /* IBDesignable+Localize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6CFE01CAA0429FF945F76E92A32613 /* IBDesignable+Localize.swift */; };
+		C2EAF86DF6F00CB64F7B9427158F2C41 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 384DDA2CB25005BD6479B5987C619DD4 /* Foundation.framework */; };
+		D93AAA3C45B08A6D8775C475733FE1B0 /* String+LocalizeTableName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246169F46A0D7A2B71269F94F88E73A3 /* String+LocalizeTableName.swift */; };
+		E43E65046F95332524F1AEC06359D23D /* Localize-Swift-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C666888C20435F0F5B8BE600D8BA70E4 /* Localize-Swift-dummy.m */; };
+		EE47FEB2DE3BF37C4C7F15EAD427A282 /* Localize_Swift.h in Headers */ = {isa = PBXBuildFile; fileRef = 519143527170A026EFB269DD6EB8782D /* Localize_Swift.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F94A4E2AA3F8F797AD31E9B1D5A7D5B1 /* Pods-SoberGarden-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F7031F7EADD73CF53B72DCFA38CE289F /* Pods-SoberGarden-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F99000E90466F308C2D3BF095243BA16 /* Pods-SoberGarden-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 142FE80B9C7D646CD09620942BF4547D /* Pods-SoberGarden-dummy.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		B18E3D3BF7CAA56E0FE1FB713A9E0EF8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 340DDF7DB405EDF7F01580175FF090DF;
+			remoteInfo = "Localize-Swift";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		08F075E49D52A0EE0AEEB11B430117A0 /* String+LocalizeBundle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+LocalizeBundle.swift"; path = "Sources/String+LocalizeBundle.swift"; sourceTree = "<group>"; };
+		13C168CA775FFCE013852B1437176AC9 /* Pods-SoberGarden.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SoberGarden.modulemap"; sourceTree = "<group>"; };
+		142FE80B9C7D646CD09620942BF4547D /* Pods-SoberGarden-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SoberGarden-dummy.m"; sourceTree = "<group>"; };
+		18D1C8D5976F7A2EE249AC52798D4D48 /* String+LocalizedBundleTableName.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+LocalizedBundleTableName.swift"; path = "Sources/String+LocalizedBundleTableName.swift"; sourceTree = "<group>"; };
+		1FB0C9B7FA40AFBE5FAA59D05897959E /* Localize-Swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Localize-Swift.release.xcconfig"; sourceTree = "<group>"; };
+		246169F46A0D7A2B71269F94F88E73A3 /* String+LocalizeTableName.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+LocalizeTableName.swift"; path = "Sources/String+LocalizeTableName.swift"; sourceTree = "<group>"; };
+		2A2DF16BE7AAC6524EBFC525EDA77CC5 /* Localize-Swift-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Localize-Swift-umbrella.h"; sourceTree = "<group>"; };
+		2ECF488EFD24A1B916546FB54E5E6827 /* Localize-Swift */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Localize-Swift"; path = Localize_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2FA94396E1A23C83C0EFC73D08F5D1D7 /* Localize-Swift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Localize-Swift.modulemap"; sourceTree = "<group>"; };
+		32DB3FF7B19118A6AE8C73B37A9C0A85 /* Localize.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Localize.swift; path = Sources/Localize.swift; sourceTree = "<group>"; };
 		384DDA2CB25005BD6479B5987C619DD4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		3A0D55A2F0354FFB24A482F91E948654 /* Pods-SoberGarden */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-SoberGarden"; path = Pods_SoberGarden.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F7E72893E454AB45AF0432575EAD267 /* Pods-SoberGarden.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SoberGarden.release.xcconfig"; sourceTree = "<group>"; };
+		44F8362EB570B56E7095AA49FC232A98 /* Pods-SoberGarden-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SoberGarden-acknowledgements.plist"; sourceTree = "<group>"; };
+		4593B560A1BB19DA1EF48CAB34AF2BB3 /* Localize-Swift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Localize-Swift-prefix.pch"; sourceTree = "<group>"; };
+		4E9772C329E414442DCAD0719CE9679B /* Pods-SoberGarden-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SoberGarden-acknowledgements.markdown"; sourceTree = "<group>"; };
+		519143527170A026EFB269DD6EB8782D /* Localize_Swift.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Localize_Swift.h; path = Sources/Localize_Swift.h; sourceTree = "<group>"; };
+		614905BAA0DF6BF0ADD7C771661A5A29 /* Pods-SoberGarden-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SoberGarden-frameworks.sh"; sourceTree = "<group>"; };
+		7FE5467A4272C85B37691D7AE65EBFF5 /* Pods-SoberGarden.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SoberGarden.debug.xcconfig"; sourceTree = "<group>"; };
+		7FFE46CE5D73B5DAF1579CE2B63B11CB /* Localize-Swift-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Localize-Swift-Info.plist"; sourceTree = "<group>"; };
+		9D6CFE01CAA0429FF945F76E92A32613 /* IBDesignable+Localize.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "IBDesignable+Localize.swift"; path = "Sources/UI/IBDesignable+Localize.swift"; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		A1A59960E4339C2C66AE90DFF5683518 /* Pods-SoberGarden.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SoberGarden.modulemap"; sourceTree = "<group>"; };
-		A3665C33F0B3D8FEEF887305E01D0899 /* Pods-SoberGarden.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SoberGarden.debug.xcconfig"; sourceTree = "<group>"; };
-		ACBB2A2FE3E0F4510E15B98ABA0E4B98 /* Pods-SoberGarden.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SoberGarden.release.xcconfig"; sourceTree = "<group>"; };
-		B81A6248D7B697B330D22E7FE7933BBD /* Pods-SoberGarden-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SoberGarden-umbrella.h"; sourceTree = "<group>"; };
-		C5A6EDD047CF2C3F930B9C12715D4E0B /* Pods-SoberGarden-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SoberGarden-Info.plist"; sourceTree = "<group>"; };
-		C82F76B2B3B9A2AAD5BE67EBF7823EB7 /* Pods-SoberGarden-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SoberGarden-acknowledgements.plist"; sourceTree = "<group>"; };
-		EFA17599D56DD5121CFEA6DE14450140 /* Pods-SoberGarden-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SoberGarden-dummy.m"; sourceTree = "<group>"; };
-		F964911EB066B139588C444BEA337109 /* Pods-SoberGarden-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SoberGarden-acknowledgements.markdown"; sourceTree = "<group>"; };
+		C666888C20435F0F5B8BE600D8BA70E4 /* Localize-Swift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Localize-Swift-dummy.m"; sourceTree = "<group>"; };
+		E81C40660BCAADBAC6BF9290FA339D9B /* Pods-SoberGarden-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SoberGarden-Info.plist"; sourceTree = "<group>"; };
+		F7031F7EADD73CF53B72DCFA38CE289F /* Pods-SoberGarden-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SoberGarden-umbrella.h"; sourceTree = "<group>"; };
+		F8FF090BB248B876E2AC731ECB8F0662 /* Localize-Swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Localize-Swift.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		62A30F5C09D3D3E70CDE7252F006AADB /* Frameworks */ = {
+		AEDD093E2ED812A8F024889E094FD555 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				872EA5712A10D5298C7E4D29AC175FDA /* Foundation.framework in Frameworks */,
+				C2EAF86DF6F00CB64F7B9427158F2C41 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F184EB4937A60437E6D5264FFA9ECB32 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A85A45E57FF0E7FA4EE51592244B6DA /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4D020B9DF3565301D7225719B8BF4EB8 /* Products */ = {
+		1B1189179CA60188B4779D34C4135B46 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
+				FD539C97C059B8A4B38D66533B56B696 /* Localize-Swift */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		29C3243CB410B9D10EBE3D37D46175FD /* Pods-SoberGarden */ = {
+			isa = PBXGroup;
+			children = (
+				13C168CA775FFCE013852B1437176AC9 /* Pods-SoberGarden.modulemap */,
+				4E9772C329E414442DCAD0719CE9679B /* Pods-SoberGarden-acknowledgements.markdown */,
+				44F8362EB570B56E7095AA49FC232A98 /* Pods-SoberGarden-acknowledgements.plist */,
+				142FE80B9C7D646CD09620942BF4547D /* Pods-SoberGarden-dummy.m */,
+				614905BAA0DF6BF0ADD7C771661A5A29 /* Pods-SoberGarden-frameworks.sh */,
+				E81C40660BCAADBAC6BF9290FA339D9B /* Pods-SoberGarden-Info.plist */,
+				F7031F7EADD73CF53B72DCFA38CE289F /* Pods-SoberGarden-umbrella.h */,
+				7FE5467A4272C85B37691D7AE65EBFF5 /* Pods-SoberGarden.debug.xcconfig */,
+				3F7E72893E454AB45AF0432575EAD267 /* Pods-SoberGarden.release.xcconfig */,
+			);
+			name = "Pods-SoberGarden";
+			path = "Target Support Files/Pods-SoberGarden";
+			sourceTree = "<group>";
+		};
+		36C189EF10F4511D155D7454873BD9CB /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				2FA94396E1A23C83C0EFC73D08F5D1D7 /* Localize-Swift.modulemap */,
+				C666888C20435F0F5B8BE600D8BA70E4 /* Localize-Swift-dummy.m */,
+				7FFE46CE5D73B5DAF1579CE2B63B11CB /* Localize-Swift-Info.plist */,
+				4593B560A1BB19DA1EF48CAB34AF2BB3 /* Localize-Swift-prefix.pch */,
+				2A2DF16BE7AAC6524EBFC525EDA77CC5 /* Localize-Swift-umbrella.h */,
+				F8FF090BB248B876E2AC731ECB8F0662 /* Localize-Swift.debug.xcconfig */,
+				1FB0C9B7FA40AFBE5FAA59D05897959E /* Localize-Swift.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Localize-Swift";
+			sourceTree = "<group>";
+		};
+		55920F71A22C79BD16E9E1A547429C8E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2ECF488EFD24A1B916546FB54E5E6827 /* Localize-Swift */,
 				3A0D55A2F0354FFB24A482F91E948654 /* Pods-SoberGarden */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C6AD3A73571C5C23AEE8D8A9E6355B0B /* Pods-SoberGarden */ = {
+		A9580D1BA9E6A541F134835B613CF650 /* LocalizeSwiftCore */ = {
 			isa = PBXGroup;
 			children = (
-				A1A59960E4339C2C66AE90DFF5683518 /* Pods-SoberGarden.modulemap */,
-				F964911EB066B139588C444BEA337109 /* Pods-SoberGarden-acknowledgements.markdown */,
-				C82F76B2B3B9A2AAD5BE67EBF7823EB7 /* Pods-SoberGarden-acknowledgements.plist */,
-				EFA17599D56DD5121CFEA6DE14450140 /* Pods-SoberGarden-dummy.m */,
-				C5A6EDD047CF2C3F930B9C12715D4E0B /* Pods-SoberGarden-Info.plist */,
-				B81A6248D7B697B330D22E7FE7933BBD /* Pods-SoberGarden-umbrella.h */,
-				A3665C33F0B3D8FEEF887305E01D0899 /* Pods-SoberGarden.debug.xcconfig */,
-				ACBB2A2FE3E0F4510E15B98ABA0E4B98 /* Pods-SoberGarden.release.xcconfig */,
+				32DB3FF7B19118A6AE8C73B37A9C0A85 /* Localize.swift */,
+				519143527170A026EFB269DD6EB8782D /* Localize_Swift.h */,
+				08F075E49D52A0EE0AEEB11B430117A0 /* String+LocalizeBundle.swift */,
+				18D1C8D5976F7A2EE249AC52798D4D48 /* String+LocalizedBundleTableName.swift */,
+				246169F46A0D7A2B71269F94F88E73A3 /* String+LocalizeTableName.swift */,
 			);
-			name = "Pods-SoberGarden";
-			path = "Target Support Files/Pods-SoberGarden";
+			name = LocalizeSwiftCore;
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
@@ -67,8 +146,9 @@
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
 				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
-				4D020B9DF3565301D7225719B8BF4EB8 /* Products */,
-				E2F9FCF5587E38A8D9B956CCC3C362F0 /* Targets Support Files */,
+				1B1189179CA60188B4779D34C4135B46 /* Pods */,
+				55920F71A22C79BD16E9E1A547429C8E /* Products */,
+				FAF84E86C942BA50895C743715464FCF /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
@@ -80,14 +160,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		E2F9FCF5587E38A8D9B956CCC3C362F0 /* Targets Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				C6AD3A73571C5C23AEE8D8A9E6355B0B /* Pods-SoberGarden */,
-			);
-			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
 		E4801F62A6B08CD9B5410329F1A18FDE /* iOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -96,32 +168,87 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
+		F9FFF0A05BFE215C9F49F9FF79E2C9CE /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				9D6CFE01CAA0429FF945F76E92A32613 /* IBDesignable+Localize.swift */,
+			);
+			name = UIKit;
+			sourceTree = "<group>";
+		};
+		FAF84E86C942BA50895C743715464FCF /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				29C3243CB410B9D10EBE3D37D46175FD /* Pods-SoberGarden */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		FD539C97C059B8A4B38D66533B56B696 /* Localize-Swift */ = {
+			isa = PBXGroup;
+			children = (
+				A9580D1BA9E6A541F134835B613CF650 /* LocalizeSwiftCore */,
+				36C189EF10F4511D155D7454873BD9CB /* Support Files */,
+				F9FFF0A05BFE215C9F49F9FF79E2C9CE /* UIKit */,
+			);
+			name = "Localize-Swift";
+			path = "Localize-Swift";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		8A66785D7E5D180E94C3F2E5C3C91B4B /* Headers */ = {
+		A9A575DA10BBDA18FF952655F1122CA4 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0EF32753EA43D35C3F2D43F1922D9F58 /* Pods-SoberGarden-umbrella.h in Headers */,
+				F94A4E2AA3F8F797AD31E9B1D5A7D5B1 /* Pods-SoberGarden-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F02540CBC1D43B75BBB0F068FF4132B4 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				677438382D3A53DE35C044B96AA29CF0 /* Localize-Swift-umbrella.h in Headers */,
+				EE47FEB2DE3BF37C4C7F15EAD427A282 /* Localize_Swift.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		FCCB247DD9928A10DCCDF169B4616A80 /* Pods-SoberGarden */ = {
+		340DDF7DB405EDF7F01580175FF090DF /* Localize-Swift */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 00ECFE5716CD0EA9C65E22ADE430F299 /* Build configuration list for PBXNativeTarget "Pods-SoberGarden" */;
+			buildConfigurationList = 0171893FFAEE29ACA3AE3C93D923F6B6 /* Build configuration list for PBXNativeTarget "Localize-Swift" */;
 			buildPhases = (
-				8A66785D7E5D180E94C3F2E5C3C91B4B /* Headers */,
-				49BB1BA814D02B0DFFDED6438C701C4A /* Sources */,
-				62A30F5C09D3D3E70CDE7252F006AADB /* Frameworks */,
-				B4A917C8CF9B5985DA5AE068F950B71E /* Resources */,
+				F02540CBC1D43B75BBB0F068FF4132B4 /* Headers */,
+				C705C36C047AE164DD0FB8A46F67D861 /* Sources */,
+				AEDD093E2ED812A8F024889E094FD555 /* Frameworks */,
+				36DB369DD5419A6E91FA237C393BD963 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+			);
+			name = "Localize-Swift";
+			productName = Localize_Swift;
+			productReference = 2ECF488EFD24A1B916546FB54E5E6827 /* Localize-Swift */;
+			productType = "com.apple.product-type.framework";
+		};
+		FCCB247DD9928A10DCCDF169B4616A80 /* Pods-SoberGarden */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BD7B552459DBFF6C7A5ED6E4F056C352 /* Build configuration list for PBXNativeTarget "Pods-SoberGarden" */;
+			buildPhases = (
+				A9A575DA10BBDA18FF952655F1122CA4 /* Headers */,
+				46A7C606DBFC21A57B604A4C4D9E95EC /* Sources */,
+				F184EB4937A60437E6D5264FFA9ECB32 /* Frameworks */,
+				CB91010A5FB1290DE4BD50C92C0E6A99 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				36864193AF17A51044FCBD44554B7204 /* PBXTargetDependency */,
 			);
 			name = "Pods-SoberGarden";
 			productName = Pods_SoberGarden;
@@ -148,17 +275,25 @@
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
 			minimizedProjectReferenceProxies = 0;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 4D020B9DF3565301D7225719B8BF4EB8 /* Products */;
+			productRefGroup = 55920F71A22C79BD16E9E1A547429C8E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				340DDF7DB405EDF7F01580175FF090DF /* Localize-Swift */,
 				FCCB247DD9928A10DCCDF169B4616A80 /* Pods-SoberGarden */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		B4A917C8CF9B5985DA5AE068F950B71E /* Resources */ = {
+		36DB369DD5419A6E91FA237C393BD963 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CB91010A5FB1290DE4BD50C92C0E6A99 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -168,57 +303,40 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		49BB1BA814D02B0DFFDED6438C701C4A /* Sources */ = {
+		46A7C606DBFC21A57B604A4C4D9E95EC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				36277DD518AFD4B0742EE4BC43B8FD14 /* Pods-SoberGarden-dummy.m in Sources */,
+				F99000E90466F308C2D3BF095243BA16 /* Pods-SoberGarden-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C705C36C047AE164DD0FB8A46F67D861 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C26543B5AAF8EB6BFD115258B345FCCB /* IBDesignable+Localize.swift in Sources */,
+				9B6575B52096A00F0FF946662EF6C68F /* Localize.swift in Sources */,
+				E43E65046F95332524F1AEC06359D23D /* Localize-Swift-dummy.m in Sources */,
+				769F2A2F3015075DA36A1B3724A007CD /* String+LocalizeBundle.swift in Sources */,
+				8314DA7E666D0D342C4C9A9AEF96BBF8 /* String+LocalizedBundleTableName.swift in Sources */,
+				D93AAA3C45B08A6D8775C475733FE1B0 /* String+LocalizeTableName.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin XCBuildConfiguration section */
-		A6BACDDB57DB5EC07B7EEEEE0AB1C865 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A3665C33F0B3D8FEEF887305E01D0899 /* Pods-SoberGarden.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_MODULE_VERIFIER = NO;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				INFOPLIST_FILE = "Target Support Files/Pods-SoberGarden/Pods-SoberGarden-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-SoberGarden/Pods-SoberGarden.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
+/* Begin PBXTargetDependency section */
+		36864193AF17A51044FCBD44554B7204 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Localize-Swift";
+			target = 340DDF7DB405EDF7F01580175FF090DF /* Localize-Swift */;
+			targetProxy = B18E3D3BF7CAA56E0FE1FB713A9E0EF8 /* PBXContainerItemProxy */;
 		};
-		DCAA1B9BA3E3DC2B83373AD5EB8F182F /* Release */ = {
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		44A4B2FB6211B90C1949A44A381F6D1F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -268,7 +386,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -280,9 +398,9 @@
 			};
 			name = Release;
 		};
-		F40FD40E60799D0DCE38985B3E2064BB /* Release */ = {
+		690E23A219FA10F54540BFDDD684CDA6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ACBB2A2FE3E0F4510E15B98ABA0E4B98 /* Pods-SoberGarden.release.xcconfig */;
+			baseConfigurationReference = 3F7E72893E454AB45AF0432575EAD267 /* Pods-SoberGarden.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -298,7 +416,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				INFOPLIST_FILE = "Target Support Files/Pods-SoberGarden/Pods-SoberGarden-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -320,7 +438,46 @@
 			};
 			name = Release;
 		};
-		F50F007C5862D7B8F2FF34ED1EDE95FB /* Debug */ = {
+		90B5009727419DEDFD8F5115BFAB92A8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7FE5467A4272C85B37691D7AE65EBFF5 /* Pods-SoberGarden.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				INFOPLIST_FILE = "Target Support Files/Pods-SoberGarden/Pods-SoberGarden-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-SoberGarden/Pods-SoberGarden.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		A0DC1C2C814704734F83EAB35BB20B21 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -373,7 +530,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -386,14 +543,89 @@
 			};
 			name = Debug;
 		};
+		B25D9227271FB24C3CD69D669E97B67A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F8FF090BB248B876E2AC731ECB8F0662 /* Localize-Swift.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_PREFIX_HEADER = "Target Support Files/Localize-Swift/Localize-Swift-prefix.pch";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "Target Support Files/Localize-Swift/Localize-Swift-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/Localize-Swift/Localize-Swift.modulemap";
+				PRODUCT_MODULE_NAME = Localize_Swift;
+				PRODUCT_NAME = Localize_Swift;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		CA599E2E668D5C9D59663F239E2944CF /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1FB0C9B7FA40AFBE5FAA59D05897959E /* Localize-Swift.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_PREFIX_HEADER = "Target Support Files/Localize-Swift/Localize-Swift-prefix.pch";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "Target Support Files/Localize-Swift/Localize-Swift-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/Localize-Swift/Localize-Swift.modulemap";
+				PRODUCT_MODULE_NAME = Localize_Swift;
+				PRODUCT_NAME = Localize_Swift;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00ECFE5716CD0EA9C65E22ADE430F299 /* Build configuration list for PBXNativeTarget "Pods-SoberGarden" */ = {
+		0171893FFAEE29ACA3AE3C93D923F6B6 /* Build configuration list for PBXNativeTarget "Localize-Swift" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A6BACDDB57DB5EC07B7EEEEE0AB1C865 /* Debug */,
-				F40FD40E60799D0DCE38985B3E2064BB /* Release */,
+				B25D9227271FB24C3CD69D669E97B67A /* Debug */,
+				CA599E2E668D5C9D59663F239E2944CF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -401,8 +633,17 @@
 		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F50F007C5862D7B8F2FF34ED1EDE95FB /* Debug */,
-				DCAA1B9BA3E3DC2B83373AD5EB8F182F /* Release */,
+				A0DC1C2C814704734F83EAB35BB20B21 /* Debug */,
+				44A4B2FB6211B90C1949A44A381F6D1F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BD7B552459DBFF6C7A5ED6E4F056C352 /* Build configuration list for PBXNativeTarget "Pods-SoberGarden" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				90B5009727419DEDFD8F5115BFAB92A8 /* Debug */,
+				690E23A219FA10F54540BFDDD684CDA6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

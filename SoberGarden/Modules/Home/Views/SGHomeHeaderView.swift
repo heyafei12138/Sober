@@ -25,9 +25,9 @@ final class SGHomeHeaderView: UIView {
     }
 
     func configure(dayCount: Int, habitName: String) {
-        dayLabel.text = "Day \(dayCount)"
-        habitLabel.text = "Clean from \(habitName)"
-        captionLabel.text = "Recovery companion"
+        dayLabel.text = "home.header.dayFormat".localizedFormat(dayCount)
+        habitLabel.text = "home.header.cleanFromFormat".localizedFormat(habitName)
+        captionLabel.text = "home.header.caption".localized()
     }
 
     private func setupView() {

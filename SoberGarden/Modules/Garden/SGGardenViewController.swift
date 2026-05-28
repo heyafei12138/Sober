@@ -121,14 +121,14 @@ final class SGGardenViewController: BaseViewController {
         cleanDaysLabel.textAlignment = .center
 
         shareButton.setImage(UIImage(systemName: "paperplane.fill"), for: .normal)
-        shareButton.setTitle("Share", for: .normal)
+        shareButton.setTitle("common.share".localized(), for: .normal)
         shareButton.tintColor = SGColor.primaryDark
         shareButton.titleLabel?.font = .systemFont(ofSize: 13, weight: .semibold)
         shareButton.backgroundColor = UIColor.white.withAlphaComponent(0.72)
         shareButton.layer.cornerRadius = 16
         shareButton.layer.masksToBounds = true
         shareButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -2, bottom: 0, right: 2)
-        shareButton.accessibilityLabel = "Share garden progress"
+        shareButton.accessibilityLabel = "garden.share.accessibility".localized()
         shareButton.addTarget(self, action: #selector(handleShareTapped), for: .touchUpInside)
 
         illustrationCardView.contentView.addSubview(illustrationView)
@@ -259,7 +259,7 @@ final class SGGardenViewController: BaseViewController {
 
         illustrationView.configure(stage: stage)
         stageTitleLabel.text = stage.title
-        cleanDaysLabel.text = "\(cleanDays) days clean"
+        cleanDaysLabel.text = "home.gardenPreview.cleanDaysFormat".localizedFormat(cleanDays)
 
         if let nextMilestone {
             let previousMilestoneDay = previousMilestoneDay(before: nextMilestone.day)
@@ -267,14 +267,14 @@ final class SGGardenViewController: BaseViewController {
             let currentStageProgress = max(cleanDays - previousMilestoneDay, 0)
             let remainingDays = max(nextMilestone.day - cleanDays, 0)
 
-            progressHeaderLabel.text = "Next reward: \(nextMilestone.title)"
-            progressDetailLabel.text = "\(remainingDays) days to go until your garden reaches \(nextMilestone.title)."
-            progressRewardLabel.text = "Unlocks: \(nextMilestone.rewardDescription)"
+            progressHeaderLabel.text = "garden.progress.nextRewardFormat".localizedFormat(nextMilestone.title)
+            progressDetailLabel.text = "garden.progress.daysToGoFormat".localizedFormat(remainingDays, nextMilestone.title)
+            progressRewardLabel.text = "garden.progress.unlocksFormat".localizedFormat(nextMilestone.rewardDescription)
             progressBarView.setProgress(CGFloat(currentStageProgress) / CGFloat(stageSpan), animated: false)
         } else {
-            progressHeaderLabel.text = "Sanctuary reached"
-            progressDetailLabel.text = "Your garden is fully grown. Keep tending it one day at a time."
-            progressRewardLabel.text = "Unlocked: The full sanctuary with sunlight, trees, and a quiet path."
+            progressHeaderLabel.text = "garden.progress.sanctuaryReached".localized()
+            progressDetailLabel.text = "garden.progress.fullyGrown".localized()
+            progressRewardLabel.text = "garden.progress.unlockedSanctuary".localized()
             progressBarView.setProgress(1, animated: false)
         }
 
@@ -304,22 +304,22 @@ final class SGGardenViewController: BaseViewController {
 
     private func growthCopy(cleanDays: Int, state: SoberGardenState) -> String {
         if state.relapseRecords.isEmpty == false, cleanDays <= 1 {
-            return "Your garden remembers your effort.\nA new seed has been planted."
+            return "garden.copy.restart".localized()
         }
 
         switch cleanDays {
         case 0...2:
-            return "A seed does not need to become a forest today. It only needs care, light, and one more clean day."
+            return "garden.copy.seed".localized()
         case 3...6:
-            return "Small choices are beginning to show. Keep returning to what helps you feel steady."
+            return "garden.copy.sprout".localized()
         case 7...13:
-            return "Your first week has roots now. The progress is real, even on days that feel quiet."
+            return "garden.copy.week".localized()
         case 14...29:
-            return "This garden is learning your rhythm. Keep protecting the space you have made."
+            return "garden.copy.rhythm".localized()
         case 30...89:
-            return "Your clean days are becoming a place you can return to. Let the momentum stay gentle."
+            return "garden.copy.momentum".localized()
         default:
-            return "Your garden holds the work you have already done. Keep tending it at your own pace."
+            return "garden.copy.longTerm".localized()
         }
     }
 
@@ -415,7 +415,7 @@ private final class SGGardenSubscriptionOverlayView: UIView {
         buttonWrapView.layer.shadowRadius = 22
         buttonWrapView.layer.shadowOffset = CGSize(width: 0, height: 12)
 
-        subscribeButton.setTitle("Unlock Garden Plus", for: .normal)
+        subscribeButton.setTitle("garden.plus.unlock".localized(), for: .normal)
         subscribeButton.setImage(UIImage(systemName: "leaf.fill"), for: .normal)
         subscribeButton.tintColor = .white
         subscribeButton.titleLabel?.font = .systemFont(ofSize: 17, weight: .heavy)
@@ -426,7 +426,7 @@ private final class SGGardenSubscriptionOverlayView: UIView {
         subscribeButton.layer.cornerCurve = .continuous
         subscribeButton.layer.masksToBounds = true
         subscribeButton.semanticContentAttribute = .forceLeftToRight
-        subscribeButton.accessibilityLabel = "Unlock Garden Plus"
+        subscribeButton.accessibilityLabel = "garden.plus.unlock".localized()
         subscribeButton.addTarget(self, action: #selector(handleSubscribeTapped), for: .touchUpInside)
 
         addSubview(posterImageView)

@@ -19,66 +19,66 @@ final class SGRescueViewController: BaseViewController {
         var title: String {
             switch self {
             case .emotion:
-                return "What are you feeling right now?"
+                return "rescue.step.emotion.title".localized()
             case .coach:
-                return "Calm Coach is here."
+                return "rescue.step.coach.title".localized()
             case .breathing:
-                return "Take one steady breath."
+                return "rescue.step.breathing.title".localized()
             case .reasons:
-                return "Return to your reasons."
+                return "rescue.step.reasons.title".localized()
             case .delay:
-                return "Create a little distance."
+                return "rescue.step.delay.title".localized()
             case .feedback:
-                return "Check in before you go."
+                return "rescue.step.feedback.title".localized()
             }
         }
 
         var subtitle: String {
             switch self {
             case .emotion:
-                return "Name the feeling first. You do not need to solve everything at once."
+                return "rescue.step.emotion.subtitle".localized()
             case .coach:
-                return "A short prompt will help you steady the next choice."
+                return "rescue.step.coach.subtitle".localized()
             case .breathing:
-                return "Slow down your body before making any decision."
+                return "rescue.step.breathing.subtitle".localized()
             case .reasons:
-                return "Your reasons are here when the urge gets loud."
+                return "rescue.step.reasons.subtitle".localized()
             case .delay:
-                return "Set a small delay and let the peak pass."
+                return "rescue.step.delay.subtitle".localized()
             case .feedback:
-                return "Notice whether the urge changed during the session."
+                return "rescue.step.feedback.subtitle".localized()
             }
         }
 
         var placeholderText: String {
             switch self {
             case .emotion:
-                return "Emotion picker will appear here in the next task."
+                return "rescue.placeholder.emotion".localized()
             case .coach:
-                return "Local Calm Coach prompt will appear here."
+                return "rescue.placeholder.coach".localized()
             case .breathing:
-                return "Breathing exercise module will appear here."
+                return "rescue.placeholder.breathing".localized()
             case .reasons:
-                return "Personal reasons will appear here."
+                return "rescue.placeholder.reasons".localized()
             case .delay:
-                return "Delay commitment controls will appear here."
+                return "rescue.placeholder.delay".localized()
             case .feedback:
-                return "Before and after urge check-in will appear here."
+                return "rescue.placeholder.feedback".localized()
             }
         }
 
         var primaryButtonTitle: String {
             switch self {
             case .coach:
-                return "Start Breathing"
+                return "rescue.button.startBreathing".localized()
             case .breathing:
-                return "Finish Early"
+                return "rescue.button.finishEarly".localized()
             case .delay:
-                return "I'll wait 10 minutes"
+                return "rescue.button.wait10".localized()
             case .feedback:
-                return "I'm okay now"
+                return "rescue.button.okayNow".localized()
             default:
-                return "Continue"
+                return "common.continue".localized()
             }
         }
 
@@ -97,7 +97,7 @@ final class SGRescueViewController: BaseViewController {
     private let draftSummaryLabel = UILabel()
     private let footerStackView = UIStackView()
     private let backButton = UIButton(type: .system)
-    private let primaryButton = SGPrimaryButton(title: "Continue")
+    private let primaryButton = SGPrimaryButton(title: "common.continue".localized())
     private let feedbackValueLabel = UILabel()
 
     private var currentStep: Step = .emotion
@@ -227,7 +227,7 @@ final class SGRescueViewController: BaseViewController {
         footerStackView.distribution = .fill
         footerStackView.spacing = 12
 
-        backButton.setTitle("Back", for: .normal)
+        backButton.setTitle("common.back".localized(), for: .normal)
         backButton.titleLabel?.font = .systemFont(ofSize: 17, weight: .semibold)
         backButton.setTitleColor(SGColor.primaryDark, for: .normal)
         backButton.setTitleColor(SGColor.textTertiary, for: .disabled)
@@ -255,33 +255,33 @@ final class SGRescueViewController: BaseViewController {
     private func stepTitle(for step: Step) -> String {
         switch step {
         case .emotion:
-            return "Start by naming the moment."
+            return "rescue.card.emotion".localized()
         case .coach:
-            return "Read one steadying thought."
+            return "rescue.card.coach".localized()
         case .breathing:
-            return "Let your body slow down."
+            return "rescue.card.breathing".localized()
         case .reasons:
-            return "Remember what you are protecting."
+            return "rescue.card.reasons".localized()
         case .delay:
-            return "Delay the decision."
+            return "rescue.card.delay".localized()
         case .feedback:
-            return "Close the loop."
+            return "rescue.card.feedback".localized()
         }
     }
 
     private func draftSummaryText() -> String {
-        let emotionText = draft.emotion?.displayName ?? "Not selected"
-        let urgeBeforeText = draft.urgeBefore.map(String.init) ?? "Not set"
-        let urgeAfterText = draft.urgeAfter.map(String.init) ?? "Not set"
-        let breathingText = draft.completedBreathing ? "Done" : "Pending"
-        let delayText = draft.completedDelay ? "Done" : "Pending"
+        let emotionText = draft.emotion?.displayName ?? "common.notSelected".localized()
+        let urgeBeforeText = draft.urgeBefore.map(String.init) ?? "common.notSet".localized()
+        let urgeAfterText = draft.urgeAfter.map(String.init) ?? "common.notSet".localized()
+        let breathingText = draft.completedBreathing ? "common.done".localized() : "common.pending".localized()
+        let delayText = draft.completedDelay ? "common.done".localized() : "common.pending".localized()
 
         return [
-            "Emotion: \(emotionText)",
-            "Urge before: \(urgeBeforeText)",
-            "Breathing: \(breathingText)",
-            "Delay: \(delayText)",
-            "Urge after: \(urgeAfterText)"
+            "rescue.summary.emotionFormat".localizedFormat(emotionText),
+            "rescue.summary.urgeBeforeFormat".localizedFormat(urgeBeforeText),
+            "rescue.summary.breathingFormat".localizedFormat(breathingText),
+            "rescue.summary.delayFormat".localizedFormat(delayText),
+            "rescue.summary.urgeAfterFormat".localizedFormat(urgeAfterText)
         ].joined(separator: "  ·  ")
     }
 
@@ -366,7 +366,7 @@ final class SGRescueViewController: BaseViewController {
             .filter { !$0.isEmpty } ?? []
 
         if reasons.isEmpty {
-            stackView.addArrangedSubview(makeReasonLabel("You chose this because your future matters more than this urge."))
+            stackView.addArrangedSubview(makeReasonLabel("rescue.reasons.fallback".localized()))
         } else {
             reasons.forEach { reason in
                 stackView.addArrangedSubview(makeReasonLabel(reason))
@@ -381,7 +381,7 @@ final class SGRescueViewController: BaseViewController {
         label.font = .systemFont(ofSize: 16, weight: .medium)
         label.textColor = SGColor.textDark
         label.numberOfLines = 0
-        label.text = "- \(text)"
+        label.text = "rescue.reasons.bulletFormat".localizedFormat(text)
         return label
     }
 
@@ -396,16 +396,16 @@ final class SGRescueViewController: BaseViewController {
         titleLabel.font = .systemFont(ofSize: 22, weight: .semibold)
         titleLabel.textColor = SGColor.textDark
         titleLabel.numberOfLines = 0
-        titleLabel.text = "Can you wait 10 minutes?"
+        titleLabel.text = "rescue.delay.title".localized()
 
         let bodyLabel = UILabel()
         bodyLabel.font = .systemFont(ofSize: 15, weight: .medium)
         bodyLabel.textColor = SGColor.textSecondary
         bodyLabel.numberOfLines = 0
-        bodyLabel.text = "You are not promising forever. Just give this wave a little time to pass."
+        bodyLabel.text = "rescue.delay.body".localized()
 
         let strugglingButton = UIButton(type: .system)
-        strugglingButton.setTitle("I'm still struggling", for: .normal)
+        strugglingButton.setTitle("rescue.delay.stillStruggling".localized(), for: .normal)
         strugglingButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
         strugglingButton.setTitleColor(SGColor.rescue, for: .normal)
         strugglingButton.backgroundColor = SGColor.rescue.withAlphaComponent(0.12)
@@ -435,7 +435,7 @@ final class SGRescueViewController: BaseViewController {
         titleLabel.font = .systemFont(ofSize: 20, weight: .semibold)
         titleLabel.textColor = SGColor.textDark
         titleLabel.numberOfLines = 0
-        titleLabel.text = "How strong is the urge now?"
+        titleLabel.text = "rescue.feedback.title".localized()
 
         feedbackValueLabel.font = .monospacedDigitSystemFont(ofSize: 28, weight: .semibold)
         feedbackValueLabel.textColor = SGColor.primaryDark
@@ -453,7 +453,7 @@ final class SGRescueViewController: BaseViewController {
         slider.addTarget(self, action: #selector(handleUrgeAfterChanged(_:)), for: .valueChanged)
 
         let startAnotherButton = UIButton(type: .system)
-        startAnotherButton.setTitle("Start another rescue", for: .normal)
+        startAnotherButton.setTitle("rescue.feedback.startAnother".localized(), for: .normal)
         startAnotherButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
         startAnotherButton.setTitleColor(SGColor.primaryDark, for: .normal)
         startAnotherButton.backgroundColor = SGColor.primaryLight.withAlphaComponent(0.68)
@@ -586,7 +586,7 @@ final class SGRescueViewController: BaseViewController {
 
     private func updateFeedbackValueLabel() {
         let value = draft.urgeAfter ?? 0
-        feedbackValueLabel.text = "\(value) / 10"
+        feedbackValueLabel.text = "rescue.feedback.valueFormat".localizedFormat(value)
     }
 
     @objc private func handleStillStrugglingTapped() {

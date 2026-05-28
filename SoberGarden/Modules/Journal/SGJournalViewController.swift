@@ -12,12 +12,12 @@ final class SGJournalViewController: BaseViewController {
     private let contentView = UIView()
     private let contentStackView = UIStackView()
     private let headerView = SGSectionHeaderView(
-        title: "Journal",
-        subtitle: "A small check-in helps you notice patterns without judging the day."
+        title: "journal.title".localized(),
+        subtitle: "journal.subtitle".localized()
     )
     private let checkInStatsView = SGCheckInStatsView()
     private let checkInView = SGJournalCheckInView()
-    private let historyHeaderView = SGSectionHeaderView(title: "Recent entries")
+    private let historyHeaderView = SGSectionHeaderView(title: "journal.history.title".localized())
     private let historyStackView = UIStackView()
 
     override func viewDidLoad() {
@@ -90,6 +90,8 @@ final class SGJournalViewController: BaseViewController {
 
     private func reloadJournal() {
         let state = SoberGardenStore.shared.state
+        headerView.configure(title: "journal.title".localized(), subtitle: "journal.subtitle".localized())
+        historyHeaderView.configure(title: "journal.history.title".localized())
         let entries = state.journalEntries
         let cleanStreakDays = state.habit.map {
             SGProgressCalculator.currentStreakDays(startDate: $0.startDate, now: Date())
@@ -156,7 +158,7 @@ final class SGJournalViewController: BaseViewController {
         label.font = .systemFont(ofSize: 15, weight: .medium)
         label.textColor = SGColor.textSecondary
         label.numberOfLines = 0
-        label.text = "No entries yet. Save today's check-in to start your journal."
+        label.text = "journal.history.empty".localized()
         return label
     }
 
@@ -171,12 +173,12 @@ final class SGJournalViewController: BaseViewController {
         iconView.contentMode = .scaleAspectFit
 
         let titleLabel = UILabel()
-        titleLabel.text = "Unlock journal history"
+        titleLabel.text = "journal.history.unlockTitle".localized()
         titleLabel.font = .systemFont(ofSize: 17, weight: .bold)
         titleLabel.textColor = SGColor.textDark
 
         let subtitleLabel = UILabel()
-        subtitleLabel.text = "\(entryCount) saved \(entryCount == 1 ? "entry" : "entries") are ready with Plus."
+        subtitleLabel.text = "journal.history.unlockSubtitleFormat".localizedFormat(entryCount)
         subtitleLabel.font = .systemFont(ofSize: 14, weight: .medium)
         subtitleLabel.textColor = SGColor.textSecondary
         subtitleLabel.numberOfLines = 0

@@ -17,7 +17,7 @@ final class SGHomeViewController: BaseViewController {
     private let coachTextStackView = UIStackView()
     private let coachImageContainerView = UIView()
     private let coachImageView = UIImageView()
-    private let coachSectionHeader = SGSectionHeaderView(title: "Calm Coach")
+    private let coachSectionHeader = SGSectionHeaderView(title: "home.coach.title".localized())
     private let coachPromptLabel = UILabel()
     private let todayCheckInCardView = SGTodayCheckInCardView()
     private let streakCardView = SGStreakCardView()
@@ -26,8 +26,8 @@ final class SGHomeViewController: BaseViewController {
     private let gardenPreviewView = SGGardenPreviewView()
     private let logoImageView = UIImageView(image: UIImage(named: "logo_icon"))
     private let shareProgressControl = SGHomeActionRowControl(
-        title: "Share Progress",
-        subtitle: "Make your progress easy to share.",
+        title: "home.shareProgress.title".localized(),
+        subtitle: "home.shareProgress.subtitle".localized(),
         iconName: "paperplane.fill"
     )
     private let rescuePillControl = SGHomeRescuePillControl()
@@ -244,13 +244,14 @@ final class SGHomeViewController: BaseViewController {
         let currentHours = habit.map { max(Int(floor(now.timeIntervalSince($0.startDate) / 3600)), 0) } ?? 0
         let longestStreak = max(cleanDays, state.relapseRecords.map(\.previousStreakDays).max() ?? cleanDays)
         let nextMilestone = SGProgressCalculator.nextMilestone(for: cleanDays)
-        let habitName = habit?.displayName ?? "Habit"
+        let habitName = habit?.displayName ?? "habit.generic".localized()
 
         headerView.configure(
             dayCount: cleanDays,
             habitName: habitName
         )
 
+        coachSectionHeader.configure(title: "home.coach.title".localized())
         coachPromptLabel.text = currentCoachText(for: state, habit: habit, cleanDays: cleanDays, now: now)
         todayCheckInCardView.configure(state: currentTodayCheckInState(from: state.checkIn))
 
@@ -492,7 +493,7 @@ private final class SGHomeActionRowControl: UIControl {
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setupView(title: "Share Progress", subtitle: "", iconName: "square.and.arrow.up")
+        setupView(title: "home.shareProgress.title".localized(), subtitle: "", iconName: "square.and.arrow.up")
     }
 
     private func setupView(title: String, subtitle: String, iconName: String) {
@@ -639,8 +640,8 @@ private final class SGHomeRescuePillControl: UIControl {
     }
 
     private func setupView() {
-        accessibilityLabel = "Help. Start support."
-        accessibilityHint = "Opens the help flow."
+        accessibilityLabel = "home.help.accessibilityLabel".localized()
+        accessibilityHint = "home.help.accessibilityHint".localized()
         accessibilityTraits = .button
 
         addSubview(pulseOuterView)
@@ -673,7 +674,7 @@ private final class SGHomeRescuePillControl: UIControl {
         iconView.tintColor = .white
         iconView.contentMode = .scaleAspectFit
 
-        titleLabel.text = "Help"
+        titleLabel.text = "home.help.title".localized()
         titleLabel.font = .systemFont(ofSize: 13, weight: .bold)
         titleLabel.textColor = .white
         titleLabel.textAlignment = .center

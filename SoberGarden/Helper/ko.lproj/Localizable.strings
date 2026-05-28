@@ -1,0 +1,22 @@
+/* 
+  Localizable.strings
+  SoberGarden
+
+  Created by hebert on 2026/5/28.
+  
+*/
+
+"settings.title" = "설정";
+"settings.subtitle" = "알림, 개인정보, 언어, 로컬 데이터를 관리합니다.";
+"settings.section.habit.title" = "습관";
+"settings.section.habit.subtitle" = "현재 회복 목표와 온보딩에서 설정한 기준을 확인합니다.";
+"settings.section.preferences.title" = "앱 환경설정";
+"settings.section.preferences.subtitle" = "SoberGarden을 매일 편하게 사용할 수 있게 조정합니다.";
+"settings.section.notifications.title" = "알림";
+"settings.section.notifications.subtitle" = "알림을 부드럽고 예측 가능하게 유지합니다.";
+"settings.section.privacy.title" = "개인정보 및 안전";
+"settings.section.privacy.subtitle" = "정책, 이용 약관, 케어 범위를 확인합니다.";
+"settings.language.title" = "언어";
+"settings.language.row.subtitle" = "앱 안에서 사용할 언어를 선택합니다.";
+"settings.language.subtitle" = "SoberGarden의 표시 언어를 선택합니다. 선택 내용은 이 기기에 저장됩니다.";
+"settings.language.selected" = "선택됨";

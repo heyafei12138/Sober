@@ -8,12 +8,12 @@ import Foundation
 struct SGOnboardingDraft {
 
     static let reasonTemplates: [String] = [
-        "I want to feel in control again.",
-        "I want to protect my health.",
-        "I want to stop feeling regret.",
-        "I want to become someone I respect.",
-        "I want more time and energy.",
-        "I want to build a better future.",
+        "onboarding.reason.control".localized(),
+        "onboarding.reason.health".localized(),
+        "onboarding.reason.regret".localized(),
+        "onboarding.reason.respect".localized(),
+        "onboarding.reason.energy".localized(),
+        "onboarding.reason.future".localized(),
     ]
 
     var habitType: HabitType?
@@ -96,20 +96,20 @@ enum SGOnboardingTimeMode: Int, CaseIterable {
     var title: String {
         switch self {
         case .day:
-            return "Minutes per day"
+            return "onboarding.time.minutesPerDay".localized()
         case .week:
-            return "Hours per week"
+            return "onboarding.time.hoursPerWeek".localized()
         case .skip:
-            return "Skip"
+            return "common.skip".localized()
         }
     }
 
     var placeholder: String {
         switch self {
         case .day:
-            return "Minutes"
+            return "common.minutes".localized()
         case .week:
-            return "Hours"
+            return "common.hours".localized()
         case .skip:
             return ""
         }
@@ -125,13 +125,13 @@ enum SGOnboardingCostMode: Int, CaseIterable {
     var title: String {
         switch self {
         case .day:
-            return "Cost per day"
+            return "onboarding.cost.perDay".localized()
         case .week:
-            return "Cost per week"
+            return "onboarding.cost.perWeek".localized()
         case .month:
-            return "Cost per month"
+            return "onboarding.cost.perMonth".localized()
         case .skip:
-            return "Skip"
+            return "common.skip".localized()
         }
     }
 }

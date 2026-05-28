@@ -110,10 +110,10 @@ class MainTabBarController: UITabBarController {
         
         // 配置TabBar项
         let items: [(title: String, systemImage: String, selectedSystemImage: String)] = [
-            ("Home", "house", "house.fill"),
-            ("Rescue", "lifepreserver", "lifepreserver.fill"),
-            ("Garden", "leaf", "leaf.fill"),
-            ("Journal", "book", "book.fill"),
+            ("tab.home".localized(), "house", "house.fill"),
+            ("tab.rescue".localized(), "lifepreserver", "lifepreserver.fill"),
+            ("tab.garden".localized(), "leaf", "leaf.fill"),
+            ("tab.journal".localized(), "book", "book.fill"),
         ]
         
         customTabBar.configureItems(items)

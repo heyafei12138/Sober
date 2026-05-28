@@ -38,7 +38,7 @@ final class SGBadgeGridView: UIView {
                 let itemView = SGBadgeItemView()
                 itemView.configure(
                     title: milestone.badgeName,
-                    dayText: "Day \(milestone.day)",
+                    dayText: "garden.dayFormat".localizedFormat(milestone.day),
                     isUnlocked: unlockedCleanDays >= milestone.day
                 )
                 rowStackView.addArrangedSubview(itemView)
@@ -57,7 +57,7 @@ final class SGBadgeGridView: UIView {
     }
 
     private func setupView() {
-        titleLabel.text = "Unlocked Badges"
+        titleLabel.text = "garden.badges.title".localized()
         titleLabel.font = .systemFont(ofSize: 18, weight: .semibold)
         titleLabel.textColor = SGColor.textDark
 

@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 @_exported import JKSwiftExtension
 @_exported import SnapKit
+@_exported import Localize_Swift
 
 // MARK: - 屏幕尺寸
 let kScreenWidth = jk_kScreenW

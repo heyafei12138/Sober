@@ -35,11 +35,11 @@ final class SGStreakCardView: UIView {
         startedDate: Date?,
         habitName: String
     ) {
-        titleLabel.text = "\(cleanDays) days clean"
-        dayMetricView.configure(value: "\(cleanDays)", title: "Days")
-        hourMetricView.configure(value: "\(currentHours)", title: "Hours")
-        longestMetricView.configure(value: "\(longestStreakDays)", title: "Longest")
-        startMetricView.configure(value: Self.startedText(for: startedDate), title: "Started")
+        titleLabel.text = "home.streak.titleFormat".localizedFormat(cleanDays)
+        dayMetricView.configure(value: "\(cleanDays)", title: "home.streak.days".localized())
+        hourMetricView.configure(value: "\(currentHours)", title: "home.streak.hours".localized())
+        longestMetricView.configure(value: "\(longestStreakDays)", title: "home.streak.longest".localized())
+        startMetricView.configure(value: Self.startedText(for: startedDate), title: "home.streak.started".localized())
     }
 
     private func setupView() {
@@ -53,7 +53,7 @@ final class SGStreakCardView: UIView {
         titleLabel.minimumScaleFactor = 0.8
 
         shareButton.setImage(UIImage(systemName: "paperplane.fill"), for: .normal)
-        shareButton.setTitle("Share", for: .normal)
+        shareButton.setTitle("common.share".localized(), for: .normal)
         shareButton.tintColor = SGColor.primaryDark
         shareButton.titleLabel?.font = .systemFont(ofSize: 13, weight: .semibold)
         shareButton.semanticContentAttribute = .forceLeftToRight

@@ -1,0 +1,22 @@
+/* 
+  Localizable.strings
+  SoberGarden
+
+  Created by hebert on 2026/5/28.
+  
+*/
+
+"settings.title" = "Ajustes";
+"settings.subtitle" = "Gestiona recordatorios, privacidad, idioma y datos locales.";
+"settings.section.habit.title" = "Hábito";
+"settings.section.habit.subtitle" = "Revisa tu objetivo actual y los datos base que configuraste al empezar.";
+"settings.section.preferences.title" = "Preferencias de la app";
+"settings.section.preferences.subtitle" = "Mantén SoberGarden cómodo para el uso diario.";
+"settings.section.notifications.title" = "Notificaciones";
+"settings.section.notifications.subtitle" = "Mantén los recordatorios suaves y previsibles.";
+"settings.section.privacy.title" = "Privacidad y seguridad";
+"settings.section.privacy.subtitle" = "Lee la política, los términos y los límites de cuidado.";
+"settings.language.title" = "Idioma";
+"settings.language.row.subtitle" = "Elige el idioma usado dentro de la app.";
+"settings.language.subtitle" = "Elige el idioma de SoberGarden. Tu elección se guarda en este dispositivo.";
+"settings.language.selected" = "Seleccionado";

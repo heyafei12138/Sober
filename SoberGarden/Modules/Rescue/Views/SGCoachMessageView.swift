@@ -25,15 +25,15 @@ final class SGCoachMessageView: UIView {
     }
 
     func showLoading() {
-        titleLabel.text = "Calm Coach is here..."
-        messageLabel.text = "Finding a steady sentence for this moment."
+        titleLabel.text = "rescue.coach.loadingTitle".localized()
+        messageLabel.text = "rescue.coach.loadingMessage".localized()
         activityIndicatorView.startAnimating()
         activityIndicatorView.isHidden = false
         iconLabel.text = "..."
     }
 
     func showPrompt(_ prompt: String) {
-        titleLabel.text = "Calm Coach"
+        titleLabel.text = "home.coach.title".localized()
         messageLabel.text = prompt
         activityIndicatorView.stopAnimating()
         activityIndicatorView.isHidden = true

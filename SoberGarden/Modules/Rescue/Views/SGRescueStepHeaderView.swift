@@ -23,7 +23,7 @@ final class SGRescueStepHeaderView: UIView {
     }
 
     func configure(title: String, subtitle: String, stepIndex: Int, totalSteps: Int) {
-        eyebrowLabel.text = "Step \(stepIndex) of \(totalSteps)"
+        eyebrowLabel.text = "rescue.step.countFormat".localizedFormat(stepIndex, totalSteps)
         titleLabel.text = title
         subtitleLabel.text = subtitle
         progressBarView.setProgress(CGFloat(stepIndex) / CGFloat(max(totalSteps, 1)), animated: false)

@@ -24,15 +24,15 @@ enum MoodType: String, Codable, CaseIterable {
     var displayName: String {
         switch self {
         case .great:
-            return "Great"
+            return "mood.great".localized()
         case .calm:
-            return "Calm"
+            return "mood.calm".localized()
         case .okay:
-            return "Okay"
+            return "mood.okay".localized()
         case .low:
-            return "Low"
+            return "mood.low".localized()
         case .stressed:
-            return "Stressed"
+            return "mood.stressed".localized()
         }
     }
 }
@@ -45,11 +45,11 @@ enum UrgeLevel: String, Codable, CaseIterable {
     var displayName: String {
         switch self {
         case .none:
-            return "No urge"
+            return "urgeLevel.none".localized()
         case .mild:
-            return "Mild urge"
+            return "urgeLevel.mild".localized()
         case .strong:
-            return "Strong urge"
+            return "urgeLevel.strong".localized()
         }
     }
 }
@@ -67,21 +67,21 @@ enum TriggerType: String, Codable, CaseIterable {
     var displayName: String {
         switch self {
         case .stress:
-            return "Stress"
+            return "trigger.stress".localized()
         case .boredom:
-            return "Boredom"
+            return "trigger.boredom".localized()
         case .loneliness:
-            return "Loneliness"
+            return "trigger.loneliness".localized()
         case .socialMedia:
-            return "Social media"
+            return "trigger.socialMedia".localized()
         case .lateNight:
-            return "Late night"
+            return "trigger.lateNight".localized()
         case .conflict:
-            return "Conflict"
+            return "trigger.conflict".localized()
         case .tiredness:
-            return "Tiredness"
+            return "trigger.tiredness".localized()
         case .custom:
-            return "Custom"
+            return "trigger.custom".localized()
         }
     }
 }

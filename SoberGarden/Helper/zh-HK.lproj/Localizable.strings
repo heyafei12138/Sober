@@ -1,0 +1,22 @@
+/* 
+  Localizable.strings
+  SoberGarden
+
+  Created by hebert on 2026/5/28.
+  
+*/
+
+"settings.title" = "設定";
+"settings.subtitle" = "管理提醒、私隱、語言和本機資料。";
+"settings.section.habit.title" = "習慣";
+"settings.section.habit.subtitle" = "查看目前戒斷目標，以及你在引導流程中設定的基礎資料。";
+"settings.section.preferences.title" = "App 偏好";
+"settings.section.preferences.subtitle" = "讓 SoberGarden 更適合你的日常使用。";
+"settings.section.notifications.title" = "通知";
+"settings.section.notifications.subtitle" = "保持提醒溫和、穩定、可預期。";
+"settings.section.privacy.title" = "私隱與安全";
+"settings.section.privacy.subtitle" = "閱讀私隱政策、使用條款和關懷邊界。";
+"settings.language.title" = "語言";
+"settings.language.row.subtitle" = "選擇 App 內使用的語言。";
+"settings.language.subtitle" = "選擇 SoberGarden 的顯示語言。此選擇會儲存在本裝置上。";
+"settings.language.selected" = "已選擇";

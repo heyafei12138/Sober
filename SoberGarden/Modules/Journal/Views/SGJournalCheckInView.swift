@@ -17,7 +17,7 @@ final class SGJournalCheckInView: UIView {
     private let triggerStackView = UIStackView()
     private let noteTextView = UITextView()
     private let notePlaceholderLabel = UILabel()
-    private let saveButton = SGPrimaryButton(title: "Save check-in")
+    private let saveButton = SGPrimaryButton(title: "journal.save".localized())
 
     private var moodChips: [MoodType: SGOptionChip] = [:]
     private var urgeChips: [UrgeLevel: SGOptionChip] = [:]
@@ -58,7 +58,7 @@ final class SGJournalCheckInView: UIView {
 
         titleLabel.font = .systemFont(ofSize: 20, weight: .semibold)
         titleLabel.textColor = SGColor.textDark
-        titleLabel.text = "Today Check-in"
+        titleLabel.text = "journal.todayCheckIn".localized()
 
         [moodStackView, urgeStackView, triggerStackView].forEach {
             $0.axis = .vertical
@@ -98,7 +98,7 @@ final class SGJournalCheckInView: UIView {
     }
 
     private func setupMoodSection() {
-        moodStackView.addArrangedSubview(makeSectionLabel("Mood"))
+        moodStackView.addArrangedSubview(makeSectionLabel("journal.mood".localized()))
         addChips(MoodType.allCases, to: moodStackView) { [weak self] mood in
             let chip = SGOptionChip(title: mood.displayName)
             chip.addTarget(self, action: #selector(self?.handleMoodTapped(_:)), for: .touchUpInside)
@@ -109,7 +109,7 @@ final class SGJournalCheckInView: UIView {
     }
 
     private func setupUrgeSection() {
-        urgeStackView.addArrangedSubview(makeSectionLabel("Urge"))
+        urgeStackView.addArrangedSubview(makeSectionLabel("journal.urge".localized()))
         addChips(UrgeLevel.allCases, to: urgeStackView) { [weak self] urge in
             let chip = SGOptionChip(title: urge.displayName)
             chip.addTarget(self, action: #selector(self?.handleUrgeTapped(_:)), for: .touchUpInside)
@@ -120,7 +120,7 @@ final class SGJournalCheckInView: UIView {
     }
 
     private func setupTriggerSection() {
-        triggerStackView.addArrangedSubview(makeSectionLabel("Triggers"))
+        triggerStackView.addArrangedSubview(makeSectionLabel("journal.triggers".localized()))
         addChips(TriggerType.allCases, to: triggerStackView) { [weak self] trigger in
             let chip = SGOptionChip(title: trigger.displayName)
             chip.addTarget(self, action: #selector(self?.handleTriggerTapped(_:)), for: .touchUpInside)
@@ -148,7 +148,7 @@ final class SGJournalCheckInView: UIView {
         tapGesture.cancelsTouchesInView = false
         noteTextView.addGestureRecognizer(tapGesture)
 
-        notePlaceholderLabel.text = "What helped you today?"
+        notePlaceholderLabel.text = "journal.note.placeholder".localized()
         notePlaceholderLabel.font = .systemFont(ofSize: 15, weight: .regular)
         notePlaceholderLabel.textColor = SGColor.textTertiary
 

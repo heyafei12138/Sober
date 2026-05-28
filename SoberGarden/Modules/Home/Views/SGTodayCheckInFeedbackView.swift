@@ -11,7 +11,7 @@ final class SGTodayCheckInFeedbackView: UIView {
     private let contentStackView = UIStackView()
     private let titleLabel = UILabel()
     private let subtitleLabel = UILabel()
-    private let button = SGPrimaryButton(title: "Done")
+    private let button = SGPrimaryButton(title: "common.done".localized())
 
     var onButtonTap: (() -> Void)?
 
@@ -25,7 +25,7 @@ final class SGTodayCheckInFeedbackView: UIView {
         setupView()
     }
 
-    func configure(title: String, subtitle: String, buttonTitle: String = "Done") {
+    func configure(title: String, subtitle: String, buttonTitle: String = "common.done".localized()) {
         titleLabel.text = title
         subtitleLabel.text = subtitle
         button.setTitle(buttonTitle, for: .normal)

@@ -30,13 +30,13 @@ final class SGTodayCheckInFlowViewController: BaseViewController {
         var title: String {
             switch self {
             case .easy:
-                return "Easy"
+                return "checkin.mood.easy".localized()
             case .okay:
-                return "Okay"
+                return "checkin.mood.okay".localized()
             case .hard:
-                return "Hard"
+                return "checkin.mood.hard".localized()
             case .urges:
-                return "I had urges"
+                return "checkin.mood.urges".localized()
             }
         }
 
@@ -73,19 +73,19 @@ final class SGTodayCheckInFlowViewController: BaseViewController {
     private let contentStackView = UIStackView()
     private let introCardView = SGTodayCheckInCardView()
     private let moodHeaderView = SGSectionHeaderView(
-        title: "How was today?",
-        subtitle: "Choose the closest answer. You can keep it light."
+        title: "checkin.flow.mood.title".localized(),
+        subtitle: "checkin.flow.mood.subtitle".localized()
     )
     private let moodStackView = UIStackView()
     private let triggerHeaderView = SGSectionHeaderView(
-        title: "What made it harder?",
-        subtitle: "Only show this when the day felt difficult."
+        title: "checkin.flow.triggers.title".localized(),
+        subtitle: "checkin.flow.triggers.subtitle".localized()
     )
     private let triggerStackView = UIStackView()
     private let feedbackView = SGTodayCheckInFeedbackView()
     private let actionStackView = UIStackView()
-    private let primaryButton = SGPrimaryButton(title: "Continue")
-    private let secondaryButton = SGPrimaryButton(title: "Back", style: .secondary)
+    private let primaryButton = SGPrimaryButton(title: "common.continue".localized())
+    private let secondaryButton = SGPrimaryButton(title: "common.back".localized(), style: .secondary)
     private var moodChips: [MoodChoice: SGOptionChip] = [:]
     private var triggerChips: [TriggerType: SGOptionChip] = [:]
 
@@ -103,7 +103,7 @@ final class SGTodayCheckInFlowViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Today’s Check-in"
+        title = "checkin.card.badge".localized()
         configureSheetPresentation()
     }
 
@@ -195,9 +195,9 @@ final class SGTodayCheckInFlowViewController: BaseViewController {
 
     private func setupFeedbackView() {
         feedbackView.configure(
-            title: "You protected another day.",
-            subtitle: "Your garden grew stronger.",
-            buttonTitle: "Done"
+            title: "checkin.feedback.protected.title".localized(),
+            subtitle: "checkin.feedback.protected.subtitle".localized(),
+            buttonTitle: "common.done".localized()
         )
         feedbackView.onButtonTap = { [weak self] in
             self?.finishFlow()
@@ -255,9 +255,9 @@ final class SGTodayCheckInFlowViewController: BaseViewController {
         if state == .todayConfirmed {
             feedbackView.isHidden = false
             feedbackView.configure(
-                title: "Today protected",
-                subtitle: "Your garden is growing.",
-                buttonTitle: "Done"
+                title: "checkin.card.confirmed.title".localized(),
+                subtitle: "checkin.card.confirmed.subtitle".localized(),
+                buttonTitle: "common.done".localized()
             )
         }
     }
@@ -265,24 +265,24 @@ final class SGTodayCheckInFlowViewController: BaseViewController {
     private func currentPrimaryTitle() -> String {
         switch currentStep {
         case .intro:
-            return "Continue"
+            return "common.continue".localized()
         case .mood:
-            return "Continue"
+            return "common.continue".localized()
         case .triggers:
-            return "Continue"
+            return "common.continue".localized()
         case .feedback:
-            return "Done"
+            return "common.done".localized()
         }
     }
 
     private func currentSecondaryTitle() -> String {
         switch currentStep {
         case .mood, .triggers:
-            return "Back"
+            return "common.back".localized()
         case .feedback:
-            return "Back"
+            return "common.back".localized()
         case .intro:
-            return "I’m struggling"
+            return "common.imStruggling".localized()
         }
     }
 
@@ -313,9 +313,9 @@ final class SGTodayCheckInFlowViewController: BaseViewController {
         currentStep = .feedback
         renderState()
         feedbackView.configure(
-            title: "You protected another day.",
-            subtitle: "Your garden grew stronger.",
-            buttonTitle: "Done"
+            title: "checkin.feedback.protected.title".localized(),
+            subtitle: "checkin.feedback.protected.subtitle".localized(),
+            buttonTitle: "common.done".localized()
         )
     }
 

@@ -28,21 +28,21 @@ enum EmotionType: String, Codable, CaseIterable {
     var displayName: String {
         switch self {
         case .urge:
-            return "Urge"
+            return "emotion.urge".localized()
         case .stress:
-            return "Stress"
+            return "emotion.stress".localized()
         case .lonely:
-            return "Lonely"
+            return "emotion.lonely".localized()
         case .bored:
-            return "Bored"
+            return "emotion.bored".localized()
         case .angry:
-            return "Angry"
+            return "emotion.angry".localized()
         case .tired:
-            return "Tired"
+            return "emotion.tired".localized()
         case .anxious:
-            return "Anxious"
+            return "emotion.anxious".localized()
         case .triggered:
-            return "Triggered"
+            return "emotion.triggered".localized()
         }
     }
 }

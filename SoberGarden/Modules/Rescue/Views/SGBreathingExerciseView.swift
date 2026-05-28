@@ -17,11 +17,11 @@ final class SGBreathingExerciseView: UIView {
         var title: String {
             switch self {
             case .inhale:
-                return "Inhale"
+                return "breathing.inhale".localized()
             case .hold:
-                return "Hold"
+                return "breathing.hold".localized()
             case .exhale:
-                return "Exhale"
+                return "breathing.exhale".localized()
             }
         }
 
@@ -159,7 +159,7 @@ final class SGBreathingExerciseView: UIView {
         let phase = phase(for: elapsedSeconds)
         phaseLabel.text = phase.title
         instructionLabel.text = instruction(for: phase)
-        remainingLabel.text = "\(max(totalDuration - elapsedSeconds, 0)) seconds remaining"
+        remainingLabel.text = "breathing.remainingFormat".localizedFormat(max(totalDuration - elapsedSeconds, 0))
     }
 
     private func animateCurrentPhase() {
@@ -199,11 +199,11 @@ final class SGBreathingExerciseView: UIView {
     private func instruction(for phase: Phase) -> String {
         switch phase {
         case .inhale:
-            return "Breathe in slowly for 4 seconds."
+            return "breathing.inhale.instruction".localized()
         case .hold:
-            return "Keep the breath soft for 2 seconds."
+            return "breathing.hold.instruction".localized()
         case .exhale:
-            return "Release the breath for 6 seconds."
+            return "breathing.exhale.instruction".localized()
         }
     }
 }

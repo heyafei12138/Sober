@@ -50,7 +50,7 @@ final class SGEmotionPickerView: UIView {
             rowStackView.spacing = 10
 
             for option in rowOptions {
-                let chip = SGOptionChip(title: option?.displayName ?? "Skip")
+                let chip = SGOptionChip(title: option?.displayName ?? "common.skip".localized())
                 chip.accessibilityIdentifier = option.map { "rescue_emotion_\($0.rawValue)" } ?? "rescue_emotion_skip"
                 chip.addTarget(self, action: #selector(handleChipTapped(_:)), for: .touchUpInside)
                 chip.tag = chips.count

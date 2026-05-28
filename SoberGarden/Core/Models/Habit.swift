@@ -38,23 +38,23 @@ enum HabitType: String, Codable, CaseIterable {
     var displayName: String {
         switch self {
         case .smoking:
-            return "Smoking"
+            return "habit.smoking".localized()
         case .vaping:
-            return "Vaping"
+            return "habit.vaping".localized()
         case .alcohol:
-            return "Alcohol"
+            return "habit.alcohol".localized()
         case .porn:
-            return "Porn"
+            return "habit.porn".localized()
         case .gambling:
-            return "Gambling"
+            return "habit.gambling".localized()
         case .sugar:
-            return "Sugar"
+            return "habit.sugar".localized()
         case .socialMedia:
-            return "Social Media"
+            return "habit.socialMedia".localized()
         case .weed:
-            return "Weed"
+            return "habit.weed".localized()
         case .custom:
-            return "Custom"
+            return "habit.custom".localized()
         }
     }
 }
