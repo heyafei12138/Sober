@@ -25,66 +25,66 @@ enum SGSubscriptionProduct: String, CaseIterable {
     var title: String {
         switch self {
         case .weekly:
-            return "Weekly"
+            return "subscription.plan.weekly.title".localized()
         case .yearly:
-            return "Yearly"
+            return "subscription.plan.yearly.title".localized()
         case .lifetime:
-            return "Lifetime"
+            return "subscription.plan.lifetime.title".localized()
         }
     }
 
     var fallbackPrice: String {
         switch self {
         case .weekly:
-            return "$12.99"
+            return "subscription.plan.weekly.price".localized()
         case .yearly:
-            return "$124.99"
+            return "subscription.plan.yearly.price".localized()
         case .lifetime:
-            return "$139.99"
+            return "subscription.plan.lifetime.price".localized()
         }
     }
 
     var cadence: String {
         switch self {
         case .weekly:
-            return "per week"
+            return "subscription.plan.weekly.cadence".localized()
         case .yearly:
-            return "per year"
+            return "subscription.plan.yearly.cadence".localized()
         case .lifetime:
-            return "one time"
+            return "subscription.plan.lifetime.cadence".localized()
         }
     }
 
     var discount: String {
         switch self {
         case .weekly:
-            return "No lock-in"
+            return "subscription.plan.weekly.discount".localized()
         case .yearly:
-            return "84% OFF"
+            return "subscription.plan.yearly.discount".localized()
         case .lifetime:
-            return "74% OFF"
+            return "subscription.plan.lifetime.discount".localized()
         }
     }
 
     var badge: String {
         switch self {
         case .weekly:
-            return "Flexible"
+            return "subscription.plan.weekly.badge".localized()
         case .yearly:
-            return "Best Value"
+            return "subscription.plan.yearly.badge".localized()
         case .lifetime:
-            return "Forever"
+            return "subscription.plan.lifetime.badge".localized()
         }
     }
 
     var highlight: String {
         switch self {
         case .weekly:
-            return "Start small"
+            return "subscription.plan.weekly.highlight".localized()
         case .yearly:
-            return "$2.08/mo"
+            return "subscription.plan.yearly.highlight".localized()
         case .lifetime:
-            return "Pay once"
+            return "subscription.plan.lifetime.highlight".localized()
         }
     }
 
@@ -186,7 +186,7 @@ final class SGSubscriptionManager {
         await loadProductsIfNeeded()
 
         guard let product = product(for: plan) else {
-            return .failed("This product is not available yet. Check App Store Connect product IDs.")
+            return .failed("subscription.error.productUnavailable".localized())
         }
 
         do {
@@ -194,7 +194,7 @@ final class SGSubscriptionManager {
             switch result {
             case .success(let verification):
                 guard case .verified(let transaction) = verification else {
-                    return .failed("The purchase could not be verified.")
+                    return .failed("subscription.error.verificationFailed".localized())
                 }
 
                 await transaction.finish()
@@ -208,7 +208,7 @@ final class SGSubscriptionManager {
                 return .pending
 
             @unknown default:
-                return .failed("The purchase could not be completed.")
+                return .failed("subscription.error.purchaseFailed".localized())
             }
         } catch {
             return .failed(error.localizedDescription)
@@ -219,7 +219,7 @@ final class SGSubscriptionManager {
         do {
             try await AppStore.sync()
             await refreshEntitlements()
-            return isPlus ? .purchased : .failed("No active subscription or lifetime purchase was found.")
+            return isPlus ? .purchased : .failed("subscription.error.noActivePurchase".localized())
         } catch {
             return .failed(error.localizedDescription)
         }

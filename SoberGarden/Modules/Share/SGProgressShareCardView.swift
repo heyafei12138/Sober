@@ -247,21 +247,21 @@ final class SGProgressShareCardView: UIView {
 
         switch content.style {
         case .garden:
-            moneyStatView.configure(title: "Saved", value: content.savedMoneyText)
-            timeStatView.configure(title: "Time back", value: content.savedTimeText)
-            stageStatView.configure(title: "Garden", value: content.gardenStage.title)
+            moneyStatView.configure(title: "share.card.saved".localized(), value: content.savedMoneyText)
+            timeStatView.configure(title: "share.card.timeBack".localized(), value: content.savedTimeText)
+            stageStatView.configure(title: "share.card.garden".localized(), value: content.gardenStage.title)
             [moneyStatView, timeStatView, stageStatView].forEach(statsStackView.addArrangedSubview)
 
         case .fresh:
-            moneyStatView.configure(title: "Saved", value: content.savedMoneyText)
-            timeStatView.configure(title: "Time back", value: content.savedTimeText)
-            stageStatView.configure(title: "Stage", value: content.gardenStage.title)
+            moneyStatView.configure(title: "share.card.saved".localized(), value: content.savedMoneyText)
+            timeStatView.configure(title: "share.card.timeBack".localized(), value: content.savedTimeText)
+            stageStatView.configure(title: "share.card.stage".localized(), value: content.gardenStage.title)
             [timeStatView, moneyStatView, stageStatView].forEach(statsStackView.addArrangedSubview)
 
         case .sunrise:
-            moneyStatView.configure(title: "Clean days", value: "\(content.cleanDays)")
-            timeStatView.configure(title: "Saved", value: content.savedMoneyText)
-            stageStatView.configure(title: "Garden", value: content.gardenStage.title)
+            moneyStatView.configure(title: "share.card.cleanDays".localized(), value: "\(content.cleanDays)")
+            timeStatView.configure(title: "share.card.saved".localized(), value: content.savedMoneyText)
+            stageStatView.configure(title: "share.card.garden".localized(), value: content.gardenStage.title)
             [moneyStatView, timeStatView, stageStatView].forEach(statsStackView.addArrangedSubview)
         }
     }
@@ -453,33 +453,33 @@ private extension SGSharePosterStyle {
     var headline: String {
         switch self {
         case .garden:
-            return "Progress worth noticing"
+            return "share.card.headline.garden".localized()
         case .fresh:
-            return "A cleaner day is growing"
+            return "share.card.headline.fresh".localized()
         case .sunrise:
-            return "One steady choice at a time"
+            return "share.card.headline.sunrise".localized()
         }
     }
 
     var quote: String {
         switch self {
         case .garden:
-            return "Growing one clean day at a time."
+            return "share.card.quote.garden".localized()
         case .fresh:
-            return "Small progress still counts."
+            return "share.card.quote.fresh".localized()
         case .sunrise:
-            return "Today has room for a fresh start."
+            return "share.card.quote.sunrise".localized()
         }
     }
 
     func dayCaption(cleanDays: Int, habitName: String) -> String {
         switch self {
         case .garden:
-            return cleanDays == 1 ? "day clean from \(habitName)" : "days clean from \(habitName)"
+            return cleanDays == 1 ? "share.card.caption.garden.one".localizedFormat(habitName) : "share.card.caption.garden.many".localizedFormat(habitName)
         case .fresh:
-            return cleanDays == 1 ? "clean day away from \(habitName)" : "clean days away from \(habitName)"
+            return cleanDays == 1 ? "share.card.caption.fresh.one".localizedFormat(habitName) : "share.card.caption.fresh.many".localizedFormat(habitName)
         case .sunrise:
-            return cleanDays == 1 ? "steady day without \(habitName)" : "steady days without \(habitName)"
+            return cleanDays == 1 ? "share.card.caption.sunrise.one".localizedFormat(habitName) : "share.card.caption.sunrise.many".localizedFormat(habitName)
         }
     }
 

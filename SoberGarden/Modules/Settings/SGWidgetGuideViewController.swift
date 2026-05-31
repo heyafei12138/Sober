@@ -30,7 +30,7 @@ final class SGWidgetGuideViewController: BaseViewController {
         closeButton.backgroundColor = UIColor.white.withAlphaComponent(0.9)
         closeButton.layer.cornerRadius = 18
         closeButton.layer.masksToBounds = true
-        closeButton.accessibilityLabel = "Close"
+        closeButton.accessibilityLabel = "common.close".localized()
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
         
         closeButton.snp.makeConstraints { make in
@@ -115,13 +115,13 @@ final class SGWidgetGuideViewController: BaseViewController {
         imageView.contentMode = .scaleAspectFit
 
         let titleLabel = UILabel()
-        titleLabel.text = "Keep your garden close"
+        titleLabel.text = "settings.widgetGuide.hero.title".localized()
         titleLabel.font = .systemFont(ofSize: 26, weight: .bold)
         titleLabel.textColor = SGColor.textDark
         titleLabel.numberOfLines = 0
 
         let bodyLabel = UILabel()
-        bodyLabel.text = "Add the SoberGarden widget to see your streak and garden progress without opening the app."
+        bodyLabel.text = "settings.widgetGuide.hero.body".localized()
         bodyLabel.font = .systemFont(ofSize: 15, weight: .regular)
         bodyLabel.textColor = SGColor.textSecondary
         bodyLabel.numberOfLines = 0
@@ -159,28 +159,28 @@ final class SGWidgetGuideViewController: BaseViewController {
         stack.layoutMargins = UIEdgeInsets(top: 18, left: 18, bottom: 18, right: 18)
 
         let header = SGSectionHeaderView(
-            title: "Add the widget",
-            subtitle: "Follow these steps from your iPhone Home Screen."
+            title: "settings.widgetGuide.steps.title".localized(),
+            subtitle: "settings.widgetGuide.steps.subtitle".localized()
         )
 
         stack.addArrangedSubview(header)
         stack.addArrangedSubview(makeStepRow(
             number: "1",
             iconName: "hand.tap.fill",
-            title: "Long press Home Screen",
-            body: "Touch and hold an empty area until the icons start to move."
+            title: "settings.widgetGuide.step1.title".localized(),
+            body: "settings.widgetGuide.step1.body".localized()
         ))
         stack.addArrangedSubview(makeStepRow(
             number: "2",
             iconName: "plus.app.fill",
-            title: "Tap Edit, then Add Widget",
-            body: "Use the Home Screen edit controls to open the widget gallery."
+            title: "settings.widgetGuide.step2.title".localized(),
+            body: "settings.widgetGuide.step2.body".localized()
         ))
         stack.addArrangedSubview(makeStepRow(
             number: "3",
             iconName: "magnifyingglass",
-            title: "Choose or search SoberGarden",
-            body: "Select SoberGarden, pick a widget size, then place it where you want."
+            title: "settings.widgetGuide.step3.title".localized(),
+            body: "settings.widgetGuide.step3.body".localized()
         ))
 
         card.contentView.addSubview(stack)

@@ -23,8 +23,8 @@ final class SGSharePreviewViewController: UIViewController {
     private let previewContainerView = UIView()
     private let imageView = UIImageView()
     private let actionStackView = UIStackView()
-    private let saveButton = SGPrimaryButton(title: "Save", style: .secondary)
-    private let shareButton = SGPrimaryButton(title: "Share", style: .primary)
+    private let saveButton = SGPrimaryButton(title: "common.save".localized(), style: .secondary)
+    private let shareButton = SGPrimaryButton(title: "common.share".localized(), style: .primary)
 
     init(package: SGShareProgressService.ProgressSharePackage) {
         self.package = package
@@ -75,18 +75,18 @@ final class SGSharePreviewViewController: UIViewController {
 
         closeButton.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
         closeButton.tintColor = SGColor.textSecondary
-        closeButton.accessibilityLabel = "Close"
+        closeButton.accessibilityLabel = "common.close".localized()
         closeButton.addTarget(self, action: #selector(handleCloseTapped), for: .touchUpInside)
 
         headerTextStackView.axis = .vertical
         headerTextStackView.alignment = .fill
         headerTextStackView.spacing = 6
 
-        titleLabel.text = "Share preview"
+        titleLabel.text = "share.preview.title".localized()
         titleLabel.font = .systemFont(ofSize: 26, weight: .bold)
         titleLabel.textColor = SGColor.textDark
 
-        subtitleLabel.text = "Review the poster before saving or sharing it."
+        subtitleLabel.text = "share.preview.subtitle".localized()
         subtitleLabel.font = .systemFont(ofSize: 15, weight: .medium)
         subtitleLabel.textColor = SGColor.textSecondary
         subtitleLabel.numberOfLines = 0
@@ -191,6 +191,10 @@ final class SGSharePreviewViewController: UIViewController {
         let activity = UIActivityViewController(activityItems: package.activityItems, applicationActivities: nil)
         activity.popoverPresentationController?.sourceView = shareButton
         activity.popoverPresentationController?.sourceRect = shareButton.bounds
+        activity.completionWithItemsHandler = { [weak self] _, completed, _, _ in
+            guard completed, let self else { return }
+            SGReviewPromptCoordinator.shared.promptIfNeeded(trigger: .posterShared, from: self)
+        }
         present(activity, animated: true)
     }
 
@@ -216,14 +220,14 @@ final class SGSharePreviewViewController: UIViewController {
                 case .denied, .restricted:
                     self.saveButton.isEnabled = true
                     self.showAlert(
-                        title: "Photos access needed",
-                        message: "Allow photo access in Settings to save the poster."
+                        title: "share.alert.photos.title".localized(),
+                        message: "share.alert.photos.message".localized()
                     )
                 case .notDetermined:
                     self.saveButton.isEnabled = true
                 @unknown default:
                     self.saveButton.isEnabled = true
-                    self.showAlert(title: "Save failed", message: "Unable to save the poster right now.")
+                    self.showAlert(title: "share.alert.saveFailed.title".localized(), message: "share.alert.saveFailed.message".localized())
                 }
             }
         }
@@ -238,18 +242,22 @@ final class SGSharePreviewViewController: UIViewController {
                 self.saveButton.isEnabled = true
 
                 if success {
-                    self.showAlert(title: "Saved", message: "The progress poster was saved to Photos.")
+                    self.showAlert(title: "share.alert.saved.title".localized(), message: "share.alert.saved.message".localized()) {
+                        SGReviewPromptCoordinator.shared.promptIfNeeded(trigger: .posterShared, from: self)
+                    }
                 } else {
-                    let message = error?.localizedDescription ?? "Unable to save the poster right now."
-                    self.showAlert(title: "Save failed", message: message)
+                    let message = error?.localizedDescription ?? "share.alert.saveFailed.message".localized()
+                    self.showAlert(title: "share.alert.saveFailed.title".localized(), message: message)
                 }
             }
         })
     }
 
-    private func showAlert(title: String, message: String) {
+    private func showAlert(title: String, message: String, completion: (() -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        alert.addAction(UIAlertAction(title: "common.ok".localized(), style: .default) { _ in
+            completion?()
+        })
         present(alert, animated: true)
     }
 }

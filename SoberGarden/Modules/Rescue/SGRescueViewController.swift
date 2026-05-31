@@ -543,6 +543,7 @@ final class SGRescueViewController: BaseViewController {
         if currentStep == .feedback {
             saveCompletedRescueSession()
             startNewSession()
+            SGReviewPromptCoordinator.shared.promptIfNeeded(trigger: .rescueCompleted, from: self)
             return
         }
 

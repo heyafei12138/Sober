@@ -1,0 +1,35 @@
+/*
+  Localizable.strings
+  SoberGardenWidgets
+
+  Generated during full app localization.
+*/
+
+"common.open" = "Abierto";
+"garden.dayFormat" = "Día %d";
+"garden.stage.bloomingGarden" = "Jardín floreciente";
+"garden.stage.flower" = "flor";
+"garden.stage.gardenBed" = "Cama de jardín";
+"garden.stage.peacefulGarden" = "Jardín tranquilo";
+"garden.stage.sanctuary" = "Santuario";
+"garden.stage.seed" = "semilla";
+"garden.stage.smallForest" = "Pequeño bosque";
+"garden.stage.sprout" = "Brotar";
+"garden.stage.youngPlant" = "planta joven";
+"habit.generic" = "Hábito";
+"tab.garden" = "jardín";
+"tab.rescue" = "Rescate";
+"widget.cleanDaysFormat" = "%d Días de limpieza";
+"widget.garden.description" = "Vea el escenario de su jardín de un vistazo.";
+"widget.garden.name" = "Jardín Sobrio";
+"widget.gardenComplete" = "Jardín completo";
+"widget.gardenDetailFormat" = "Día %d · %@";
+"widget.gardenGrowing" = "cultivo de jardín";
+"widget.gardenGrowingBody" = "Tu jardín está creciendo.";
+"widget.nextMilestoneFormat" = "Siguiente: %d Días";
+"widget.rescue.body" = "Tómate unos minutos constantes antes de elegir.";
+"widget.rescue.description" = "Abre Rescue cuando el momento se ponga difícil.";
+"widget.rescue.name" = "SoberGarden Rescate";
+"widget.rescue.question" = "¿Luchando?";
+"widget.streak.description" = "Realice un seguimiento de los días limpios y el próximo hito.";
+"widget.streak.name" = "Racha de SoberGarden";

@@ -17,7 +17,7 @@ final class SGEditHabitViewController: BaseViewController {
     private let scrollView = UIScrollView()
     private let contentView = UIView()
     private let contentStackView = UIStackView()
-    private let saveButton = SGPrimaryButton(title: "Save Changes")
+    private let saveButton = SGPrimaryButton(title: "settings.edit.save".localized())
 
     private let customHabitTextField = UITextField()
     private let startDatePicker = UIDatePicker()
@@ -43,7 +43,7 @@ final class SGEditHabitViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Edit Habit"
+        title = "settings.edit.title".localized()
     }
 
     override func setupSubviews() {
@@ -92,8 +92,8 @@ final class SGEditHabitViewController: BaseViewController {
 
     private func buildForm() {
         contentStackView.addArrangedSubview(SGSectionHeaderView(
-            title: "Habit Details",
-            subtitle: "Update the baseline used for streak, savings, time, and rescue reminders."
+            title: "settings.edit.details.title".localized(),
+            subtitle: "settings.edit.details.subtitle".localized()
         ))
 
         contentStackView.addArrangedSubview(makeHabitTypeSection())
@@ -103,7 +103,7 @@ final class SGEditHabitViewController: BaseViewController {
     }
 
     private func makeHabitTypeSection() -> UIView {
-        let (sectionStack, stack) = makeSectionStack(title: "Habit", subtitle: "Choose the closest match, or keep a custom name.")
+        let (sectionStack, stack) = makeSectionStack(title: "settings.edit.habit.title".localized(), subtitle: "settings.edit.habit.subtitle".localized())
         let gridStack = makeVerticalStack(spacing: 10)
         let allTypes = HabitType.allCases
         stride(from: 0, to: allTypes.count, by: 2).forEach { startIndex in
@@ -131,7 +131,7 @@ final class SGEditHabitViewController: BaseViewController {
 
         configureTextField(
             customHabitTextField,
-            placeholder: "Custom habit name",
+            placeholder: "settings.edit.habit.customPlaceholder".localized(),
             text: originalHabit.customName,
             keyboardType: .default
         )
@@ -142,7 +142,7 @@ final class SGEditHabitViewController: BaseViewController {
     }
 
     private func makeStartDateSection() -> UIView {
-        let (sectionStack, stack) = makeSectionStack(title: "Start Date", subtitle: "Future dates are not allowed.")
+        let (sectionStack, stack) = makeSectionStack(title: "settings.edit.startDate.title".localized(), subtitle: "settings.edit.startDate.subtitle".localized())
 
         startDatePicker.datePickerMode = .date
         startDatePicker.preferredDatePickerStyle = .inline
@@ -155,11 +155,11 @@ final class SGEditHabitViewController: BaseViewController {
     }
 
     private func makeDailyNumbersSection() -> UIView {
-        let (sectionStack, stack) = makeSectionStack(title: "Savings Baseline", subtitle: "Leave a field blank if you do not want to track it.")
+        let (sectionStack, stack) = makeSectionStack(title: "settings.edit.baseline.title".localized(), subtitle: "settings.edit.baseline.subtitle".localized())
 
         configureTextField(
             dailyCostTextField,
-            placeholder: "Daily cost",
+            placeholder: "settings.edit.baseline.costPlaceholder".localized(),
             text: originalHabit.dailyCost.map { Self.numberFormatter.string(from: NSNumber(value: $0)) ?? "\($0)" },
             keyboardType: .decimalPad
         )
@@ -167,7 +167,7 @@ final class SGEditHabitViewController: BaseViewController {
 
         configureTextField(
             dailyMinutesTextField,
-            placeholder: "Daily minutes",
+            placeholder: "settings.edit.baseline.minutesPlaceholder".localized(),
             text: originalHabit.dailyMinutes.map { "\($0)" },
             keyboardType: .numberPad
         )
@@ -177,7 +177,7 @@ final class SGEditHabitViewController: BaseViewController {
     }
 
     private func makeReasonsSection() -> UIView {
-        let (sectionStack, stack) = makeSectionStack(title: "Reasons", subtitle: "Keep a few reasons nearby for difficult moments.")
+        let (sectionStack, stack) = makeSectionStack(title: "settings.edit.reasons.title".localized(), subtitle: "settings.edit.reasons.subtitle".localized())
 
         let reasonStack = makeVerticalStack(spacing: 10)
         SGOnboardingDraft.reasonTemplates.enumerated().forEach { index, template in
@@ -197,7 +197,7 @@ final class SGEditHabitViewController: BaseViewController {
         customReasonsTextView.layer.borderWidth = 1
         customReasonsTextView.layer.borderColor = SGColor.separator.cgColor
         customReasonsTextView.textContainerInset = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
-        customReasonsTextView.accessibilityLabel = "Custom reasons"
+        customReasonsTextView.accessibilityLabel = "settings.edit.reasons.customAccessibility".localized()
         customReasonsTextView.snp.makeConstraints { make in
             make.height.equalTo(112)
         }
@@ -272,7 +272,7 @@ final class SGEditHabitViewController: BaseViewController {
     @objc private func handleStartDateChanged(_ sender: UIDatePicker) {
         if sender.date > Date() {
             sender.date = Date()
-            showAlert(title: "Invalid date", message: "Start date cannot be in the future.")
+            showAlert(title: "settings.edit.alert.invalidDate.title".localized(), message: "settings.edit.alert.invalidDate.message".localized())
         }
     }
 
@@ -298,13 +298,13 @@ final class SGEditHabitViewController: BaseViewController {
     private func makeUpdatedHabit() -> Habit? {
         let trimmedCustomName = customHabitTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         if selectedHabitType == .custom, trimmedCustomName?.isEmpty ?? true {
-            showAlert(title: "Custom name required", message: "Please enter a custom habit name.")
+            showAlert(title: "settings.edit.alert.customName.title".localized(), message: "settings.edit.alert.customName.message".localized())
             return nil
         }
 
         let startDate = min(startDatePicker.date, Date())
         if startDatePicker.date > Date() {
-            showAlert(title: "Invalid date", message: "Start date cannot be in the future.")
+            showAlert(title: "settings.edit.alert.invalidDate.title".localized(), message: "settings.edit.alert.invalidDate.message".localized())
             return nil
         }
 
@@ -343,7 +343,7 @@ final class SGEditHabitViewController: BaseViewController {
 
     private func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        alert.addAction(UIAlertAction(title: "common.ok".localized(), style: .default))
         present(alert, animated: true)
     }
 

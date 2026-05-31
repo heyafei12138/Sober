@@ -23,7 +23,7 @@ struct SGStreakWidgetView: View {
                 VStack(alignment: .leading, spacing: family == .systemSmall ? 8 : 12) {
                     SGWidgetHeader(title: "SoberGarden", icon: "leaf.fill")
                     Spacer(minLength: 4)
-                    Text("\(entry.snapshot.cleanDays) Days Clean")
+                    Text(String(format: SGLoc("widget.cleanDaysFormat"), entry.snapshot.cleanDays))
                         .font(family == .systemSmall ? .title2.bold() : .largeTitle.bold())
                         .foregroundStyle(SGWidgetPalette.text)
                         .lineLimit(1)
@@ -44,9 +44,9 @@ struct SGStreakWidgetView: View {
 
     private var nextMilestoneText: String {
         guard let nextMilestone = entry.snapshot.nextMilestone else {
-            return "Garden complete"
+            return SGLoc("widget.gardenComplete")
         }
-        return "Next: \(nextMilestone) Days"
+        return String(format: SGLoc("widget.nextMilestoneFormat"), nextMilestone)
     }
 }
 
@@ -58,8 +58,8 @@ struct SGGardenWidgetView: View {
         SGWidgetContainer(url: URL(string: "sobergarden://garden")) {
             if family == .systemSmall {
                 VStack(alignment: .leading, spacing: 6) {
-                    SGWidgetHeader(title: "Garden", icon: "camera.macro")
-                    Text("Garden growing")
+                    SGWidgetHeader(title: SGLoc("tab.garden"), icon: "camera.macro")
+                    Text(SGLoc("widget.gardenGrowing"))
                         .font(.system(size: 16, weight: .bold, design: .rounded))
                         .foregroundStyle(SGWidgetPalette.text)
                         .lineLimit(1)
@@ -67,7 +67,7 @@ struct SGGardenWidgetView: View {
                         .layoutPriority(2)
                     Spacer(minLength: 0)
                     HStack(alignment: .bottom, spacing: 8) {
-                        Text("Day \(entry.snapshot.cleanDays)")
+                        Text(String(format: SGLoc("garden.dayFormat"), entry.snapshot.cleanDays))
                             .font(.subheadline.weight(.semibold))
                             .foregroundStyle(SGWidgetPalette.secondary)
                             .lineLimit(1)
@@ -79,14 +79,14 @@ struct SGGardenWidgetView: View {
             } else {
                 HStack(alignment: .center, spacing: 14) {
                     VStack(alignment: .leading, spacing: 7) {
-                        SGWidgetHeader(title: "Garden", icon: "camera.macro")
-                        Text("Your garden is growing.")
+                        SGWidgetHeader(title: SGLoc("tab.garden"), icon: "camera.macro")
+                        Text(SGLoc("widget.gardenGrowingBody"))
                             .font(.system(size: 18, weight: .bold, design: .rounded))
                             .foregroundStyle(SGWidgetPalette.text)
                             .lineLimit(2)
                             .minimumScaleFactor(0.78)
                             .layoutPriority(2)
-                        Text("Day \(entry.snapshot.cleanDays) · \(entry.snapshot.gardenStage.title)")
+                        Text(String(format: SGLoc("widget.gardenDetailFormat"), entry.snapshot.cleanDays, entry.snapshot.gardenStage.title))
                             .font(.subheadline.weight(.semibold))
                             .foregroundStyle(SGWidgetPalette.secondary)
                             .lineLimit(1)
@@ -115,21 +115,21 @@ struct SGRescueWidgetView: View {
                 .offset(x: family == .systemSmall ? 20 : 18, y: family == .systemSmall ? 12 : 14)
 
                 VStack(alignment: .leading, spacing: 10) {
-                    SGWidgetHeader(title: "Rescue", icon: "lifepreserver.fill", tint: SGWidgetPalette.rescue)
+                    SGWidgetHeader(title: SGLoc("tab.rescue"), icon: "lifepreserver.fill", tint: SGWidgetPalette.rescue)
                     Spacer(minLength: 4)
-                    Text("Struggling?")
+                    Text(SGLoc("widget.rescue.question"))
                         .font(family == .systemSmall ? .title2.bold() : .largeTitle.bold())
                         .foregroundStyle(SGWidgetPalette.text)
                         .lineLimit(1)
                         .minimumScaleFactor(0.72)
-                    Text("Open")
+                    Text(SGLoc("common.open"))
                         .font(.headline.weight(.semibold))
                         .foregroundStyle(.white)
                         .padding(.horizontal, 14)
                         .padding(.vertical, 8)
                         .background(Capsule().fill(SGWidgetPalette.rescue))
                     if family == .systemMedium {
-                        Text("Take a few steady minutes before choosing.")
+                        Text(SGLoc("widget.rescue.body"))
                             .font(.caption)
                             .foregroundStyle(SGWidgetPalette.secondary)
                             .lineLimit(1)

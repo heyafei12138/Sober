@@ -34,8 +34,8 @@ struct SGStreakWidget: Widget {
         StaticConfiguration(kind: kind, provider: SGWidgetProvider()) { entry in
             SGStreakWidgetView(entry: entry)
         }
-        .configurationDisplayName("SoberGarden Streak")
-        .description("Track clean days and the next milestone.")
+        .configurationDisplayName(SGLoc("widget.streak.name"))
+        .description(SGLoc("widget.streak.description"))
         .supportedFamilies([.systemSmall, .systemMedium])
     }
 }
@@ -47,8 +47,8 @@ struct SGGardenWidget: Widget {
         StaticConfiguration(kind: kind, provider: SGWidgetProvider()) { entry in
             SGGardenWidgetView(entry: entry)
         }
-        .configurationDisplayName("SoberGarden Garden")
-        .description("See your garden stage at a glance.")
+        .configurationDisplayName(SGLoc("widget.garden.name"))
+        .description(SGLoc("widget.garden.description"))
         .supportedFamilies([.systemSmall, .systemMedium])
     }
 }
@@ -60,8 +60,8 @@ struct SGRescueWidget: Widget {
         StaticConfiguration(kind: kind, provider: SGWidgetProvider()) { entry in
             SGRescueWidgetView(entry: entry)
         }
-        .configurationDisplayName("SoberGarden Rescue")
-        .description("Open Rescue when the moment gets hard.")
+        .configurationDisplayName(SGLoc("widget.rescue.name"))
+        .description(SGLoc("widget.rescue.description"))
         .supportedFamilies([.systemSmall, .systemMedium])
     }
 }

@@ -1,0 +1,18 @@
+/*
+  Localizable.strings
+  SoberGardenWatch
+
+  Generated for extension-localized strings.
+*/
+
+"breathing.exhale" = "Breathe out";
+"breathing.inhale" = "Breathe in";
+"common.done" = "Done";
+"common.imStruggling" = "I'm Struggling";
+"habit.generic" = "Habit";
+"watch.allMilestonesReached" = "All milestones reached";
+"watch.breathing.completed" = "You made space.";
+"watch.breathing.restart" = "Restart";
+"watch.breathing.title" = "Breathe";
+"watch.cleanDaysFormat" = "%d days clean";
+"watch.nextMilestoneFormat" = "Next: %d days";

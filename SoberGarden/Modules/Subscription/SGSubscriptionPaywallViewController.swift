@@ -97,35 +97,27 @@ final class SGSubscriptionPaywallViewController: BaseViewController {
         linkStackView.distribution = .equalSpacing
         linkStackView.spacing = 12
 
-        configureLinkButton(privacyButton, title: "Privacy Policy", action: #selector(handlePrivacyTapped))
-        configureLinkButton(termsButton, title: "Terms", action: #selector(handleTermsTapped))
-        configureLinkButton(restoreButton, title: "Restore", action: #selector(handleRestoreTapped))
+        configureLinkButton(privacyButton, title: "subscription.link.privacy".localized(), action: #selector(handlePrivacyTapped))
+        configureLinkButton(termsButton, title: "subscription.link.terms".localized(), action: #selector(handleTermsTapped))
+        configureLinkButton(restoreButton, title: "subscription.link.restore".localized(), action: #selector(handleRestoreTapped))
 
         statusLabel.font = .systemFont(ofSize: 13, weight: .semibold)
         statusLabel.textColor = SGColor.textSecondary
         statusLabel.textAlignment = .center
         statusLabel.numberOfLines = 0
 
-        legalTitleLabel.text = "Subscription Information"
+        legalTitleLabel.text = "subscription.legal.title".localized()
         legalTitleLabel.font = .systemFont(ofSize: 16, weight: .heavy)
         legalTitleLabel.textColor = SGColor.textDark
         legalTitleLabel.textAlignment = .left
 
-        legalLabel.text = """
-        SoberGarden Plus unlocks deeper trend views, richer garden motivation, more reflection space, and future Plus-only support tools.
-
-        • Payment is charged to your Apple ID at confirmation of purchase.
-        • Weekly and yearly plans renew automatically unless cancelled at least 24 hours before the end of the current period.
-        • Lifetime access is a one-time purchase and does not renew.
-        • You can manage or cancel subscriptions in Apple ID account settings after purchase.
-        • Discounts compare each plan against paying weekly for the same access period.
-        """
+        legalLabel.text = "subscription.legal.body".localized()
         legalLabel.font = .systemFont(ofSize: 12, weight: .medium)
         legalLabel.textColor = SGColor.textTertiary
         legalLabel.textAlignment = .left
         legalLabel.numberOfLines = 0
 
-        subscribeButton.setTitle("Continue", for: .normal)
+        subscribeButton.setTitle("common.continue".localized(), for: .normal)
         subscribeButton.addTarget(self, action: #selector(handleSubscribeTapped), for: .touchUpInside)
 
         view.addSubview(scrollView)
@@ -213,18 +205,18 @@ final class SGSubscriptionPaywallViewController: BaseViewController {
 
     private func configureContent() {
         heroView.configure(
-            eyebrow: "SoberGarden Plus",
-            title: "Grow with deeper support",
-            message: "Unlock a calmer recovery companion with richer tracking, more reflection space, and long-term garden motivation."
+            eyebrow: "subscription.hero.eyebrow".localized(),
+            title: "subscription.hero.title".localized(),
+            message: "subscription.hero.message".localized()
         )
         benefitsView.configure(
             benefits: [
-                ("chart.line.uptrend.xyaxis", "Deeper trends"),
-                ("leaf.fill", "Garden themes"),
-                ("square.and.pencil", "More reflection")
+                ("chart.line.uptrend.xyaxis", "subscription.benefit.trends".localized()),
+                ("leaf.fill", "subscription.benefit.garden".localized()),
+                ("square.and.pencil", "subscription.benefit.reflection".localized())
             ]
         )
-        appleNoticeView.configure(text: "Secure payment protected by Apple")
+        appleNoticeView.configure(text: "subscription.appleNotice".localized())
         refreshPlanCards()
     }
 
@@ -241,7 +233,7 @@ final class SGSubscriptionPaywallViewController: BaseViewController {
             )
         }
 
-        subscribeButton.setTitle("Continue", for: .normal)
+        subscribeButton.setTitle("common.continue".localized(), for: .normal)
     }
 
     private func revealCloseButtonAfterDelay() {
@@ -278,7 +270,7 @@ final class SGSubscriptionPaywallViewController: BaseViewController {
         purchaseInFlight = true
         subscribeButton.isEnabled = false
         restoreButton.isEnabled = false
-        statusLabel.text = "Processing purchase..."
+        statusLabel.text = "subscription.status.processing".localized()
 
         Task {
             let result = await SGSubscriptionManager.shared.purchase(selectedPlan)
@@ -303,7 +295,7 @@ final class SGSubscriptionPaywallViewController: BaseViewController {
         purchaseInFlight = true
         subscribeButton.isEnabled = false
         restoreButton.isEnabled = false
-        statusLabel.text = "Restoring purchases..."
+        statusLabel.text = "subscription.status.restoring".localized()
 
         Task {
             let result = await SGSubscriptionManager.shared.restorePurchases()
@@ -318,12 +310,12 @@ final class SGSubscriptionPaywallViewController: BaseViewController {
 
         switch result {
         case .purchased:
-            statusLabel.text = "SoberGarden Plus is active."
+            statusLabel.text = "subscription.status.active".localized()
             closePaywall()
         case .cancelled:
             statusLabel.text = nil
         case .pending:
-            statusLabel.text = "Purchase is pending approval."
+            statusLabel.text = "subscription.status.pending".localized()
         case .failed(let message):
             statusLabel.text = message
         }
@@ -389,7 +381,7 @@ private final class SGSubscriptionContinueButton: UIButton {
     }
 
     private func setupView() {
-        setTitle("Continue", for: .normal)
+        setTitle("common.continue".localized(), for: .normal)
         setTitleColor(.white, for: .normal)
         titleLabel?.font = .systemFont(ofSize: 17, weight: .heavy)
         clipsToBounds = false
@@ -573,11 +565,11 @@ private final class SGSubscriptionBenefitsView: UIView {
         layer.borderWidth = 1
         layer.borderColor = SGColor.primaryLight.withAlphaComponent(0.82).cgColor
 
-        titleLabel.text = "Everything for steady progress"
+        titleLabel.text = "subscription.benefits.title".localized()
         titleLabel.font = .systemFont(ofSize: 18, weight: .bold)
         titleLabel.textColor = SGColor.textDark
 
-        subtitleLabel.text = "Designed for long-term momentum, not pressure."
+        subtitleLabel.text = "subscription.benefits.subtitle".localized()
         subtitleLabel.font = .systemFont(ofSize: 12, weight: .semibold)
         subtitleLabel.textColor = SGColor.textSecondary
         subtitleLabel.numberOfLines = 2

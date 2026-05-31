@@ -1,0 +1,35 @@
+/*
+  Localizable.strings
+  SoberGardenWidgets
+
+  Generated for extension-localized strings.
+*/
+
+"common.open" = "Open";
+"garden.dayFormat" = "Day %d";
+"garden.stage.bloomingGarden" = "Blooming Garden";
+"garden.stage.flower" = "Flower";
+"garden.stage.gardenBed" = "Garden Bed";
+"garden.stage.peacefulGarden" = "Peaceful Garden";
+"garden.stage.sanctuary" = "Sanctuary";
+"garden.stage.seed" = "Seed";
+"garden.stage.smallForest" = "Small Forest";
+"garden.stage.sprout" = "Sprout";
+"garden.stage.youngPlant" = "Young Plant";
+"habit.generic" = "Habit";
+"tab.garden" = "Garden";
+"tab.rescue" = "Rescue";
+"widget.cleanDaysFormat" = "%d Days Clean";
+"widget.garden.description" = "See your garden stage at a glance.";
+"widget.garden.name" = "SoberGarden Garden";
+"widget.gardenComplete" = "Garden complete";
+"widget.gardenDetailFormat" = "Day %d · %@";
+"widget.gardenGrowing" = "Garden growing";
+"widget.gardenGrowingBody" = "Your garden is growing.";
+"widget.nextMilestoneFormat" = "Next: %d Days";
+"widget.rescue.body" = "Take a few steady minutes before choosing.";
+"widget.rescue.description" = "Open Rescue when the moment gets hard.";
+"widget.rescue.name" = "SoberGarden Rescue";
+"widget.rescue.question" = "Struggling?";
+"widget.streak.description" = "Track clean days and the next milestone.";
+"widget.streak.name" = "SoberGarden Streak";

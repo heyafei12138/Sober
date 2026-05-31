@@ -1,0 +1,35 @@
+/*
+  Localizable.strings
+  SoberGardenWidgets
+
+  Generated during full app localization.
+*/
+
+"common.open" = "打開";
+"garden.dayFormat" = "日 %d";
+"garden.stage.bloomingGarden" = "盛開的花園";
+"garden.stage.flower" = "花";
+"garden.stage.gardenBed" = "花園床";
+"garden.stage.peacefulGarden" = "平安花園";
+"garden.stage.sanctuary" = "庇護所";
+"garden.stage.seed" = "種子";
+"garden.stage.smallForest" = "小森林";
+"garden.stage.sprout" = "發芽";
+"garden.stage.youngPlant" = "幼苗";
+"habit.generic" = "習慣";
+"tab.garden" = "花園";
+"tab.rescue" = "救援";
+"widget.cleanDaysFormat" = "%d 清潔天數";
+"widget.garden.description" = "一目了然地看到您的花园舞台。";
+"widget.garden.name" = "清醒花園";
+"widget.gardenComplete" = "花園竣工";
+"widget.gardenDetailFormat" = "日 %d · %@";
+"widget.gardenGrowing" = "花園種植";
+"widget.gardenGrowingBody" = "你的花园正在成长。";
+"widget.nextMilestoneFormat" = "下一页： %d 天";
+"widget.rescue.body" = "在选择之前花几分钟时间。";
+"widget.rescue.description" = "当情况变得困难时，打开救援。";
+"widget.rescue.name" = "清醒花園救援";
+"widget.rescue.question" = "掙扎嗎？";
+"widget.streak.description" = "跟踪清洁日和下一个里程碑。";
+"widget.streak.name" = "清醒花園條紋";

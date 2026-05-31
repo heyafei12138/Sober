@@ -1,0 +1,35 @@
+/*
+  Localizable.strings
+  SoberGardenWidgets
+
+  Generated during full app localization.
+*/
+
+"common.open" = "開く";
+"garden.dayFormat" = "%d 日";
+"garden.stage.bloomingGarden" = "ブルーミングガーデン";
+"garden.stage.flower" = "花";
+"garden.stage.gardenBed" = "ガーデンベッド";
+"garden.stage.peacefulGarden" = "平和な庭園";
+"garden.stage.sanctuary" = "サンクチュアリ";
+"garden.stage.seed" = "種子";
+"garden.stage.smallForest" = "小さな森";
+"garden.stage.sprout" = "スプラウト";
+"garden.stage.youngPlant" = "若い植物";
+"habit.generic" = "習慣";
+"tab.garden" = "庭園";
+"tab.rescue" = "レスキュー";
+"widget.cleanDaysFormat" = "%d クリーンな日数";
+"widget.garden.description" = "ガーデンステージが一目でわかります。";
+"widget.garden.name" = "SoberGarden ガーデン";
+"widget.gardenComplete" = "庭園完成";
+"widget.gardenDetailFormat" = "%d · %@ 日";
+"widget.gardenGrowing" = "庭の成長";
+"widget.gardenGrowingBody" = "あなたの庭は成長しています。";
+"widget.nextMilestoneFormat" = "次へ: %d 日";
+"widget.rescue.body" = "選択する前に、数分間しっかり時間をかけてください。";
+"widget.rescue.description" = "困ったときは Rescue を開いてください。";
+"widget.rescue.name" = "ソーバーガーデンレスキュー";
+"widget.rescue.question" = "苦労していますか？";
+"widget.streak.description" = "クリーンな日と次のマイルストーンを追跡します。";
+"widget.streak.name" = "ソーバーガーデン ストリーク";

@@ -1,0 +1,35 @@
+/*
+  Localizable.strings
+  SoberGardenWidgets
+
+  Generated during full app localization.
+*/
+
+"common.open" = "열기";
+"garden.dayFormat" = "일 %d";
+"garden.stage.bloomingGarden" = "블루밍 가든";
+"garden.stage.flower" = "꽃";
+"garden.stage.gardenBed" = "가든 베드";
+"garden.stage.peacefulGarden" = "평화로운 정원";
+"garden.stage.sanctuary" = "성역";
+"garden.stage.seed" = "종자";
+"garden.stage.smallForest" = "작은 숲";
+"garden.stage.sprout" = "새싹";
+"garden.stage.youngPlant" = "어린 식물";
+"habit.generic" = "습관";
+"tab.garden" = "정원";
+"tab.rescue" = "구조";
+"widget.cleanDaysFormat" = "%d 청소일";
+"widget.garden.description" = "정원 무대를 한눈에 확인하세요.";
+"widget.garden.name" = "소버가든 정원";
+"widget.gardenComplete" = "정원 완성";
+"widget.gardenDetailFormat" = "일 %d · %@";
+"widget.gardenGrowing" = "정원 재배";
+"widget.gardenGrowingBody" = "당신의 정원이 성장하고 있습니다.";
+"widget.nextMilestoneFormat" = "다음: %d일";
+"widget.rescue.body" = "선택하기 전에 몇 분 정도 꾸준한 시간을 투자하세요.";
+"widget.rescue.description" = "힘든 순간이 오면 Rescue를 열어보세요.";
+"widget.rescue.name" = "소버가든 구조";
+"widget.rescue.question" = "어려움을 겪고 계십니까?";
+"widget.streak.description" = "깨끗한 날과 다음 이정표를 추적하세요.";
+"widget.streak.name" = "소버가든 스트릭";

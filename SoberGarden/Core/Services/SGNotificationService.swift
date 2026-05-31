@@ -91,8 +91,8 @@ final class SGNotificationService: NSObject {
         guard SGSubscriptionManager.shared.isPlus else { return }
 
         let content = UNMutableNotificationContent()
-        content.title = "Check in with yourself"
-        content.body = "You made it 10 minutes. How do you feel now?"
+        content.title = "notification.rescueDelay.title".localized()
+        content.body = "notification.rescueDelay.body".localized()
         content.sound = .default
 
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)
@@ -111,8 +111,8 @@ final class SGNotificationService: NSObject {
 
     func scheduleTestNotification(after timeInterval: TimeInterval = 5) {
         let content = UNMutableNotificationContent()
-        content.title = "SoberGarden"
-        content.body = "Protect today. Your garden is still growing."
+        content.title = "notification.generic.title".localized()
+        content.body = "notification.generic.body".localized()
         content.sound = .default
 
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: max(timeInterval, 1), repeats: false)
@@ -131,8 +131,8 @@ final class SGNotificationService: NSObject {
 
     private func scheduleDailyReminder(time: DateComponents) {
         let content = UNMutableNotificationContent()
-        content.title = "SoberGarden"
-        content.body = "Protect today. Your garden is still growing."
+        content.title = "notification.generic.title".localized()
+        content.body = "notification.generic.body".localized()
         content.sound = .default
 
         let trigger = UNCalendarNotificationTrigger(dateMatching: normalizedTimeComponents(time), repeats: true)
@@ -147,8 +147,8 @@ final class SGNotificationService: NSObject {
 
     private func scheduleNightReminder(time: DateComponents) {
         let content = UNMutableNotificationContent()
-        content.title = "SoberGarden"
-        content.body = "Late night reminder: choose rest over regret."
+        content.title = "notification.generic.title".localized()
+        content.body = "notification.night.body".localized()
         content.sound = .default
 
         let trigger = UNCalendarNotificationTrigger(dateMatching: normalizedTimeComponents(time), repeats: true)
@@ -182,8 +182,8 @@ final class SGNotificationService: NSObject {
         guard milestoneDate > Date() else { return nil }
 
         let content = UNMutableNotificationContent()
-        content.title = "Milestone reached"
-        content.body = "You reached \(milestone.day) clean days. A new bloom is waiting."
+        content.title = "notification.milestone.title".localized()
+        content.body = "notification.milestone.body".localizedFormat(milestone.day)
         content.sound = .default
 
         let triggerComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: milestoneDate)

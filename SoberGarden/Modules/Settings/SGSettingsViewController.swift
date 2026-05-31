@@ -4,6 +4,7 @@
 //
 
 import UIKit
+import MessageUI
 import SafariServices
 
 final class SGSettingsViewController: BaseViewController {
@@ -134,20 +135,20 @@ final class SGSettingsViewController: BaseViewController {
         ))
 
         contentStackView.addArrangedSubview(makeSectionCard(
-            title: "Data Management",
-            subtitle: "Local data stays on this device unless you remove it.",
+            title: "settings.section.data.title".localized(),
+            subtitle: "settings.section.data.subtitle".localized(),
             rows: buildDataRows()
         ))
 
         contentStackView.addArrangedSubview(makeSectionCard(
-            title: "Widget",
-            subtitle: "Put your garden progress on the Home Screen.",
+            title: "settings.section.widget.title".localized(),
+            subtitle: "settings.section.widget.subtitle".localized(),
             rows: buildWidgetRows()
         ))
 
         contentStackView.addArrangedSubview(makeSectionCard(
-            title: "About",
-            subtitle: "Small product details and the current app build.",
+            title: "settings.section.about.title".localized(),
+            subtitle: "settings.section.about.subtitle".localized(),
             rows: buildAboutRows())
         )
     }
@@ -185,17 +186,17 @@ final class SGSettingsViewController: BaseViewController {
     }
 
     private func buildHabitRows(habit: Habit?) -> [SGSettingsRowView] {
-        let habitType = habit?.displayName ?? "Not set"
-        let startDate = habit.map { Self.displayDateFormatter.string(from: $0.startDate) } ?? "Not set"
+        let habitType = habit?.displayName ?? "common.notSet".localized()
+        let startDate = habit.map { Self.displayDateFormatter.string(from: $0.startDate) } ?? "common.notSet".localized()
         let dailyCost = Self.currencyString(for: habit?.dailyCost)
-        let dailyMinutes = habit?.dailyMinutes.map { "\($0) min/day" } ?? "Not set"
-        let reasons = habit?.reasons.isEmpty == false ? "\(habit?.reasons.count ?? 0) reasons" : "Not set"
+        let dailyMinutes = habit?.dailyMinutes.map { "settings.habit.minutesPerDayFormat".localizedFormat($0) } ?? "common.notSet".localized()
+        let reasons = habit?.reasons.isEmpty == false ? "settings.habit.reasonsFormat".localizedFormat(habit?.reasons.count ?? 0) : "common.notSet".localized()
 
         let editRow = SGSettingsRowView()
         editRow.configure(
-            title: "Edit habit",
+            title: "settings.habit.editTitle".localized(),
             subtitle: habitType,
-            value: "Update goal details",
+            value: "settings.habit.editValue".localized(),
             accessory: .disclosure
         )
         editRow.onTap = { [weak self] in
@@ -203,28 +204,28 @@ final class SGSettingsViewController: BaseViewController {
         }
 
         let startDateRow = SGSettingsRowView()
-        startDateRow.configure(title: "Start date", value: startDate, accessory: .none)
+        startDateRow.configure(title: "settings.habit.startDate".localized(), value: startDate, accessory: .none)
 
         let costRow = SGSettingsRowView()
-        costRow.configure(title: "Daily cost", value: dailyCost, accessory: .none)
+        costRow.configure(title: "settings.habit.dailyCost".localized(), value: dailyCost, accessory: .none)
 
         let timeRow = SGSettingsRowView()
-        timeRow.configure(title: "Daily time", value: dailyMinutes, accessory: .none)
+        timeRow.configure(title: "settings.habit.dailyTime".localized(), value: dailyMinutes, accessory: .none)
 
         let reasonsRow = SGSettingsRowView()
-        reasonsRow.configure(title: "Reasons", value: reasons, accessory: .none)
+        reasonsRow.configure(title: "settings.habit.reasons".localized(), value: reasons, accessory: .none)
 
         let additionalHabitRow = SGSettingsRowView()
         additionalHabitRow.configure(
-            title: "Additional habits",
-            subtitle: "Track more than one recovery goal with Plus.",
-            value: "Plus",
+            title: "settings.habit.additional.title".localized(),
+            subtitle: "settings.habit.additional.subtitle".localized(),
+            value: "subscription.plus".localized(),
             accessory: .disclosure
         )
         additionalHabitRow.onTap = { [weak self] in
             guard let self else { return }
             if self.requirePlusAccess() {
-                self.showComingSoonAlert(title: "Coming soon", message: "Multiple habit tracking will be available in a later build.")
+                self.showComingSoonAlert(title: "settings.habit.additional.comingSoonTitle".localized(), message: "settings.habit.additional.comingSoonMessage".localized())
             }
         }
 
@@ -245,8 +246,8 @@ final class SGSettingsViewController: BaseViewController {
     private func buildNotificationRows(settings: SoberGardenSettings) -> [SGSettingsRowView] {
         let dailyReminder = SGSettingsRowView()
         dailyReminder.configure(
-            title: "Daily reminder",
-            subtitle: "A gentle check-in at \(Self.timeString(for: settings.dailyReminderTime)).",
+            title: "settings.notifications.daily.title".localized(),
+            subtitle: "settings.notifications.daily.subtitle".localizedFormat(Self.timeString(for: settings.dailyReminderTime)),
             accessory: .toggle(settings.dailyReminderEnabled)
         )
         dailyReminder.onToggleChanged = { [weak self] isOn in
@@ -257,8 +258,8 @@ final class SGSettingsViewController: BaseViewController {
 
         let milestoneRow = SGSettingsRowView()
         milestoneRow.configure(
-            title: "Milestone notifications",
-            subtitle: "Celebrate important streak points.",
+            title: "settings.notifications.milestone.title".localized(),
+            subtitle: "settings.notifications.milestone.subtitle".localized(),
             accessory: .toggle(SGSubscriptionManager.shared.isPlus && settings.milestoneNotificationsEnabled)
         )
         milestoneRow.onToggleChanged = { [weak self] isOn in
@@ -269,8 +270,8 @@ final class SGSettingsViewController: BaseViewController {
 
         let nightReminder = SGSettingsRowView()
         nightReminder.configure(
-            title: "Night reminder",
-            subtitle: "A softer nudge if the evening gets hard.",
+            title: "settings.notifications.night.title".localized(),
+            subtitle: "settings.notifications.night.subtitle".localized(),
             accessory: .toggle(SGSubscriptionManager.shared.isPlus && settings.nightReminderEnabled)
         )
         nightReminder.onToggleChanged = { [weak self] isOn in
@@ -281,8 +282,8 @@ final class SGSettingsViewController: BaseViewController {
 
         let rescueReminder = SGSettingsRowView()
         rescueReminder.configure(
-            title: "Rescue delay reminder",
-            subtitle: "Remind me when I choose to wait.",
+            title: "settings.notifications.rescue.title".localized(),
+            subtitle: "settings.notifications.rescue.subtitle".localized(),
             accessory: .toggle(SGSubscriptionManager.shared.isPlus && settings.rescueDelayReminderEnabled)
         )
         rescueReminder.onToggleChanged = { [weak self] isOn in
@@ -350,8 +351,8 @@ final class SGSettingsViewController: BaseViewController {
     private func buildPrivacyRows(settings: SoberGardenSettings) -> [SGSettingsRowView] {
         let appLock = SGSettingsRowView()
         appLock.configure(
-            title: "Face ID / App Lock",
-            subtitle: "Require device authentication when returning to SoberGarden.",
+            title: "settings.privacy.appLock.title".localized(),
+            subtitle: "settings.privacy.appLock.subtitle".localized(),
             accessory: .toggle(settings.appLockEnabled)
         )
         appLock.onToggleChanged = { [weak self] isOn in
@@ -360,8 +361,8 @@ final class SGSettingsViewController: BaseViewController {
 
         let privacyPolicy = SGSettingsRowView()
         privacyPolicy.configure(
-            title: "Privacy Policy",
-            subtitle: "How local data is stored and used.",
+            title: "settings.privacy.policy.title".localized(),
+            subtitle: "settings.privacy.policy.subtitle".localized(),
             accessory: .disclosure
         )
         privacyPolicy.onTap = { [weak self] in
@@ -370,8 +371,8 @@ final class SGSettingsViewController: BaseViewController {
 
         let terms = SGSettingsRowView()
         terms.configure(
-            title: "Terms of Use",
-            subtitle: "Usage terms and expectations.",
+            title: "settings.privacy.terms.title".localized(),
+            subtitle: "settings.privacy.terms.subtitle".localized(),
             accessory: .disclosure
         )
         terms.onTap = { [weak self] in
@@ -380,8 +381,8 @@ final class SGSettingsViewController: BaseViewController {
 
         let disclaimer = SGSettingsRowView()
         disclaimer.configure(
-            title: "Non-medical disclaimer",
-            subtitle: "Review what this app does, and what it does not do.",
+            title: "settings.privacy.disclaimer.title".localized(),
+            subtitle: "settings.privacy.disclaimer.subtitle".localized(),
             accessory: .disclosure
         )
         disclaimer.onTap = { [weak self] in
@@ -420,8 +421,8 @@ final class SGSettingsViewController: BaseViewController {
     private func buildDataRows() -> [SGSettingsRowView] {
         let resetRow = SGSettingsRowView()
         resetRow.configure(
-            title: "Reset current streak",
-            subtitle: "Start fresh without removing the whole app history.",
+            title: "settings.data.reset.title".localized(),
+            subtitle: "settings.data.reset.subtitle".localized(),
             accessory: .disclosure,
             isDestructive: true
         )
@@ -431,8 +432,8 @@ final class SGSettingsViewController: BaseViewController {
 
         let deleteRow = SGSettingsRowView()
         deleteRow.configure(
-            title: "Delete all data",
-            subtitle: "Remove the habit, entries, sessions, and reminders from this device.",
+            title: "settings.data.delete.title".localized(),
+            subtitle: "settings.data.delete.subtitle".localized(),
             accessory: .disclosure,
             isDestructive: true
         )
@@ -446,8 +447,8 @@ final class SGSettingsViewController: BaseViewController {
     private func buildWidgetRows() -> [SGSettingsRowView] {
         let widgetGuideRow = SGSettingsRowView()
         widgetGuideRow.configure(
-            title: "Add Home Screen widget",
-            subtitle: "Step-by-step guide for adding SoberGarden to your Home Screen.",
+            title: "settings.widget.title".localized(),
+            subtitle: "settings.widget.subtitle".localized(),
             accessory: .disclosure
         )
         widgetGuideRow.onTap = { [weak self] in
@@ -465,13 +466,24 @@ final class SGSettingsViewController: BaseViewController {
     }
 
     private func buildAboutRows() -> [SGSettingsRowView] {
+        let feedbackRow = SGSettingsRowView()
+        feedbackRow.configure(
+            title: "settings.feedback.title".localized(),
+            subtitle: "settings.feedback.subtitle".localized(),
+            accessory: .disclosure
+        )
+        feedbackRow.onTap = { [weak self] in
+            guard let self else { return }
+            SGFeedbackMailPresenter.shared.presentFeedback(from: self)
+        }
+
         let versionRow = SGSettingsRowView()
         versionRow.configure(
-            title: "App version",
+            title: "settings.about.version".localized(),
             value: appVersionText,
             accessory: .none
         )
-        return [versionRow]
+        return [feedbackRow, versionRow]
     }
 
     private func open(url: URL?) {
@@ -482,18 +494,18 @@ final class SGSettingsViewController: BaseViewController {
 
     private func showComingSoonAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        alert.addAction(UIAlertAction(title: "common.ok".localized(), style: .default))
         present(alert, animated: true)
     }
 
     private func showNotificationPermissionAlert() {
         let alert = UIAlertController(
-            title: "Notifications are off",
-            message: "Allow notifications in iOS Settings to use reminders.",
+            title: "settings.alert.notificationsOff.title".localized(),
+            message: "settings.alert.notificationsOff.message".localized(),
             preferredStyle: .alert
         )
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        alert.addAction(UIAlertAction(title: "Open Settings", style: .default) { _ in
+        alert.addAction(UIAlertAction(title: "common.ok".localized(), style: .default))
+        alert.addAction(UIAlertAction(title: "settings.alert.openSettings".localized(), style: .default) { _ in
             guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
             UIApplication.shared.open(url)
         })
@@ -502,11 +514,11 @@ final class SGSettingsViewController: BaseViewController {
 
     private func showAppLockAuthenticationAlert() {
         let alert = UIAlertController(
-            title: "App Lock was not enabled",
-            message: "Device authentication is required before App Lock can be turned on.",
+            title: "settings.alert.appLockFailed.title".localized(),
+            message: "settings.alert.appLockFailed.message".localized(),
             preferredStyle: .alert
         )
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        alert.addAction(UIAlertAction(title: "common.ok".localized(), style: .default))
         present(alert, animated: true)
     }
 
@@ -521,13 +533,13 @@ final class SGSettingsViewController: BaseViewController {
 
     private func confirmResetCurrentStreak() {
         let alert = UIAlertController(
-            title: "Start again?",
-            message: "Your progress is not erased. Your garden remembers your effort, and a new seed will be planted.",
+            title: "settings.alert.reset.title".localized(),
+            message: "settings.alert.reset.message".localized(),
             preferredStyle: .alert
         )
 
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        alert.addAction(UIAlertAction(title: "Start Again", style: .destructive) { [weak self] _ in
+        alert.addAction(UIAlertAction(title: "common.cancel".localized(), style: .cancel))
+        alert.addAction(UIAlertAction(title: "settings.alert.reset.confirm".localized(), style: .destructive) { [weak self] _ in
             SoberGardenStore.shared.resetCurrentStreak()
             self?.reloadContent()
             self?.showResetCompleteAlert()
@@ -538,23 +550,23 @@ final class SGSettingsViewController: BaseViewController {
 
     private func showResetCompleteAlert() {
         let alert = UIAlertController(
-            title: "Calm Coach",
-            message: "A new seed has been planted. Begin again without shame.",
+            title: "settings.alert.reset.completeTitle".localized(),
+            message: "settings.alert.reset.completeMessage".localized(),
             preferredStyle: .alert
         )
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        alert.addAction(UIAlertAction(title: "common.ok".localized(), style: .default))
         present(alert, animated: true)
     }
 
     private func confirmDeleteAllData() {
         let alert = UIAlertController(
-            title: "Delete all data?",
-            message: "This removes the habit, progress history, journal entries, rescue sessions, and local settings from this device.",
+            title: "settings.alert.delete.title".localized(),
+            message: "settings.alert.delete.message".localized(),
             preferredStyle: .alert
         )
 
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        alert.addAction(UIAlertAction(title: "Delete", style: .destructive) { [weak self] _ in
+        alert.addAction(UIAlertAction(title: "common.cancel".localized(), style: .cancel))
+        alert.addAction(UIAlertAction(title: "settings.alert.delete.confirm".localized(), style: .destructive) { [weak self] _ in
             SoberGardenStore.shared.deleteAllData()
             self?.returnToOnboarding()
         })
@@ -606,7 +618,7 @@ final class SGSettingsViewController: BaseViewController {
     }
 
     private static func currencyString(for value: Double?) -> String {
-        guard let value else { return "Not set" }
+        guard let value else { return "common.notSet".localized() }
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
         formatter.minimumFractionDigits = 0
@@ -644,12 +656,12 @@ private final class SGSettingsSubscriptionCardView: UIControl {
     }
 
     func configure(isPlus: Bool) {
-        badgeLabel.text = isPlus ? "PLUS ACTIVE" : "SOBERGARDEN PLUS"
-        titleLabel.text = isPlus ? "Your Plus garden is active" : "Grow deeper with Plus"
+        badgeLabel.text = isPlus ? "settings.plus.activeBadge".localized() : "settings.plus.brandBadge".localized()
+        titleLabel.text = isPlus ? "settings.plus.activeTitle".localized() : "settings.plus.inactiveTitle".localized()
         subtitleLabel.text = isPlus
-            ? "Premium tracking and reflection tools are unlocked for this Apple ID."
-            : "Unlock richer trends, garden motivation, and more reflection space."
-        actionButton.setTitle(isPlus ? "Manage" : "View Plans", for: .normal)
+            ? "settings.plus.activeSubtitle".localized()
+            : "settings.plus.inactiveSubtitle".localized()
+        actionButton.setTitle(isPlus ? "settings.plus.manage".localized() : "settings.plus.viewPlans".localized(), for: .normal)
     }
 
     private func setupView() {
@@ -696,7 +708,7 @@ private final class SGSettingsSubscriptionCardView: UIControl {
         featureStackView.alignment = .fill
         featureStackView.distribution = .fillProportionally
         featureStackView.spacing = 8
-        ["Trends", "Garden", "Reflection"].forEach { feature in
+        ["settings.plus.feature.trends".localized(), "settings.plus.feature.garden".localized(), "settings.plus.feature.reflection".localized()].forEach { feature in
             featureStackView.addArrangedSubview(makeFeaturePill(text: feature))
         }
 

@@ -5,6 +5,10 @@
 
 import Foundation
 
+func SGLoc(_ key: String) -> String {
+    NSLocalizedString(key, tableName: "Localizable", bundle: .main, value: key, comment: "")
+}
+
 enum SGWatchGardenStage: String, Codable {
     case seed
     case sprout
@@ -28,7 +32,7 @@ struct SGWatchSnapshot: Codable {
         cleanDays: 0,
         nextMilestone: nil,
         gardenStage: .seed,
-        habitDisplayName: "Habit",
+        habitDisplayName: SGLoc("habit.generic"),
         updatedAt: Date()
     )
 }

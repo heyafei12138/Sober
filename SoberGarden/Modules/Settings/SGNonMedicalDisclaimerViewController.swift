@@ -22,7 +22,7 @@ final class SGNonMedicalDisclaimerViewController: BaseViewController {
     private let heroBadgeLabel = UILabel()
     private let heroTitleLabel = UILabel()
     private let heroBodyLabel = UILabel()
-    private let understandButton = SGPrimaryButton(title: "Understand")
+    private let understandButton = SGPrimaryButton(title: "common.understand".localized())
 
     init(mode: PresentationMode) {
         self.mode = mode
@@ -37,7 +37,7 @@ final class SGNonMedicalDisclaimerViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = mode == .settings ? "Non-medical disclaimer" : nil
+        title = mode == .settings ? "settings.disclaimer.title".localized() : nil
     }
 
     override func setupSubviews() {
@@ -129,7 +129,7 @@ final class SGNonMedicalDisclaimerViewController: BaseViewController {
         bannerContentStack.alignment = .fill
         bannerContentStack.spacing = 8
 
-        heroBadgeLabel.text = "Non-medical"
+        heroBadgeLabel.text = "settings.disclaimer.badge".localized()
         heroBadgeLabel.font = .systemFont(ofSize: 12, weight: .semibold)
         heroBadgeLabel.textColor = SGColor.textDark
         heroBadgeLabel.backgroundColor = UIColor.white.withAlphaComponent(0.88)
@@ -140,12 +140,12 @@ final class SGNonMedicalDisclaimerViewController: BaseViewController {
             make.height.equalTo(24)
         }
 
-        heroTitleLabel.text = "A recovery companion, not a clinician."
+        heroTitleLabel.text = "settings.disclaimer.hero.title".localized()
         heroTitleLabel.font = .systemFont(ofSize: 26, weight: .bold)
         heroTitleLabel.textColor = SGColor.textDark
         heroTitleLabel.numberOfLines = 0
 
-        heroBodyLabel.text = "SoberGarden is built for self-reflection, urge support, calming exercises, gentle reminders, and progress tracking."
+        heroBodyLabel.text = "settings.disclaimer.hero.body".localized()
         heroBodyLabel.font = .systemFont(ofSize: 15, weight: .regular)
         heroBodyLabel.textColor = SGColor.textSecondary
         heroBodyLabel.numberOfLines = 0
@@ -165,28 +165,28 @@ final class SGNonMedicalDisclaimerViewController: BaseViewController {
 
     private func buildWhatItIsCard() -> UIView {
         return makeInfoCard(
-            title: "What this app is",
-            subtitle: "A calm place to notice what you feel and choose the next useful step.",
+            title: "settings.disclaimer.is.title".localized(),
+            subtitle: "settings.disclaimer.is.subtitle".localized(),
             icon: UIImage(named: "home_calm_coach_icon") ?? UIImage(systemName: "leaf.fill"),
             rows: [
-                ("Self-reflection", "Use the journal and home screen to notice patterns without judging the day.", "checkmark.circle.fill", SGColor.primaryDark),
-                ("Urge support", "Use Rescue when you need a minute of breathing, delay, or a reason to pause.", "checkmark.circle.fill", SGColor.primaryDark),
-                ("Gentle reminders", "Keep nudges soft and predictable so the app stays supportive, not noisy.", "checkmark.circle.fill", SGColor.primaryDark),
-                ("Progress tracking", "See clean days, savings, garden growth, and milestones at a glance.", "checkmark.circle.fill", SGColor.primaryDark)
+                ("settings.disclaimer.is.selfReflection".localized(), "settings.disclaimer.is.selfReflection.body".localized(), "checkmark.circle.fill", SGColor.primaryDark),
+                ("settings.disclaimer.is.urgeSupport".localized(), "settings.disclaimer.is.urgeSupport.body".localized(), "checkmark.circle.fill", SGColor.primaryDark),
+                ("settings.disclaimer.is.gentleReminders".localized(), "settings.disclaimer.is.gentleReminders.body".localized(), "checkmark.circle.fill", SGColor.primaryDark),
+                ("settings.disclaimer.is.progressTracking".localized(), "settings.disclaimer.is.progressTracking.body".localized(), "checkmark.circle.fill", SGColor.primaryDark)
             ]
         )
     }
 
     private func buildWhatItIsNotCard() -> UIView {
         return makeInfoCard(
-            title: "What this app is not",
-            subtitle: "These boundaries are part of the product, not a footnote.",
+            title: "settings.disclaimer.isNot.title".localized(),
+            subtitle: "settings.disclaimer.isNot.subtitle".localized(),
             icon: UIImage(systemName: "slash.circle.fill"),
             rows: [
-                ("Not diagnosis", "The app does not assess, label, or diagnose a condition.", "xmark.circle.fill", UIColor.systemRed),
-                ("Not treatment", "It does not provide medical treatment or replace professional care.", "xmark.circle.fill", UIColor.systemRed),
-                ("Not a doctor or therapist", "It does not act as a clinician, emergency service, or licensed provider.", "xmark.circle.fill", UIColor.systemRed),
-                ("Not a guarantee", "The app supports your effort, but it cannot promise outcomes or permanence.", "xmark.circle.fill", UIColor.systemRed)
+                ("settings.disclaimer.isNot.diagnosis".localized(), "settings.disclaimer.isNot.diagnosis.body".localized(), "xmark.circle.fill", UIColor.systemRed),
+                ("settings.disclaimer.isNot.treatment".localized(), "settings.disclaimer.isNot.treatment.body".localized(), "xmark.circle.fill", UIColor.systemRed),
+                ("settings.disclaimer.isNot.clinician".localized(), "settings.disclaimer.isNot.clinician.body".localized(), "xmark.circle.fill", UIColor.systemRed),
+                ("settings.disclaimer.isNot.guarantee".localized(), "settings.disclaimer.isNot.guarantee.body".localized(), "xmark.circle.fill", UIColor.systemRed)
             ]
         )
     }
@@ -204,17 +204,17 @@ final class SGNonMedicalDisclaimerViewController: BaseViewController {
         stack.layoutMargins = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
 
         let header = SGSectionHeaderView(
-            title: "How to use it",
-            subtitle: "Keep the app close to the moment, not as a substitute for care."
+            title: "settings.disclaimer.howToUse.title".localized(),
+            subtitle: "settings.disclaimer.howToUse.subtitle".localized()
         )
         stack.addArrangedSubview(header)
-        stack.addArrangedSubview(makeStepRow(number: "1", title: "Open Home", body: "Read the Calm Coach card, streak, and garden preview first.", accent: SGColor.primaryDark))
-        stack.addArrangedSubview(makeStepRow(number: "2", title: "Use Rescue", body: "When the urge climbs, slow down with breath, delay, and reasons.", accent: SGColor.rescue))
-        stack.addArrangedSubview(makeStepRow(number: "3", title: "Record or reflect", body: "Journal what happened, then come back later and notice what changed.", accent: SGColor.flower))
+        stack.addArrangedSubview(makeStepRow(number: "1", title: "settings.disclaimer.howToUse.step1.title".localized(), body: "settings.disclaimer.howToUse.step1.body".localized(), accent: SGColor.primaryDark))
+        stack.addArrangedSubview(makeStepRow(number: "2", title: "settings.disclaimer.howToUse.step2.title".localized(), body: "settings.disclaimer.howToUse.step2.body".localized(), accent: SGColor.rescue))
+        stack.addArrangedSubview(makeStepRow(number: "3", title: "settings.disclaimer.howToUse.step3.title".localized(), body: "settings.disclaimer.howToUse.step3.body".localized(), accent: SGColor.flower))
 
         let noteRow = makeMediaRow(
-            title: "Garden language is symbolic",
-            body: "The seed, sprout, and bloom stages are progress markers for motivation and reflection.",
+            title: "settings.disclaimer.howToUse.note.title".localized(),
+            body: "settings.disclaimer.howToUse.note.body".localized(),
             image: UIImage(named: "garden_stage_seed") ?? UIImage(named: "garden_stage_sprout")
         )
         stack.addArrangedSubview(noteRow)

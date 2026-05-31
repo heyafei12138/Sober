@@ -18,7 +18,7 @@ struct SGWatchHomeView: View {
                     NavigationLink {
                         SGWatchBreathingView()
                     } label: {
-                        Label("I'm Struggling", systemImage: "lifepreserver.fill")
+                        Label(SGLoc("common.imStruggling"), systemImage: "lifepreserver.fill")
                             .font(.headline.weight(.semibold))
                             .frame(maxWidth: .infinity)
                     }
@@ -46,7 +46,7 @@ struct SGWatchHomeView: View {
                     .lineLimit(1)
             }
 
-            Text("\(snapshot.cleanDays) days clean")
+            Text(String(format: SGLoc("watch.cleanDaysFormat"), snapshot.cleanDays))
                 .font(.system(.title2, design: .rounded).weight(.bold))
                 .foregroundStyle(.primary)
                 .minimumScaleFactor(0.72)
@@ -66,9 +66,9 @@ struct SGWatchHomeView: View {
 
     private var nextMilestoneText: String {
         guard let nextMilestone = snapshot.nextMilestone else {
-            return "All milestones reached"
+            return SGLoc("watch.allMilestonesReached")
         }
-        return "Next: \(nextMilestone) days"
+        return String(format: SGLoc("watch.nextMilestoneFormat"), nextMilestone)
     }
 }
 

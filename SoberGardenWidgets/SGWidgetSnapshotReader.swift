@@ -5,6 +5,10 @@
 
 import Foundation
 
+func SGLoc(_ key: String) -> String {
+    NSLocalizedString(key, tableName: "Localizable", bundle: .main, value: key, comment: "")
+}
+
 enum SGWidgetGardenStage: String, Codable {
     case seed
     case sprout
@@ -19,23 +23,23 @@ enum SGWidgetGardenStage: String, Codable {
     var title: String {
         switch self {
         case .seed:
-            return "Seed"
+            return SGLoc("garden.stage.seed")
         case .sprout:
-            return "Sprout"
+            return SGLoc("garden.stage.sprout")
         case .youngPlant:
-            return "Young Plant"
+            return SGLoc("garden.stage.youngPlant")
         case .flower:
-            return "Flower"
+            return SGLoc("garden.stage.flower")
         case .gardenBed:
-            return "Garden Bed"
+            return SGLoc("garden.stage.gardenBed")
         case .bloomingGarden:
-            return "Blooming Garden"
+            return SGLoc("garden.stage.bloomingGarden")
         case .peacefulGarden:
-            return "Peaceful Garden"
+            return SGLoc("garden.stage.peacefulGarden")
         case .smallForest:
-            return "Small Forest"
+            return SGLoc("garden.stage.smallForest")
         case .sanctuary:
-            return "Sanctuary"
+            return SGLoc("garden.stage.sanctuary")
         }
     }
 
@@ -64,7 +68,7 @@ struct SGWidgetSnapshot: Codable {
         cleanDays: 0,
         nextMilestone: nil,
         gardenStage: .seed,
-        habitDisplayName: "Habit",
+        habitDisplayName: SGLoc("habit.generic"),
         updatedAt: Date()
     )
 }

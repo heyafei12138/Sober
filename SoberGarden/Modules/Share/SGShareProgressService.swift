@@ -13,11 +13,11 @@ enum SGSharePosterStyle: String, CaseIterable {
     var title: String {
         switch self {
         case .garden:
-            return "Garden"
+            return "share.style.garden".localized()
         case .fresh:
-            return "Fresh"
+            return "share.style.fresh".localized()
         case .sunrise:
-            return "Sunrise"
+            return "share.style.sunrise".localized()
         }
     }
 }
@@ -69,10 +69,10 @@ final class SGShareProgressService {
 
         let image = renderCardImage(content: cardContent)
         let text = [
-            "I'm growing one clean day at a time.",
-            "\(cleanDays) \(cleanDays == 1 ? "day" : "days") clean from \(habit.displayName).",
-            "Garden stage: \(gardenStage.title).",
-            "Saved: \(savedMoneyText) and \(savedTimeText)."
+            "share.text.line1".localized(),
+            "share.text.cleanDaysFormat".localizedFormat(cleanDays, habit.displayName),
+            "share.text.gardenStageFormat".localizedFormat(gardenStage.title),
+            "share.text.savedFormat".localizedFormat(savedMoneyText, savedTimeText)
         ].joined(separator: "\n")
 
         return ProgressSharePackage(image: image, text: text, style: style)
@@ -103,14 +103,14 @@ final class SGShareProgressService {
     }
 
     private static func timeText(for minutes: Int) -> String {
-        guard minutes > 0 else { return "0 min" }
-        guard minutes >= 60 else { return "\(minutes) min" }
+        guard minutes > 0 else { return "share.time.zero".localized() }
+        guard minutes >= 60 else { return "share.time.minutesFormat".localizedFormat(minutes) }
 
         let hours = minutes / 60
         let leftover = minutes % 60
         if leftover == 0 {
-            return "\(hours)h"
+            return "share.time.hoursFormat".localizedFormat(hours)
         }
-        return "\(hours)h \(leftover)m"
+        return "share.time.hoursMinutesFormat".localizedFormat(hours, leftover)
     }
 }

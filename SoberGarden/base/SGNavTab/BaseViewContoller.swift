@@ -65,7 +65,7 @@ open class BaseViewController: UIViewController {
         button.layer.shadowOpacity = 0.22
         button.layer.shadowRadius = 7
         button.layer.shadowOffset = CGSize(width: 0, height: 4)
-        button.accessibilityLabel = "SoberGarden Plus"
+        button.accessibilityLabel = "subscription.plus".localized()
         return button
     }()
 

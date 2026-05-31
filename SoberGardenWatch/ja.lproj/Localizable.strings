@@ -1,0 +1,18 @@
+/*
+  Localizable.strings
+  SoberGardenWatch
+
+  Generated during full app localization.
+*/
+
+"breathing.exhale" = "息を吐く";
+"breathing.inhale" = "息を吸う";
+"common.done" = "完了";
+"common.imStruggling" = "苦労しています";
+"habit.generic" = "習慣";
+"watch.allMilestonesReached" = "すべてのマイルストーンに到達しました";
+"watch.breathing.completed" = "あなたはスペースを作りました。";
+"watch.breathing.restart" = "再起動";
+"watch.breathing.title" = "呼吸する";
+"watch.cleanDaysFormat" = "%d 日クリーン";
+"watch.nextMilestoneFormat" = "次へ: %d 日";

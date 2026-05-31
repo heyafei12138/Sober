@@ -12,17 +12,17 @@ final class SGCheckInStatsView: UIView {
     private let cardView = SGCardView()
     private let stackView = UIStackView()
     private let headerView = SGSectionHeaderView(
-        title: "Secondary stats",
-        subtitle: "Check-in streak stays separate from clean streak."
+        title: "settings.stats.title".localized(),
+        subtitle: "settings.stats.subtitle".localized()
     )
     private let rowsStackView = UIStackView()
     private let checkInRow = SGCheckInStatRowView(
-        title: "Check-in streak",
+        title: "settings.stats.checkIn".localized(),
         accentColor: SGColor.primaryDark,
         surfaceColor: UIColor.hexString("#F4F8FF")
     )
     private let cleanRow = SGCheckInStatRowView(
-        title: "Clean streak",
+        title: "settings.stats.clean".localized(),
         accentColor: SGColor.flower,
         surfaceColor: UIColor.hexString("#FFF8EE")
     )
@@ -43,11 +43,11 @@ final class SGCheckInStatsView: UIView {
     }
 
     func configure(cleanStreakDays: Int?, checkInStreakDays: Int) {
-        checkInRow.configure(value: "\(max(checkInStreakDays, 0)) days")
+        checkInRow.configure(value: "settings.stats.daysFormat".localizedFormat(max(checkInStreakDays, 0)))
         if let cleanStreakDays {
-            cleanRow.configure(value: "\(max(cleanStreakDays, 0)) days")
+            cleanRow.configure(value: "settings.stats.daysFormat".localizedFormat(max(cleanStreakDays, 0)))
         } else {
-            cleanRow.configure(value: "Not set")
+            cleanRow.configure(value: "common.notSet".localized())
         }
     }
 
@@ -90,11 +90,11 @@ final class SGCheckInStatsView: UIView {
 
         premiumIconView.contentMode = .scaleAspectFit
 
-        premiumTitleLabel.text = "Unlock Plus stats"
+        premiumTitleLabel.text = "settings.stats.premiumTitle".localized()
         premiumTitleLabel.font = .systemFont(ofSize: 16, weight: .bold)
         premiumTitleLabel.textColor = SGColor.textDark
 
-        premiumSubtitleLabel.text = "See streak context and check-in momentum."
+        premiumSubtitleLabel.text = "settings.stats.premiumSubtitle".localized()
         premiumSubtitleLabel.font = .systemFont(ofSize: 13, weight: .medium)
         premiumSubtitleLabel.textColor = SGColor.textSecondary
         premiumSubtitleLabel.numberOfLines = 0

@@ -57,6 +57,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidBecomeActive(_ scene: UIScene) {
         // Called when the scene has moved from an inactive state to an active state.
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+        SGReviewPromptCoordinator.shared.recordColdStartAndPromptIfNeeded(from: window?.rootViewController)
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
@@ -79,7 +80,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     private func routeAfterUnlock(_ url: URL) {
         pendingDeepLinkURL = url
-        SGAppLockService.shared.authenticateIfNeeded(reason: "Unlock SoberGarden to continue.") { [weak self] success in
+        SGAppLockService.shared.authenticateIfNeeded(reason: "appLock.unlockReason".localized()) { [weak self] success in
             guard success else {
                 self?.pendingDeepLinkURL = nil
                 return

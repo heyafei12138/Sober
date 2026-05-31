@@ -30,23 +30,23 @@ struct SGWatchBreathingView: View {
                     .frame(width: isBreathingIn ? 96 : 54, height: isBreathingIn ? 96 : 54)
                     .animation(.easeInOut(duration: 4).repeatForever(autoreverses: true), value: isBreathingIn)
 
-                Text(isCompleted ? "Done" : "\(remainingSeconds)s")
+                Text(isCompleted ? SGLoc("common.done") : "\(remainingSeconds)s")
                     .font(.system(.title3, design: .rounded).weight(.bold))
                     .foregroundStyle(.white)
             }
 
-            Text(isCompleted ? "You made space." : phaseText)
+            Text(isCompleted ? SGLoc("watch.breathing.completed") : phaseText)
                 .font(.headline.weight(.semibold))
                 .multilineTextAlignment(.center)
 
-            Button("Restart") {
+            Button(SGLoc("watch.breathing.restart")) {
                 restart()
             }
             .font(.footnote.weight(.semibold))
             .buttonStyle(.bordered)
         }
         .padding(.horizontal, 8)
-        .navigationTitle("Breathe")
+        .navigationTitle(SGLoc("watch.breathing.title"))
         .onAppear {
             restart()
         }
@@ -56,7 +56,7 @@ struct SGWatchBreathingView: View {
     }
 
     private var phaseText: String {
-        isBreathingIn ? "Breathe in" : "Breathe out"
+        isBreathingIn ? SGLoc("breathing.inhale") : SGLoc("breathing.exhale")
     }
 
     private func restart() {

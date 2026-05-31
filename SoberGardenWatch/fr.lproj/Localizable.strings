@@ -1,0 +1,18 @@
+/*
+  Localizable.strings
+  SoberGardenWatch
+
+  Generated during full app localization.
+*/
+
+"breathing.exhale" = "Expirez";
+"breathing.inhale" = "Inspirez";
+"common.done" = "Terminé";
+"common.imStruggling" = "j'ai du mal";
+"habit.generic" = "Habitude";
+"watch.allMilestonesReached" = "Tous les jalons atteints";
+"watch.breathing.completed" = "Vous avez fait de la place.";
+"watch.breathing.restart" = "Redémarrer";
+"watch.breathing.title" = "Respirer";
+"watch.cleanDaysFormat" = "%d jours d'abstinence";
+"watch.nextMilestoneFormat" = "Suivant : %d jours";
