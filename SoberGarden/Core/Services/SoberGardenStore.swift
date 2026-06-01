@@ -17,6 +17,7 @@ final class SoberGardenStore {
     private let encoder: JSONEncoder
     private let decoder: JSONDecoder
     private let stateURL: URL
+    private let sideEffectsEnabled: Bool
 
     private(set) var state: SoberGardenState
 
@@ -24,20 +25,18 @@ final class SoberGardenStore {
         self.init(fileManager: .default)
     }
 
-    init(fileManager: FileManager) {
-        self.fileManager = fileManager
-
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
-        encoder.dateEncodingStrategy = .iso8601
-        self.encoder = encoder
-
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
-        self.decoder = decoder
-
+    convenience init(fileManager: FileManager) {
         let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first
-        self.stateURL = (documentsURL ?? fileManager.temporaryDirectory).appendingPathComponent("sober_garden_state.json")
+        let stateURL = (documentsURL ?? fileManager.temporaryDirectory).appendingPathComponent("sober_garden_state.json")
+        self.init(fileManager: fileManager, stateURL: stateURL)
+    }
+
+    private init(fileManager: FileManager, stateURL: URL, sideEffectsEnabled: Bool = true) {
+        self.fileManager = fileManager
+        self.encoder = Self.makeEncoder()
+        self.decoder = Self.makeDecoder()
+        self.stateURL = stateURL
+        self.sideEffectsEnabled = sideEffectsEnabled
         self.state = SoberGardenState()
         self.state = load()
     }
@@ -48,7 +47,9 @@ final class SoberGardenStore {
             var defaultState = SoberGardenState()
             Self.reconcileCheckInState(&defaultState)
             state = defaultState
-            SGWidgetSnapshotWriter.shared.clearSnapshot()
+            if sideEffectsEnabled {
+                SGWidgetSnapshotWriter.shared.clearSnapshot()
+            }
             return state
         }
 
@@ -71,14 +72,18 @@ final class SoberGardenStore {
             }
 
             state = migratedState
-            SGWidgetSnapshotWriter.shared.writeSnapshot(for: migratedState)
+            if sideEffectsEnabled {
+                SGWidgetSnapshotWriter.shared.writeSnapshot(for: migratedState)
+            }
             return migratedState
         } catch {
             debugPrint("Failed to load sober garden state: \(error)")
             var fallbackState = SoberGardenState()
             Self.reconcileCheckInState(&fallbackState)
             state = fallbackState
-            SGWidgetSnapshotWriter.shared.clearSnapshot()
+            if sideEffectsEnabled {
+                SGWidgetSnapshotWriter.shared.clearSnapshot()
+            }
             return state
         }
     }
@@ -91,8 +96,10 @@ final class SoberGardenStore {
             let data = try encoder.encode(normalizedState)
             try data.write(to: stateURL, options: [.atomic])
             self.state = normalizedState
-            SGNotificationService.shared.rescheduleNotifications(for: normalizedState)
-            SGWidgetSnapshotWriter.shared.writeSnapshot(for: normalizedState)
+            if sideEffectsEnabled {
+                SGNotificationService.shared.rescheduleNotifications(for: normalizedState)
+                SGWidgetSnapshotWriter.shared.writeSnapshot(for: normalizedState)
+            }
         } catch {
             debugPrint("Failed to save sober garden state: \(error)")
         }
@@ -161,6 +168,75 @@ final class SoberGardenStore {
         update { state in
             state.relapseRecords.append(record)
             state.relapseRecords.sort { $0.date > $1.date }
+        }
+    }
+
+    func recordTodayAsPlanted(now: Date = Date(), calendar: Calendar = .current) {
+        updateDailyRecord(for: now, status: .planted, now: now, calendar: calendar)
+    }
+
+    func recordTodayAsRainy(now: Date = Date(), calendar: Calendar = .current) {
+        updateDailyRecord(for: now, status: .rainy, now: now, calendar: calendar)
+    }
+
+    func updateDailyRecord(
+        for date: Date,
+        status: DailyRecordStatus,
+        now: Date = Date(),
+        calendar: Calendar = .current
+    ) {
+        let normalizedDate = calendar.startOfDay(for: date)
+        let dayKey = DailyRecord.dayKey(for: date, calendar: calendar)
+        update { state in
+            if let index = state.dailyRecords.firstIndex(where: { Self.dailyRecord($0, matches: dayKey, normalizedDate: normalizedDate, calendar: calendar) }) {
+                let existingRecord = state.dailyRecords[index]
+                state.dailyRecords[index] = DailyRecord(
+                    id: existingRecord.id,
+                    date: normalizedDate,
+                    dayKey: dayKey,
+                    status: status,
+                    createdAt: existingRecord.createdAt,
+                    updatedAt: now
+                )
+            } else {
+                let record = DailyRecord(
+                    id: UUID(),
+                    date: normalizedDate,
+                    dayKey: dayKey,
+                    status: status,
+                    createdAt: now,
+                    updatedAt: now
+                )
+                state.dailyRecords.append(record)
+            }
+            state.dailyRecords.sort { $0.date > $1.date }
+        }
+    }
+
+    func clearDailyRecord(for date: Date, calendar: Calendar = .current) {
+        let normalizedDate = calendar.startOfDay(for: date)
+        let dayKey = DailyRecord.dayKey(for: date, calendar: calendar)
+        update { state in
+            state.dailyRecords.removeAll { Self.dailyRecord($0, matches: dayKey, normalizedDate: normalizedDate, calendar: calendar) }
+            state.dailyRecords.sort { $0.date > $1.date }
+        }
+    }
+
+    func dailyRecord(for date: Date, calendar: Calendar = .current) -> DailyRecord? {
+        let normalizedDate = calendar.startOfDay(for: date)
+        let dayKey = DailyRecord.dayKey(for: date, calendar: calendar)
+        return state.dailyRecords.first { Self.dailyRecord($0, matches: dayKey, normalizedDate: normalizedDate, calendar: calendar) }
+    }
+
+    func markDailyPlantReviewShown(type: String) {
+        update { state in
+            state.lastReviewShownType = type
+        }
+    }
+
+    func setDailyGardenDisplayDays(_ days: Int?) {
+        update { state in
+            state.dailyGardenDisplayDays = days
         }
     }
 
@@ -277,8 +353,10 @@ final class SoberGardenStore {
             debugPrint("Failed to delete sober garden state: \(error)")
         }
         state = SoberGardenState()
-        SGNotificationService.shared.cancelScheduledNotifications()
-        SGWidgetSnapshotWriter.shared.clearSnapshot()
+        if sideEffectsEnabled {
+            SGNotificationService.shared.cancelScheduledNotifications()
+            SGWidgetSnapshotWriter.shared.clearSnapshot()
+        }
     }
 
     private func ensureStorageDirectoryExists() throws {
@@ -293,6 +371,28 @@ final class SoberGardenStore {
     }
 
     private static let promptRepeatWindow: TimeInterval = 24 * 60 * 60
+
+    private static func makeEncoder() -> JSONEncoder {
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+        encoder.dateEncodingStrategy = .iso8601
+        return encoder
+    }
+
+    private static func makeDecoder() -> JSONDecoder {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        return decoder
+    }
+
+    private static func dailyRecord(
+        _ record: DailyRecord,
+        matches dayKey: String,
+        normalizedDate: Date,
+        calendar: Calendar
+    ) -> Bool {
+        record.dayKey == dayKey || calendar.isDate(record.date, inSameDayAs: normalizedDate)
+    }
 
     private static func reconcileCheckInState(
         _ state: inout SoberGardenState,
@@ -371,3 +471,52 @@ final class SoberGardenStore {
         return 1
     }
 }
+
+#if DEBUG
+extension SoberGardenStore {
+    static func debugAssertDailyRecordPersistenceBehavior() {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(secondsFromGMT: 0)!
+        let day = Date(timeIntervalSince1970: 1_800_000_000)
+        let laterSameDay = day.addingTimeInterval(60 * 60)
+        let previousDay = day.addingTimeInterval(-24 * 60 * 60)
+        let temporaryURL = FileManager.default.temporaryDirectory
+            .appendingPathComponent(UUID().uuidString)
+            .appendingPathComponent("sober_garden_state.json")
+
+        let store = SoberGardenStore(fileManager: FileManager.default, stateURL: temporaryURL, sideEffectsEnabled: false)
+        store.update { state in
+            state.dailyRecords = [
+                DailyRecord(
+                    id: UUID(),
+                    date: laterSameDay,
+                    dayKey: DailyRecord.dayKey(for: laterSameDay, calendar: calendar),
+                    status: .rainy,
+                    createdAt: day,
+                    updatedAt: day
+                )
+            ]
+        }
+
+        store.updateDailyRecord(for: day, status: .planted, now: day, calendar: calendar)
+        let planted = store.dailyRecord(for: laterSameDay, calendar: calendar)
+        assert(planted?.status == .planted)
+        assert(planted?.date == calendar.startOfDay(for: day))
+        assert(planted?.dayKey == DailyRecord.dayKey(for: day, calendar: calendar))
+
+        store.recordTodayAsRainy(now: laterSameDay, calendar: calendar)
+        let rainy = store.dailyRecord(for: day, calendar: calendar)
+        assert(rainy?.status == .rainy)
+        assert(rainy?.id == planted?.id)
+        assert(rainy?.createdAt == planted?.createdAt)
+
+        store.updateDailyRecord(for: previousDay, status: .planted, now: previousDay, calendar: calendar)
+        assert(store.state.dailyRecords.map(\.date) == store.state.dailyRecords.map(\.date).sorted(by: >))
+
+        store.clearDailyRecord(for: day, calendar: calendar)
+        assert(store.dailyRecord(for: day, calendar: calendar) == nil)
+
+        try? FileManager.default.removeItem(at: temporaryURL.deletingLastPathComponent())
+    }
+}
+#endif

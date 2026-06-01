@@ -33,3 +33,6 @@
 "widget.rescue.question" = "En difficulté ?";
 "widget.streak.description" = "Suivez les jours de propreté et la prochaine étape.";
 "widget.streak.name" = "Série SoberGarden";
+"widget.todayStatus.notPlanted" = "Pas encore planté aujourd'hui";
+"widget.todayStatus.planted" = "Planté aujourd'hui";
+"widget.todayStatus.rainy" = "Jour de pluie";

@@ -11,4 +11,5 @@ struct WidgetSnapshot: Codable {
     var gardenStage: GardenStage
     var habitDisplayName: String
     var updatedAt: Date
+    var todayStatus: DailyRecordStatus?
 }

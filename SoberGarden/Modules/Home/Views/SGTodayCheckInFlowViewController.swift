@@ -230,9 +230,9 @@ final class SGTodayCheckInFlowViewController: BaseViewController {
         let cardState: SGTodayCheckInCardView.State
         switch state {
         case .todayNotConfirmed, .dailyFlow:
-            cardState = .todayNotConfirmed
+            cardState = .todayEmpty
         case .todayConfirmed:
-            cardState = .todayConfirmed
+            cardState = .todayPlanted
         case .yesterdayPending:
             cardState = .yesterdayPending
         }

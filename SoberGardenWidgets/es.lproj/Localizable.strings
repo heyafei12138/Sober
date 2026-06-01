@@ -33,3 +33,6 @@
 "widget.rescue.question" = "¿Luchando?";
 "widget.streak.description" = "Realice un seguimiento de los días limpios y el próximo hito.";
 "widget.streak.name" = "Racha de SoberGarden";
+"widget.todayStatus.notPlanted" = "Hoy aun no plantado";
+"widget.todayStatus.planted" = "Hoy plantado";
+"widget.todayStatus.rainy" = "Dia lluvioso";

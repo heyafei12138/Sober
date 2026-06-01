@@ -33,3 +33,6 @@
 "widget.rescue.question" = "Kämpfen?";
 "widget.streak.description" = "Verfolgen Sie saubere Tage und den nächsten Meilenstein.";
 "widget.streak.name" = "SoberGarden Serie";
+"widget.todayStatus.notPlanted" = "Heute noch nicht gepflanzt";
+"widget.todayStatus.planted" = "Heute gepflanzt";
+"widget.todayStatus.rainy" = "Regentag";

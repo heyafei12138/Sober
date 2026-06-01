@@ -33,3 +33,6 @@
 "widget.rescue.question" = "어려움을 겪고 계십니까?";
 "widget.streak.description" = "깨끗한 날과 다음 이정표를 추적하세요.";
 "widget.streak.name" = "소버가든 스트릭";
+"widget.todayStatus.notPlanted" = "오늘은 아직 심지 않았어요";
+"widget.todayStatus.planted" = "오늘 심었어요";
+"widget.todayStatus.rainy" = "비 오는 날";

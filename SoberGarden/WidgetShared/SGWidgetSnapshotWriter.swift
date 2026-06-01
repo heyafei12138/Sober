@@ -46,7 +46,8 @@ final class SGWidgetSnapshotWriter {
             nextMilestone: SGProgressCalculator.nextMilestone(for: cleanDays)?.day,
             gardenStage: SGProgressCalculator.currentGardenStage(for: cleanDays),
             habitDisplayName: habit.displayName,
-            updatedAt: now
+            updatedAt: now,
+            todayStatus: Self.todayStatus(from: state.dailyRecords, now: now, calendar: calendar)
         )
 
         do {
@@ -73,5 +74,23 @@ final class SGWidgetSnapshotWriter {
         #if canImport(WidgetKit)
         WidgetCenter.shared.reloadAllTimelines()
         #endif
+    }
+
+    private static func todayStatus(
+        from records: [DailyRecord],
+        now: Date,
+        calendar: Calendar
+    ) -> DailyRecordStatus? {
+        let normalizedDate = calendar.startOfDay(for: now)
+        let dayKey = DailyRecord.dayKey(for: now, calendar: calendar)
+
+        return records
+            .filter { record in
+                record.dayKey == dayKey || calendar.isDate(record.date, inSameDayAs: normalizedDate)
+            }
+            .max { lhs, rhs in
+                lhs.updatedAt < rhs.updatedAt
+            }?
+            .status
     }
 }

@@ -33,3 +33,6 @@
 "widget.rescue.question" = "掙扎嗎？";
 "widget.streak.description" = "跟踪清洁日和下一个里程碑。";
 "widget.streak.name" = "清醒花園條紋";
+"widget.todayStatus.notPlanted" = "今日尚未種下";
+"widget.todayStatus.planted" = "今日已種下";
+"widget.todayStatus.rainy" = "雨天";

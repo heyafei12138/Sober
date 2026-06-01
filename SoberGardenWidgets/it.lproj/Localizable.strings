@@ -33,3 +33,6 @@
 "widget.rescue.question" = "Lottando?";
 "widget.streak.description" = "Tieni traccia dei giorni puliti e del traguardo successivo.";
 "widget.streak.name" = "SoberGarden Serie";
+"widget.todayStatus.notPlanted" = "Oggi non ancora piantato";
+"widget.todayStatus.planted" = "Oggi piantato";
+"widget.todayStatus.rainy" = "Giorno di pioggia";

@@ -33,3 +33,6 @@
 "widget.rescue.question" = "苦労していますか？";
 "widget.streak.description" = "クリーンな日と次のマイルストーンを追跡します。";
 "widget.streak.name" = "ソーバーガーデン ストリーク";
+"widget.todayStatus.notPlanted" = "今日はまだ植えていません";
+"widget.todayStatus.planted" = "今日は植えました";
+"widget.todayStatus.rainy" = "雨の日";

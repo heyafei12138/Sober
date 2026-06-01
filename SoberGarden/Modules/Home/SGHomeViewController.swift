@@ -20,6 +20,9 @@ final class SGHomeViewController: BaseViewController {
     private let coachSectionHeader = SGSectionHeaderView(title: "home.coach.title".localized())
     private let coachPromptLabel = UILabel()
     private let todayCheckInCardView = SGTodayCheckInCardView()
+    private let dailyGardenGridView = SGDailyGardenGridView()
+    private let dailyPlantStatsView = SGDailyPlantStatsView()
+    private let plantReviewCardView = SGPlantReviewCardView()
     private let streakCardView = SGStreakCardView()
     private let savingsView = SGSavedStatsView()
     private let milestoneCardView = SGMilestoneCardView()
@@ -72,6 +75,9 @@ final class SGHomeViewController: BaseViewController {
         setupHeader()
         setupCoachCard()
         setupTodayCheckInCard()
+        setupDailyGardenGrid()
+        setupDailyPlantStats()
+        setupPlantReviewCard()
         setupStreakCard()
         setupSavingsSection()
         setupMilestoneSection()
@@ -181,13 +187,35 @@ final class SGHomeViewController: BaseViewController {
 
     private func setupTodayCheckInCard() {
         todayCheckInCardView.onPrimaryAction = { [weak self] in
-            self?.presentTodayCheckInFlow()
+            self?.recordTodayAsPlanted()
         }
         todayCheckInCardView.onSecondaryAction = { [weak self] in
-            self?.handleTodayCheckInSecondaryAction()
+            self?.recordTodayAsRainy()
+        }
+        todayCheckInCardView.onEditAction = { [weak self] in
+            self?.presentTodayRecordEditor()
         }
         contentStackView.addArrangedSubview(todayCheckInCardView)
         contentStackView.setCustomSpacing(22, after: todayCheckInCardView)
+    }
+
+    private func setupDailyGardenGrid() {
+        dailyGardenGridView.onRangeTap = { [weak self] in
+            self?.presentDailyGardenRangeSelector()
+        }
+        contentStackView.addArrangedSubview(dailyGardenGridView)
+        contentStackView.setCustomSpacing(12, after: dailyGardenGridView)
+    }
+
+    private func setupDailyPlantStats() {
+        contentStackView.addArrangedSubview(dailyPlantStatsView)
+    }
+
+    private func setupPlantReviewCard() {
+        plantReviewCardView.onDismiss = { [weak self] in
+            self?.dismissPlantReview()
+        }
+        contentStackView.addArrangedSubview(plantReviewCardView)
     }
 
     private func setupStreakCard() {
@@ -234,12 +262,19 @@ final class SGHomeViewController: BaseViewController {
         }
     }
 
-    private func renderContent() {
+    private func renderContent(now: Date = Date()) {
         let state = SoberGardenStore.shared.state
         let habit = state.habit
-        let now = Date()
+        let dailyPlantDisplayData = currentDailyPlantDisplayData(state: state, habit: habit, now: now)
+        let todayRecord = dailyPlantDisplayData.todayRecord
 
         let cleanDays = habit.map { SGProgressCalculator.currentStreakDays(startDate: $0.startDate, now: now) } ?? 1
+        let automaticDailyGardenDays = SGProgressCalculator.dailyGardenAutomaticDisplayDays(for: cleanDays)
+        let usesAutomaticDailyGardenDays = state.dailyGardenDisplayDays.map { Self.dailyGardenDisplayOptions.contains($0) } != true
+        let selectedDailyGardenDays = Self.normalizedDailyGardenDisplayDays(
+            state.dailyGardenDisplayDays,
+            automaticDays: automaticDailyGardenDays
+        )
         let elapsedDays = habit.map { SGProgressCalculator.elapsedCleanDaysForSavings(startDate: $0.startDate, now: now) } ?? 0
         let currentHours = habit.map { max(Int(floor(now.timeIntervalSince($0.startDate) / 3600)), 0) } ?? 0
         let longestStreak = max(cleanDays, state.relapseRecords.map(\.previousStreakDays).max() ?? cleanDays)
@@ -252,8 +287,32 @@ final class SGHomeViewController: BaseViewController {
         )
 
         coachSectionHeader.configure(title: "home.coach.title".localized())
-        coachPromptLabel.text = currentCoachText(for: state, habit: habit, cleanDays: cleanDays, now: now)
-        todayCheckInCardView.configure(state: currentTodayCheckInState(from: state.checkIn))
+        coachPromptLabel.text = currentCoachText(cleanDays: cleanDays, todayStatus: todayRecord?.status, now: now)
+        todayCheckInCardView.configure(state: currentTodayPlantState(for: todayRecord))
+        let dailyGardenItems = currentDailyGardenItems(
+            records: dailyPlantDisplayData.records,
+            startDate: dailyPlantDisplayData.startDate,
+            selectedDays: selectedDailyGardenDays,
+            isAutomatic: usesAutomaticDailyGardenDays,
+            now: now
+        )
+        dailyGardenGridView.configure(
+            items: dailyGardenItems,
+            selectedDays: selectedDailyGardenDays,
+            rangeTitle: Self.dailyGardenRangeTitle(
+                selectedDays: selectedDailyGardenDays,
+                isAutomatic: usesAutomaticDailyGardenDays
+            )
+        )
+        let dailyPlantStreak = SGProgressCalculator.dailyPlantStreak(records: dailyPlantDisplayData.records, now: now)
+        let totalPlantedDays = SGProgressCalculator.totalPlantedDays(records: dailyPlantDisplayData.records)
+        dailyPlantStatsView.configure(
+            currentStreakDays: dailyPlantStreak,
+            totalPlantedDays: totalPlantedDays
+        )
+        plantReviewCardView.configure(
+            reviewType: currentPlantReviewType(totalPlantedDays: totalPlantedDays, state: state)
+        )
 
         streakCardView.configure(
             cleanDays: cleanDays,
@@ -282,81 +341,184 @@ final class SGHomeViewController: BaseViewController {
         )
     }
 
-    private func currentTodayCheckInState(from checkInState: SoberGardenCheckInState) -> SGTodayCheckInCardView.State {
-        if checkInState.confirmedToday {
-            return .todayConfirmed
-        }
-
-        if checkInState.needsYesterdayConfirmation {
-            return .yesterdayPending
-        }
-
-        return .todayNotConfirmed
+    private struct DailyPlantDisplayData {
+        let records: [DailyRecord]
+        let startDate: Date
+        let todayRecord: DailyRecord?
     }
 
-    private func presentTodayCheckInFlow() {
-        let checkInState = SoberGardenStore.shared.state.checkIn
-        let flowState: SGTodayCheckInFlowViewController.State
-
-        if checkInState.needsYesterdayConfirmation {
-            flowState = .yesterdayPending
-        } else if checkInState.confirmedToday {
-            flowState = .todayConfirmed
-        } else {
-            flowState = .dailyFlow
-        }
-
-        let flowViewController = SGTodayCheckInFlowViewController(state: flowState)
-        flowViewController.onComplete = { [weak self] result in
-            self?.handleTodayCheckInResult(result)
-        }
-        flowViewController.onReset = { [weak self] in
-            self?.handleTodayCheckInReset()
-        }
-        present(flowViewController, animated: true)
+    private func currentDailyPlantDisplayData(
+        state: SoberGardenState,
+        habit: Habit?,
+        now: Date,
+        calendar: Calendar = .current
+    ) -> DailyPlantDisplayData {
+        let startDate = habit?.startDate ?? now
+        return DailyPlantDisplayData(
+            records: state.dailyRecords,
+            startDate: startDate,
+            todayRecord: SoberGardenStore.shared.dailyRecord(for: now, calendar: calendar)
+        )
     }
 
-    private func handleTodayCheckInSecondaryAction() {
-        let checkInState = SoberGardenStore.shared.state.checkIn
-        if checkInState.needsYesterdayConfirmation {
-            presentTodayCheckInFlow()
-            return
-        }
-
-        if let tabBarController = tabBarController as? MainTabBarController {
-            tabBarController.setSelectedIndex(1)
-        } else {
-            navigationController?.pushViewController(SGRescueViewController(), animated: true)
+    private func currentTodayPlantState(for record: DailyRecord?) -> SGTodayCheckInCardView.State {
+        switch record?.status {
+        case .planted:
+            return .todayPlanted
+        case .rainy:
+            return .todayRainy
+        case nil:
+            return .todayEmpty
         }
     }
 
-    private func handleTodayCheckInResult(_ result: SGTodayCheckInFlowViewController.Result) {
-        let store = SoberGardenStore.shared
+    private func recordTodayAsPlanted() {
+        let now = Date()
+        guard SoberGardenStore.shared.dailyRecord(for: now) == nil else { return }
+        SoberGardenStore.shared.recordTodayAsPlanted(now: now)
+        renderContent(now: now)
+        animateTodayCheckInFeedback()
+    }
 
-        switch result.state {
-        case .todayNotConfirmed, .dailyFlow:
-            store.markTodayCheckInConfirmed(outcome: result.outcome)
-        case .yesterdayPending:
-            let yesterdayDate = store.state.checkIn.lastCheckInDate ?? Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? Date()
-            store.recordYesterdayCheckInConfirmed(
-                outcome: result.outcome,
-                yesterdayDate: yesterdayDate
+    private func recordTodayAsRainy() {
+        let now = Date()
+        guard SoberGardenStore.shared.dailyRecord(for: now) == nil else { return }
+        SoberGardenStore.shared.recordTodayAsRainy(now: now)
+        renderContent(now: now)
+        animateTodayCheckInFeedback()
+    }
+
+    private func currentDailyGardenItems(
+        records: [DailyRecord],
+        startDate: Date,
+        selectedDays: Int,
+        isAutomatic: Bool,
+        now: Date
+    ) -> [DailyDayItem] {
+        if isAutomatic {
+            return SGProgressCalculator.journeyDailyItems(
+                records: records,
+                startDate: startDate,
+                count: selectedDays,
+                now: now
             )
-        case .todayConfirmed:
-            break
         }
 
-        dismiss(animated: true) { [weak self] in
-            self?.renderContent()
-            self?.animateTodayCheckInFeedback()
-        }
+        return SGProgressCalculator.contextualDailyItems(
+            records: records,
+            startDate: startDate,
+            count: selectedDays,
+            now: now
+        )
     }
 
-    private func handleTodayCheckInReset() {
-        SoberGardenStore.shared.resetCleanStreakAfterCheckInReset()
-        dismiss(animated: true) { [weak self] in
+    private func presentTodayRecordEditor() {
+        let now = Date()
+        let state = SoberGardenStore.shared.state
+        let displayData = currentDailyPlantDisplayData(state: state, habit: state.habit, now: now)
+        guard let todayRecord = displayData.todayRecord else { return }
+
+        let sheetViewController = SGDailyPlantEditSheetViewController(currentStatus: todayRecord.status) { [weak self] action in
+            switch action {
+            case .planted:
+                self?.updateTodayRecord(status: .planted)
+            case .rainy:
+                self?.updateTodayRecord(status: .rainy)
+            case .clear:
+                self?.clearTodayRecord()
+            }
+        }
+        present(sheetViewController, animated: false)
+    }
+
+    private func presentDailyGardenRangeSelector() {
+        let now = Date()
+        let state = SoberGardenStore.shared.state
+        let cleanDays = state.habit.map { SGProgressCalculator.currentStreakDays(startDate: $0.startDate, now: now) } ?? 1
+        let automaticDays = SGProgressCalculator.dailyGardenAutomaticDisplayDays(for: cleanDays)
+        let usesAutomaticDays = state.dailyGardenDisplayDays.map { Self.dailyGardenDisplayOptions.contains($0) } != true
+        let selectedDays = Self.normalizedDailyGardenDisplayDays(state.dailyGardenDisplayDays, automaticDays: automaticDays)
+        let options = [SGDailyGardenRangeSheetViewController.Option(
+            days: nil,
+            title: "home.dailyGardenGrid.rangeSelector.autoFormat".localizedFormat(automaticDays)
+        )] + Self.dailyGardenDisplayOptions.map { days in
+            SGDailyGardenRangeSheetViewController.Option(
+                days: days,
+                title: "home.dailyGardenGrid.rangeSelector.daysFormat".localizedFormat(days)
+            )
+        }
+
+        let sheetViewController = SGDailyGardenRangeSheetViewController(
+            options: options,
+            selectedDays: selectedDays,
+            isAutomatic: usesAutomaticDays
+        ) { [weak self] days in
+            SoberGardenStore.shared.setDailyGardenDisplayDays(days)
             self?.renderContent()
         }
+        present(sheetViewController, animated: false)
+    }
+
+    private func updateTodayRecord(status: DailyRecordStatus) {
+        let now = Date()
+        SoberGardenStore.shared.updateDailyRecord(for: now, status: status, now: now)
+        renderContent(now: now)
+        animateTodayCheckInFeedback()
+    }
+
+    private func clearTodayRecord() {
+        let now = Date()
+        SoberGardenStore.shared.clearDailyRecord(for: now)
+        renderContent(now: now)
+        animateTodayCheckInFeedback()
+    }
+
+    private func currentPlantReviewType(
+        totalPlantedDays: Int,
+        state: SoberGardenState
+    ) -> SGPlantReviewCardView.ReviewType? {
+        if totalPlantedDays == 7,
+           state.lastReviewShownType != SGPlantReviewCardView.ReviewType.totalPlanted7.rawValue {
+            return .totalPlanted7
+        }
+
+        if totalPlantedDays == 30,
+           state.lastReviewShownType != SGPlantReviewCardView.ReviewType.totalPlanted30.rawValue {
+            return .totalPlanted30
+        }
+
+        return nil
+    }
+
+    private static var dailyGardenDisplayOptions: [Int] {
+        Array(
+            Set(Milestone.defaultMilestones.map(\.day) + [3])
+        )
+        .filter { $0 > 1 }
+        .sorted()
+    }
+
+    private static func normalizedDailyGardenDisplayDays(_ days: Int?, automaticDays: Int) -> Int {
+        guard let days, dailyGardenDisplayOptions.contains(days) else {
+            return automaticDays
+        }
+        return days
+    }
+
+    private static func dailyGardenRangeTitle(selectedDays: Int, isAutomatic: Bool) -> String {
+        if isAutomatic {
+            return "home.dailyGardenGrid.range.autoFormat".localizedFormat(selectedDays)
+        }
+        return "home.dailyGardenGrid.range.manualFormat".localizedFormat(selectedDays)
+    }
+
+    private func dismissPlantReview() {
+        let state = SoberGardenStore.shared.state
+        let totalPlantedDays = SGProgressCalculator.totalPlantedDays(records: state.dailyRecords)
+        guard let reviewType = currentPlantReviewType(totalPlantedDays: totalPlantedDays, state: state) else { return }
+
+        SoberGardenStore.shared.markDailyPlantReviewShown(type: reviewType.rawValue)
+        renderContent()
     }
 
     private func animateTodayCheckInFeedback() {
@@ -391,12 +553,12 @@ final class SGHomeViewController: BaseViewController {
         present(disclaimerViewController, animated: true)
     }
 
-    private func currentCoachText(for state: SoberGardenState, habit: Habit?, cleanDays: Int, now: Date) -> String {
+    private func currentCoachText(cleanDays: Int, todayStatus: DailyRecordStatus?, now: Date) -> String {
         let promptContext: SGCalmCoachContext
-        if state.checkIn.needsYesterdayConfirmation {
-            promptContext = .yesterdayFollowUp
-        } else if state.checkIn.confirmedToday {
+        if todayStatus == .planted {
             promptContext = .postCheckInEncouragement
+        } else if todayStatus == .rainy {
+            promptContext = .relapse
         } else if cleanDays == 7 {
             promptContext = .milestone7
         } else {

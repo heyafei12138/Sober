@@ -8,20 +8,23 @@ import UIKit
 final class SGTodayCheckInCardView: UIView {
 
     enum State {
-        case todayNotConfirmed
-        case todayConfirmed
+        case todayEmpty
+        case todayPlanted
+        case todayRainy
         case yesterdayPending
 
         var badgeTitle: String {
-            "checkin.card.badge".localized()
+            "dailyPlant.card.badge".localized()
         }
 
         var title: String {
             switch self {
-            case .todayNotConfirmed:
-                return "checkin.card.today.title".localized()
-            case .todayConfirmed:
-                return "checkin.card.confirmed.title".localized()
+            case .todayEmpty:
+                return "dailyPlant.card.empty.title".localized()
+            case .todayPlanted:
+                return "dailyPlant.card.planted.title".localized()
+            case .todayRainy:
+                return "dailyPlant.card.rainy.title".localized()
             case .yesterdayPending:
                 return "checkin.card.yesterday.title".localized()
             }
@@ -29,10 +32,12 @@ final class SGTodayCheckInCardView: UIView {
 
         var subtitle: String {
             switch self {
-            case .todayNotConfirmed:
-                return "checkin.card.today.subtitle".localized()
-            case .todayConfirmed:
-                return "checkin.card.confirmed.subtitle".localized()
+            case .todayEmpty:
+                return "dailyPlant.card.empty.subtitle".localized()
+            case .todayPlanted:
+                return "dailyPlant.card.planted.subtitle".localized()
+            case .todayRainy:
+                return "dailyPlant.card.rainy.subtitle".localized()
             case .yesterdayPending:
                 return "checkin.card.yesterday.subtitle".localized()
             }
@@ -40,10 +45,12 @@ final class SGTodayCheckInCardView: UIView {
 
         var detail: String? {
             switch self {
-            case .todayNotConfirmed:
+            case .todayEmpty:
                 return nil
-            case .todayConfirmed:
-                return "checkin.card.confirmed.detail".localized()
+            case .todayPlanted:
+                return nil
+            case .todayRainy:
+                return nil
             case .yesterdayPending:
                 return nil
             }
@@ -51,20 +58,42 @@ final class SGTodayCheckInCardView: UIView {
 
         var primaryButtonTitle: String? {
             switch self {
-            case .todayNotConfirmed:
-                return "checkin.card.today.primary".localized()
-            case .todayConfirmed:
+            case .todayEmpty:
+                return "dailyPlant.card.empty.primary".localized()
+            case .todayPlanted:
+                return "dailyPlant.card.planted.status".localized()
+            case .todayRainy:
                 return nil
             case .yesterdayPending:
                 return "checkin.card.yesterday.primary".localized()
             }
         }
 
+        var isPrimaryButtonEnabled: Bool {
+            switch self {
+            case .todayEmpty, .yesterdayPending:
+                return true
+            case .todayPlanted, .todayRainy:
+                return false
+            }
+        }
+
         var secondaryButtonTitle: String? {
             switch self {
-            case .todayNotConfirmed, .yesterdayPending:
-                return self == .todayNotConfirmed ? "common.imStruggling".localized() : "checkin.card.yesterday.secondary".localized()
-            case .todayConfirmed:
+            case .todayEmpty:
+                return "dailyPlant.card.empty.secondary".localized()
+            case .yesterdayPending:
+                return "checkin.card.yesterday.secondary".localized()
+            case .todayPlanted, .todayRainy:
+                return nil
+            }
+        }
+
+        var editButtonTitle: String? {
+            switch self {
+            case .todayPlanted, .todayRainy:
+                return "dailyPlant.card.editToday".localized()
+            case .todayEmpty, .yesterdayPending:
                 return nil
             }
         }
@@ -72,6 +101,7 @@ final class SGTodayCheckInCardView: UIView {
 
     var onPrimaryAction: (() -> Void)?
     var onSecondaryAction: (() -> Void)?
+    var onEditAction: (() -> Void)?
 
     private let eyebrowLabel = UILabel()
     private let titleLabel = UILabel()
@@ -80,6 +110,7 @@ final class SGTodayCheckInCardView: UIView {
     private let buttonStackView = UIStackView()
     private let primaryButton = SGPrimaryButton(title: "common.continue".localized())
     private let secondaryButton = SGPrimaryButton(title: "common.imStruggling".localized(), style: .secondary)
+    private let editButton = UIButton(type: .system)
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -101,8 +132,10 @@ final class SGTodayCheckInCardView: UIView {
         if let primaryTitle = state.primaryButtonTitle {
             primaryButton.setTitle(primaryTitle, for: .normal)
             primaryButton.isHidden = false
+            primaryButton.isEnabled = state.isPrimaryButtonEnabled
         } else {
             primaryButton.isHidden = true
+            primaryButton.isEnabled = false
         }
 
         if let secondaryTitle = state.secondaryButtonTitle {
@@ -110,6 +143,13 @@ final class SGTodayCheckInCardView: UIView {
             secondaryButton.isHidden = false
         } else {
             secondaryButton.isHidden = true
+        }
+
+        if let editTitle = state.editButtonTitle {
+            editButton.setTitle(editTitle, for: .normal)
+            editButton.isHidden = false
+        } else {
+            editButton.isHidden = true
         }
 
         buttonStackView.isHidden = primaryButton.isHidden && secondaryButton.isHidden
@@ -157,14 +197,20 @@ final class SGTodayCheckInCardView: UIView {
         buttonStackView.spacing = 12
         buttonStackView.distribution = .fillEqually
 
+        editButton.titleLabel?.font = .systemFont(ofSize: 14, weight: .semibold)
+        editButton.setTitleColor(SGColor.primaryDark, for: .normal)
+        editButton.contentHorizontalAlignment = .left
+
         primaryButton.addTarget(self, action: #selector(handlePrimaryTapped), for: .touchUpInside)
         secondaryButton.addTarget(self, action: #selector(handleSecondaryTapped), for: .touchUpInside)
+        editButton.addTarget(self, action: #selector(handleEditTapped), for: .touchUpInside)
 
         contentStackView.addArrangedSubview(eyebrowLabel)
         contentStackView.addArrangedSubview(titleLabel)
         contentStackView.addArrangedSubview(subtitleLabel)
         contentStackView.addArrangedSubview(detailLabel)
         contentStackView.addArrangedSubview(buttonStackView)
+        contentStackView.addArrangedSubview(editButton)
 
         buttonStackView.addArrangedSubview(primaryButton)
         buttonStackView.addArrangedSubview(secondaryButton)
@@ -186,13 +232,13 @@ final class SGTodayCheckInCardView: UIView {
     private func updateAppearance(for state: State) {
         eyebrowLabel.text = state.badgeTitle
         switch state {
-        case .todayNotConfirmed:
+        case .todayEmpty:
             eyebrowLabel.textColor = SGColor.primaryDark
             titleLabel.textColor = SGColor.textDark
-        case .todayConfirmed:
+        case .todayPlanted:
             eyebrowLabel.textColor = SGColor.primaryDark
             titleLabel.textColor = SGColor.primaryDark
-        case .yesterdayPending:
+        case .todayRainy, .yesterdayPending:
             eyebrowLabel.textColor = SGColor.primaryDark
             titleLabel.textColor = SGColor.textDark
         }
@@ -204,5 +250,9 @@ final class SGTodayCheckInCardView: UIView {
 
     @objc private func handleSecondaryTapped() {
         onSecondaryAction?()
+    }
+
+    @objc private func handleEditTapped() {
+        onEditAction?()
     }
 }

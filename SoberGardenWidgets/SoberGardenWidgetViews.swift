@@ -34,6 +34,11 @@ struct SGStreakWidgetView: View {
                         .foregroundStyle(SGWidgetPalette.secondary)
                         .lineLimit(1)
                         .minimumScaleFactor(0.76)
+                    Text(todayStatusText)
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(todayStatusColor)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.76)
                     if family == .systemMedium {
                         SGWidgetProgressLine(cleanDays: entry.snapshot.cleanDays, nextMilestone: entry.snapshot.nextMilestone)
                     }
@@ -47,6 +52,28 @@ struct SGStreakWidgetView: View {
             return SGLoc("widget.gardenComplete")
         }
         return String(format: SGLoc("widget.nextMilestoneFormat"), nextMilestone)
+    }
+
+    private var todayStatusText: String {
+        switch entry.snapshot.todayStatus {
+        case .planted:
+            return SGLoc("widget.todayStatus.planted")
+        case .rainy:
+            return SGLoc("widget.todayStatus.rainy")
+        case nil:
+            return SGLoc("widget.todayStatus.notPlanted")
+        }
+    }
+
+    private var todayStatusColor: Color {
+        switch entry.snapshot.todayStatus {
+        case .planted:
+            return SGWidgetPalette.primary
+        case .rainy:
+            return SGWidgetPalette.rainy
+        case nil:
+            return SGWidgetPalette.secondary
+        }
     }
 }
 
@@ -265,6 +292,7 @@ enum SGWidgetPalette {
     static let background = Color(red: 0.98, green: 0.96, blue: 0.90)
     static let greenWash = Color(red: 0.90, green: 0.94, blue: 0.86)
     static let primary = Color(red: 0.37, green: 0.49, blue: 0.27)
+    static let rainy = Color(red: 0.39, green: 0.50, blue: 0.57)
     static let rescue = Color(red: 0.91, green: 0.61, blue: 0.36)
     static let text = Color(red: 0.19, green: 0.25, blue: 0.17)
     static let secondary = text.opacity(0.66)

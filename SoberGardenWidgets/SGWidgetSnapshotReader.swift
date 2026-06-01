@@ -57,19 +57,26 @@ enum SGWidgetGardenStage: String, Codable {
     }
 }
 
+enum SGWidgetDailyRecordStatus: String, Codable {
+    case planted
+    case rainy
+}
+
 struct SGWidgetSnapshot: Codable {
     var cleanDays: Int
     var nextMilestone: Int?
     var gardenStage: SGWidgetGardenStage
     var habitDisplayName: String
     var updatedAt: Date
+    var todayStatus: SGWidgetDailyRecordStatus?
 
     static let placeholder = SGWidgetSnapshot(
         cleanDays: 0,
         nextMilestone: nil,
         gardenStage: .seed,
         habitDisplayName: SGLoc("habit.generic"),
-        updatedAt: Date()
+        updatedAt: Date(),
+        todayStatus: nil
     )
 }
 

@@ -10,6 +10,10 @@ struct SoberGardenState: Codable {
     var rescueSessions: [RescueSession]
     var journalEntries: [JournalEntry]
     var relapseRecords: [RelapseRecord]
+    var dailyRecords: [DailyRecord]
+    var dailyGardenDisplayDays: Int?
+    var lastReviewShownType: String?
+    var lastMonthlyReviewShownMonth: String?
     var recentPromptIDs: [PromptDisplayRecord]
     var checkIn: SoberGardenCheckInState
     var settings: SoberGardenSettings
@@ -19,6 +23,10 @@ struct SoberGardenState: Codable {
         rescueSessions: [RescueSession] = [],
         journalEntries: [JournalEntry] = [],
         relapseRecords: [RelapseRecord] = [],
+        dailyRecords: [DailyRecord] = [],
+        dailyGardenDisplayDays: Int? = nil,
+        lastReviewShownType: String? = nil,
+        lastMonthlyReviewShownMonth: String? = nil,
         recentPromptIDs: [PromptDisplayRecord] = [],
         checkIn: SoberGardenCheckInState = SoberGardenCheckInState(),
         settings: SoberGardenSettings = SoberGardenSettings()
@@ -27,6 +35,10 @@ struct SoberGardenState: Codable {
         self.rescueSessions = rescueSessions
         self.journalEntries = journalEntries
         self.relapseRecords = relapseRecords
+        self.dailyRecords = dailyRecords
+        self.dailyGardenDisplayDays = dailyGardenDisplayDays
+        self.lastReviewShownType = lastReviewShownType
+        self.lastMonthlyReviewShownMonth = lastMonthlyReviewShownMonth
         self.recentPromptIDs = recentPromptIDs
         self.checkIn = checkIn
         self.settings = settings
@@ -37,6 +49,10 @@ struct SoberGardenState: Codable {
         case rescueSessions
         case journalEntries
         case relapseRecords
+        case dailyRecords
+        case dailyGardenDisplayDays
+        case lastReviewShownType
+        case lastMonthlyReviewShownMonth
         case recentPromptIDs
         case checkIn
         case settings
@@ -48,6 +64,10 @@ struct SoberGardenState: Codable {
         rescueSessions = try container.decodeIfPresent([RescueSession].self, forKey: .rescueSessions) ?? []
         journalEntries = try container.decodeIfPresent([JournalEntry].self, forKey: .journalEntries) ?? []
         relapseRecords = try container.decodeIfPresent([RelapseRecord].self, forKey: .relapseRecords) ?? []
+        dailyRecords = try container.decodeIfPresent([DailyRecord].self, forKey: .dailyRecords) ?? []
+        dailyGardenDisplayDays = try container.decodeIfPresent(Int.self, forKey: .dailyGardenDisplayDays)
+        lastReviewShownType = try container.decodeIfPresent(String.self, forKey: .lastReviewShownType)
+        lastMonthlyReviewShownMonth = try container.decodeIfPresent(String.self, forKey: .lastMonthlyReviewShownMonth)
         recentPromptIDs = try container.decodeIfPresent([PromptDisplayRecord].self, forKey: .recentPromptIDs) ?? []
         checkIn = try container.decodeIfPresent(SoberGardenCheckInState.self, forKey: .checkIn) ?? SoberGardenCheckInState()
         settings = try container.decodeIfPresent(SoberGardenSettings.self, forKey: .settings) ?? SoberGardenSettings()
@@ -59,10 +79,83 @@ struct SoberGardenState: Codable {
         try container.encode(rescueSessions, forKey: .rescueSessions)
         try container.encode(journalEntries, forKey: .journalEntries)
         try container.encode(relapseRecords, forKey: .relapseRecords)
+        try container.encode(dailyRecords, forKey: .dailyRecords)
+        try container.encodeIfPresent(dailyGardenDisplayDays, forKey: .dailyGardenDisplayDays)
+        try container.encodeIfPresent(lastReviewShownType, forKey: .lastReviewShownType)
+        try container.encodeIfPresent(lastMonthlyReviewShownMonth, forKey: .lastMonthlyReviewShownMonth)
         try container.encode(recentPromptIDs, forKey: .recentPromptIDs)
         try container.encode(checkIn, forKey: .checkIn)
         try container.encode(settings, forKey: .settings)
     }
+}
+
+struct DailyRecord: Codable, Identifiable, Equatable {
+    let id: UUID
+    let date: Date
+    let dayKey: String
+    var status: DailyRecordStatus
+    var createdAt: Date
+    var updatedAt: Date
+
+    init(
+        id: UUID,
+        date: Date,
+        dayKey: String,
+        status: DailyRecordStatus,
+        createdAt: Date,
+        updatedAt: Date
+    ) {
+        self.id = id
+        self.date = date
+        self.dayKey = dayKey
+        self.status = status
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
+    }
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case date
+        case dayKey
+        case status
+        case createdAt
+        case updatedAt
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(UUID.self, forKey: .id)
+        date = try container.decode(Date.self, forKey: .date)
+        dayKey = try container.decodeIfPresent(String.self, forKey: .dayKey) ?? Self.dayKey(for: date)
+        status = try container.decode(DailyRecordStatus.self, forKey: .status)
+        createdAt = try container.decode(Date.self, forKey: .createdAt)
+        updatedAt = try container.decode(Date.self, forKey: .updatedAt)
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(date, forKey: .date)
+        try container.encode(dayKey, forKey: .dayKey)
+        try container.encode(status, forKey: .status)
+        try container.encode(createdAt, forKey: .createdAt)
+        try container.encode(updatedAt, forKey: .updatedAt)
+    }
+
+    static func dayKey(for date: Date, calendar: Calendar = .current) -> String {
+        let components = calendar.dateComponents([.year, .month, .day], from: date)
+        return String(
+            format: "%04d-%02d-%02d",
+            components.year ?? 0,
+            components.month ?? 0,
+            components.day ?? 0
+        )
+    }
+}
+
+enum DailyRecordStatus: String, Codable, Equatable {
+    case planted
+    case rainy
 }
 
 struct SoberGardenCheckInState: Codable, Equatable {
