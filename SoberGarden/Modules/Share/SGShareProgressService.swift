@@ -56,6 +56,7 @@ final class SGShareProgressService {
         let gardenStage = SGProgressCalculator.currentGardenStage(for: cleanDays)
         let savedMoneyText = Self.moneyText(for: savedMoney)
         let savedTimeText = Self.timeText(for: savedMinutes)
+        let recoveryLanguage = habit.recoveryLanguage
 
         let cardContent = SGProgressShareCardView.Content(
             cleanDays: cleanDays,
@@ -63,15 +64,16 @@ final class SGShareProgressService {
             savedTimeText: savedTimeText,
             gardenStage: gardenStage,
             habitName: habit.displayName,
+            recoveryLanguage: recoveryLanguage,
             generatedAt: now,
             style: style
         )
 
         let image = renderCardImage(content: cardContent)
         let text = [
-            "share.text.line1".localized(),
-            "share.text.cleanDaysFormat".localizedFormat(cleanDays, habit.displayName),
-            "share.text.gardenStageFormat".localizedFormat(gardenStage.title),
+            Self.shareLeadLine(for: recoveryLanguage),
+            Self.dayCountLine(for: recoveryLanguage, cleanDays: cleanDays, habitName: habit.displayName),
+            Self.gardenStageLine(for: recoveryLanguage, gardenStageTitle: gardenStage.title),
             "share.text.savedFormat".localizedFormat(savedMoneyText, savedTimeText)
         ].joined(separator: "\n")
 
@@ -112,5 +114,26 @@ final class SGShareProgressService {
             return "share.time.hoursFormat".localizedFormat(hours)
         }
         return "share.time.hoursMinutesFormat".localizedFormat(hours, leftover)
+    }
+
+    private static func shareLeadLine(for recoveryLanguage: SGRecoveryLanguage) -> String {
+        if recoveryLanguage.mode == .sobriety {
+            return "share.text.line1.sobriety".localized()
+        }
+        return "share.text.line1".localized()
+    }
+
+    private static func dayCountLine(for recoveryLanguage: SGRecoveryLanguage, cleanDays: Int, habitName: String) -> String {
+        if recoveryLanguage.mode == .sobriety {
+            return "share.text.soberDaysFormat".localizedFormat(cleanDays)
+        }
+        return "share.text.cleanDaysFormat".localizedFormat(cleanDays, habitName)
+    }
+
+    private static func gardenStageLine(for recoveryLanguage: SGRecoveryLanguage, gardenStageTitle: String) -> String {
+        if recoveryLanguage.mode == .sobriety {
+            return "share.text.recoveryGardenStageFormat".localizedFormat(gardenStageTitle)
+        }
+        return "share.text.gardenStageFormat".localizedFormat(gardenStageTitle)
     }
 }

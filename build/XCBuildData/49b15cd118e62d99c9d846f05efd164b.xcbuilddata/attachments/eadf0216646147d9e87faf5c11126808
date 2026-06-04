@@ -1,0 +1,29 @@
+{
+  "" : {
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenTests.build/Objects-normal/arm64/SoberGardenTests-primary.dia",
+    "emit-module-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenTests.build/Objects-normal/arm64/SoberGardenTests-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenTests.build/Objects-normal/arm64/SoberGardenTests-primary-emit-module.dia",
+    "pch" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenTests.build/Objects-normal/arm64/SoberGardenTests-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenTests.build/Objects-normal/arm64/SoberGardenTests-primary.swiftdeps"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/RescueSessionTests.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenTests.build/Objects-normal/arm64/RescueSessionTests.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenTests.build/Objects-normal/arm64/RescueSessionTests.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenTests.build/Objects-normal/arm64/RescueSessionTests.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGardenTests.build/Objects-normal/arm64/RescueSessionTests.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenTests.build/Objects-normal/arm64/RescueSessionTests.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenTests.build/Objects-normal/arm64/RescueSessionTests.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenTests.build/Objects-normal/arm64/RescueSessionTests.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenTests.build/Objects-normal/arm64/RescueSessionTests~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SGRecoveryLanguageTests.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenTests.build/Objects-normal/arm64/SGRecoveryLanguageTests.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenTests.build/Objects-normal/arm64/SGRecoveryLanguageTests.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenTests.build/Objects-normal/arm64/SGRecoveryLanguageTests.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGardenTests.build/Objects-normal/arm64/SGRecoveryLanguageTests.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenTests.build/Objects-normal/arm64/SGRecoveryLanguageTests.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenTests.build/Objects-normal/arm64/SGRecoveryLanguageTests.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenTests.build/Objects-normal/arm64/SGRecoveryLanguageTests.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenTests.build/Objects-normal/arm64/SGRecoveryLanguageTests~partial.swiftmodule"
+  }
+}

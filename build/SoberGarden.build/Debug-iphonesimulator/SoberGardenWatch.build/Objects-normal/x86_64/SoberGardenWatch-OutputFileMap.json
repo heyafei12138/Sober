@@ -1,0 +1,59 @@
+{
+  "" : {
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/SoberGardenWatch-primary.dia",
+    "emit-module-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/SoberGardenWatch-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/SoberGardenWatch-primary-emit-module.dia",
+    "pch" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/SoberGardenWatch-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/SoberGardenWatch-primary.swiftdeps"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGardenWatch/SGWatchBreathingView.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/SGWatchBreathingView.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/SGWatchBreathingView.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/SGWatchBreathingView.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/SGWatchBreathingView.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/SGWatchBreathingView.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/SGWatchBreathingView.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/SGWatchBreathingView.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/SGWatchBreathingView~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGardenWatch/SGWatchHomeView.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/SGWatchHomeView.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/SGWatchHomeView.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/SGWatchHomeView.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/SGWatchHomeView.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/SGWatchHomeView.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/SGWatchHomeView.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/SGWatchHomeView.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/SGWatchHomeView~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGardenWatch/SGWatchSnapshotReader.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/SGWatchSnapshotReader.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/SGWatchSnapshotReader.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/SGWatchSnapshotReader.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/SGWatchSnapshotReader.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/SGWatchSnapshotReader.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/SGWatchSnapshotReader.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/SGWatchSnapshotReader.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/SGWatchSnapshotReader~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGardenWatch/SoberGardenWatchApp.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/SoberGardenWatchApp.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/SoberGardenWatchApp.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/SoberGardenWatchApp.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/SoberGardenWatchApp.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/SoberGardenWatchApp.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/SoberGardenWatchApp.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/SoberGardenWatchApp.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/SoberGardenWatchApp~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/DerivedSources/GeneratedAssetSymbols.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/GeneratedAssetSymbols.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/GeneratedAssetSymbols.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/GeneratedAssetSymbols.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/GeneratedAssetSymbols.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/GeneratedAssetSymbols.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/GeneratedAssetSymbols.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/GeneratedAssetSymbols.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGardenWatch.build/Objects-normal/x86_64/GeneratedAssetSymbols~partial.swiftmodule"
+  }
+}

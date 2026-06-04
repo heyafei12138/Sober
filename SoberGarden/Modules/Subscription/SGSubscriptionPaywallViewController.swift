@@ -29,6 +29,7 @@ final class SGSubscriptionPaywallViewController: BaseViewController {
     private var planCards: [SGSubscriptionProduct: SGSubscriptionPlanCard] = [:]
     private var purchaseInFlight = false
     private var hasScheduledCloseButtonReveal = false
+    private var hasClosedAfterSuccessfulPurchase = false
     private let privacyPolicyURL = URL(string: "https://sites.google.com/view/sober-privacy")!
     private let termsURL = URL(string: "https://sites.google.com/view/sober-termsofus")!
 
@@ -46,11 +47,21 @@ final class SGSubscriptionPaywallViewController: BaseViewController {
         isCustomNavigationHidden = true
         title = nil
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleEntitlementChanged),
+            name: SGSubscriptionManager.entitlementDidChangeNotification,
+            object: nil
+        )
         Task {
             await SGSubscriptionManager.shared.loadProductsIfNeeded()
             await SGSubscriptionManager.shared.refreshEntitlements()
             refreshPlanCards()
         }
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -274,7 +285,9 @@ final class SGSubscriptionPaywallViewController: BaseViewController {
 
         Task {
             let result = await SGSubscriptionManager.shared.purchase(selectedPlan)
-            handlePurchaseResult(result)
+            await MainActor.run {
+                self.handlePurchaseResult(result)
+            }
         }
     }
 
@@ -299,7 +312,9 @@ final class SGSubscriptionPaywallViewController: BaseViewController {
 
         Task {
             let result = await SGSubscriptionManager.shared.restorePurchases()
-            handlePurchaseResult(result)
+            await MainActor.run {
+                self.handlePurchaseResult(result)
+            }
         }
     }
 
@@ -311,7 +326,7 @@ final class SGSubscriptionPaywallViewController: BaseViewController {
         switch result {
         case .purchased:
             statusLabel.text = "subscription.status.active".localized()
-            closePaywall()
+            closePaywallAfterSuccess()
         case .cancelled:
             statusLabel.text = nil
         case .pending:
@@ -321,12 +336,23 @@ final class SGSubscriptionPaywallViewController: BaseViewController {
         }
     }
 
+    private func closePaywallAfterSuccess() {
+        guard hasClosedAfterSuccessfulPurchase == false else { return }
+        hasClosedAfterSuccessfulPurchase = true
+        closePaywall()
+    }
+
     private func closePaywall() {
         if presentingViewController != nil {
             dismiss(animated: true)
         } else {
             popCurrentController()
         }
+    }
+
+    @objc private func handleEntitlementChanged() {
+        guard SGSubscriptionManager.shared.isPlus else { return }
+        closePaywallAfterSuccess()
     }
 
     private func configureLinkButton(_ button: UIButton, title: String, action: Selector) {

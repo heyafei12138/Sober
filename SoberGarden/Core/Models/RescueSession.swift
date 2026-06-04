@@ -13,6 +13,11 @@ struct RescueSession: Codable, Identifiable {
     var urgeAfter: Int?
     var completedBreathing: Bool
     var completedDelay: Bool
+
+    var urgeReduction: Int? {
+        guard let urgeBefore, let urgeAfter else { return nil }
+        return max(0, urgeBefore - urgeAfter)
+    }
 }
 
 enum EmotionType: String, Codable, CaseIterable {

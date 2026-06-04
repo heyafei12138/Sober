@@ -215,6 +215,13 @@ final class SGSettingsViewController: BaseViewController {
         let reasonsRow = SGSettingsRowView()
         reasonsRow.configure(title: "settings.habit.reasons".localized(), value: reasons, accessory: .none)
 
+        let wordingRow = SGSettingsRowView()
+        wordingRow.configure(
+            title: "settings.habit.wording.title".localized(),
+            subtitle: habitWordingSubtitle(for: habit),
+            accessory: .none
+        )
+
         let additionalHabitRow = SGSettingsRowView()
         additionalHabitRow.configure(
             title: "settings.habit.additional.title".localized(),
@@ -229,7 +236,7 @@ final class SGSettingsViewController: BaseViewController {
             }
         }
 
-        return [editRow, startDateRow, costRow, timeRow, reasonsRow, additionalHabitRow]
+        return [editRow, startDateRow, costRow, timeRow, reasonsRow, wordingRow, additionalHabitRow]
     }
 
     private func bindSubscriptionCard() {
@@ -241,6 +248,17 @@ final class SGSettingsViewController: BaseViewController {
     private func presentSubscriptionPaywall() {
         let paywallViewController = SGSubscriptionPaywallViewController()
         presentController(paywallViewController)
+    }
+
+    private func habitWordingSubtitle(for habit: Habit?) -> String {
+        switch habit?.recoveryLanguage.mode {
+        case .sobriety:
+            return "settings.habit.wording.subtitle.sobriety".localized()
+        case .generic:
+            return "settings.habit.wording.subtitle.generic".localized()
+        case nil:
+            return "settings.habit.wording.subtitle.default".localized()
+        }
     }
 
     private func buildNotificationRows(settings: SoberGardenSettings) -> [SGSettingsRowView] {

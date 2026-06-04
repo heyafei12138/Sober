@@ -28,11 +28,13 @@ final class SGGardenPreviewView: UIControl {
         setupView()
     }
 
-    func configure(gardenStage: GardenStage, nextMilestone: Milestone?, cleanDays: Int, habitName: String) {
+    func configure(gardenStage: GardenStage, nextMilestone: Milestone?, cleanDays: Int, habitName: String, recoveryLanguage: SGRecoveryLanguage) {
         titleLabel.text = gardenStage.title
-        badgeLabel.text = "home.gardenPreview.cleanDaysFormat".localizedFormat(cleanDays)
+        badgeLabel.text = recoveryLanguage.dayCountFormatKey.localizedFormat(cleanDays)
 
-        if let nextMilestone {
+        if recoveryLanguage.mode == .sobriety {
+            subtitleLabel.text = "recovery.gardenPreview.subtitle.sobriety".localized()
+        } else if let nextMilestone {
             let remaining = max(nextMilestone.day - cleanDays, 0)
             subtitleLabel.text = remaining == 0
                 ? "home.gardenPreview.ready".localized()

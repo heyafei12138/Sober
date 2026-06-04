@@ -1,0 +1,799 @@
+{
+  "" : {
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SoberGarden-primary.dia",
+    "emit-module-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SoberGarden-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SoberGarden-primary-emit-module.dia",
+    "pch" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SoberGarden-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SoberGarden-primary.swiftdeps"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/AppDelegate.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/AppDelegate.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/AppDelegate.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/AppDelegate.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/AppDelegate.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/AppDelegate.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/AppDelegate.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/AppDelegate.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/AppDelegate~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Core/Models/Habit.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/Habit.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/Habit.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/Habit.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/Habit.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/Habit.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/Habit.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/Habit.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/Habit~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Core/Models/JournalEntry.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/JournalEntry.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/JournalEntry.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/JournalEntry.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/JournalEntry.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/JournalEntry.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/JournalEntry.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/JournalEntry.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/JournalEntry~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Core/Models/Milestone.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/Milestone.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/Milestone.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/Milestone.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/Milestone.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/Milestone.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/Milestone.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/Milestone.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/Milestone~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Core/Models/RelapseRecord.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/RelapseRecord.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/RelapseRecord.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/RelapseRecord.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/RelapseRecord.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/RelapseRecord.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/RelapseRecord.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/RelapseRecord.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/RelapseRecord~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Core/Models/RescueSession.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/RescueSession.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/RescueSession.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/RescueSession.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/RescueSession.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/RescueSession.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/RescueSession.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/RescueSession.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/RescueSession~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Core/Models/WidgetSnapshot.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/WidgetSnapshot.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/WidgetSnapshot.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/WidgetSnapshot.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/WidgetSnapshot.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/WidgetSnapshot.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/WidgetSnapshot.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/WidgetSnapshot.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/WidgetSnapshot~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Core/Services/SGAppLockService.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGAppLockService.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGAppLockService.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGAppLockService.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGAppLockService.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGAppLockService.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGAppLockService.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGAppLockService.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGAppLockService~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Core/Services/SGCalmCoachService.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGCalmCoachService.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGCalmCoachService.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGCalmCoachService.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGCalmCoachService.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGCalmCoachService.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGCalmCoachService.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGCalmCoachService.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGCalmCoachService~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Core/Services/SGDeepLinkRouter.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDeepLinkRouter.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDeepLinkRouter.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDeepLinkRouter.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDeepLinkRouter.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDeepLinkRouter.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDeepLinkRouter.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDeepLinkRouter.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDeepLinkRouter~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Core/Services/SGFeedbackMailPresenter.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGFeedbackMailPresenter.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGFeedbackMailPresenter.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGFeedbackMailPresenter.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGFeedbackMailPresenter.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGFeedbackMailPresenter.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGFeedbackMailPresenter.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGFeedbackMailPresenter.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGFeedbackMailPresenter~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Core/Services/SGNotificationService.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGNotificationService.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGNotificationService.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGNotificationService.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGNotificationService.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGNotificationService.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGNotificationService.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGNotificationService.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGNotificationService~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Core/Services/SGProgressCalculator.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGProgressCalculator.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGProgressCalculator.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGProgressCalculator.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGProgressCalculator.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGProgressCalculator.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGProgressCalculator.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGProgressCalculator.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGProgressCalculator~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Core/Services/SGReviewPromptCoordinator.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGReviewPromptCoordinator.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGReviewPromptCoordinator.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGReviewPromptCoordinator.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGReviewPromptCoordinator.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGReviewPromptCoordinator.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGReviewPromptCoordinator.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGReviewPromptCoordinator.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGReviewPromptCoordinator~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Core/Services/SGSubscriptionManager.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSubscriptionManager.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSubscriptionManager.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSubscriptionManager.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSubscriptionManager.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSubscriptionManager.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSubscriptionManager.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSubscriptionManager.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSubscriptionManager~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Core/Services/SoberGardenState.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SoberGardenState.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SoberGardenState.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SoberGardenState.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SoberGardenState.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SoberGardenState.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SoberGardenState.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SoberGardenState.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SoberGardenState~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Core/Services/SoberGardenStore.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SoberGardenStore.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SoberGardenStore.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SoberGardenStore.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SoberGardenStore.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SoberGardenStore.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SoberGardenStore.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SoberGardenStore.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SoberGardenStore~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Core/UI/SGCardView.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGCardView.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGCardView.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGCardView.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGCardView.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGCardView.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGCardView.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGCardView.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGCardView~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Core/UI/SGOptionChip.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGOptionChip.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGOptionChip.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGOptionChip.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGOptionChip.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGOptionChip.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGOptionChip.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGOptionChip.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGOptionChip~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Core/UI/SGPrimaryButton.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGPrimaryButton.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGPrimaryButton.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGPrimaryButton.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGPrimaryButton.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGPrimaryButton.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGPrimaryButton.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGPrimaryButton.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGPrimaryButton~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Core/UI/SGProgressBarView.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGProgressBarView.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGProgressBarView.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGProgressBarView.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGProgressBarView.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGProgressBarView.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGProgressBarView.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGProgressBarView.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGProgressBarView~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Core/UI/SGReviewPromptViewController.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGReviewPromptViewController.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGReviewPromptViewController.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGReviewPromptViewController.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGReviewPromptViewController.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGReviewPromptViewController.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGReviewPromptViewController.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGReviewPromptViewController.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGReviewPromptViewController~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Core/UI/SGSectionHeaderView.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSectionHeaderView.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSectionHeaderView.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSectionHeaderView.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSectionHeaderView.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSectionHeaderView.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSectionHeaderView.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSectionHeaderView.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSectionHeaderView~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Helper/Define/SGAppConstants.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGAppConstants.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGAppConstants.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGAppConstants.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGAppConstants.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGAppConstants.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGAppConstants.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGAppConstants.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGAppConstants~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Helper/Define/SGDefine.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDefine.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDefine.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDefine.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDefine.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDefine.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDefine.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDefine.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDefine~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Helper/Theme/SGColor.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGColor.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGColor.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGColor.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGColor.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGColor.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGColor.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGColor.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGColor~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Helper/extension/ColorExtension.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/ColorExtension.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/ColorExtension.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/ColorExtension.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/ColorExtension.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/ColorExtension.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/ColorExtension.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/ColorExtension.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/ColorExtension~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Helper/extension/VCExtension.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/VCExtension.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/VCExtension.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/VCExtension.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/VCExtension.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/VCExtension.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/VCExtension.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/VCExtension.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/VCExtension~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Modules/Garden/SGGardenViewController.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGGardenViewController.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGGardenViewController.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGGardenViewController.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGGardenViewController.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGGardenViewController.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGGardenViewController.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGGardenViewController.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGGardenViewController~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Modules/Garden/Views/SGBadgeGridView.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGBadgeGridView.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGBadgeGridView.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGBadgeGridView.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGBadgeGridView.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGBadgeGridView.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGBadgeGridView.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGBadgeGridView.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGBadgeGridView~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Modules/Garden/Views/SGGardenIllustrationView.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGGardenIllustrationView.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGGardenIllustrationView.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGGardenIllustrationView.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGGardenIllustrationView.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGGardenIllustrationView.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGGardenIllustrationView.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGGardenIllustrationView.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGGardenIllustrationView~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Modules/Garden/Views/SGGrowthPathView.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGGrowthPathView.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGGrowthPathView.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGGrowthPathView.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGGrowthPathView.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGGrowthPathView.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGGrowthPathView.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGGrowthPathView.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGGrowthPathView~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Modules/Home/SGHomeViewController.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGHomeViewController.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGHomeViewController.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGHomeViewController.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGHomeViewController.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGHomeViewController.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGHomeViewController.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGHomeViewController.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGHomeViewController~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Modules/Home/Views/SGDailyGardenGridView.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDailyGardenGridView.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDailyGardenGridView.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDailyGardenGridView.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDailyGardenGridView.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDailyGardenGridView.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDailyGardenGridView.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDailyGardenGridView.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDailyGardenGridView~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Modules/Home/Views/SGDailyGardenRangeSheetViewController.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDailyGardenRangeSheetViewController.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDailyGardenRangeSheetViewController.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDailyGardenRangeSheetViewController.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDailyGardenRangeSheetViewController.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDailyGardenRangeSheetViewController.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDailyGardenRangeSheetViewController.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDailyGardenRangeSheetViewController.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDailyGardenRangeSheetViewController~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Modules/Home/Views/SGDailyPlantEditSheetViewController.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDailyPlantEditSheetViewController.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDailyPlantEditSheetViewController.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDailyPlantEditSheetViewController.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDailyPlantEditSheetViewController.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDailyPlantEditSheetViewController.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDailyPlantEditSheetViewController.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDailyPlantEditSheetViewController.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDailyPlantEditSheetViewController~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Modules/Home/Views/SGDailyPlantStatsView.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDailyPlantStatsView.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDailyPlantStatsView.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDailyPlantStatsView.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDailyPlantStatsView.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDailyPlantStatsView.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDailyPlantStatsView.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDailyPlantStatsView.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGDailyPlantStatsView~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Modules/Home/Views/SGGardenPreviewView.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGGardenPreviewView.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGGardenPreviewView.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGGardenPreviewView.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGGardenPreviewView.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGGardenPreviewView.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGGardenPreviewView.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGGardenPreviewView.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGGardenPreviewView~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Modules/Home/Views/SGHomeHeaderView.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGHomeHeaderView.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGHomeHeaderView.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGHomeHeaderView.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGHomeHeaderView.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGHomeHeaderView.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGHomeHeaderView.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGHomeHeaderView.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGHomeHeaderView~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Modules/Home/Views/SGMilestoneCardView.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGMilestoneCardView.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGMilestoneCardView.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGMilestoneCardView.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGMilestoneCardView.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGMilestoneCardView.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGMilestoneCardView.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGMilestoneCardView.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGMilestoneCardView~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Modules/Home/Views/SGPlantReviewCardView.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGPlantReviewCardView.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGPlantReviewCardView.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGPlantReviewCardView.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGPlantReviewCardView.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGPlantReviewCardView.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGPlantReviewCardView.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGPlantReviewCardView.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGPlantReviewCardView~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Modules/Home/Views/SGSavedStatsView.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSavedStatsView.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSavedStatsView.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSavedStatsView.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSavedStatsView.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSavedStatsView.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSavedStatsView.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSavedStatsView.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSavedStatsView~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Modules/Home/Views/SGStreakCardView.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGStreakCardView.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGStreakCardView.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGStreakCardView.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGStreakCardView.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGStreakCardView.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGStreakCardView.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGStreakCardView.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGStreakCardView~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Modules/Home/Views/SGTodayCheckInCardView.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGTodayCheckInCardView.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGTodayCheckInCardView.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGTodayCheckInCardView.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGTodayCheckInCardView.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGTodayCheckInCardView.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGTodayCheckInCardView.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGTodayCheckInCardView.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGTodayCheckInCardView~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Modules/Home/Views/SGTodayCheckInFeedbackView.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGTodayCheckInFeedbackView.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGTodayCheckInFeedbackView.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGTodayCheckInFeedbackView.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGTodayCheckInFeedbackView.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGTodayCheckInFeedbackView.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGTodayCheckInFeedbackView.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGTodayCheckInFeedbackView.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGTodayCheckInFeedbackView~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Modules/Home/Views/SGTodayCheckInFlowViewController.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGTodayCheckInFlowViewController.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGTodayCheckInFlowViewController.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGTodayCheckInFlowViewController.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGTodayCheckInFlowViewController.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGTodayCheckInFlowViewController.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGTodayCheckInFlowViewController.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGTodayCheckInFlowViewController.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGTodayCheckInFlowViewController~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Modules/Journal/SGJournalViewController.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGJournalViewController.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGJournalViewController.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGJournalViewController.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGJournalViewController.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGJournalViewController.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGJournalViewController.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGJournalViewController.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGJournalViewController~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Modules/Journal/Views/SGJournalCheckInView.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGJournalCheckInView.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGJournalCheckInView.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGJournalCheckInView.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGJournalCheckInView.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGJournalCheckInView.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGJournalCheckInView.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGJournalCheckInView.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGJournalCheckInView~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Modules/Journal/Views/SGJournalHistoryCell.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGJournalHistoryCell.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGJournalHistoryCell.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGJournalHistoryCell.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGJournalHistoryCell.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGJournalHistoryCell.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGJournalHistoryCell.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGJournalHistoryCell.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGJournalHistoryCell~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Modules/Onboarding/SGOnboardingDraft.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGOnboardingDraft.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGOnboardingDraft.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGOnboardingDraft.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGOnboardingDraft.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGOnboardingDraft.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGOnboardingDraft.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGOnboardingDraft.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGOnboardingDraft~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Modules/Onboarding/SGOnboardingStepView.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGOnboardingStepView.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGOnboardingStepView.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGOnboardingStepView.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGOnboardingStepView.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGOnboardingStepView.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGOnboardingStepView.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGOnboardingStepView.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGOnboardingStepView~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Modules/Onboarding/SGOnboardingViewController.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGOnboardingViewController.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGOnboardingViewController.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGOnboardingViewController.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGOnboardingViewController.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGOnboardingViewController.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGOnboardingViewController.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGOnboardingViewController.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGOnboardingViewController~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Modules/Rescue/SGRescueDraft.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGRescueDraft.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGRescueDraft.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGRescueDraft.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGRescueDraft.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGRescueDraft.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGRescueDraft.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGRescueDraft.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGRescueDraft~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Modules/Rescue/SGRescueViewController.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGRescueViewController.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGRescueViewController.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGRescueViewController.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGRescueViewController.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGRescueViewController.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGRescueViewController.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGRescueViewController.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGRescueViewController~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Modules/Rescue/Views/SGBreathingExerciseView.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGBreathingExerciseView.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGBreathingExerciseView.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGBreathingExerciseView.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGBreathingExerciseView.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGBreathingExerciseView.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGBreathingExerciseView.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGBreathingExerciseView.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGBreathingExerciseView~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Modules/Rescue/Views/SGCoachMessageView.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGCoachMessageView.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGCoachMessageView.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGCoachMessageView.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGCoachMessageView.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGCoachMessageView.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGCoachMessageView.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGCoachMessageView.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGCoachMessageView~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Modules/Rescue/Views/SGEmotionPickerView.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGEmotionPickerView.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGEmotionPickerView.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGEmotionPickerView.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGEmotionPickerView.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGEmotionPickerView.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGEmotionPickerView.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGEmotionPickerView.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGEmotionPickerView~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Modules/Rescue/Views/SGRescueStepHeaderView.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGRescueStepHeaderView.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGRescueStepHeaderView.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGRescueStepHeaderView.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGRescueStepHeaderView.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGRescueStepHeaderView.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGRescueStepHeaderView.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGRescueStepHeaderView.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGRescueStepHeaderView~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Modules/SGTabPlaceholder.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGTabPlaceholder.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGTabPlaceholder.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGTabPlaceholder.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGTabPlaceholder.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGTabPlaceholder.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGTabPlaceholder.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGTabPlaceholder.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGTabPlaceholder~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Modules/Settings/SGAppLanguage.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGAppLanguage.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGAppLanguage.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGAppLanguage.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGAppLanguage.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGAppLanguage.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGAppLanguage.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGAppLanguage.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGAppLanguage~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Modules/Settings/SGEditHabitViewController.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGEditHabitViewController.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGEditHabitViewController.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGEditHabitViewController.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGEditHabitViewController.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGEditHabitViewController.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGEditHabitViewController.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGEditHabitViewController.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGEditHabitViewController~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Modules/Settings/SGLanguageSelectionViewController.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGLanguageSelectionViewController.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGLanguageSelectionViewController.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGLanguageSelectionViewController.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGLanguageSelectionViewController.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGLanguageSelectionViewController.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGLanguageSelectionViewController.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGLanguageSelectionViewController.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGLanguageSelectionViewController~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Modules/Settings/SGNonMedicalDisclaimerViewController.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGNonMedicalDisclaimerViewController.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGNonMedicalDisclaimerViewController.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGNonMedicalDisclaimerViewController.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGNonMedicalDisclaimerViewController.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGNonMedicalDisclaimerViewController.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGNonMedicalDisclaimerViewController.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGNonMedicalDisclaimerViewController.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGNonMedicalDisclaimerViewController~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Modules/Settings/SGSettingsRowView.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSettingsRowView.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSettingsRowView.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSettingsRowView.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSettingsRowView.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSettingsRowView.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSettingsRowView.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSettingsRowView.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSettingsRowView~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Modules/Settings/SGSettingsViewController.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSettingsViewController.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSettingsViewController.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSettingsViewController.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSettingsViewController.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSettingsViewController.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSettingsViewController.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSettingsViewController.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSettingsViewController~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Modules/Settings/SGWidgetGuideViewController.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGWidgetGuideViewController.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGWidgetGuideViewController.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGWidgetGuideViewController.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGWidgetGuideViewController.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGWidgetGuideViewController.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGWidgetGuideViewController.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGWidgetGuideViewController.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGWidgetGuideViewController~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Modules/Settings/Views/SGCheckInStatsView.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGCheckInStatsView.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGCheckInStatsView.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGCheckInStatsView.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGCheckInStatsView.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGCheckInStatsView.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGCheckInStatsView.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGCheckInStatsView.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGCheckInStatsView~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Modules/Share/SGProgressShareCardView.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGProgressShareCardView.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGProgressShareCardView.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGProgressShareCardView.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGProgressShareCardView.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGProgressShareCardView.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGProgressShareCardView.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGProgressShareCardView.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGProgressShareCardView~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Modules/Share/SGSharePreviewViewController.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSharePreviewViewController.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSharePreviewViewController.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSharePreviewViewController.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSharePreviewViewController.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSharePreviewViewController.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSharePreviewViewController.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSharePreviewViewController.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSharePreviewViewController~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Modules/Share/SGShareProgressService.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGShareProgressService.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGShareProgressService.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGShareProgressService.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGShareProgressService.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGShareProgressService.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGShareProgressService.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGShareProgressService.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGShareProgressService~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/Modules/Subscription/SGSubscriptionPaywallViewController.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSubscriptionPaywallViewController.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSubscriptionPaywallViewController.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSubscriptionPaywallViewController.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSubscriptionPaywallViewController.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSubscriptionPaywallViewController.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSubscriptionPaywallViewController.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSubscriptionPaywallViewController.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGSubscriptionPaywallViewController~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/SceneDelegate.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SceneDelegate.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SceneDelegate.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SceneDelegate.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SceneDelegate.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SceneDelegate.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SceneDelegate.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SceneDelegate.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SceneDelegate~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/ViewController.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/ViewController.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/ViewController.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/ViewController.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/ViewController.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/ViewController.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/ViewController.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/ViewController.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/ViewController~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/WidgetShared/SGWidgetSnapshotWriter.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGWidgetSnapshotWriter.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGWidgetSnapshotWriter.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGWidgetSnapshotWriter.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGWidgetSnapshotWriter.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGWidgetSnapshotWriter.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGWidgetSnapshotWriter.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGWidgetSnapshotWriter.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/SGWidgetSnapshotWriter~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/base/SGNavTab/BaseViewContoller.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/BaseViewContoller.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/BaseViewContoller.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/BaseViewContoller.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/BaseViewContoller.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/BaseViewContoller.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/BaseViewContoller.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/BaseViewContoller.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/BaseViewContoller~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/base/SGNavTab/CustomNavigationBar.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/CustomNavigationBar.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/CustomNavigationBar.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/CustomNavigationBar.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/CustomNavigationBar.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/CustomNavigationBar.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/CustomNavigationBar.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/CustomNavigationBar.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/CustomNavigationBar~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/base/SGNavTab/MainTabBarController.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/MainTabBarController.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/MainTabBarController.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/MainTabBarController.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/MainTabBarController.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/MainTabBarController.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/MainTabBarController.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/MainTabBarController.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/MainTabBarController~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/SoberGarden/base/SGNavTab/TabbarView.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/TabbarView.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/TabbarView.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/TabbarView.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/TabbarView.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/TabbarView.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/TabbarView.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/TabbarView.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/TabbarView~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/DerivedSources/GeneratedAssetSymbols.swift" : {
+    "const-values" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/GeneratedAssetSymbols.d",
+    "diagnostics" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/GeneratedAssetSymbols.dia",
+    "index-unit-output-path" : "/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "llvm-bc" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/GeneratedAssetSymbols.bc",
+    "object" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "swift-dependencies" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/project/2026/SoberGarden/build/SoberGarden.build/Debug-iphonesimulator/SoberGarden.build/Objects-normal/arm64/GeneratedAssetSymbols~partial.swiftmodule"
+  }
+}

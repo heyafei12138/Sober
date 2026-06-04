@@ -33,9 +33,10 @@ final class SGStreakCardView: UIView {
         currentHours: Int,
         longestStreakDays: Int,
         startedDate: Date?,
-        habitName: String
+        habitName: String,
+        recoveryLanguage: SGRecoveryLanguage
     ) {
-        titleLabel.text = "home.streak.titleFormat".localizedFormat(cleanDays)
+        titleLabel.text = recoveryLanguage.dayCountFormatKey.localizedFormat(cleanDays)
         dayMetricView.configure(value: "\(cleanDays)", title: "home.streak.days".localized())
         hourMetricView.configure(value: "\(currentHours)", title: "home.streak.hours".localized())
         longestMetricView.configure(value: "\(longestStreakDays)", title: "home.streak.longest".localized())

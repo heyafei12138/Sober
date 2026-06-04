@@ -11,6 +11,11 @@ enum SGCalmCoachContext: String, CaseIterable {
     case confirmedToday
     case yesterdayFollowUp
     case postCheckInEncouragement
+    case sobrietyMorning
+    case cravingMoment
+    case postSetback
+    case milestoneSober
+    case nightReflection
     case urge
     case stress
     case lonely
@@ -118,6 +123,26 @@ final class SGCalmCoachService {
         "postCheckInEncouragement": [
             SGCalmCoachPrompt(id: "postCheckInEncouragement_1", context: "postCheckInEncouragement", weight: 3, text: "Nice work. You kept the garden moving today."),
             SGCalmCoachPrompt(id: "postCheckInEncouragement_2", context: "postCheckInEncouragement", weight: 2, text: "That was a steady choice. Let the win land.")
+        ],
+        "sobrietyMorning": [
+            SGCalmCoachPrompt(id: "sobrietyMorning_1", context: "sobrietyMorning", weight: 3, text: "Protect today first. The rest can wait until the next calm hour."),
+            SGCalmCoachPrompt(id: "sobrietyMorning_2", context: "sobrietyMorning", weight: 2, text: "You only need to stay sober through the next honest choice.")
+        ],
+        "cravingMoment": [
+            SGCalmCoachPrompt(id: "cravingMoment_1", context: "cravingMoment", weight: 3, text: "You do not need to solve your whole life tonight. Just protect this next ten minutes."),
+            SGCalmCoachPrompt(id: "cravingMoment_2", context: "cravingMoment", weight: 2, text: "The urge can rise and fall without becoming an action.")
+        ],
+        "postSetback": [
+            SGCalmCoachPrompt(id: "postSetback_1", context: "postSetback", weight: 3, text: "One setback does not erase the garden you have already grown."),
+            SGCalmCoachPrompt(id: "postSetback_2", context: "postSetback", weight: 2, text: "Restart gently. Shame does not need to lead the next step.")
+        ],
+        "milestoneSober": [
+            SGCalmCoachPrompt(id: "milestoneSober_1", context: "milestoneSober", weight: 3, text: "This sober streak is real. Let it count as proof, not pressure."),
+            SGCalmCoachPrompt(id: "milestoneSober_2", context: "milestoneSober", weight: 2, text: "You are not starting from hope alone anymore. You are building evidence.")
+        ],
+        "nightReflection": [
+            SGCalmCoachPrompt(id: "nightReflection_1", context: "nightReflection", weight: 3, text: "Night can make cravings sound urgent. They are still allowed to pass unanswered."),
+            SGCalmCoachPrompt(id: "nightReflection_2", context: "nightReflection", weight: 2, text: "Keep tonight small, private, and safe. Morning does not need extra damage to clean up.")
         ],
         "urge": [
             SGCalmCoachPrompt(id: "urge_1", context: "urge", weight: 3, text: "Ride this urge for one minute before you decide anything."),

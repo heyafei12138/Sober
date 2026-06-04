@@ -280,15 +280,17 @@ final class SGHomeViewController: BaseViewController {
         let longestStreak = max(cleanDays, state.relapseRecords.map(\.previousStreakDays).max() ?? cleanDays)
         let nextMilestone = SGProgressCalculator.nextMilestone(for: cleanDays)
         let habitName = habit?.displayName ?? "habit.generic".localized()
+        let recoveryLanguage = habit?.recoveryLanguage ?? .generic
 
         headerView.configure(
             dayCount: cleanDays,
-            habitName: habitName
+            habitName: habitName,
+            recoveryLanguage: recoveryLanguage
         )
 
         coachSectionHeader.configure(title: "home.coach.title".localized())
-        coachPromptLabel.text = currentCoachText(cleanDays: cleanDays, todayStatus: todayRecord?.status, now: now)
-        todayCheckInCardView.configure(state: currentTodayPlantState(for: todayRecord))
+        coachPromptLabel.text = currentCoachText(cleanDays: cleanDays, todayStatus: todayRecord?.status, recoveryLanguage: recoveryLanguage, now: now)
+        todayCheckInCardView.configure(state: currentTodayPlantState(for: todayRecord), recoveryLanguage: recoveryLanguage)
         let dailyGardenItems = currentDailyGardenItems(
             records: dailyPlantDisplayData.records,
             startDate: dailyPlantDisplayData.startDate,
@@ -319,7 +321,8 @@ final class SGHomeViewController: BaseViewController {
             currentHours: currentHours,
             longestStreakDays: longestStreak,
             startedDate: habit?.startDate,
-            habitName: habitName
+            habitName: habitName,
+            recoveryLanguage: recoveryLanguage
         )
 
         savingsView.configure(
@@ -337,7 +340,8 @@ final class SGHomeViewController: BaseViewController {
             gardenStage: SGProgressCalculator.currentGardenStage(for: cleanDays),
             nextMilestone: nextMilestone,
             cleanDays: cleanDays,
-            habitName: habitName
+            habitName: habitName,
+            recoveryLanguage: recoveryLanguage
         )
     }
 
@@ -553,16 +557,21 @@ final class SGHomeViewController: BaseViewController {
         present(disclaimerViewController, animated: true)
     }
 
-    private func currentCoachText(cleanDays: Int, todayStatus: DailyRecordStatus?, now: Date) -> String {
+    private func currentCoachText(
+        cleanDays: Int,
+        todayStatus: DailyRecordStatus?,
+        recoveryLanguage: SGRecoveryLanguage,
+        now: Date
+    ) -> String {
         let promptContext: SGCalmCoachContext
         if todayStatus == .planted {
-            promptContext = .postCheckInEncouragement
+            promptContext = recoveryLanguage.mode == .sobriety ? .sobrietyMorning : .postCheckInEncouragement
         } else if todayStatus == .rainy {
-            promptContext = .relapse
+            promptContext = recoveryLanguage.mode == .sobriety ? .postSetback : .relapse
         } else if cleanDays == 7 {
-            promptContext = .milestone7
+            promptContext = recoveryLanguage.mode == .sobriety ? .milestoneSober : .milestone7
         } else {
-            promptContext = .notConfirmedToday
+            promptContext = recoveryLanguage.mode == .sobriety ? .cravingMoment : .notConfirmedToday
         }
 
         return SGCalmCoachService.shared.promptText(for: promptContext, now: now)

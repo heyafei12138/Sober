@@ -11,12 +11,23 @@
 		04B7430D2FC55276000FA01E /* FLAnimatedImage in Frameworks */ = {isa = PBXBuildFile; productRef = 04B7430C2FC55276000FA01E /* FLAnimatedImage */; };
 		04F5E7F82FBC96D10049A938 /* JKSwiftExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 04F5E7F72FBC96D10049A938 /* JKSwiftExtension */; };
 		04F5E7FB2FBC97690049A938 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 04F5E7FA2FBC97690049A938 /* SnapKit */; };
+		2AD69C10C63FA8DB2DC82549 /* RescueSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10B2C9C4648D2741481C56 /* RescueSessionTests.swift */; };
 		2B3039A9D7BA8D47ABEF5826 /* Pods_SoberGarden.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4CC144DE7B44112E610A660 /* Pods_SoberGarden.framework */; };
+		6710F44777640DE74996E64D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE62F51E9452A1B3063E088B /* Foundation.framework */; };
 		700000000000000000000002 /* SoberGardenWidgets.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 700000000000000000000001 /* SoberGardenWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		710000000000000000000002 /* SoberGardenWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 710000000000000000000001 /* SoberGardenWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D3F28EEA64703AC7668E5931 /* SGRecoveryLanguageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B85172A64A3E7EE813341B1 /* SGRecoveryLanguageTests.swift */; };
+		E5B8E0D353CAAD387C23C775 /* XCTest.framework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7283C42711F3992F5C1187C /* XCTest.framework.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		0570A3174753643922E6102E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04F5E7A62FBC900E0049A938 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 04F5E7AD2FBC900E0049A938;
+			remoteInfo = SoberGarden;
+		};
 		70000000000000000000000D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 04F5E7A62FBC900E0049A938 /* Project object */;
@@ -61,10 +72,15 @@
 /* Begin PBXFileReference section */
 		04B73F312FBF3A14000FA01E /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		04F5E7AE2FBC900E0049A938 /* SoberGarden.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoberGarden.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1B85172A64A3E7EE813341B1 /* SGRecoveryLanguageTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SGRecoveryLanguageTests.swift; sourceTree = "<group>"; };
 		329B5C1808AF900B8025CB26 /* Pods-SoberGarden.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoberGarden.debug.xcconfig"; path = "Target Support Files/Pods-SoberGarden/Pods-SoberGarden.debug.xcconfig"; sourceTree = "<group>"; };
 		3D09EF61D7EDB5C1083DBF73 /* Pods-SoberGarden.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoberGarden.release.xcconfig"; path = "Target Support Files/Pods-SoberGarden/Pods-SoberGarden.release.xcconfig"; sourceTree = "<group>"; };
+		6A9951F17B6BC55CEBAE1011 /* SoberGardenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SoberGardenTests.xctest; path = SoberGardenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		700000000000000000000001 /* SoberGardenWidgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SoberGardenWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		710000000000000000000001 /* SoberGardenWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoberGardenWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD10B2C9C4648D2741481C56 /* RescueSessionTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RescueSessionTests.swift; sourceTree = "<group>"; };
+		E7283C42711F3992F5C1187C /* XCTest.framework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/XCTest.framework.framework; sourceTree = DEVELOPER_DIR; };
+		EE62F51E9452A1B3063E088B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		F4CC144DE7B44112E610A660 /* Pods_SoberGarden.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoberGarden.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -104,6 +120,8 @@
 		};
 		710000000000000000000003 /* SoberGardenWatch */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+			);
 			path = SoberGardenWatch;
 			sourceTree = "<group>";
 		};
@@ -118,6 +136,15 @@
 				2B3039A9D7BA8D47ABEF5826 /* Pods_SoberGarden.framework in Frameworks */,
 				04F5E7F82FBC96D10049A938 /* JKSwiftExtension in Frameworks */,
 				04B7430D2FC55276000FA01E /* FLAnimatedImage in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		64A0DC41664DAF8A0ABB074F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6710F44777640DE74996E64D /* Foundation.framework in Frameworks */,
+				E5B8E0D353CAAD387C23C775 /* XCTest.framework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,6 +175,7 @@
 				04F5E7AF2FBC900E0049A938 /* Products */,
 				D8D6EB5FAFB443900407D9BC /* Pods */,
 				6125C260A87855DBFF2E3224 /* Frameworks */,
+				BBBA98E0BB90749B373FA087 /* SoberGardenTests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -157,6 +185,7 @@
 				04F5E7AE2FBC900E0049A938 /* SoberGarden.app */,
 				700000000000000000000001 /* SoberGardenWidgets.appex */,
 				710000000000000000000001 /* SoberGardenWatch.app */,
+				6A9951F17B6BC55CEBAE1011 /* SoberGardenTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -165,8 +194,27 @@
 			isa = PBXGroup;
 			children = (
 				F4CC144DE7B44112E610A660 /* Pods_SoberGarden.framework */,
+				A624F4B0D3068816300CB9EB /* iOS */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A624F4B0D3068816300CB9EB /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				EE62F51E9452A1B3063E088B /* Foundation.framework */,
+				E7283C42711F3992F5C1187C /* XCTest.framework.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		BBBA98E0BB90749B373FA087 /* SoberGardenTests */ = {
+			isa = PBXGroup;
+			children = (
+				CD10B2C9C4648D2741481C56 /* RescueSessionTests.swift */,
+				1B85172A64A3E7EE813341B1 /* SGRecoveryLanguageTests.swift */,
+			);
+			name = SoberGardenTests;
 			sourceTree = "<group>";
 		};
 		D8D6EB5FAFB443900407D9BC /* Pods */ = {
@@ -247,6 +295,24 @@
 			productReference = 710000000000000000000001 /* SoberGardenWatch.app */;
 			productType = "com.apple.product-type.application";
 		};
+		BC428339AE51FEF75E734A4A /* SoberGardenTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4A23DCF3F4B12BA4D07BF501 /* Build configuration list for PBXNativeTarget "SoberGardenTests" */;
+			buildPhases = (
+				A2254E7D5644CDF6C8B32B21 /* Sources */,
+				64A0DC41664DAF8A0ABB074F /* Frameworks */,
+				0A6435B20EFC4EE9D98FA8D5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6236AF3A439DB237907D794A /* PBXTargetDependency */,
+			);
+			name = SoberGardenTests;
+			productName = SoberGardenTests;
+			productReference = 6A9951F17B6BC55CEBAE1011 /* SoberGardenTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -298,6 +364,7 @@
 				04F5E7AD2FBC900E0049A938 /* SoberGarden */,
 				700000000000000000000008 /* SoberGardenWidgets */,
 				710000000000000000000008 /* SoberGardenWatch */,
+				BC428339AE51FEF75E734A4A /* SoberGardenTests */,
 			);
 		};
 /* End PBXProject section */
@@ -308,6 +375,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				04B73F322FBF3A14000FA01E /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0A6435B20EFC4EE9D98FA8D5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,9 +469,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A2254E7D5644CDF6C8B32B21 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2AD69C10C63FA8DB2DC82549 /* RescueSessionTests.swift in Sources */,
+				D3F28EEA64703AC7668E5931 /* SGRecoveryLanguageTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		6236AF3A439DB237907D794A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SoberGarden;
+			target = 04F5E7AD2FBC900E0049A938 /* SoberGarden */;
+			targetProxy = 0570A3174753643922E6102E /* PBXContainerItemProxy */;
+		};
 		70000000000000000000000E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 700000000000000000000008 /* SoberGardenWidgets */;
@@ -751,6 +840,58 @@
 			};
 			name = Release;
 		};
+		8E965E2A94E04A1FF945BB9C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = FQ89HCKDX4;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.Sober.SoberGarden.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SoberGarden.app/SoberGarden";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F00A92F646C8FC7C55016826 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = FQ89HCKDX4;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.Sober.SoberGarden.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SoberGarden.app/SoberGarden";
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -768,6 +909,15 @@
 			buildConfigurations = (
 				04F5E7C22FBC90100049A938 /* Debug */,
 				04F5E7C32FBC90100049A938 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4A23DCF3F4B12BA4D07BF501 /* Build configuration list for PBXNativeTarget "SoberGardenTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E965E2A94E04A1FF945BB9C /* Release */,
+				F00A92F646C8FC7C55016826 /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

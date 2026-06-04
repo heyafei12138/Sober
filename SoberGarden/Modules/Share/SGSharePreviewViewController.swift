@@ -86,7 +86,7 @@ final class SGSharePreviewViewController: UIViewController {
         titleLabel.font = .systemFont(ofSize: 26, weight: .bold)
         titleLabel.textColor = SGColor.textDark
 
-        subtitleLabel.text = "share.preview.subtitle".localized()
+        subtitleLabel.text = previewSubtitle()
         subtitleLabel.font = .systemFont(ofSize: 15, weight: .medium)
         subtitleLabel.textColor = SGColor.textSecondary
         subtitleLabel.numberOfLines = 0
@@ -174,6 +174,8 @@ final class SGSharePreviewViewController: UIViewController {
         actionStackView.snp.makeConstraints { make in
             make.height.equalTo(56)
         }
+
+        applyStyleAvailability()
     }
 
     @objc private func handleSaveTapped() {
@@ -202,11 +204,36 @@ final class SGSharePreviewViewController: UIViewController {
         let styles = SGSharePosterStyle.allCases
         guard styles.indices.contains(sender.selectedSegmentIndex) else { return }
 
-        selectedStyle = styles[sender.selectedSegmentIndex]
+        let nextStyle = styles[sender.selectedSegmentIndex]
+        guard canUseStyle(nextStyle) else {
+            sender.selectedSegmentIndex = SGSharePosterStyle.allCases.firstIndex(of: selectedStyle) ?? 0
+            requirePlusAccess()
+            return
+        }
+
+        selectedStyle = nextStyle
         guard let updatedPackage = SGShareProgressService.shared.makeProgressSharePackage(style: selectedStyle) else { return }
 
         package = updatedPackage
         imageView.image = updatedPackage.image
+    }
+
+    private func applyStyleAvailability() {
+        let styles = SGSharePosterStyle.allCases
+        for (index, style) in styles.enumerated() {
+            styleSegmentedControl.setEnabled(canUseStyle(style), forSegmentAt: index)
+        }
+    }
+
+    private func canUseStyle(_ style: SGSharePosterStyle) -> Bool {
+        SGSubscriptionManager.shared.isPlus || style == .garden
+    }
+
+    private func previewSubtitle() -> String {
+        if SGSubscriptionManager.shared.isPlus {
+            return "share.preview.subtitle".localized()
+        }
+        return "share.preview.subtitle.free".localized()
     }
 
     private func saveImageToPhotoLibrary() {

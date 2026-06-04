@@ -1,0 +1,4 @@
+module FLAnimatedImage {
+umbrella header "/Users/mac/Library/Developer/Xcode/DerivedData/SoberGarden-exprjfixbuyeaggxmvlmutmizace/SourcePackages/checkouts/FLAnimatedImage/FLAnimatedImage/include/FLAnimatedImage.h"
+export *
+}

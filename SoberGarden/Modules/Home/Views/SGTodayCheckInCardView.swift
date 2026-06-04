@@ -122,14 +122,14 @@ final class SGTodayCheckInCardView: UIView {
         setupView()
     }
 
-    func configure(state: State) {
+    func configure(state: State, recoveryLanguage: SGRecoveryLanguage) {
         eyebrowLabel.text = state.badgeTitle
-        titleLabel.text = state.title
-        subtitleLabel.text = state.subtitle
+        titleLabel.text = title(for: state, recoveryLanguage: recoveryLanguage)
+        subtitleLabel.text = subtitle(for: state, recoveryLanguage: recoveryLanguage)
         detailLabel.text = state.detail
         detailLabel.isHidden = state.detail == nil
 
-        if let primaryTitle = state.primaryButtonTitle {
+        if let primaryTitle = primaryButtonTitle(for: state, recoveryLanguage: recoveryLanguage) {
             primaryButton.setTitle(primaryTitle, for: .normal)
             primaryButton.isHidden = false
             primaryButton.isEnabled = state.isPrimaryButtonEnabled
@@ -138,7 +138,7 @@ final class SGTodayCheckInCardView: UIView {
             primaryButton.isEnabled = false
         }
 
-        if let secondaryTitle = state.secondaryButtonTitle {
+        if let secondaryTitle = secondaryButtonTitle(for: state, recoveryLanguage: recoveryLanguage) {
             secondaryButton.setTitle(secondaryTitle, for: .normal)
             secondaryButton.isHidden = false
         } else {
@@ -155,6 +155,48 @@ final class SGTodayCheckInCardView: UIView {
         buttonStackView.isHidden = primaryButton.isHidden && secondaryButton.isHidden
 
         updateAppearance(for: state)
+    }
+
+    private func title(for state: State, recoveryLanguage: SGRecoveryLanguage) -> String {
+        switch (state, recoveryLanguage.mode) {
+        case (.todayPlanted, .sobriety):
+            return "recovery.card.planted.title.sobriety".localized()
+        default:
+            return state.title
+        }
+    }
+
+    private func subtitle(for state: State, recoveryLanguage: SGRecoveryLanguage) -> String {
+        switch (state, recoveryLanguage.mode) {
+        case (.todayEmpty, .sobriety):
+            return "recovery.card.empty.subtitle.sobriety".localized()
+        case (.todayPlanted, .sobriety):
+            return "recovery.card.planted.subtitle.sobriety".localized()
+        case (.todayRainy, .sobriety):
+            return "recovery.card.rainy.subtitle.sobriety".localized()
+        default:
+            return state.subtitle
+        }
+    }
+
+    private func primaryButtonTitle(for state: State, recoveryLanguage: SGRecoveryLanguage) -> String? {
+        switch state {
+        case .todayEmpty:
+            return recoveryLanguage.primaryCheckInActionKey.localized()
+        case .todayPlanted:
+            return recoveryLanguage.completedCheckInStatusKey.localized()
+        default:
+            return state.primaryButtonTitle
+        }
+    }
+
+    private func secondaryButtonTitle(for state: State, recoveryLanguage: SGRecoveryLanguage) -> String? {
+        switch state {
+        case .todayEmpty:
+            return recoveryLanguage.setbackActionKey.localized()
+        default:
+            return state.secondaryButtonTitle
+        }
     }
 
     private func setupView() {

@@ -228,6 +228,7 @@ final class SGTodayCheckInFlowViewController: BaseViewController {
 
     private func renderState() {
         let cardState: SGTodayCheckInCardView.State
+        let recoveryLanguage = SoberGardenStore.shared.state.habit?.recoveryLanguage ?? .generic
         switch state {
         case .todayNotConfirmed, .dailyFlow:
             cardState = .todayEmpty
@@ -238,7 +239,7 @@ final class SGTodayCheckInFlowViewController: BaseViewController {
         }
 
         introCardView.isHidden = state == .todayConfirmed
-        introCardView.configure(state: cardState)
+        introCardView.configure(state: cardState, recoveryLanguage: recoveryLanguage)
         moodHeaderView.isHidden = currentStep != .mood
         moodStackView.isHidden = currentStep != .mood
         triggerHeaderView.isHidden = currentStep != .triggers

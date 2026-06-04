@@ -24,10 +24,15 @@ final class SGHomeHeaderView: UIView {
         setupView()
     }
 
-    func configure(dayCount: Int, habitName: String) {
-        dayLabel.text = "home.header.dayFormat".localizedFormat(dayCount)
-        habitLabel.text = "home.header.cleanFromFormat".localizedFormat(habitName)
-        captionLabel.text = "home.header.caption".localized()
+    func configure(dayCount: Int, habitName: String, recoveryLanguage: SGRecoveryLanguage) {
+        dayLabel.text = recoveryLanguage.dayCountFormatKey.localizedFormat(dayCount)
+        if recoveryLanguage.mode == .sobriety {
+            habitLabel.text = recoveryLanguage.homeStatusSubtitleKey.localized()
+            captionLabel.text = recoveryLanguage.homeStatusCaptionKey.localized()
+        } else {
+            habitLabel.text = "home.header.cleanFromFormat".localizedFormat(habitName)
+            captionLabel.text = recoveryLanguage.homeStatusCaptionKey.localized()
+        }
     }
 
     private func setupView() {

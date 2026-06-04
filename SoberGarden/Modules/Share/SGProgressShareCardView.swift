@@ -13,6 +13,7 @@ final class SGProgressShareCardView: UIView {
         let savedTimeText: String
         let gardenStage: GardenStage
         let habitName: String
+        let recoveryLanguage: SGRecoveryLanguage
         let generatedAt: Date
         let style: SGSharePosterStyle
     }
@@ -54,12 +55,16 @@ final class SGProgressShareCardView: UIView {
     func configure(with content: Content) {
         applyStyle(content.style)
         dateLabel.text = Self.displayDateFormatter.string(from: content.generatedAt)
-        headlineLabel.text = content.style.headline
+        headlineLabel.text = content.style.headline(recoveryLanguage: content.recoveryLanguage)
         dayCountLabel.text = "\(content.cleanDays)"
-        dayCaptionLabel.text = content.style.dayCaption(cleanDays: content.cleanDays, habitName: content.habitName)
+        dayCaptionLabel.text = content.style.dayCaption(
+            cleanDays: content.cleanDays,
+            habitName: content.habitName,
+            recoveryLanguage: content.recoveryLanguage
+        )
         configureStats(with: content)
         stageImageView.image = UIImage(named: content.gardenStage.gardenImageName)
-        quoteLabel.text = content.style.quote
+        quoteLabel.text = content.style.quote(recoveryLanguage: content.recoveryLanguage)
         footerLabel.text = "SoberGarden"
     }
 
@@ -249,7 +254,7 @@ final class SGProgressShareCardView: UIView {
         case .garden:
             moneyStatView.configure(title: "share.card.saved".localized(), value: content.savedMoneyText)
             timeStatView.configure(title: "share.card.timeBack".localized(), value: content.savedTimeText)
-            stageStatView.configure(title: "share.card.garden".localized(), value: content.gardenStage.title)
+            stageStatView.configure(title: content.recoveryLanguage.gardenTitleKey.localized(), value: content.gardenStage.title)
             [moneyStatView, timeStatView, stageStatView].forEach(statsStackView.addArrangedSubview)
 
         case .fresh:
@@ -259,9 +264,9 @@ final class SGProgressShareCardView: UIView {
             [timeStatView, moneyStatView, stageStatView].forEach(statsStackView.addArrangedSubview)
 
         case .sunrise:
-            moneyStatView.configure(title: "share.card.cleanDays".localized(), value: "\(content.cleanDays)")
+            moneyStatView.configure(title: content.recoveryLanguage.dayUnitTitleKey.localized(), value: "\(content.cleanDays)")
             timeStatView.configure(title: "share.card.saved".localized(), value: content.savedMoneyText)
-            stageStatView.configure(title: "share.card.garden".localized(), value: content.gardenStage.title)
+            stageStatView.configure(title: content.recoveryLanguage.gardenTitleKey.localized(), value: content.gardenStage.title)
             [moneyStatView, timeStatView, stageStatView].forEach(statsStackView.addArrangedSubview)
         }
     }
@@ -450,7 +455,17 @@ private final class SGShareStatView: UIView {
 
 private extension SGSharePosterStyle {
 
-    var headline: String {
+    func headline(recoveryLanguage: SGRecoveryLanguage) -> String {
+        if recoveryLanguage.mode == .sobriety {
+            switch self {
+            case .garden:
+                return "share.card.headline.garden.sobriety".localized()
+            case .fresh:
+                return "share.card.headline.fresh.sobriety".localized()
+            case .sunrise:
+                return "share.card.headline.sunrise.sobriety".localized()
+            }
+        }
         switch self {
         case .garden:
             return "share.card.headline.garden".localized()
@@ -461,7 +476,17 @@ private extension SGSharePosterStyle {
         }
     }
 
-    var quote: String {
+    func quote(recoveryLanguage: SGRecoveryLanguage) -> String {
+        if recoveryLanguage.mode == .sobriety {
+            switch self {
+            case .garden:
+                return "share.card.quote.garden.sobriety".localized()
+            case .fresh:
+                return "share.card.quote.fresh.sobriety".localized()
+            case .sunrise:
+                return "share.card.quote.sunrise.sobriety".localized()
+            }
+        }
         switch self {
         case .garden:
             return "share.card.quote.garden".localized()
@@ -472,7 +497,23 @@ private extension SGSharePosterStyle {
         }
     }
 
-    func dayCaption(cleanDays: Int, habitName: String) -> String {
+    func dayCaption(cleanDays: Int, habitName: String, recoveryLanguage: SGRecoveryLanguage) -> String {
+        if recoveryLanguage.mode == .sobriety {
+            switch self {
+            case .garden:
+                return cleanDays == 1
+                    ? "share.card.caption.garden.sobriety.one".localized()
+                    : "share.card.caption.garden.sobriety.many".localized()
+            case .fresh:
+                return cleanDays == 1
+                    ? "share.card.caption.fresh.sobriety.one".localized()
+                    : "share.card.caption.fresh.sobriety.many".localized()
+            case .sunrise:
+                return cleanDays == 1
+                    ? "share.card.caption.sunrise.sobriety.one".localized()
+                    : "share.card.caption.sunrise.sobriety.many".localized()
+            }
+        }
         switch self {
         case .garden:
             return cleanDays == 1 ? "share.card.caption.garden.one".localizedFormat(habitName) : "share.card.caption.garden.many".localizedFormat(habitName)

@@ -9,76 +9,64 @@ import UIKit
 final class SGRescueViewController: BaseViewController {
 
     private enum Step: Int, CaseIterable {
+        case urgeBefore
         case emotion
-        case coach
         case breathing
         case reasons
         case delay
-        case feedback
+        case urgeAfter
+        case completion
 
         var title: String {
             switch self {
+            case .urgeBefore:
+                return "rescue.step.urgeBefore.title".localized()
             case .emotion:
                 return "rescue.step.emotion.title".localized()
-            case .coach:
-                return "rescue.step.coach.title".localized()
             case .breathing:
                 return "rescue.step.breathing.title".localized()
             case .reasons:
                 return "rescue.step.reasons.title".localized()
             case .delay:
                 return "rescue.step.delay.title".localized()
-            case .feedback:
-                return "rescue.step.feedback.title".localized()
+            case .urgeAfter:
+                return "rescue.step.urgeAfter.title".localized()
+            case .completion:
+                return "rescue.step.completion.title".localized()
             }
         }
 
         var subtitle: String {
             switch self {
+            case .urgeBefore:
+                return "rescue.step.urgeBefore.subtitle".localized()
             case .emotion:
                 return "rescue.step.emotion.subtitle".localized()
-            case .coach:
-                return "rescue.step.coach.subtitle".localized()
             case .breathing:
                 return "rescue.step.breathing.subtitle".localized()
             case .reasons:
                 return "rescue.step.reasons.subtitle".localized()
             case .delay:
                 return "rescue.step.delay.subtitle".localized()
-            case .feedback:
-                return "rescue.step.feedback.subtitle".localized()
-            }
-        }
-
-        var placeholderText: String {
-            switch self {
-            case .emotion:
-                return "rescue.placeholder.emotion".localized()
-            case .coach:
-                return "rescue.placeholder.coach".localized()
-            case .breathing:
-                return "rescue.placeholder.breathing".localized()
-            case .reasons:
-                return "rescue.placeholder.reasons".localized()
-            case .delay:
-                return "rescue.placeholder.delay".localized()
-            case .feedback:
-                return "rescue.placeholder.feedback".localized()
+            case .urgeAfter:
+                return "rescue.step.urgeAfter.subtitle".localized()
+            case .completion:
+                return "rescue.step.completion.subtitle".localized()
             }
         }
 
         var primaryButtonTitle: String {
             switch self {
-            case .coach:
-                return "rescue.button.startBreathing".localized()
+            case .urgeBefore, .emotion, .reasons:
+                return "common.continue".localized()
             case .breathing:
                 return "rescue.button.finishEarly".localized()
             case .delay:
                 return "rescue.button.wait10".localized()
-            case .feedback:
+            case .urgeAfter:
                 return "rescue.button.okayNow".localized()
-            default:
-                return "common.continue".localized()
+            case .completion:
+                return "rescue.button.complete".localized()
             }
         }
 
@@ -98,13 +86,11 @@ final class SGRescueViewController: BaseViewController {
     private let footerStackView = UIStackView()
     private let backButton = UIButton(type: .system)
     private let primaryButton = SGPrimaryButton(title: "common.continue".localized())
-    private let feedbackValueLabel = UILabel()
+    private let urgeValueLabel = UILabel()
 
-    private var currentStep: Step = .emotion
+    private var currentStep: Step = .urgeBefore
     private var draft = SGRescueDraft()
-    private var coachLoadWorkItem: DispatchWorkItem?
     private var coachPromptText: String?
-    private var isCoachLoading = false
     private var didSkipEmotion = false
 
     override func viewDidLoad() {
@@ -116,7 +102,7 @@ final class SGRescueViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        if currentStep == .emotion {
+        if currentStep == .urgeBefore {
             renderCurrentStep()
         }
     }
@@ -129,11 +115,10 @@ final class SGRescueViewController: BaseViewController {
     }
 
     func startNewSession() {
-        cancelCoachLoading()
         coachPromptText = nil
         didSkipEmotion = false
         draft = SGRescueDraft()
-        currentStep = .emotion
+        currentStep = .urgeBefore
         renderCurrentStep()
     }
 
@@ -148,10 +133,10 @@ final class SGRescueViewController: BaseViewController {
         stepTitleLabel.text = stepTitle(for: currentStep)
         renderStepContent()
         draftSummaryLabel.text = draftSummaryText()
-        backButton.isEnabled = currentStep != .emotion
+        backButton.isEnabled = currentStep != .urgeBefore
         backButton.alpha = backButton.isEnabled ? 1 : 0.38
         primaryButton.setTitle(currentStep.primaryButtonTitle, for: .normal)
-        primaryButton.isEnabled = currentStep != .coach || !isCoachLoading
+        primaryButton.isEnabled = canAdvance(from: currentStep)
     }
 
     private func setupScrollView() {
@@ -254,18 +239,20 @@ final class SGRescueViewController: BaseViewController {
 
     private func stepTitle(for step: Step) -> String {
         switch step {
+        case .urgeBefore:
+            return "rescue.card.urgeBefore".localized()
         case .emotion:
             return "rescue.card.emotion".localized()
-        case .coach:
-            return "rescue.card.coach".localized()
         case .breathing:
             return "rescue.card.breathing".localized()
         case .reasons:
             return "rescue.card.reasons".localized()
         case .delay:
             return "rescue.card.delay".localized()
-        case .feedback:
-            return "rescue.card.feedback".localized()
+        case .urgeAfter:
+            return "rescue.card.urgeAfter".localized()
+        case .completion:
+            return "rescue.card.completion".localized()
         }
     }
 
@@ -289,8 +276,22 @@ final class SGRescueViewController: BaseViewController {
         stepContentContainerView.subviews.forEach { $0.removeFromSuperview() }
 
         switch currentStep {
+        case .urgeBefore:
+            let urgeBeforeView = makeUrgeRatingView(
+                titleKey: "rescue.urgeBefore.title",
+                value: draft.urgeBefore,
+                onChange: { [weak self] value in
+                    self?.draft.urgeBefore = value
+                    self?.updateUrgeValueLabel()
+                    self?.primaryButton.isEnabled = self?.canAdvance(from: .urgeBefore) == true
+                }
+            )
+            stepContentContainerView.addSubview(urgeBeforeView)
+            urgeBeforeView.snp.makeConstraints { make in
+                make.edges.equalToSuperview()
+            }
+
         case .emotion:
-            cancelCoachLoading()
             let pickerView = SGEmotionPickerView()
             pickerView.configure(selectedEmotion: draft.emotion, didSelectSkip: didSkipEmotion)
             pickerView.onSelectEmotion = { [weak self] emotion in
@@ -301,35 +302,14 @@ final class SGRescueViewController: BaseViewController {
                 make.edges.equalToSuperview()
             }
 
-        case .coach:
-            let coachView = SGCoachMessageView()
-            stepContentContainerView.addSubview(coachView)
-            coachView.snp.makeConstraints { make in
-                make.edges.equalToSuperview()
-            }
-
-            if let coachPromptText {
-                isCoachLoading = false
-                coachView.showPrompt(coachPromptText)
-            } else {
-                coachView.showLoading()
-                scheduleCoachPromptLoad()
-            }
-
         case .breathing:
-            cancelCoachLoading()
-            let breathingView = SGBreathingExerciseView()
-            breathingView.onComplete = { [weak self] in
-                self?.completeBreathingNaturally()
-            }
+            let breathingView = makeBreathingStepView()
             stepContentContainerView.addSubview(breathingView)
             breathingView.snp.makeConstraints { make in
                 make.edges.equalToSuperview()
             }
-            breathingView.start()
 
         case .reasons:
-            cancelCoachLoading()
             let reasonsView = makeReasonsView()
             stepContentContainerView.addSubview(reasonsView)
             reasonsView.snp.makeConstraints { make in
@@ -337,21 +317,126 @@ final class SGRescueViewController: BaseViewController {
             }
 
         case .delay:
-            cancelCoachLoading()
             let delayView = makeDelayView()
             stepContentContainerView.addSubview(delayView)
             delayView.snp.makeConstraints { make in
                 make.edges.equalToSuperview()
             }
 
-        case .feedback:
-            cancelCoachLoading()
-            let feedbackView = makeFeedbackView()
-            stepContentContainerView.addSubview(feedbackView)
-            feedbackView.snp.makeConstraints { make in
+        case .urgeAfter:
+            let urgeAfterView = makeUrgeRatingView(
+                titleKey: "rescue.urgeAfter.title",
+                value: draft.urgeAfter,
+                onChange: { [weak self] value in
+                    self?.draft.urgeAfter = value
+                    self?.updateUrgeValueLabel()
+                    self?.primaryButton.isEnabled = self?.canAdvance(from: .urgeAfter) == true
+                },
+                secondaryActionTitleKey: "rescue.feedback.startAnother",
+                secondaryAction: { [weak self] in
+                    self?.saveCompletedRescueSession()
+                    self?.startNewSession()
+                }
+            )
+            stepContentContainerView.addSubview(urgeAfterView)
+            urgeAfterView.snp.makeConstraints { make in
+                make.edges.equalToSuperview()
+            }
+
+        case .completion:
+            let completionView = makeCompletionView()
+            stepContentContainerView.addSubview(completionView)
+            completionView.snp.makeConstraints { make in
                 make.edges.equalToSuperview()
             }
         }
+    }
+
+    private func makeBreathingStepView() -> UIView {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.spacing = 16
+
+        let coachView = SGCoachMessageView()
+        if coachPromptText == nil {
+            coachPromptText = SGCalmCoachService.shared.promptText(
+                for: coachContext(for: draft.emotion)
+            )
+        }
+        coachView.showPrompt(coachPromptText ?? "")
+
+        let breathingView = SGBreathingExerciseView()
+            breathingView.onComplete = { [weak self] in
+                self?.completeBreathingNaturally()
+            }
+        breathingView.start()
+
+        stackView.addArrangedSubview(coachView)
+        stackView.addArrangedSubview(breathingView)
+        return stackView
+    }
+
+    private func makeUrgeRatingView(
+        titleKey: String,
+        value: Int?,
+        onChange: @escaping (Int) -> Void,
+        secondaryActionTitleKey: String? = nil,
+        secondaryAction: (() -> Void)? = nil
+    ) -> UIView {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.spacing = 14
+
+        let titleLabel = UILabel()
+        titleLabel.font = .systemFont(ofSize: 20, weight: .semibold)
+        titleLabel.textColor = SGColor.textDark
+        titleLabel.numberOfLines = 0
+        titleLabel.text = titleKey.localized()
+
+        urgeValueLabel.font = .monospacedDigitSystemFont(ofSize: 28, weight: .semibold)
+        urgeValueLabel.textColor = SGColor.primaryDark
+        urgeValueLabel.textAlignment = .center
+
+        let slider = UISlider()
+        let initialValue = value ?? 0
+        slider.minimumValue = 0
+        slider.maximumValue = 10
+        slider.value = Float(initialValue)
+        slider.minimumTrackTintColor = SGColor.primary
+        slider.maximumTrackTintColor = SGColor.primaryLight
+        slider.addAction(
+            UIAction { _ in
+                onChange(Int(slider.value.rounded()))
+            },
+            for: .valueChanged
+        )
+
+        updateUrgeValueLabel(for: value ?? initialValue)
+
+        stackView.addArrangedSubview(titleLabel)
+        stackView.addArrangedSubview(urgeValueLabel)
+        stackView.addArrangedSubview(slider)
+
+        if let secondaryActionTitleKey, let secondaryAction {
+            let secondaryButton = UIButton(type: .system)
+            secondaryButton.setTitle(secondaryActionTitleKey.localized(), for: .normal)
+            secondaryButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
+            secondaryButton.setTitleColor(SGColor.primaryDark, for: .normal)
+            secondaryButton.backgroundColor = SGColor.primaryLight.withAlphaComponent(0.68)
+            secondaryButton.layer.cornerRadius = 14
+            secondaryButton.layer.masksToBounds = true
+            secondaryButton.addAction(UIAction { _ in secondaryAction() }, for: .touchUpInside)
+            stackView.addArrangedSubview(secondaryButton)
+            secondaryButton.snp.makeConstraints { make in
+                make.height.equalTo(46)
+            }
+        }
+
+        return stackView
     }
 
     private func makeReasonsView() -> UIView {
@@ -424,7 +509,7 @@ final class SGRescueViewController: BaseViewController {
         return stackView
     }
 
-    private func makeFeedbackView() -> UIView {
+    private func makeCompletionView() -> UIView {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .fill
@@ -435,22 +520,19 @@ final class SGRescueViewController: BaseViewController {
         titleLabel.font = .systemFont(ofSize: 20, weight: .semibold)
         titleLabel.textColor = SGColor.textDark
         titleLabel.numberOfLines = 0
-        titleLabel.text = "rescue.feedback.title".localized()
+        titleLabel.text = completionTitleText()
 
-        feedbackValueLabel.font = .monospacedDigitSystemFont(ofSize: 28, weight: .semibold)
-        feedbackValueLabel.textColor = SGColor.primaryDark
-        feedbackValueLabel.textAlignment = .center
+        let bodyLabel = UILabel()
+        bodyLabel.font = .systemFont(ofSize: 16, weight: .medium)
+        bodyLabel.textColor = SGColor.textSecondary
+        bodyLabel.numberOfLines = 0
+        bodyLabel.text = completionBodyText()
 
-        let slider = UISlider()
-        if draft.urgeAfter == nil {
-            draft.urgeAfter = 0
-        }
-        slider.minimumValue = 0
-        slider.maximumValue = 10
-        slider.value = Float(draft.urgeAfter ?? 0)
-        slider.minimumTrackTintColor = SGColor.primary
-        slider.maximumTrackTintColor = SGColor.primaryLight
-        slider.addTarget(self, action: #selector(handleUrgeAfterChanged(_:)), for: .valueChanged)
+        let scoreLabel = UILabel()
+        scoreLabel.font = .monospacedDigitSystemFont(ofSize: 24, weight: .semibold)
+        scoreLabel.textColor = SGColor.primaryDark
+        scoreLabel.textAlignment = .center
+        scoreLabel.text = completionScoreText()
 
         let startAnotherButton = UIButton(type: .system)
         startAnotherButton.setTitle("rescue.feedback.startAnother".localized(), for: .normal)
@@ -462,15 +544,14 @@ final class SGRescueViewController: BaseViewController {
         startAnotherButton.addTarget(self, action: #selector(handleStartAnotherRescueTapped), for: .touchUpInside)
 
         stackView.addArrangedSubview(titleLabel)
-        stackView.addArrangedSubview(feedbackValueLabel)
-        stackView.addArrangedSubview(slider)
+        stackView.addArrangedSubview(bodyLabel)
+        stackView.addArrangedSubview(scoreLabel)
         stackView.addArrangedSubview(startAnotherButton)
 
         startAnotherButton.snp.makeConstraints { make in
             make.height.equalTo(46)
         }
 
-        updateFeedbackValueLabel()
         return stackView
     }
 
@@ -478,37 +559,14 @@ final class SGRescueViewController: BaseViewController {
         draft.emotion = emotion
         didSkipEmotion = emotion == nil
         coachPromptText = nil
-        currentStep = .coach
+        currentStep = .breathing
         renderCurrentStep()
     }
 
-    private func scheduleCoachPromptLoad() {
-        guard coachLoadWorkItem == nil else { return }
-        isCoachLoading = true
-        primaryButton.isEnabled = false
-        coachLoadWorkItem?.cancel()
-
-        let workItem = DispatchWorkItem { [weak self] in
-            guard let self else { return }
-            self.coachPromptText = SGCalmCoachService.shared.promptText(
-                for: self.coachContext(for: self.draft.emotion)
-            )
-            self.isCoachLoading = false
-            self.coachLoadWorkItem = nil
-            self.renderCurrentStep()
-        }
-
-        coachLoadWorkItem = workItem
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.2, execute: workItem)
-    }
-
-    private func cancelCoachLoading() {
-        coachLoadWorkItem?.cancel()
-        coachLoadWorkItem = nil
-        isCoachLoading = false
-    }
-
     private func coachContext(for emotion: EmotionType?) -> SGCalmCoachContext {
+        if SoberGardenStore.shared.state.habit?.isSobrietyFocused == true {
+            return .cravingMoment
+        }
         guard let emotion, let context = SGCalmCoachContext(rawValue: emotion.rawValue) else {
             return .urge
         }
@@ -517,19 +575,11 @@ final class SGRescueViewController: BaseViewController {
 
     @objc private func handleBackTapped() {
         guard currentStep.rawValue > 0, let previousStep = Step(rawValue: currentStep.rawValue - 1) else { return }
-        if currentStep == .coach {
-            cancelCoachLoading()
-            coachPromptText = nil
-        }
         currentStep = previousStep
         renderCurrentStep()
     }
 
     @objc private func handlePrimaryTapped() {
-        if currentStep == .coach, isCoachLoading {
-            return
-        }
-
         if currentStep == .breathing {
             finishBreathingEarly()
             return
@@ -540,7 +590,7 @@ final class SGRescueViewController: BaseViewController {
             return
         }
 
-        if currentStep == .feedback {
+        if currentStep == .completion {
             saveCompletedRescueSession()
             startNewSession()
             SGReviewPromptCoordinator.shared.promptIfNeeded(trigger: .rescueCompleted, from: self)
@@ -548,9 +598,6 @@ final class SGRescueViewController: BaseViewController {
         }
 
         guard let nextStep = Step(rawValue: currentStep.rawValue + 1) else { return }
-        if nextStep == .coach {
-            coachPromptText = nil
-        }
         currentStep = nextStep
         renderCurrentStep()
     }
@@ -570,7 +617,7 @@ final class SGRescueViewController: BaseViewController {
     private func completeDelayCommitment() {
         draft.completedDelay = true
         SGNotificationService.shared.scheduleRescueDelayReminder()
-        currentStep = .feedback
+        currentStep = .urgeAfter
         renderCurrentStep()
     }
 
@@ -585,9 +632,18 @@ final class SGRescueViewController: BaseViewController {
         )
     }
 
-    private func updateFeedbackValueLabel() {
-        let value = draft.urgeAfter ?? 0
-        feedbackValueLabel.text = "rescue.feedback.valueFormat".localizedFormat(value)
+    private func updateUrgeValueLabel(for value: Int? = nil) {
+        let value = value ?? {
+            switch currentStep {
+            case .urgeBefore:
+                return draft.urgeBefore ?? 0
+            case .urgeAfter:
+                return draft.urgeAfter ?? 0
+            default:
+                return draft.urgeAfter ?? draft.urgeBefore ?? 0
+            }
+        }()
+        urgeValueLabel.text = "rescue.feedback.valueFormat".localizedFormat(value)
     }
 
     @objc private func handleStillStrugglingTapped() {
@@ -596,13 +652,51 @@ final class SGRescueViewController: BaseViewController {
         renderCurrentStep()
     }
 
-    @objc private func handleUrgeAfterChanged(_ sender: UISlider) {
-        draft.urgeAfter = Int(sender.value.rounded())
-        updateFeedbackValueLabel()
-    }
-
     @objc private func handleStartAnotherRescueTapped() {
         saveCompletedRescueSession()
         startNewSession()
+    }
+
+    private func canAdvance(from step: Step) -> Bool {
+        switch step {
+        case .urgeBefore:
+            return draft.urgeBefore != nil
+        case .urgeAfter:
+            return draft.urgeAfter != nil
+        default:
+            return true
+        }
+    }
+
+    private func completionTitleText() -> String {
+        guard let reduction = completedRescueSession().urgeReduction, reduction > 0 else {
+            return "rescue.completion.title.paused".localized()
+        }
+        return "rescue.completion.title.reducedFormat".localizedFormat(reduction)
+    }
+
+    private func completionBodyText() -> String {
+        guard let reduction = completedRescueSession().urgeReduction, reduction > 0 else {
+            return "rescue.completion.body.paused".localized()
+        }
+        return "rescue.completion.body.reduced".localized()
+    }
+
+    private func completionScoreText() -> String {
+        let before = draft.urgeBefore ?? 0
+        let after = draft.urgeAfter ?? 0
+        return "rescue.completion.scoreFormat".localizedFormat(before, after)
+    }
+
+    private func completedRescueSession() -> RescueSession {
+        RescueSession(
+            id: UUID(),
+            date: draft.startedAt,
+            emotion: draft.emotion ?? .urge,
+            urgeBefore: draft.urgeBefore,
+            urgeAfter: draft.urgeAfter,
+            completedBreathing: draft.completedBreathing,
+            completedDelay: draft.completedDelay
+        )
     }
 }

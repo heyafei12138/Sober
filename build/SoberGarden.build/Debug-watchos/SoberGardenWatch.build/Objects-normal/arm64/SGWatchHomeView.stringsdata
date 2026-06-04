@@ -1,0 +1,16 @@
+{
+  "source": "/Users/mac/Desktop/project/2026/SoberGarden/SoberGardenWatch/SGWatchHomeView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "SoberGarden",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 31
+        }
+      }
+    ]
+  },
+  "version": 1
+}

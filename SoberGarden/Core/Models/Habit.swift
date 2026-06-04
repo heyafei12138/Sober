@@ -57,4 +57,36 @@ enum HabitType: String, Codable, CaseIterable {
             return "habit.custom".localized()
         }
     }
+
+    var isSobrietyFocused: Bool {
+        self == .alcohol
+    }
+
+    var recoveryLanguage: SGRecoveryLanguage {
+        isSobrietyFocused ? .sobriety : .generic
+    }
+
+    static var onboardingSelectionOrder: [HabitType] {
+        [
+            .alcohol,
+            .smoking,
+            .vaping,
+            .porn,
+            .gambling,
+            .sugar,
+            .socialMedia,
+            .weed,
+            .custom
+        ]
+    }
+}
+
+extension Habit {
+    var isSobrietyFocused: Bool {
+        type.isSobrietyFocused
+    }
+
+    var recoveryLanguage: SGRecoveryLanguage {
+        type.recoveryLanguage
+    }
 }

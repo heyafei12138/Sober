@@ -84,6 +84,7 @@ final class SGOnboardingViewController: BaseViewController {
     private var selectedStartDateOption: Int = 0
     private var selectedCostMode: SGOnboardingCostMode = .skip
     private var selectedTimeMode: SGOnboardingTimeMode = .skip
+    private let habitSelectionOrder = HabitType.onboardingSelectionOrder
 
     private let progressBarView = SGProgressBarView()
     private let stepView = SGOnboardingStepView()
@@ -175,7 +176,7 @@ final class SGOnboardingViewController: BaseViewController {
     }
 
     private func renderCurrentStep() {
-        stepView.configure(title: currentStep.title, subtitle: currentStep.subtitle)
+        stepView.configure(title: currentStepTitle(), subtitle: currentStepSubtitle())
         primaryButton.setTitle(currentStep.primaryButtonTitle, for: .normal)
         backButton.isHidden = currentStep == .welcome
         updateFooterButtons()
@@ -253,13 +254,13 @@ final class SGOnboardingViewController: BaseViewController {
         addIllustration(named: "guider_icon_tree1", height: 110)
 
         let gridStack = makeVerticalStack(spacing: 10)
-        let rows = HabitType.allCases.chunked(into: 2)
+        let rows = habitSelectionOrder.chunked(into: 2)
 
         rows.forEach { rowTypes in
             let rowStack = makeHorizontalStack()
             rowTypes.forEach { type in
                 let chip = SGOptionChip(title: type.displayName)
-                chip.tag = HabitType.allCases.firstIndex(of: type) ?? 0
+                chip.tag = habitSelectionOrder.firstIndex(of: type) ?? 0
                 chip.isSelected = draft.habitType == type
                 chip.addTarget(self, action: #selector(handleHabitChipTapped(_:)), for: .touchUpInside)
                 rowStack.addArrangedSubview(chip)
@@ -491,12 +492,30 @@ final class SGOnboardingViewController: BaseViewController {
     }
 
     @objc private func handleHabitChipTapped(_ sender: SGOptionChip) {
-        let selectedType = HabitType.allCases[sender.tag]
+        let selectedType = habitSelectionOrder[sender.tag]
         draft.habitType = selectedType
         if selectedType != .custom {
             draft.customHabitName = nil
         }
         renderCurrentStep()
+    }
+
+    private func currentStepTitle() -> String {
+        switch currentStep {
+        case .startDate where draft.habitType?.isSobrietyFocused == true:
+            return "onboarding.startDate.title.sobriety".localized()
+        default:
+            return currentStep.title
+        }
+    }
+
+    private func currentStepSubtitle() -> String? {
+        switch currentStep {
+        case .startDate where draft.habitType?.isSobrietyFocused == true:
+            return "onboarding.startDate.subtitle.sobriety".localized()
+        default:
+            return currentStep.subtitle
+        }
     }
 
     @objc private func handleCustomHabitChanged(_ sender: UITextField) {
