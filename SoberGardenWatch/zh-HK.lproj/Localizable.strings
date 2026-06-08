@@ -12,7 +12,7 @@
 "habit.generic" = "習慣";
 "watch.allMilestonesReached" = "已達到所有里程碑";
 "watch.breathing.completed" = "你騰出了空間。";
-"watch.breathing.restart" = "重新啟動";
+"watch.breathing.restart" = "重新開始";
 "watch.breathing.title" = "呼吸";
-"watch.cleanDaysFormat" = "%d 天清潔";
-"watch.nextMilestoneFormat" = "下一篇：%d 天";
+"watch.cleanDaysFormat" = "%d 天潔淨";
+"watch.nextMilestoneFormat" = "下一個：%d 天";

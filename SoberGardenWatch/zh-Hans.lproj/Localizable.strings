@@ -6,13 +6,13 @@
 */
 
 "breathing.exhale" = "呼";
-"breathing.inhale" = "吸入";
-"common.done" = "完毕";
+"breathing.inhale" = "吸气";
+"common.done" = "完成";
 "common.imStruggling" = "我正在挣扎";
 "habit.generic" = "习惯";
 "watch.allMilestonesReached" = "已达到所有里程碑";
 "watch.breathing.completed" = "你腾出了空间。";
-"watch.breathing.restart" = "重新启动";
+"watch.breathing.restart" = "重新开始";
 "watch.breathing.title" = "呼吸";
-"watch.cleanDaysFormat" = "%d 天清洁";
-"watch.nextMilestoneFormat" = "下一篇：%d 天";
+"watch.cleanDaysFormat" = "%d 天清净";
+"watch.nextMilestoneFormat" = "下一个：%d 天";

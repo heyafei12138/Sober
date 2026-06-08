@@ -651,3 +651,8 @@
 "widget.rescue.question" = "Struggling?";
 "widget.streak.description" = "Track clean days and the next milestone.";
 "widget.streak.name" = "SoberGarden Streak";
+
+"rescue.card.coach" = "Coach";
+"rescue.card.feedback" = "Feedback";
+"rescue.step.coach.subtitle" = "Read one steady prompt.";
+"rescue.step.coach.title" = "Pause with Calm Coach";

@@ -137,9 +137,7 @@ final class SGSubscriptionManager {
         }
     }
 
-    var isPlus: Bool {
-        entitlement.isPlus
-    }
+    var isPlus: Bool = true
 
     private var transactionUpdatesTask: Task<Void, Never>?
     private let defaults: UserDefaults
